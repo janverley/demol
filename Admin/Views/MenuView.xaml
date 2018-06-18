@@ -1,0 +1,69 @@
+﻿<Page x:Class="Admin.Views.MenuView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Admin.Views"
+      xmlns:model="clr-namespace:Admin.Model"
+      mc:Ignorable="d" 
+      xmlns:cal="http://www.caliburnproject.org"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MenuView">
+
+    <Grid Margin="40">
+        <Grid.Resources>
+            <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+            <Style TargetType="{x:Type RadioButton}">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="0 0 5 0"/>
+                <Setter Property="MinWidth" Value="80"/>
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+        </Grid.Resources>
+        <StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0 20">
+
+                <TextBlock>Dag:</TextBlock>
+                <ComboBox x:Name="Dagen" SelectedItem="{Binding SelectedDag}" DisplayMemberPath="Text" 
+                      cal:Message.Attach="[Event SelectionChanged]=[Action SelectedDagChanged()]" Width="200"/>
+            </StackPanel>
+
+            <StackPanel>
+                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" >Opdracht 1 OK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}">Opdracht 1 NOK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}">Opdracht 1 NA</RadioButton>
+            </StackPanel>
+            <StackPanel Margin="0 15 0 0">
+                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" >Opdracht 2 OK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}">Opdracht 2 NOK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}">Opdracht 2 NA</RadioButton>
+            </StackPanel>
+            <StackPanel Margin="0 15 0 0">
+                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" >Opdracht 3 OK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}">Opdracht 3 NOK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}">Opdracht 3 NA</RadioButton>
+            </StackPanel>
+
+
+            <TextBlock Margin="20">Pas vragen verdiend vandaag:</TextBlock>
+
+            <ItemsControl Grid.IsSharedSizeScope="True" Name="Pasvragen"/>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Name="SaveAdmin" HorizontalAlignment="Left">Save</Button>
+                <Button Name="StartQuiz" HorizontalAlignment="Left">Start</Button>
+                <Button Name="Validate" HorizontalAlignment="Left">Valideer</Button>
+                <Button Name="InvalidateAnswers" HorizontalAlignment="Left">Invalideer Antwoorden</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

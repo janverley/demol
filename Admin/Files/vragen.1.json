@@ -1,0 +1,61 @@
+{
+    "Dag": "1",
+    "Vragen": [
+        {
+            "Text": "Wie denk jij dat de Mol was vandaag?",
+            "Opties": [
+                "Juul",
+                "Staf",
+                "Vic",
+                "Mie",
+                "Jochen",
+                "Pieter",
+                "Hanne",
+                "Kris",
+                "Hilde"
+            ]
+        },
+        {
+            "Text": "Wie zat aan de linkerhand van de Mol vandaag?",
+            "Opties": [
+                "Juul",
+                "Staf",
+                "Vic",
+                "Mie",
+                "Jochen",
+                "Pieter",
+                "Hanne",
+                "Kris",
+                "Hilde"
+            ]
+        },
+        {
+            "Text": "Wie sliep naast de Mol vandaag?",
+            "Opties": [
+                "Juul",
+                "Staf",
+                "Vic",
+                "Mie",
+                "Jochen",
+                "Pieter",
+                "Hanne",
+                "Kris",
+                "Hilde",
+                "Nienamd"
+            ]
+        },
+        {
+            "Text": "Droeg De Mol vandaag sandalen?",
+            "Opties": [
+                "Ja",
+                "Nee"
+            ]
+        },
+        {
+            "Text": "Hoeveel broers heeft de Mol?"
+        },
+        {
+            "Text": "Hoe oud is de Mol?"
+        }
+    ]
+}
