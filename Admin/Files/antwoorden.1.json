@@ -1,13 +1,30 @@
 {
-    "Dag" : "1",
-    "Deelnemer": "juul",
-    "Antwoorden": [
-            "juul",
-            "juul",
-            "juul",
-            "juul",
-            "ja",
-            "3",
-            "42"
+    "Dag": "1",
+    "Spelers": [
+        {
+            "Naam": "juul",
+            "Antwoorden": [
+                "juul",
+                "juul",
+                "juul",
+                "juul",
+                "ja",
+                "3",
+                "42"
+            ],
+            "Tijd" : ""
+        },
+        {
+            "Naam": "mie",
+            "Antwoorden": [
+                "juul",
+                "mie",
+                "juul",
+                "juul",
+                "ja",
+                "3",
+                "42"
+            ]
+        }
     ]
 }

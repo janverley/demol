@@ -86,8 +86,11 @@
     <Compile Include="Model\VragenData.cs" />
     <Compile Include="ViewModels\InvalidateViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\OptieViewModel.cs" />
     <Compile Include="ViewModels\PasVraagViewModel.cs" />
-    <Compile Include="ViewModels\QuizViewModel.cs" />
+    <Compile Include="ViewModels\QuizIntroViewModel.cs" />
+    <Compile Include="ViewModels\QuizVraagViewModel.cs" />
+    <Compile Include="ViewModels\QuizVragenViewModel.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ValidateViewModel.cs" />
@@ -98,8 +101,14 @@
     <Compile Include="Views\PasVraagView.xaml.cs">
       <DependentUpon>PasVraagView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\QuizView.xaml.cs">
-      <DependentUpon>QuizView.xaml</DependentUpon>
+    <Compile Include="Views\QuizIntroView.xaml.cs">
+      <DependentUpon>QuizIntroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuizVraagView.xaml.cs">
+      <DependentUpon>QuizVraagView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuizVragenView.xaml.cs">
+      <DependentUpon>QuizVragenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -135,7 +144,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\QuizView.xaml">
+    <Page Include="Views\QuizIntroView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuizVraagView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuizVragenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

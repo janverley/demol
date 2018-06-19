@@ -22,11 +22,6 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="FontSize" Value="15" />
             </Style>
-            <Style TargetType="{x:Type Button}">
-                <Setter Property="Margin" Value="0 0 5 0"/>
-                <Setter Property="MinWidth" Value="80"/>
-                <Setter Property="FontSize" Value="15" />
-            </Style>
         </Grid.Resources>
         <StackPanel>
 
@@ -59,10 +54,10 @@
             <ItemsControl Grid.IsSharedSizeScope="True" Name="Pasvragen"/>
 
             <StackPanel Orientation="Horizontal">
-                <Button Name="SaveAdmin" HorizontalAlignment="Left">Save</Button>
-                <Button Name="StartQuiz" HorizontalAlignment="Left">Start</Button>
-                <Button Name="Validate" HorizontalAlignment="Left">Valideer</Button>
-                <Button Name="InvalidateAnswers" HorizontalAlignment="Left">Invalideer Antwoorden</Button>
+                <Button Name="SaveAdmin" Style="{StaticResource Btn1}">Save</Button>
+                <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start</Button>
+                <Button Name="Validate" Style="{StaticResource Btn1}">Valideer</Button>
+                <Button Name="InvalidateAnswers" Style="{StaticResource Btn1}">Invalideer Antwoorden</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

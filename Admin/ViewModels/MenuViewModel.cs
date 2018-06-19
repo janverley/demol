@@ -132,7 +132,7 @@ namespace Admin.ViewModels
 
         public void StartQuiz()
         {
-            navigationService.NavigateToViewModel<QuizViewModel>(SelectedDag.Id);
+            navigationService.NavigateToViewModel<QuizIntroViewModel>(new Dictionary<string,object> { { "Dag", SelectedDag.Id } });
         }
         public bool CanValidate => SelectedDag != null;
 

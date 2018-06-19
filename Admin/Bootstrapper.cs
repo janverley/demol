@@ -38,7 +38,7 @@ namespace Admin
                .PerRequest<ShellViewModel>()
                .PerRequest<MenuViewModel>()
                .PerRequest<InvalidateViewModel>()
-               .PerRequest<QuizViewModel>()
+               .PerRequest<QuizIntroViewModel>()
                .PerRequest<ValidateViewModel>()
                .PerRequest<ResultViewModel>();
         }
