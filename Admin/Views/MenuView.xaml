@@ -36,22 +36,24 @@
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start</Button>
                 <Button Name="Validate" Style="{StaticResource Btn1}">Valideer</Button>
                 <Button Name="InvalidateAnswers" Style="{StaticResource Btn1}">Invalideer Antwoorden</Button>
+                <Button Name="Result" Style="{StaticResource Btn1}">Dag resultaat</Button>
             </StackPanel>
 
+            
             <StackPanel Margin="0 20 0 0">
-                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" >Opdracht 1 OK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}">Opdracht 1 NOK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}">Opdracht 1 NA</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}">Opdracht 1 OK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}">Opdracht 1 NOK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}">Opdracht 1 NA</RadioButton>
             </StackPanel>
             <StackPanel Margin="0 15 0 0">
-                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" >Opdracht 2 OK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}">Opdracht 2 NOK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}">Opdracht 2 NA</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}" >Opdracht 2 OK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}" >Opdracht 2 NOK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}" >Opdracht 2 NA</RadioButton>
             </StackPanel>
             <StackPanel Margin="0 15 0 0">
-                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" >Opdracht 3 OK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}">Opdracht 3 NOK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}">Opdracht 3 NA</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}" >Opdracht 3 OK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}" >Opdracht 3 NOK</RadioButton>
+                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}" >Opdracht 3 NA</RadioButton>
             </StackPanel>
 
 

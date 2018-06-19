@@ -6,5 +6,10 @@
              xmlns:local="clr-namespace:Admin.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <RadioButton  Content="{Binding Path=OptieText}" IsChecked="{Binding Path=IsSelected}"/>
+    <StackPanel>
+        <!--<RadioButton Style="{StaticResource R1}" Content="sdfsdfsdf" IsChecked="true"/>
+        <RadioButton Style="{StaticResource R1}" Content="sdfsdfsdf" IsChecked="false"/>-->
+        <RadioButton Style="{StaticResource R1}" Content="{Binding Path=OptieText}" IsChecked="{Binding Path=IsSelected}"/>
+
+    </StackPanel>
 </UserControl>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Admin.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="De Mol" Height="450" Width="800">
+        Title="De Mol" Height="450" Width="800" WindowState="Maximized">
     <Window.Background>
         <ImageBrush ImageSource="./bg.jpg" Stretch="UniformToFill"></ImageBrush>
     </Window.Background>
