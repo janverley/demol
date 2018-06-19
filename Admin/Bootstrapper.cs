@@ -32,15 +32,17 @@ namespace Admin
 
             container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<ShellViewModel>()
+                .Singleton<MenuViewModel>();
 
             container
-               .PerRequest<ShellViewModel>()
-               .PerRequest<MenuViewModel>()
                .PerRequest<InvalidateViewModel>()
                .PerRequest<QuizIntroViewModel>()
+               .PerRequest<QuizOuttroViewModel>()
                .PerRequest<ValidateViewModel>()
-               .PerRequest<ResultViewModel>();
+               .PerRequest<ResultViewModel>()
+               .PerRequest<QuizVragenViewModel>();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
@@ -66,7 +68,7 @@ namespace Admin
         protected override void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            MessageBox.Show($"{e.Exception.Message}\n{e.Exception.StackTrace}\n{e.Exception.InnerException?.Message ??""}", "An error as occurred", MessageBoxButton.OK);
+            MessageBox.Show($"{e.Exception.Message}\n{e.Exception.InnerException?.Message ?? ""}", "An error as occurred", MessageBoxButton.OK);
         }
 
     }

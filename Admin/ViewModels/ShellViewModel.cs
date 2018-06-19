@@ -3,23 +3,20 @@ using System.Windows.Controls;
 
 namespace Admin.ViewModels
 {
-    public class ShellViewModel : Screen
+    public class ShellViewModel : Conductor<object>.Collection.OneActive
     {
         private readonly SimpleContainer container;
-        private INavigationService navigationService;
 
         public ShellViewModel(SimpleContainer container)
         {
             this.container = container;
         }
 
-        public void RegisterFrame(Frame frame)
+        protected override void OnInitialize()
         {
-            navigationService = new FrameAdapter(frame);
+            base.OnInitialize();
 
-            container.Instance(navigationService);
-
-            navigationService.NavigateToViewModel(typeof(MenuViewModel));
+            ActivateItem(container.GetInstance<MenuViewModel>());
         }
     }
 }

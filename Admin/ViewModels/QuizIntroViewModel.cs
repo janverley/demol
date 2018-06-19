@@ -8,28 +8,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Admin.ViewModels
 {
     public class QuizIntroViewModel : Screen
     {
-        public QuizIntroViewModel(INavigationService navigationService)
+        public QuizIntroViewModel(ShellViewModel conductor, SimpleContainer container)
         {
-            this.navigationService = navigationService;
+            this.conductor = conductor;
+            this.container = container;
         }
 
         private string naam;
-        private INavigationService navigationService;
-        private int dag;
-
-        public int Dag
-        {
-            get { return dag; }
-            set
-            {
-                Set(ref dag, value);
-            }
-        }
+        private readonly ShellViewModel conductor;
+        private readonly SimpleContainer container;
 
         public string Naam
         {
@@ -52,11 +45,28 @@ namespace Admin.ViewModels
         public bool CanStart => !string.IsNullOrEmpty(Naam);
         public void Start()
         {
-            navigationService.NavigateToViewModel<QuizVragenViewModel>(new Dictionary<string, object> { { "Dag", Dag }, { "Speler", Naam } });
+            var x = container.GetInstance<QuizVragenViewModel>();
+            x.Naam = Naam;
+            conductor.ActivateItem(x);
+
         }
-        public void Stop()
+
+        public void OnKeyDown(KeyEventArgs e)
         {
-            navigationService.NavigateToViewModel<MenuViewModel>();
+            if (e?.Key == Key.Enter && CanStart)
+            {
+                Start();
+            }
+            if (e?.Key == Key.Escape )
+            {
+                Menu();
+            }
+        }
+
+        public void Menu()
+        {
+            var x = container.GetInstance<MenuViewModel>();
+            conductor.ActivateItem(x);
         }
     }
 }

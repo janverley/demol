@@ -8,6 +8,10 @@ namespace Admin.Model
 {
     public class Speler
     {
+        public Speler()
+        {
+            Antwoorden = new List<string>();
+        }
         public string Naam { get; set; }
         public List<string> Antwoorden { get; set; }
         public TimeSpan Tijd { get; set; }
@@ -16,6 +20,6 @@ namespace Admin.Model
     public class AntwoordenData
     {
         public string Dag { get; set; }
-        public List<Speler> Spelers { get; set; }
+        public List<Speler> Spelers { get; set; } = new List<Speler>();
     }
 }

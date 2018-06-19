@@ -18,11 +18,14 @@ namespace Admin.Views
     /// <summary>
     /// Interaction logic for QuizView.xaml
     /// </summary>
-    public partial class QuizIntroView : Page
+    public partial class QuizIntroView : UserControl
     {
         public QuizIntroView()
         {
             InitializeComponent();
+            Dispatcher.BeginInvoke(new System.Action(() => { Keyboard.Focus(Naam); }),System.Windows.Threading.DispatcherPriority.Loaded);
         }
+
+
     }
 }

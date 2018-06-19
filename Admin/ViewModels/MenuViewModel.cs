@@ -10,22 +10,17 @@ using System.Threading.Tasks;
 
 namespace Admin.ViewModels
 {
-    public class DagViewModel
-    {
-        public DagViewModel(int id, string text)
-        {
-            Id = id;
-            Text = text;
-        }
-
-        public int Id { get; }
-        public string Text { get; }
-    }
 
     public class MenuViewModel : Screen
     {
 
-        private readonly INavigationService navigationService;
+        public MenuViewModel(ShellViewModel conductor, SimpleContainer container)
+        {
+            this.conductor = conductor;
+            this.container = container;
+            Pasvragen = new BindableCollection<PasVraagViewModel>();
+        }
+
         private Status _op1;
         private Status _op2;
         private Status _op3;
@@ -79,15 +74,10 @@ namespace Admin.ViewModels
             op3 = data.Opdrachten.op3;
         }
 
+        private IConductor conductor;
+        private readonly SimpleContainer container;
 
         public BindableCollection<PasVraagViewModel> Pasvragen { get; private set; }
-
-        public MenuViewModel(INavigationService navigationService)
-        {
-            this.navigationService = navigationService;
-
-            Pasvragen = new BindableCollection<PasVraagViewModel>();
-        }
 
         public Status op1
         {
@@ -132,26 +122,33 @@ namespace Admin.ViewModels
 
         public void StartQuiz()
         {
-            navigationService.NavigateToViewModel<QuizIntroViewModel>(new Dictionary<string,object> { { "Dag", SelectedDag.Id } });
+            var x = container.GetInstance<QuizIntroViewModel>();
+            conductor.ActivateItem(x);
         }
         public bool CanValidate => SelectedDag != null;
 
         public void Validate()
         {
-            navigationService.NavigateToViewModel<ValidateViewModel>(SelectedDag.Id);
+            var x = container.GetInstance<ValidateViewModel>();
+            //x.Dag = SelectedDag.Id;
+            conductor.ActivateItem(x);
         }
         public bool CanInvalidateAnswers => SelectedDag != null;
 
         public void InvalidateAnswers()
         {
-            navigationService.NavigateToViewModel<InvalidateViewModel>(SelectedDag.Id);
+            var x = container.GetInstance<InvalidateViewModel>();
+            //x.Dag = SelectedDag.Id;
+            conductor.ActivateItem(x);
         }
 
         public bool CanShowResult => SelectedDag != null;
 
         public void ShowResult()
         {
-            navigationService.NavigateToViewModel<ResultViewModel>(SelectedDag.Id);
+            var x = container.GetInstance<ResultViewModel>();
+            //x.Dag = SelectedDag.Id;
+            conductor.ActivateItem(x);
         }
     }
 }

@@ -8,26 +8,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Admin.ViewModels
 {
-    class QuizVragenViewModel : Screen
+    public class QuizVragenViewModel : Screen
     {
         private string naam;
-        private int dag;
 
         public string Naam
         {
             get { return naam; }
             set { Set(ref naam, value); }
-        }
-        public int Dag
-        {
-            get { return dag; }
-            set
-            {
-                Set(ref dag, value);
-            }
         }
 
         private DateTime startTime;
@@ -35,11 +27,13 @@ namespace Admin.ViewModels
         private Speler speler;
         private QuizVraagViewModel quizVraag;
         private int index;
-        private readonly INavigationService navigationService;
+        private IConductor conductor;
+        private readonly SimpleContainer container;
 
-        public QuizVragenViewModel(INavigationService navigationService)
+        public QuizVragenViewModel(ShellViewModel conductor, SimpleContainer container)
         {
-            this.navigationService = navigationService;
+            this.conductor = conductor;
+            this.container = container;
         }
 
         protected override void OnActivate()
@@ -47,18 +41,16 @@ namespace Admin.ViewModels
             base.OnActivate();
             startTime = DateTime.UtcNow;
 
-            Debug.Assert(Dag > 0);
-
             quizVraagViewModels.Clear();
 
             speler = new Speler { Naam = Naam };
 
-            string contents = File.ReadAllText($@".\Files\vragen.{Dag}.json");
+            string contents = File.ReadAllText($@".\Files\vragen.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
             var vragen = JsonConvert.DeserializeObject<VragenData>(contents);
 
             foreach (var vraag in vragen.Vragen)
             {
-                quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Text, vraag.Opties)); 
+                quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Text, vraag.Opties??Enumerable.Empty<string>())); 
             }
 
             QuizVraag = quizVraagViewModels[index];
@@ -76,6 +68,23 @@ namespace Admin.ViewModels
             }
         }
 
+        public void OnKeyDown(KeyEventArgs e)
+        {
+            if (e?.Key == Key.Enter)
+            {
+                if (CanNext)
+                {
+                    Next();
+                }
+                else if (CanStop)
+                {
+                    Stop();
+                }
+            }
+
+        }
+
+
         public bool CanNext => index < (quizVraagViewModels.Count - 1);
         public bool CanStop => index  == quizVraagViewModels.Count - 1;
         public void Next()
@@ -92,16 +101,27 @@ namespace Admin.ViewModels
         public void Stop()
         {
             var diff = DateTime.UtcNow - startTime;
+
+            // noteer antwoord
+            speler.Antwoorden.Add(quizVraag.AntwoordToNote);
+
             speler.Tijd = diff;
 
-            string antwoordenJson = File.ReadAllText($@".\Files\antwoorden.{Dag}.json");
-            var antwoorden = JsonConvert.DeserializeObject<AntwoordenData>(antwoordenJson);
+            AntwoordenData antwoorden = new AntwoordenData { Dag = container.GetInstance<MenuViewModel>().SelectedDag.Id.ToString()};
+            if (File.Exists($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json"))
+            {
+                string antwoordenJson = File.ReadAllText($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+                antwoorden = JsonConvert.DeserializeObject<AntwoordenData>(antwoordenJson);
+            }
+
             antwoorden.Spelers.Add(speler);
-
             var data = JsonConvert.SerializeObject(antwoorden, Formatting.Indented);
-            File.WriteAllText($@".\Files\antwoorden.{Dag}.json", data);
+            File.WriteAllText($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json", data);
 
-            navigationService.NavigateToViewModel<QuizIntroViewModel>(new Dictionary<string, object> { { "Dag", Dag } });
+            var x = container.GetInstance<QuizOuttroViewModel>();
+            
+            conductor.ActivateItem(x);
+
         }
     }
 }

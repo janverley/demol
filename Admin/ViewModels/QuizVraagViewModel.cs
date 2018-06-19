@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Admin.ViewModels
 {
-    class QuizVraagViewModel : PropertyChangedBase
+    public class QuizVraagViewModel : PropertyChangedBase
     {
         private string text;
         private string antwoord;
         private bool showAntwoord;
 
-        public QuizVraagViewModel(string text, List<string> opties)
+        public QuizVraagViewModel(string text, IEnumerable<string> opties)
         {
             Text = text;
             Opties = new BindableCollection<OptieViewModel>(opties.Select(s => new OptieViewModel(s)));
@@ -46,7 +47,6 @@ namespace Admin.ViewModels
             }
         }
 
-
         public BindableCollection<OptieViewModel> Opties { get; set; }
 
         public string AntwoordToNote
@@ -55,7 +55,7 @@ namespace Admin.ViewModels
             {
                 if (Opties.Any())
                 {
-                    return Opties.FirstOrDefault(o => o.IsSelected)?.OptieText??$"NIKS{DateTime.UtcNow.ToShortTimeString()}";
+                    return Opties.FirstOrDefault(o => o.IsSelected)?.OptieText??$"NIKS_{DateTime.UtcNow.Ticks}";
                 }
                 else
                 {

@@ -18,7 +18,7 @@ namespace Admin.Views
     /// <summary>
     /// Interaction logic for QuizVragenView.xaml
     /// </summary>
-    public partial class QuizVragenView : Page
+    public partial class QuizVragenView : UserControl
     {
         public QuizVragenView()
         {

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Admin.Views
 {
     /// <summary>
-    /// Interaction logic for MenuView.xaml
+    /// Interaction logic for QuizOuttroView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class QuizOuttroView : UserControl
     {
-        public MenuView()
+        public QuizOuttroView()
         {
             InitializeComponent();
         }

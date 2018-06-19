@@ -11,6 +11,7 @@
         <ImageBrush ImageSource="./bg.jpg" Stretch="UniformToFill"></ImageBrush>
     </Window.Background>
     <ScrollViewer>
-        <Frame cal:Message.Attach="RegisterFrame($source)" DataContext="{x:Null}" />
+        <ContentControl Name="ActiveItem"/>
+        <!--<Frame cal:Message.Attach="RegisterFrame($source)" DataContext="{x:Null}" />-->
     </ScrollViewer>
 </Window>

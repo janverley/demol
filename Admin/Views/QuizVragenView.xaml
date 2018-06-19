@@ -1,4 +1,4 @@
-﻿<Page x:Class="Admin.Views.QuizVragenView"
+﻿<UserControl x:Class="Admin.Views.QuizVragenView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,17 +6,19 @@
       xmlns:local="clr-namespace:Admin.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="QuizVragenView">
+                   xmlns:cal="http://www.caliburnproject.org"
+        cal:Message.Attach="[Event KeyDown] = [Action OnKeyDown($eventArgs)]">
 
     <Grid Margin="40">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ContentPresenter x:Name="QuizVraag"/>
+        <ContentControl Name="QuizVraag"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
             <Button x:Name="Next" Style="{StaticResource Btn1}">Volgende Vraag</Button>
             <Button x:Name="Stop" Style="{StaticResource Btn1}">Stop</Button>
         </StackPanel>
     </Grid>
-</Page>
+</UserControl>
+    
