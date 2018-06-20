@@ -7,11 +7,11 @@
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         Title="De Mol" Height="450" Width="800" WindowState="Maximized">
-    <Window.Background>
-        <ImageBrush ImageSource="./bg.jpg" Stretch="UniformToFill"></ImageBrush>
-    </Window.Background>
-    <ScrollViewer>
+    <Grid Background="Black">
+        <Image Source="./bg.jpg"  Stretch="UniformToFill"/>
+        <ScrollViewer>
         <ContentControl Name="ActiveItem"/>
         <!--<Frame cal:Message.Attach="RegisterFrame($source)" DataContext="{x:Null}" />-->
     </ScrollViewer>
+    </Grid>
 </Window>

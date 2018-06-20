@@ -21,6 +21,16 @@ namespace DeMol.ViewModels
             get { return naam; }
             set { Set(ref naam, value); }
         }
+        public bool IsDeMol
+        {
+            get { return isDeMol; }
+            set
+            {
+                if (Set(ref isDeMol, value))
+                {
+                }
+            }
+        }
 
         private DateTime startTime;
         private List<QuizVraagViewModel> quizVraagViewModels = new List<QuizVraagViewModel>();
@@ -29,6 +39,7 @@ namespace DeMol.ViewModels
         private int index;
         private IConductor conductor;
         private readonly SimpleContainer container;
+        private bool isDeMol;
 
         public QuizVragenViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -104,6 +115,8 @@ namespace DeMol.ViewModels
 
             // noteer antwoord
             speler.Antwoorden.Add(quizVraag.AntwoordToNote);
+
+            speler.IsDeMol = IsDeMol;
 
             speler.Tijd = diff;
 

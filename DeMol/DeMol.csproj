@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OptieViewModel.cs" />
     <Compile Include="ViewModels\PasVraagViewModel.cs" />
+    <Compile Include="ViewModels\QuizIntro2ViewModel.cs" />
     <Compile Include="ViewModels\QuizIntroViewModel.cs" />
     <Compile Include="ViewModels\QuizOuttroViewModel.cs" />
     <Compile Include="ViewModels\QuizVraagViewModel.cs" />
@@ -90,6 +91,9 @@
     </Compile>
     <Compile Include="Views\PasVraagView.xaml.cs">
       <DependentUpon>PasVraagView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuizIntro2View.xaml.cs">
+      <DependentUpon>QuizIntro2View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuizIntroView.xaml.cs">
       <DependentUpon>QuizIntroView.xaml</DependentUpon>
@@ -112,7 +116,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="AppViewModel.cs" />
     <Page Include="Views\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PasVraagView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuizIntro2View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

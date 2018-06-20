@@ -45,7 +45,7 @@ namespace DeMol.ViewModels
         public bool CanStart => !string.IsNullOrEmpty(Naam);
         public void Start()
         {
-            var x = container.GetInstance<QuizVragenViewModel>();
+            var x = container.GetInstance<QuizIntro2ViewModel>();
             x.Naam = Naam;
             conductor.ActivateItem(x);
 

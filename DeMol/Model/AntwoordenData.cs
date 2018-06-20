@@ -12,6 +12,7 @@ namespace DeMol.Model
         {
             Antwoorden = new List<string>();
         }
+        public bool IsDeMol { get; set; }
         public string Naam { get; set; }
         public List<string> Antwoorden { get; set; }
         public TimeSpan Tijd { get; set; }
