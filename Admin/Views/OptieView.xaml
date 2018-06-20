@@ -9,7 +9,7 @@
     <StackPanel>
         <!--<RadioButton Style="{StaticResource R1}" Content="sdfsdfsdf" IsChecked="true"/>
         <RadioButton Style="{StaticResource R1}" Content="sdfsdfsdf" IsChecked="false"/>-->
-        <RadioButton Style="{StaticResource R1}" Content="{Binding Path=OptieText}" IsChecked="{Binding Path=IsSelected}"/>
+        <RadioButton GroupName="qasdasd" Style="{StaticResource R1}" Content="{Binding Path=OptieText}" IsChecked="{Binding Path=IsSelected}"/>
 
     </StackPanel>
 </UserControl>

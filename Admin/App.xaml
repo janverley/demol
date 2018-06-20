@@ -6,7 +6,7 @@
              >
     <Application.Resources>
         <ResourceDictionary>
-            <SolidColorBrush x:Key="90p" Color="#90FFFFFF"></SolidColorBrush>
+            <SolidColorBrush x:Key="90p" Color="#50FFFFFF"></SolidColorBrush>
             <SolidColorBrush x:Key="95p" Color="#95FFFFFF"></SolidColorBrush>
 
             <Style TargetType="{x:Type TextBlock}" x:Key="H1">
