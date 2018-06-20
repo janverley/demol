@@ -1,7 +1,7 @@
 ﻿using Caliburn.Micro;
 using System.Windows.Controls;
 
-namespace Admin.ViewModels
+namespace DeMol.ViewModels
 {
     public class ShellViewModel : Conductor<object>.Collection.OneActive
     {

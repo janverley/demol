@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Admin.Views
+namespace DeMol.Views
 {
     public class EnumToBooleanConverter : IValueConverter
     {

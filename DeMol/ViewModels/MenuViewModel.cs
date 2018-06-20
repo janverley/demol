@@ -1,4 +1,4 @@
-﻿using Admin.Model;
+﻿using DeMol.Model;
 using Caliburn.Micro;
 using Newtonsoft.Json;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Admin.ViewModels
+namespace DeMol.ViewModels
 {
 
     public class MenuViewModel : Screen

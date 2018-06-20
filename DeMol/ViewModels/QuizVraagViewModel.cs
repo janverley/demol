@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Admin.ViewModels
+namespace DeMol.ViewModels
 {
     public class QuizVraagViewModel : PropertyChangedBase
     {

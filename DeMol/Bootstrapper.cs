@@ -1,11 +1,11 @@
-﻿using Admin.ViewModels;
+﻿using DeMol.ViewModels;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Admin
+namespace DeMol
 {
     //Basic AppBootstrapper
     public class Bootstrapper : BootstrapperBase

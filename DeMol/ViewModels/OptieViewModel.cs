@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Admin.ViewModels
+namespace DeMol.ViewModels
 {
     public class OptieViewModel : PropertyChangedBase
     {

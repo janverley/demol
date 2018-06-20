@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Admin.Views
+namespace DeMol.Views
 {
     /// <summary>
     /// Interaction logic for PasVraagView.xaml
