@@ -1,14 +1,7 @@
 ﻿using Admin.ViewModels;
-using Caliburn.Metro;
-using Caliburn.Metro.Core;
 using Caliburn.Micro;
-using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
