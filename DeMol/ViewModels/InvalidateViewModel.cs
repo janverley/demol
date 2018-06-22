@@ -23,6 +23,10 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
+        public void Invalidate()
+        {
+            System.IO.File.Delete($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+        }
     }
 
 }

@@ -1,33 +1,30 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DeMol.ViewModels
 {
-    public class QuizIntro3ViewModel : Screen
+    public class QuizWieIsDeMolViewModel : Screen
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
         private string naam;
 
-        OptieViewModel optieJa = new OptieViewModel("Ja");
-        OptieViewModel optieNee = new OptieViewModel("Nee");
-
-
-        public QuizIntro3ViewModel(ShellViewModel conductor, SimpleContainer container)
+        public QuizWieIsDeMolViewModel(ShellViewModel conductor, SimpleContainer container)
         {
             this.conductor = conductor;
             this.container = container;
 
-            optieJa.PropertyChanged += Optie_PropertyChanged;
-            optieNee.PropertyChanged += Optie_PropertyChanged;
 
-            Opties = new BindableCollection<OptieViewModel> { optieJa, optieNee };
+            var spelers = container.GetInstance<MenuViewModel>().Spelerdata.Spelers;
+            foreach (var speler in spelers)
+            {
+                var optie = new OptieViewModel(speler.Naam);
+                optie.PropertyChanged += Optie_PropertyChanged;
+
+                Opties.Add(optie);
+            }
         }
 
         private void Optie_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -38,8 +35,7 @@ namespace DeMol.ViewModels
             }
         }
 
-        public BindableCollection<OptieViewModel> Opties { get; set; }
-
+        public BindableCollection<OptieViewModel> Opties { get; set; } = new BindableCollection<OptieViewModel>();
         public string Naam
         {
             get { return naam; }
@@ -47,12 +43,12 @@ namespace DeMol.ViewModels
             {
                 if (Set(ref naam, value))
                 {
-                    NotifyOfPropertyChange(() => BenJijDeMol);
+                   
                 }
             }
         }
 
-        public string BenJijDeMol => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, was jij vandaag De Mol?";
+        public string Text => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat vandaag De Mol was?";
 
         public void OnKeyDown(KeyEventArgs e)
         {
@@ -71,7 +67,7 @@ namespace DeMol.ViewModels
         {
             var x = container.GetInstance<QuizVragenViewModel>();
             x.Naam = Naam;
-            x.IsDeMol = optieJa.IsSelected;
+            x.IsDeMol = false;
             conductor.ActivateItem(x);
         }
         public void Menu()

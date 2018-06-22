@@ -1,13 +1,8 @@
-﻿using DeMol.Model;
-using Caliburn.Micro;
-using Newtonsoft.Json;
+﻿using Caliburn.Micro;
+using DeMol.Model;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DeMol.ViewModels
@@ -56,8 +51,7 @@ namespace DeMol.ViewModels
 
             speler = new Speler { Naam = Naam.ToLower() };
 
-            string contents = File.ReadAllText($@".\Files\vragen.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
-            var vragen = JsonConvert.DeserializeObject<VragenData>(contents);
+            var vragen = Util.SafeReadJson<VragenData>($@".\Files\vragen.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
 
             foreach (var vraag in vragen.Vragen)
             {
@@ -119,16 +113,11 @@ namespace DeMol.ViewModels
 
             speler.Tijd = diff;
 
-            AntwoordenData antwoorden = new AntwoordenData { Dag = container.GetInstance<MenuViewModel>().SelectedDag.Id.ToString()};
-            if (File.Exists($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json"))
-            {
-                string antwoordenJson = File.ReadAllText($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
-                antwoorden = JsonConvert.DeserializeObject<AntwoordenData>(antwoordenJson);
-            }
+            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
 
             antwoorden.Spelers.Add(speler);
-            var data = JsonConvert.SerializeObject(antwoorden, Formatting.Indented);
-            File.WriteAllText($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json", data);
+
+            Util.SafeFileWithBackup($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json", antwoorden);
 
             var x = container.GetInstance<QuizOuttroViewModel>();
             

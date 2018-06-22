@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\AntwoordenData.cs" />
+    <Compile Include="Model\SpelerData.cs" />
     <Compile Include="Model\Util.cs" />
     <Compile Include="Model\VragenData.cs" />
     <Compile Include="ViewModels\CheckViewModel.cs" />
@@ -76,9 +77,9 @@
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OptieViewModel.cs" />
     <Compile Include="ViewModels\PasVraagViewModel.cs" />
-    <Compile Include="ViewModels\QuizIntro2ViewModel.cs" />
-    <Compile Include="ViewModels\QuizIntro3ViewModel.cs" />
-    <Compile Include="ViewModels\QuizIntroViewModel.cs" />
+    <Compile Include="ViewModels\QuizBenJijDeMolViewModel.cs" />
+    <Compile Include="ViewModels\QuizWieIsDeMolViewModel.cs" />
+    <Compile Include="ViewModels\QuizNaamViewModel.cs" />
     <Compile Include="ViewModels\QuizOuttroViewModel.cs" />
     <Compile Include="ViewModels\QuizVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizVragenViewModel.cs" />
@@ -102,11 +103,11 @@
     <Compile Include="Views\PasVraagView.xaml.cs">
       <DependentUpon>PasVraagView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\QuizIntro2View.xaml.cs">
-      <DependentUpon>QuizIntro2View.xaml</DependentUpon>
+    <Compile Include="Views\QuizBenJijDeMolView.xaml.cs">
+      <DependentUpon>QuizBenJijDeMolView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\QuizIntroView.xaml.cs">
-      <DependentUpon>QuizIntroView.xaml</DependentUpon>
+    <Compile Include="Views\QuizNaamView.xaml.cs">
+      <DependentUpon>QuizNaamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuizOuttroView.xaml.cs">
       <DependentUpon>QuizOuttroView.xaml</DependentUpon>
@@ -116,6 +117,9 @@
     </Compile>
     <Compile Include="Views\QuizVragenView.xaml.cs">
       <DependentUpon>QuizVragenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuizWieIsDeMolView.xaml.cs">
+      <DependentUpon>QuizWieIsDeMolView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ResultView.xaml.cs">
       <DependentUpon>ResultView.xaml</DependentUpon>
@@ -152,11 +156,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\QuizIntro2View.xaml">
+    <Page Include="Views\QuizBenJijDeMolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\QuizIntroView.xaml">
+    <Page Include="Views\QuizNaamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuizVragenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuizWieIsDeMolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +215,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Files\antwoorden.1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\spelers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Files\vragen.1.json">

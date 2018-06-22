@@ -2,20 +2,6 @@
     "Dag": "1",
     "Vragen": [
         {
-            "Text": "Wie denk jij dat de Mol was vandaag?",
-            "Opties": [
-                "Juul",
-                "Staf",
-                "Vic",
-                "Mie",
-                "Jochen",
-                "Pieter",
-                "Hanne",
-                "Kris",
-                "Hilde"
-            ]
-        },
-        {
             "Text": "Wie zat aan de linkerhand van de Mol vandaag?",
             "Opties": [
                 "Juul",
@@ -41,7 +27,7 @@
                 "Hanne",
                 "Kris",
                 "Hilde",
-                "Nienamd"
+                "Niemand"
             ]
         },
         {

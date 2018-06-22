@@ -21,7 +21,7 @@ namespace DeMol.ViewModels
 
         public void Next()
         {
-            var x = container.GetInstance<QuizIntroViewModel>();
+            var x = container.GetInstance<QuizNaamViewModel>();
             conductor.ActivateItem(x);
         }
         public void OnKeyDown(KeyEventArgs e)

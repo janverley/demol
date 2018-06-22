@@ -59,7 +59,7 @@ namespace DeMol.ViewModels
                 }
                 else
                 {
-                    return Antwoord;
+                    return Antwoord?? $"NIKS_{DateTime.UtcNow.Ticks}";
                 }
             }
         }

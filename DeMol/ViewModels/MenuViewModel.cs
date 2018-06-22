@@ -1,19 +1,13 @@
 ﻿using DeMol.Model;
 using Caliburn.Micro;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeMol.ViewModels
 {
 
     public class MenuViewModel : Screen
     {
-        public int AantalSpelers => 9;
+        public int AantalSpelers => Spelerdata.Spelers.Count;
         public int AantalSpelersDieDeMolMoetenGeradenHebben => 2;
 
 
@@ -27,6 +21,20 @@ namespace DeMol.ViewModels
         private Status _op1;
         private Status _op2;
         private Status _op3;
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            Spelerdata = Util.SafeReadJson<SpelersData>($@".\Files\spelers.json");
+            
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            SaveAdmin();
+            base.OnDeactivate(close);
+        }
 
         public BindableCollection<DagViewModel> Dagen
         {
@@ -68,9 +76,7 @@ namespace DeMol.ViewModels
 
         public void SelectedDagChanged()
         {
-            string contents = File.ReadAllText($@".\Files\admin.{SelectedDag.Id}.json");
-            var data = JsonConvert.DeserializeObject<AdminData>(contents);
-
+            var data = Util.SafeReadJson<AdminData>($@".\Files\admin.{SelectedDag.Id}.json");
 
             foreach (var item in data.Pasvragen)
             {
@@ -136,9 +142,7 @@ namespace DeMol.ViewModels
                 newData.Pasvragen.Add(new PasvragenVerdiend { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
             }
 
-            var data = JsonConvert.SerializeObject(newData, Formatting.Indented);
-
-            File.WriteAllText($@".\Files\admin.{SelectedDag.Id}.json", data);
+            Util.SafeFileWithBackup($@".\Files\admin.{SelectedDag.Id}.json", newData);
         }
 
         public bool CanStartQuiz => SelectedDag != null && UnLocked;
@@ -146,10 +150,12 @@ namespace DeMol.ViewModels
 
         public void StartQuiz()
         {
-            var x = container.GetInstance<QuizIntroViewModel>();
+            var x = container.GetInstance<QuizNaamViewModel>();
             conductor.ActivateItem(x);
         }
         public bool CanValidate => SelectedDag != null && UnLocked;
+
+        public SpelersData Spelerdata { get; private set; }
 
         public void Validate()
         {

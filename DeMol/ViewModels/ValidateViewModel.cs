@@ -1,9 +1,7 @@
 ﻿using Caliburn.Micro;
 using DeMol.Model;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,12 +27,7 @@ namespace DeMol.ViewModels
         {
             base.OnActivate();
 
-            AntwoordenData antwoorden = new AntwoordenData { Dag = container.GetInstance<MenuViewModel>().SelectedDag.Id.ToString() };
-            if (File.Exists($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json"))
-            {
-                string antwoordenJson = File.ReadAllText($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
-                antwoorden = JsonConvert.DeserializeObject<AntwoordenData>(antwoordenJson);
-            }
+            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
 
             Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}", antwoorden.Spelers.Count == container.GetInstance<MenuViewModel>().AantalSpelers));
             Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}", antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
@@ -51,7 +44,6 @@ namespace DeMol.ViewModels
         public void ShowResult()
         {
             var x = container.GetInstance<ResultViewModel>();
-            //x.Dag = SelectedDag.Id;
             conductor.ActivateItem(x);
         }
 
