@@ -32,6 +32,7 @@ namespace DeMol
             container
                .PerRequest<InvalidateViewModel>()
                .PerRequest<QuizIntroViewModel>()
+               .PerRequest<QuizIntro2ViewModel>()
                .PerRequest<QuizOuttroViewModel>()
                .PerRequest<ValidateViewModel>()
                .PerRequest<ResultViewModel>()

@@ -23,6 +23,7 @@ namespace DeMol.Views
         public QuizVraagView()
         {
             InitializeComponent();
+            Dispatcher.BeginInvoke(new System.Action(() => Keyboard.Focus(Antwoord)), System.Windows.Threading.DispatcherPriority.Loaded);
         }
     }
 }

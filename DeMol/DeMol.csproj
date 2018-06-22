@@ -68,13 +68,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\AntwoordenData.cs" />
+    <Compile Include="Model\Util.cs" />
     <Compile Include="Model\VragenData.cs" />
+    <Compile Include="ViewModels\CheckViewModel.cs" />
     <Compile Include="ViewModels\DagViewModel.cs" />
     <Compile Include="ViewModels\InvalidateViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OptieViewModel.cs" />
     <Compile Include="ViewModels\PasVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizIntro2ViewModel.cs" />
+    <Compile Include="ViewModels\QuizIntro3ViewModel.cs" />
     <Compile Include="ViewModels\QuizIntroViewModel.cs" />
     <Compile Include="ViewModels\QuizOuttroViewModel.cs" />
     <Compile Include="ViewModels\QuizVraagViewModel.cs" />
@@ -82,13 +85,20 @@
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ValidateViewModel.cs" />
+    <Compile Include="Views\CheckView.xaml.cs">
+      <DependentUpon>CheckView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EnumToBooleanConverter.cs" />
+    <Compile Include="Views\InvalidateView.xaml.cs">
+      <DependentUpon>InvalidateView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OptieView.xaml.cs">
       <DependentUpon>OptieView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PasswordHelper.cs" />
     <Compile Include="Views\PasVraagView.xaml.cs">
       <DependentUpon>PasVraagView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +117,9 @@
     <Compile Include="Views\QuizVragenView.xaml.cs">
       <DependentUpon>QuizVragenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -116,6 +129,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Views\ValidateView.xaml.cs">
+      <DependentUpon>ValidateView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\CheckView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvalidateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,7 +172,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ValidateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

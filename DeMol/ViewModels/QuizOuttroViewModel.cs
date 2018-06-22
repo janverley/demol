@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DeMol.ViewModels
 {
@@ -22,6 +23,13 @@ namespace DeMol.ViewModels
         {
             var x = container.GetInstance<QuizIntroViewModel>();
             conductor.ActivateItem(x);
+        }
+        public void OnKeyDown(KeyEventArgs e)
+        {
+            if (e?.Key == Key.Enter)
+            {
+                Next();
+            }
         }
     }
 }

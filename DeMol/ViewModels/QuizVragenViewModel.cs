@@ -54,7 +54,7 @@ namespace DeMol.ViewModels
 
             quizVraagViewModels.Clear();
 
-            speler = new Speler { Naam = Naam };
+            speler = new Speler { Naam = Naam.ToLower() };
 
             string contents = File.ReadAllText($@".\Files\vragen.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
             var vragen = JsonConvert.DeserializeObject<VragenData>(contents);
@@ -113,7 +113,6 @@ namespace DeMol.ViewModels
         {
             var diff = DateTime.UtcNow - startTime;
 
-            // noteer antwoord
             speler.Antwoorden.Add(quizVraag.AntwoordToNote);
 
             speler.IsDeMol = IsDeMol;

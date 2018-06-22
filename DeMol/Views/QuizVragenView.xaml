@@ -14,7 +14,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ContentControl Name="QuizVraag"/>
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Naam" Margin="0 30"/>
+
+            <ContentControl Name="QuizVraag"/>
+        </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
             <Button x:Name="Next" Style="{StaticResource Btn1}">Volgende Vraag</Button>
             <Button x:Name="Stop" Style="{StaticResource Btn1}">Stop</Button>

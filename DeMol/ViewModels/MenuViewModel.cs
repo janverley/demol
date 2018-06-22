@@ -13,6 +13,9 @@ namespace DeMol.ViewModels
 
     public class MenuViewModel : Screen
     {
+        public int AantalSpelers => 9;
+        public int AantalSpelersDieDeMolMoetenGeradenHebben => 2;
+
 
         public MenuViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -47,15 +50,20 @@ namespace DeMol.ViewModels
         public DagViewModel SelectedDag
         {
             get { return selectedDag; }
-            set {
+            set
+            {
                 if (Set(ref selectedDag, value))
                 {
-                    NotifyOfPropertyChange(() => CanSaveAdmin);
-                    NotifyOfPropertyChange(() => CanShowResult);
-                    NotifyOfPropertyChange(() => CanStartQuiz);
-                    NotifyOfPropertyChange(() => CanValidate);
+                    UpdateButtonStates();
                 }
             }
+        }
+
+        private void UpdateButtonStates()
+        {
+            NotifyOfPropertyChange(() => CanSaveAdmin);
+            NotifyOfPropertyChange(() => CanStartQuiz);
+            NotifyOfPropertyChange(() => CanValidate);
         }
 
         public void SelectedDagChanged()
@@ -97,7 +105,23 @@ namespace DeMol.ViewModels
             set { Set(ref _op3, value); }
         }
 
-        public bool CanSaveAdmin => SelectedDag != null;
+        public string LockString
+        {
+            get { return lockString; }
+            set
+            {
+                if (Set(ref lockString, value))
+                {
+                    UpdateButtonStates();
+                }
+            }
+        }
+
+        private string lockString = "";
+
+        private bool UnLocked => LockString.Equals("asd", StringComparison.InvariantCultureIgnoreCase);
+
+        public bool CanSaveAdmin => SelectedDag != null && UnLocked;
 
         public void SaveAdmin()
         {
@@ -117,7 +141,7 @@ namespace DeMol.ViewModels
             File.WriteAllText($@".\Files\admin.{SelectedDag.Id}.json", data);
         }
 
-        public bool CanStartQuiz => SelectedDag != null;
+        public bool CanStartQuiz => SelectedDag != null && UnLocked;
 
 
         public void StartQuiz()
@@ -125,28 +149,11 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<QuizIntroViewModel>();
             conductor.ActivateItem(x);
         }
-        public bool CanValidate => SelectedDag != null;
+        public bool CanValidate => SelectedDag != null && UnLocked;
 
         public void Validate()
         {
             var x = container.GetInstance<ValidateViewModel>();
-            //x.Dag = SelectedDag.Id;
-            conductor.ActivateItem(x);
-        }
-        public bool CanInvalidateAnswers => SelectedDag != null;
-
-        public void InvalidateAnswers()
-        {
-            var x = container.GetInstance<InvalidateViewModel>();
-            //x.Dag = SelectedDag.Id;
-            conductor.ActivateItem(x);
-        }
-
-        public bool CanShowResult => SelectedDag != null;
-
-        public void ShowResult()
-        {
-            var x = container.GetInstance<ResultViewModel>();
             //x.Dag = SelectedDag.Id;
             conductor.ActivateItem(x);
         }

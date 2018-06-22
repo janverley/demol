@@ -12,7 +12,7 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Margin="40" HorizontalAlignment="Center" Style="{StaticResource H1}" Name="BenJijDeMol"/>
-            <TextBox x:Name="Naam" Text="{Binding Path=Naam, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource B1}" MinWidth="200"/>
+            <ItemsControl Grid.IsSharedSizeScope="True" Name="Opties" HorizontalAlignment="Center"/>
             <Button Name="Start" HorizontalAlignment="Center" Style="{StaticResource Btn1}" Margin="20">Start</Button>
         </StackPanel>
         <Button VerticalAlignment="Bottom" Name="Menu" HorizontalAlignment="Center" Style="{StaticResource Btn1}" Margin="20">Menu</Button>

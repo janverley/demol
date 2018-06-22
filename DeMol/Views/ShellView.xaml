@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:DeMol.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="De Mol" Height="450" Width="800" WindowState="Maximized">
+        Title="De Mol" Height="450" Width="800" >
     <Grid Background="Black">
         <Image Source="./bg.jpg"  Stretch="UniformToFill"/>
-        <ScrollViewer>
-        <ContentControl Name="ActiveItem"/>
-        <!--<Frame cal:Message.Attach="RegisterFrame($source)" DataContext="{x:Null}" />-->
-    </ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ContentControl Name="ActiveItem"/>
+        </ScrollViewer>
     </Grid>
 </Window>

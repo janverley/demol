@@ -13,21 +13,19 @@
     <Grid Margin="40">
         <Grid.Resources>
             <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="FontSize" Value="15" />
-            </Style>
-            <Style TargetType="{x:Type RadioButton}">
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="FontSize" Value="15" />
-            </Style>
         </Grid.Resources>
         <StackPanel>
 
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource H1}">Paswoord:</TextBlock>
+                <PasswordBox Width="100" local:PasswordHelper.BindPassword="True" 
+         local:PasswordHelper.BoundPassword="{Binding Path=LockString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource H1p}"
+                             x:Name="PasswordBox"/>
+            </StackPanel> 
+            
             <StackPanel Orientation="Horizontal" Margin="0 20">
 
-                <TextBlock>Dag:</TextBlock>
+                <TextBlock Style="{StaticResource H1}">Dag:</TextBlock>
                 <ComboBox x:Name="Dagen" SelectedItem="{Binding SelectedDag}" DisplayMemberPath="Text" 
                       cal:Message.Attach="[Event SelectionChanged]=[Action SelectedDagChanged()]" Width="200"/>
             </StackPanel>
@@ -35,8 +33,6 @@
                 <Button Name="SaveAdmin" Style="{StaticResource Btn1}">Save</Button>
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start</Button>
                 <Button Name="Validate" Style="{StaticResource Btn1}">Valideer</Button>
-                <Button Name="InvalidateAnswers" Style="{StaticResource Btn1}">Invalideer Antwoorden</Button>
-                <Button Name="Result" Style="{StaticResource Btn1}">Dag resultaat</Button>
             </StackPanel>
 
             

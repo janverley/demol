@@ -46,6 +46,12 @@
                 <Setter Property="Background" Value="{StaticResource 90p}"/>
                 <Setter Property="TextAlignment" Value="Center" />
             </Style>
+            <Style TargetType="{x:Type PasswordBox}" x:Key="H1p">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="Background" Value="{StaticResource 90p}"/>
+                <Setter Property="PasswordChar" Value="X" />
+            </Style>
             <Style TargetType="{x:Type Button}" x:Key="Btn1">
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="FontSize" Value="25" />

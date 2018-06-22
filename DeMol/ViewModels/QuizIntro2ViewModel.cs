@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,19 +14,20 @@ namespace DeMol.ViewModels
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
         private string naam;
-        private bool isDeMol;
+
+        OptieViewModel optieJa = new OptieViewModel("Ja");
+        OptieViewModel optieNee = new OptieViewModel("Nee");
+
 
         public QuizIntro2ViewModel(ShellViewModel conductor, SimpleContainer container)
         {
             this.conductor = conductor;
             this.container = container;
 
-            var ja = new OptieViewModel("Ja");
-            ja.PropertyChanged += Optie_PropertyChanged;
-            var nee = new OptieViewModel("Nee");
-            nee.PropertyChanged += Optie_PropertyChanged;
+            optieJa.PropertyChanged += Optie_PropertyChanged;
+            optieNee.PropertyChanged += Optie_PropertyChanged;
 
-            Opties = new BindableCollection<OptieViewModel> { ja,nee };
+            Opties = new BindableCollection<OptieViewModel> { optieJa,optieNee };
         }
 
         private void Optie_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -50,18 +52,7 @@ namespace DeMol.ViewModels
             }
         }
 
-        public string BenJijDeMol => $"{Naam}, was jij vandaag De Mol?";
-
-        public bool IsDeMol
-        {
-            get { return isDeMol; }
-            set
-            {
-                if (Set(ref isDeMol, value))
-                {
-                }
-            }
-        }
+        public string BenJijDeMol => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, was jij vandaag De Mol?";
 
         public void OnKeyDown(KeyEventArgs e)
         {
@@ -80,7 +71,7 @@ namespace DeMol.ViewModels
         {
             var x = container.GetInstance<QuizVragenViewModel>();
             x.Naam = Naam;
-            x.IsDeMol = IsDeMol;
+            x.IsDeMol = optieJa.IsSelected;
             conductor.ActivateItem(x);
         }
         public void Menu()
