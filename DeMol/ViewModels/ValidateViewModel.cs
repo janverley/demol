@@ -27,7 +27,7 @@ namespace DeMol.ViewModels
         {
             base.OnActivate();
 
-            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{Dag}.json");
 
             Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}", antwoorden.Spelers.Count == container.GetInstance<MenuViewModel>().AantalSpelers));
             Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}", antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
@@ -41,9 +41,12 @@ namespace DeMol.ViewModels
 
         public bool CanShowResult => Checks.All(c => c.IsOk);
 
+        public int Dag { get; set; }
+
         public void ShowResult()
         {
             var x = container.GetInstance<ResultViewModel>();
+            x.Dag = Dag;
             conductor.ActivateItem(x);
         }
 

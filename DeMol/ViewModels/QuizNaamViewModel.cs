@@ -53,11 +53,6 @@ namespace DeMol.ViewModels
                 }
             }
         }
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-        }
 
         public bool CanStart => !string.IsNullOrEmpty(Naam) && string.IsNullOrEmpty(Message);
         public void Start()

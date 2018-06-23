@@ -1,6 +1,7 @@
 ﻿using DeMol.Model;
 using Caliburn.Micro;
 using System;
+using System.Linq;
 
 namespace DeMol.ViewModels
 {
@@ -15,7 +16,6 @@ namespace DeMol.ViewModels
         {
             this.conductor = conductor;
             this.container = container;
-            Pasvragen = new BindableCollection<PasVraagViewModel>();
         }
 
         private Status _op1;
@@ -26,32 +26,31 @@ namespace DeMol.ViewModels
         {
             base.OnActivate();
 
+            DagenData = Util.SafeReadJson<DagenData>($@".\Files\dagen.json");
             Spelerdata = Util.SafeReadJson<SpelersData>($@".\Files\spelers.json");
-            
+
+            foreach (var dag in DagenData.Dagen)
+            {
+                Dagen.Add(new DagViewModel(dag.Id, dag.Naam));
+            }
+
+            // if set, preselect SelectedDag
+            if (Dag > 0 && Dagen.Any(d => d.Id == Dag))
+            {
+                SelectedDag = Dagen.First(d => d.Id == Dag);
+            }
         }
 
         protected override void OnDeactivate(bool close)
         {
-            SaveAdmin();
+            if (SelectedDag != null)
+            {
+                SaveAdmin();
+            }
             base.OnDeactivate(close);
         }
 
-        public BindableCollection<DagViewModel> Dagen
-        {
-            get
-            {
-                return new BindableCollection<DagViewModel>
-                {
-                    new DagViewModel(1,"zaterdag 30 juni"),
-                    new DagViewModel(2,"zondag 1 juli"),
-                    new DagViewModel(3,"maandag 2 juli"),
-                    new DagViewModel(4,"dinsdag 3 juli"),
-                    new DagViewModel(5,"woensdag 4 juli"),
-                    new DagViewModel(5,"donderdag 5 juli"),
-                    new DagViewModel(5,"vrijdag 6 juli"),
-                };
-            }
-        }
+        public BindableCollection<DagViewModel> Dagen => new BindableCollection<DagViewModel>();
 
         private DagViewModel selectedDag;
 
@@ -63,6 +62,7 @@ namespace DeMol.ViewModels
                 if (Set(ref selectedDag, value))
                 {
                     UpdateButtonStates();
+                    Dag = SelectedDag.Id;
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace DeMol.ViewModels
         private IConductor conductor;
         private readonly SimpleContainer container;
 
-        public BindableCollection<PasVraagViewModel> Pasvragen { get; private set; }
+        public BindableCollection<PasVraagViewModel> Pasvragen => new BindableCollection<PasVraagViewModel>();
 
         public Status op1
         {
@@ -129,7 +129,14 @@ namespace DeMol.ViewModels
 
         public bool CanSaveAdmin => SelectedDag != null && UnLocked;
 
-        public void SaveAdmin()
+        public void Timer()
+        {
+            var x = container.GetInstance<TimerViewModel>();
+            x.Minuten = 45;
+            conductor.ActivateItem(x);
+        }
+
+            public void SaveAdmin()
         {
             var newData = new AdminData();
             newData.Opdrachten.op1 = op1;
@@ -155,13 +162,16 @@ namespace DeMol.ViewModels
         }
         public bool CanValidate => SelectedDag != null && UnLocked;
 
+        public DagenData DagenData { get; private set; }
         public SpelersData Spelerdata { get; private set; }
+        public int Dag { get; internal set; }
 
         public void Validate()
         {
             var x = container.GetInstance<ValidateViewModel>();
-            //x.Dag = SelectedDag.Id;
+            x.Dag = SelectedDag.Id;
             conductor.ActivateItem(x);
         }
+
     }
 }

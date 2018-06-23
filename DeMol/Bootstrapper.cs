@@ -1,5 +1,6 @@
-﻿using DeMol.ViewModels;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using DeMol.ViewModels;
+using NDesk.Options;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -37,7 +38,8 @@ namespace DeMol
                .PerRequest<QuizOuttroViewModel>()
                .PerRequest<ValidateViewModel>()
                .PerRequest<ResultViewModel>()
-               .PerRequest<QuizVragenViewModel>();
+               .PerRequest<QuizVragenViewModel>()
+               .PerRequest<TimerViewModel>();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

@@ -43,6 +43,9 @@
     <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
     </Reference>
+    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -68,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\AntwoordenData.cs" />
+    <Compile Include="Model\DagenData.cs" />
     <Compile Include="Model\SpelerData.cs" />
     <Compile Include="Model\Util.cs" />
     <Compile Include="Model\VragenData.cs" />
@@ -85,6 +89,7 @@
     <Compile Include="ViewModels\QuizVragenViewModel.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\ValidateViewModel.cs" />
     <Compile Include="Views\CheckView.xaml.cs">
       <DependentUpon>CheckView.xaml</DependentUpon>
@@ -133,6 +138,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Views\TimerView.xaml.cs">
+      <DependentUpon>TimerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ValidateView.xaml.cs">
       <DependentUpon>ValidateView.xaml</DependentUpon>
     </Compile>
@@ -188,6 +196,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TimerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ValidateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -217,6 +229,7 @@
     <None Include="Files\antwoorden.1.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Files\dagen.json" />
     <None Include="Files\spelers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

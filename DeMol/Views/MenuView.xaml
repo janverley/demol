@@ -33,6 +33,7 @@
                 <Button Name="SaveAdmin" Style="{StaticResource Btn1}">Save</Button>
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start</Button>
                 <Button Name="Validate" Style="{StaticResource Btn1}">Valideer</Button>
+                <Button Name="Timer" Style="{StaticResource Btn1}">Timer</Button>
             </StackPanel>
 
             

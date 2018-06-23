@@ -25,11 +25,13 @@ namespace DeMol.ViewModels
             timer.Interval = TimeSpan.FromSeconds(5);
         }
 
+        public int Dag { get; set; }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
-            var adminData = Util.SafeReadJson<AdminData>($@".\Files\admin.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+            var adminData = Util.SafeReadJson<AdminData>($@".\Files\admin.{Dag}.json");
 
-            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{Dag}.json");
 
             var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
             var juisteAntwoorden = deMol.Antwoorden;
