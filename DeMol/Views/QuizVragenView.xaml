@@ -15,8 +15,8 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Naam" Margin="0 30"/>
-
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Naam" />
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Message" Margin="10"/>
             <ContentControl Name="QuizVraag"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">

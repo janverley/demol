@@ -10,6 +10,15 @@ namespace DeMol.Model
 {
     public static class Util
     {
+        private static Dictionary<Type, string> Files => new Dictionary<Type, string>
+        {
+            { typeof(AdminData), @".\Files\admin.{0}.json" },
+            { typeof(DagenData), @".\Files\dagen.json"},
+            { typeof(SpelersData), @".\Files\spelers.json" },
+            { typeof(VragenData), @".\Files\vragen.{0}.json" },
+            { typeof(AntwoordenData), @".\Files\antwoorden.{0}.json" }
+        };
+
         public static bool SafeEqual(this string a, string b)
         {
             var sa = a.Trim().ToLower();
@@ -18,20 +27,91 @@ namespace DeMol.Model
             return sa.Equals(sb, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public static void SafeFileWithBackup(string path, object data)
+        public static void SafeFileWithBackup(object data)
         {
-            var contents = JsonConvert.SerializeObject(data, Formatting.Indented);
-
-            // todo first backup
-            File.WriteAllText(path, contents);
+            SafeFileWithBackup(Files[data.GetType()], data);
+        }
+        public static void SafeFileWithBackup(object data, int dag)
+        {
+            SafeFileWithBackup(string.Format(Files[data.GetType()], dag), data);
         }
 
-        public static T SafeReadJson<T>(string path)
+        private static void SafeFileWithBackup(string path, object data)
         {
-            string contents = File.ReadAllText(path);
-            var data = JsonConvert.DeserializeObject<T>(contents);
+            var fileInfo = new FileInfo(path);
+            // first backup
+            if (fileInfo.Exists)
+            {
+                var index = 0;
+                var backupFile = fileInfo;
+
+                while (backupFile.Exists)
+                {
+                    index++;
+                    backupFile = new FileInfo(Path.Combine(fileInfo.DirectoryName, $"{index}.{fileInfo.Name}"));
+                }
+
+                fileInfo.CopyTo(backupFile.FullName);
+            }
+
+            var contents = JsonConvert.SerializeObject(data, Formatting.Indented);
+            File.WriteAllText(fileInfo.FullName, contents);
+        }
+
+        public static T SafeReadJson<T>(int dag) where T : new()
+        {
+            var path = string.Format(Files[typeof(T)], dag);
+            return SafeReadJson<T>(path);
+        }
+
+        public static T SafeReadJson<T>() where T : new()
+        {
+            var path = Files[typeof(T)];
+            return SafeReadJson<T>(path);
+        }
+        private static T SafeReadJson<T>(string path) where T : new()
+        {
+            T data = new T();
+
+            if (File.Exists(path))
+            {
+                string contents = File.ReadAllText(path);
+                data = JsonConvert.DeserializeObject<T>(contents);
+            }
 
             return data;
+        }
+
+
+        internal static bool DataFileFoundAndValid<T>()
+        {
+            return DataFileFoundAndValid<T>(Files[typeof(T)]);
+        }
+        internal static bool DataFileFoundAndValid<T>(int dag)
+        {
+            return DataFileFoundAndValid<T>(string.Format(Files[typeof(T)], dag));
+        }
+        private static bool DataFileFoundAndValid<T>(string path)
+        {
+            var result = true;
+
+            if (!File.Exists(path))
+            {
+                result = false;
+            }
+            else
+            {
+                string contents = File.ReadAllText(path);
+                try
+                {
+                    T data = JsonConvert.DeserializeObject<T>(contents);
+                }
+                catch
+                {
+                    result = false;
+                }
+            }
+            return result;
         }
     }
 }

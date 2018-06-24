@@ -30,7 +30,7 @@ namespace DeMol.Model
     {
         public AdminData()
         {
-            Opdrachten = new Opdrachten();
+            Opdrachten = new Opdrachten { op1 = Status.NOK, op2 = Status.NA, op3 = Status.NA };
             Pasvragen = new List<PasvragenVerdiend>();
         }
 

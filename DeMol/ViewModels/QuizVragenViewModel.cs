@@ -41,17 +41,41 @@ namespace DeMol.ViewModels
             this.conductor = conductor;
             this.container = container;
         }
+      
+        private string message;
+
+        public string Message
+        {
+            get
+            {
+                return message;
+            }
+            set
+            {
+                Set(ref message, value);
+            }
+        }
 
         protected override void OnActivate()
         {
             base.OnActivate();
             startTime = DateTime.UtcNow;
 
+            if (IsDeMol)
+            {
+                Message = "Jij bent De Mol, dus je moet op alle vragen goed antwoorden!";
+            }
+            else
+            {
+                Message = "";
+            }
+
+
             quizVraagViewModels.Clear();
 
             speler = new Speler { Naam = Naam.ToLower() };
 
-            var vragen = Util.SafeReadJson<VragenData>($@".\Files\vragen.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+            var vragen = Util.SafeReadJson<VragenData>(container.GetInstance<ShellViewModel>().Dag);
 
             foreach (var vraag in vragen.Vragen)
             {
@@ -113,14 +137,14 @@ namespace DeMol.ViewModels
 
             speler.Tijd = diff;
 
-            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+            var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 
             antwoorden.Spelers.Add(speler);
 
-            Util.SafeFileWithBackup($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json", antwoorden);
+            Util.SafeFileWithBackup(antwoorden, container.GetInstance<ShellViewModel>().Dag);
 
             var x = container.GetInstance<QuizOuttroViewModel>();
-            
+            x.Naam = Naam;
             conductor.ActivateItem(x);
 
         }

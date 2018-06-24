@@ -1,7 +1,10 @@
 ﻿using Caliburn.Micro;
+using DeMol.Model;
+using DeMol.Properties;
 using NDesk.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace DeMol.ViewModels
@@ -15,19 +18,60 @@ namespace DeMol.ViewModels
             this.container = container;
         }
 
+        private int dag;
+
+        public int Dag
+        {
+            get
+            {
+                return dag;
+            }
+            set
+            {
+                Set(ref dag, value);
+
+                Title = $"De Mol - {DagenData.Dagen.First(d => d.Id == dag)?.Naam??""}";
+            }
+        }
+        private string title;
+
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                Set(ref title, value);
+            }
+        }
+
+        public int AantalSpelers => Spelerdata.Spelers.Count;
+        public int AantalSpelersDieDeMolMoetenGeradenHebben => Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben;
+        public DagenData DagenData { get; private set; }
+        public SpelersData Spelerdata { get; private set; }
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
 
+            DagenData = Util.SafeReadJson<DagenData>();
+
+            Spelerdata = Util.SafeReadJson<SpelersData>();
+
+
             var menuDay = -1;
             var timerminuten = -1;
             var showResult = -1;
+            var showQuiz = -1;
 
             var p = new OptionSet()
             {
                 { "m|menu=", "Start the Menu screen for day.", (int v) => menuDay = v },
                 { "t|timer=", "Start the timer screen with # minutes.", (int v) => timerminuten = v },
                 { "r|result=",  "Start the ResultScreen for day", (int v) => showResult = v},
+                { "q|quiz=",  "Start the Quiz for day", (int v) => showQuiz = v},
             };
 
             List<string> extra;
@@ -51,17 +95,18 @@ namespace DeMol.ViewModels
             else if (showResult > 0)
             {
                 var x = container.GetInstance<ResultViewModel>();
-                x.Dag = showResult;
+                Dag = showResult;
+                ActivateItem(x);
+            }
+            else if (showQuiz > 0)
+            {
+                var x = container.GetInstance<QuizNaamViewModel>();
+                Dag = showQuiz;
                 ActivateItem(x);
             }
             else
             {
                 var x = container.GetInstance<MenuViewModel>();
-
-                if (menuDay > 0)
-                {
-                    x.Dag = menuDay;
-                }
                 ActivateItem(x);
             }
         }

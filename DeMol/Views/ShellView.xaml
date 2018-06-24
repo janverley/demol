@@ -6,10 +6,15 @@
         xmlns:local="clr-namespace:DeMol.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="De Mol" Height="450" Width="800" >
+        Title="De Mol" Height="450" Width="800" WindowState="Maximized" Icon="./bg.icon.png">
     <Grid Background="Black">
-        <Image Source="./bg.jpg"  Stretch="UniformToFill"/>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Source="./bg.jpg"  Stretch="UniformToFill" Grid.RowSpan="2"/>
+        <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Title" Grid.Row="0" Margin="0 5"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <ContentControl Name="ActiveItem"/>
         </ScrollViewer>
     </Grid>

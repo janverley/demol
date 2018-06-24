@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:DeMol.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-                          xmlns:cal="http://www.caliburnproject.org"
-        cal:Message.Attach="[Event KeyDown] = [Action OnKeyDown($eventArgs)]">
+             xmlns:cal="http://www.caliburnproject.org"
+             cal:Message.Attach="[Event KeyDown] = [Action OnKeyDown($eventArgs)]">
     <Grid>
         <StackPanel VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" >Je antwoorden zijn genoteerd.</TextBlock>
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Message"/>
             <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Margin="20">Roep de volgende speler</TextBlock>
             <Button Name="Next" Style="{StaticResource Btn1}" HorizontalAlignment="Center" Margin="40" MinWidth="80">OK</Button>
         </StackPanel>

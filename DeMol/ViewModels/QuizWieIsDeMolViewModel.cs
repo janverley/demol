@@ -17,7 +17,7 @@ namespace DeMol.ViewModels
             this.container = container;
 
 
-            var spelers = container.GetInstance<MenuViewModel>().Spelerdata.Spelers;
+            var spelers = container.GetInstance<ShellViewModel>().Spelerdata.Spelers;
             foreach (var speler in spelers)
             {
                 var optie = new OptieViewModel(speler.Naam);

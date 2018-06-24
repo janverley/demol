@@ -16,48 +16,60 @@
         </Grid.Resources>
         <StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource H1}">Paswoord:</TextBlock>
-                <PasswordBox Width="100" local:PasswordHelper.BindPassword="True" 
-         local:PasswordHelper.BoundPassword="{Binding Path=LockString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource H1p}"
-                             x:Name="PasswordBox"/>
-            </StackPanel> 
-            
             <StackPanel Orientation="Horizontal" Margin="0 20">
-
                 <TextBlock Style="{StaticResource H1}">Dag:</TextBlock>
                 <ComboBox x:Name="Dagen" SelectedItem="{Binding SelectedDag}" DisplayMemberPath="Text" 
                       cal:Message.Attach="[Event SelectionChanged]=[Action SelectedDagChanged()]" Width="200"/>
+                <TextBlock Style="{StaticResource H1}" Name="Message" Margin="10 0 0 0"/>
             </StackPanel>
+
             <StackPanel Orientation="Horizontal">
-                <Button Name="SaveAdmin" Style="{StaticResource Btn1}">Save</Button>
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start</Button>
                 <Button Name="Validate" Style="{StaticResource Btn1}">Valideer</Button>
                 <Button Name="Timer" Style="{StaticResource Btn1}">Timer</Button>
             </StackPanel>
+            <Border BorderBrush="White" BorderThickness="1" Margin="5"  Padding="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0 5">
+                        <TextBlock Style="{StaticResource H1}">Paswoord:</TextBlock>
+                        <PasswordBox Width="100" local:PasswordHelper.BindPassword="True" 
+         local:PasswordHelper.BoundPassword="{Binding Path=LockString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource H1p}"
+                             x:Name="PasswordBox"/>
+                        <Button Name="SaveAdmin" Style="{StaticResource Btn1}" Margin="5 0">Save</Button>
+                    </StackPanel>
 
-            
-            <StackPanel Margin="0 20 0 0">
-                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}">Opdracht 1 OK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}">Opdracht 1 NOK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}">Opdracht 1 NA</RadioButton>
-            </StackPanel>
-            <StackPanel Margin="0 15 0 0">
-                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}" >Opdracht 2 OK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}" >Opdracht 2 NOK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}" >Opdracht 2 NA</RadioButton>
-            </StackPanel>
-            <StackPanel Margin="0 15 0 0">
-                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}" >Opdracht 3 OK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}" >Opdracht 3 NOK</RadioButton>
-                <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}" >Opdracht 3 NA</RadioButton>
-            </StackPanel>
 
-
-            <TextBlock Margin="20">Pas vragen verdiend vandaag:</TextBlock>
-
-            <ItemsControl Grid.IsSharedSizeScope="True" Name="Pasvragen"/>
-
+                    <StackPanel Grid.Column="0" Grid.Row="1" >
+                        <StackPanel >
+                            <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}">Opdracht 1 geslaagd</RadioButton>
+                            <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}">Opdracht 1 niet geslaagd</RadioButton>
+                            <RadioButton IsChecked="{Binding Path=op1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}">Opdracht 1 niet gespeeld</RadioButton>
+                        </StackPanel>
+                        <StackPanel Margin="0 15 0 0">
+                            <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}" >Opdracht 2 geslaagd</RadioButton>
+                            <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}" >Opdracht 2 niet geslaagd</RadioButton>
+                            <RadioButton IsChecked="{Binding Path=op2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}" >Opdracht 2 niet gespeeld</RadioButton>
+                        </StackPanel>
+                        <StackPanel Margin="0 15 0 0">
+                            <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.OK}}" Style="{StaticResource R2}" >Opdracht 3 geslaagd</RadioButton>
+                            <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NOK}}" Style="{StaticResource R2}" >Opdracht 3 niet geslaagd</RadioButton>
+                            <RadioButton IsChecked="{Binding Path=op3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Status.NA}}" Style="{StaticResource R2}" >Opdracht 3 niet gespeeld</RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <TextBlock Style="{StaticResource H1}">Pas vragen verdiend vandaag:</TextBlock>
+                        <ItemsControl Grid.IsSharedSizeScope="True" Name="Pasvragen"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>

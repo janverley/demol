@@ -22,5 +22,23 @@ namespace DeMol.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("asd")]
+        public string pwd {
+            get {
+                return ((string)(this["pwd"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int AantalSpelersDieDeMolMoetenGeradenHebben {
+            get {
+                return ((int)(this["AantalSpelersDieDeMolMoetenGeradenHebben"]));
+            }
+        }
     }
 }

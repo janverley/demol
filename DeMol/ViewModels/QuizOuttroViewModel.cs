@@ -19,11 +19,29 @@ namespace DeMol.ViewModels
             this.container = container;
         }
 
+        private string naam;
+
+        public string Naam
+        {
+            get { return naam; }
+            set
+            {
+                if (Set(ref naam, value))
+                {
+                    NotifyOfPropertyChange(() => Message);
+                }
+            }
+        }
+
+        public string Message => $"{Naam}, je antwoorden zijn genoteerd.";
+
+
         public void Next()
         {
             var x = container.GetInstance<QuizNaamViewModel>();
             conductor.ActivateItem(x);
         }
+
         public void OnKeyDown(KeyEventArgs e)
         {
             if (e?.Key == Key.Enter)

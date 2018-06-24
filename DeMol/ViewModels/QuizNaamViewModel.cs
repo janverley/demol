@@ -1,5 +1,6 @@
 using Caliburn.Micro;
 using DeMol.Model;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 
@@ -32,7 +33,7 @@ namespace DeMol.ViewModels
 
         private void Validate()
         {
-            if (!container.GetInstance<MenuViewModel>().Spelerdata.Spelers.Any(s => s.Naam.SafeEqual(Naam)))
+            if (!container.GetInstance<ShellViewModel>().Spelerdata.Spelers.Any(s => s.Naam.SafeEqual(Naam)))
             {
                 Message = $"'{Naam}' ken ik niet.";
             }
@@ -54,11 +55,14 @@ namespace DeMol.ViewModels
             }
         }
 
-        public bool CanStart => !string.IsNullOrEmpty(Naam) && string.IsNullOrEmpty(Message);
+        public bool VragenGevonden => Util.DataFileFoundAndValid<VragenData>(container.GetInstance<ShellViewModel>().Dag);
+
+        public bool CanStart => !string.IsNullOrEmpty(Naam) && string.IsNullOrEmpty(Message) && VragenGevonden;
+
         public void Start()
         {
             var x = container.GetInstance<QuizBenJijDeMolViewModel>();
-            x.Naam = Naam;
+            x.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower());
             conductor.ActivateItem(x);
 
         }
@@ -72,6 +76,16 @@ namespace DeMol.ViewModels
             if (e?.Key == Key.Escape )
             {
                 Menu();
+            }
+        }
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            if (!VragenGevonden)
+            {
+                Message = $"Geen Vragen gevonden!";
+                NotifyOfPropertyChange(() => VragenGevonden);
             }
         }
 

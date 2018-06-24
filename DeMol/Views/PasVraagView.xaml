@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DeMol.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="30" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" SharedSizeGroup="Names"/>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="Naam"/>
-        <TextBox Grid.Column="1" x:Name="PasVragenVerdiend" Width="80"/>
+        <TextBlock Style="{StaticResource H1}" x:Name="Naam"/>
+        <TextBox Grid.Column="1" x:Name="PasVragenVerdiend" Style="{StaticResource B1}" Width="80"/>
     </Grid>
 </UserControl>

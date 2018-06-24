@@ -25,13 +25,11 @@ namespace DeMol.ViewModels
             timer.Interval = TimeSpan.FromSeconds(5);
         }
 
-        public int Dag { get; set; }
-
         private void Timer_Tick(object sender, EventArgs e)
         {
-            var adminData = Util.SafeReadJson<AdminData>($@".\Files\admin.{Dag}.json");
+            var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
 
-            var antwoorden = Util.SafeReadJson<AntwoordenData>($@".\Files\antwoorden.{Dag}.json");
+            var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 
             var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
             var juisteAntwoorden = deMol.Antwoorden;
@@ -66,16 +64,16 @@ namespace DeMol.ViewModels
                         var dagwinnaar = scores.OrderBy(s => s.juisteAntwoorden).ThenBy(s => s.tijd).First();
 
                         Winnaar = dagwinnaar.Speler;
-                        
+
 
                         Text = $"Alle opdrachten geslaaagd! {Environment.NewLine} De Dagwinnaar is {dagwinnaar.Speler}!  De mol was vandaag {deMol.Naam}.";
                         Text += $"{Environment.NewLine}{dagwinnaar.Speler} had {dagwinnaar.juisteAntwoorden} juiste antwoorden.";
 
                         if (scores.Count(s => s.juisteAntwoorden == dagwinnaar.juisteAntwoorden) > 1)
                         {
-                            Text += $"{Environment.NewLine}Ex-aequo: Er waren {scores.Count(s => s.juisteAntwoorden == dagwinnaar.juisteAntwoorden)} spelers met {dagwinnaar.juisteAntwoorden} juiste antwoorden, maar die waren trager dan {dagwinnaar.Speler}: {string.Join(",", scores.Where(s => ! s.Equals(dagwinnaar)).Select(s => s.Speler))}";
+                            Text += $"{Environment.NewLine}Ex-aequo: Er waren {scores.Count(s => s.juisteAntwoorden == dagwinnaar.juisteAntwoorden)} spelers met {dagwinnaar.juisteAntwoorden} juiste antwoorden, maar die waren trager dan {dagwinnaar.Speler}: {string.Join(",", scores.Where(s => !s.Equals(dagwinnaar)).Select(s => s.Speler))}";
                         }
-                            
+
                     }
                     else // op1 wel en op2 wel maar op 3 niet geslaagd
                     {
@@ -128,10 +126,27 @@ namespace DeMol.ViewModels
         {
             base.OnActivate();
 
+            var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+
+            Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:", Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
+            Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}", antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
+            Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}", antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
+
+            if (!Checks.All(c => c.IsOk))
+            {
+                ShowChecks = true;
+                NotifyOfPropertyChange(() => ShowChecks);
+            }
+            else
+            {
+
             Text = "De uitslag van vandaag...";
 
             timer.Start();
+            }
         }
+        public BindableCollection<CheckViewModel> Checks { get; set; } = new BindableCollection<CheckViewModel>();
+        public bool ShowChecks { get; private set; } = false;
 
         private string MolText(AntwoordenData antwoorden)
         {
@@ -140,7 +155,7 @@ namespace DeMol.ViewModels
             // mol geraden? 
             var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
             var raders = antwoorden.Spelers.Where(s => !s.IsDeMol).Where(s => s.DeMolIs.SafeEqual(deMol.Naam));
-            if (raders.Count() >= container.GetInstance<MenuViewModel>().AantalSpelersDieDeMolMoetenGeradenHebben)
+            if (raders.Count() >= container.GetInstance<ShellViewModel>().AantalSpelersDieDeMolMoetenGeradenHebben)
             {
                 // de mol is geraden door
                 Winnaar = "Niemand";
@@ -162,5 +177,6 @@ namespace DeMol.ViewModels
 
             return $"{Environment.NewLine}{result}";
         }
+
     }
 }

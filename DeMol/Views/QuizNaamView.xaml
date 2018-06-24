@@ -12,7 +12,7 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Margin="40" HorizontalAlignment="Center" Style="{StaticResource H1}">Geef je naam in:</TextBlock>
-            <TextBox x:Name="Naam" Text="{Binding Path=Naam, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource B1}" MinWidth="200"/>
+            <TextBox x:Name="Naam" Text="{Binding Path=Naam, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource B1}" MinWidth="200" IsEnabled="{Binding Path=VragenGevonden}"/>
             <TextBlock x:Name="Message" Margin="0 10 0 0" HorizontalAlignment="Center" Style="{StaticResource H1}"/>
             <Button Name="Start" HorizontalAlignment="Center" Style="{StaticResource Btn1}" Margin="20">Start</Button>
         </StackPanel>

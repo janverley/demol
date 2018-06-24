@@ -47,7 +47,7 @@ namespace DeMol.ViewModels
             }
         }
 
-        public string BenJijDeMol => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, was jij vandaag De Mol?";
+        public string BenJijDeMol => $"{Naam}, was jij vandaag De Mol?";
 
         public void OnKeyDown(KeyEventArgs e)
         {

@@ -7,11 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ItemsControl Grid.IsSharedSizeScope="True" Name="Checks" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ItemsControl Grid.IsSharedSizeScope="True" Name="Checks" />
+       
+        <StackPanel VerticalAlignment="Bottom" Margin="20">
             <Button Name="InvalidateAnswers" Style="{StaticResource Btn1}">Invalideer Antwoorden</Button>
             <Button Name="ShowResult" Style="{StaticResource Btn1}">Dag resultaat</Button>
-            <Button Name="Menu" HorizontalAlignment="Center" Style="{StaticResource Btn1}" >Menu</Button>
         </StackPanel>
+        </StackPanel>
+        <Button VerticalAlignment="Bottom" Margin="20" Name="Menu" HorizontalAlignment="Center" Style="{StaticResource Btn1}" >Menu</Button>
     </Grid>
 </UserControl>

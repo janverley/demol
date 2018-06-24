@@ -25,7 +25,7 @@ namespace DeMol.ViewModels
         }
         public void Invalidate()
         {
-            System.IO.File.Delete($@".\Files\antwoorden.{container.GetInstance<MenuViewModel>().SelectedDag.Id}.json");
+            System.IO.File.Delete($@".\Files\antwoorden.{container.GetInstance<ShellViewModel>().Dag}.json");
         }
     }
 
