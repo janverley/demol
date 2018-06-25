@@ -52,9 +52,19 @@ namespace DeMol.ViewModels
         public DagenData DagenData { get; private set; }
         public SpelersData Spelerdata { get; private set; }
 
+        private string bgSource;
+
+        public string BgSource
+        {
+            get { return bgSource; }
+            set { Set(ref bgSource, value); }
+        }
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
+
+            BgSource = @"./bg.jpg";
 
             DagenData = Util.SafeReadJson<DagenData>();
 
@@ -74,7 +84,9 @@ namespace DeMol.ViewModels
                 { "q|quiz=",  "Start the Quiz for day", (int v) => showQuiz = v},
             };
 
-            List<string> extra;
+
+
+        List<string> extra;
             try
             {
                 extra = p.Parse(Environment.GetCommandLineArgs());

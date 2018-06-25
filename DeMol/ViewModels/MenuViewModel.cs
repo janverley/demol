@@ -200,6 +200,10 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<ValidateViewModel>();
             conductor.ActivateItem(x);
         }
-
+        public void EndResult()
+        {
+            var x = container.GetInstance<EndResultViewModel>();
+            conductor.ActivateItem(x);
+        }
     }
 }

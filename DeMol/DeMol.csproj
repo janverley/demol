@@ -87,6 +87,7 @@
     <Compile Include="ViewModels\QuizOuttroViewModel.cs" />
     <Compile Include="ViewModels\QuizVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizVragenViewModel.cs" />
+    <Compile Include="ViewModels\EndResultViewModel.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
@@ -125,6 +126,9 @@
     </Compile>
     <Compile Include="Views\QuizWieIsDeMolView.xaml.cs">
       <DependentUpon>QuizWieIsDeMolView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EndResultView.xaml.cs">
+      <DependentUpon>EndResultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ResultView.xaml.cs">
       <DependentUpon>ResultView.xaml</DependentUpon>
@@ -187,6 +191,10 @@
     <Page Include="Views\QuizWieIsDeMolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EndResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ResultView.xaml">
       <SubType>Designer</SubType>
@@ -255,6 +263,11 @@
   <ItemGroup>
     <Resource Include="Views\bg.icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\bg.red.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

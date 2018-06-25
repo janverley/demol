@@ -28,6 +28,14 @@ namespace DeMol.ViewModels
         private void Timer_Tick(object sender, EventArgs e)
         {
             left = left - timer.Interval;
+
+            if (left <= TimeSpan.Zero)
+            {
+                left = TimeSpan.Zero;
+                container.GetInstance<ShellViewModel>().BgSource = @"./bg.red.jpg";
+                Stop();
+            }
+
             NotifyOfPropertyChange(() => Tijd);
         }
 
@@ -45,7 +53,7 @@ namespace DeMol.ViewModels
             base.OnDeactivate(close);
 
         }
-        private TimeSpan left = TimeSpan.FromSeconds(0);
+        private TimeSpan left = TimeSpan.Zero;
 
         public string Tijd
         {

@@ -43,18 +43,30 @@ namespace DeMol.Model
             if (fileInfo.Exists)
             {
                 var index = 0;
-                var backupFile = fileInfo;
+                FileInfo backupFile;
 
-                while (backupFile.Exists)
+                do
                 {
+                    backupFile = new FileInfo(Path.Combine(fileInfo.DirectoryName, "Backups", $"{index}.{fileInfo.Name}"));
                     index++;
-                    backupFile = new FileInfo(Path.Combine(fileInfo.DirectoryName, $"{index}.{fileInfo.Name}"));
+                }
+                while (backupFile.Exists);
+
+                if (!Directory.Exists(backupFile.DirectoryName))
+                {
+                    Directory.CreateDirectory(backupFile.DirectoryName);
                 }
 
                 fileInfo.CopyTo(backupFile.FullName);
             }
 
             var contents = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            if (!Directory.Exists(fileInfo.DirectoryName))
+            {
+                Directory.CreateDirectory(fileInfo.DirectoryName);
+            }
+
             File.WriteAllText(fileInfo.FullName, contents);
         }
 

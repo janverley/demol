@@ -26,6 +26,7 @@
             <StackPanel Orientation="Horizontal">
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start</Button>
                 <Button Name="Validate" Style="{StaticResource Btn1}">Valideer</Button>
+                <Button Name="EndResult" Style="{StaticResource Btn1}">EindResultaat</Button>
                 <Button Name="Timer" Style="{StaticResource Btn1}">Timer</Button>
             </StackPanel>
             <Border BorderBrush="White" BorderThickness="1" Margin="5"  Padding="5">
