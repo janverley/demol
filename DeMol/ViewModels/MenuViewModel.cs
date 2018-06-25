@@ -24,6 +24,7 @@ namespace DeMol.ViewModels
         {
             base.OnActivate();
 
+            Dagen.Clear();
             foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
             {
                 Dagen.Add(new DagViewModel(dag.Id, dag.Naam));
@@ -56,7 +57,10 @@ namespace DeMol.ViewModels
             {
                 if (Set(ref selectedDag, value))
                 {
-                    container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
+                    if (value != null)
+                    {
+                        container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
+                    }
                     UpdateButtonStates();
                 }
             }
@@ -71,36 +75,38 @@ namespace DeMol.ViewModels
 
         public void SelectedDagChanged()
         {
-            container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
-
-            var data = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-
-            // als file niet gevonden
-            foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
+            if (SelectedDag != null)
             {
-                if (!data.Pasvragen.Any(pv => pv.Naam.SafeEqual(speler.Naam)))
+                container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
+                var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+
+                // als file niet gevonden
+                foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
                 {
-                    data.Pasvragen.Add(new PasvragenVerdiend { Naam = speler.Naam, PasVragenVerdiend = 0 });
+                    if (!adminData.Pasvragen.Any(pv => pv.Naam.SafeEqual(speler.Naam)))
+                    {
+                        adminData.Pasvragen.Add(new PasvragenVerdiend { Naam = speler.Naam, PasVragenVerdiend = 0 });
+                    }
                 }
-            }
 
-            Pasvragen.Clear();
-            foreach (var item in data.Pasvragen)
-            {
-                Pasvragen.Add(new PasVraagViewModel { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
-            }
+                Pasvragen.Clear();
+                foreach (var item in adminData.Pasvragen)
+                {
+                    Pasvragen.Add(new PasVraagViewModel { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
+                }
 
-            op1 = data.Opdrachten.op1;
-            op2 = data.Opdrachten.op2;
-            op3 = data.Opdrachten.op3;
+                op1 = adminData.Opdrachten.op1;
+                op2 = adminData.Opdrachten.op2;
+                op3 = adminData.Opdrachten.op3;
 
-            if (!VragenGevonden)
-            {
-                Message = "Vragen File niet gevonden!";
-            }
-            else
-            {
-                Message = "";
+                if (!VragenGevonden)
+                {
+                    Message = "Vragen File niet gevonden!";
+                }
+                else
+                {
+                    Message = "";
+                }
             }
         }
 

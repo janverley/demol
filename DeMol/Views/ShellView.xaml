@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DeMol.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="De Mol" Height="450" Width="800"  Icon="./bg.icon.png">
+        Title="De Mol" Height="450" Width="800"  Icon="./bg.icon.png" WindowState="Maximized">
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

@@ -73,7 +73,7 @@ namespace DeMol.ViewModels
 
             quizVraagViewModels.Clear();
 
-            speler = new Speler { Naam = Naam.ToLower() };
+            speler = new Speler { Naam = Naam };
 
             var vragen = Util.SafeReadJson<VragenData>(container.GetInstance<ShellViewModel>().Dag);
 
@@ -116,6 +116,9 @@ namespace DeMol.ViewModels
 
         public bool CanNext => index < (quizVraagViewModels.Count - 1);
         public bool CanStop => index  == quizVraagViewModels.Count - 1;
+
+        public string DeMolIs { get; set; }
+
         public void Next()
         {
             // noteer antwoord
@@ -132,7 +135,7 @@ namespace DeMol.ViewModels
             var diff = DateTime.UtcNow - startTime;
 
             speler.Antwoorden.Add(quizVraag.AntwoordToNote);
-
+            speler.DeMolIs = DeMolIs;
             speler.IsDeMol = IsDeMol;
 
             speler.Tijd = diff;

@@ -48,8 +48,8 @@ namespace DeMol.ViewModels
 
                 foreach (var speler in antwoorden.Spelers.Where(s => !s.IsDeMol))
                 {
-                    var juist = 0;
-
+                    var juist = adminData.Pasvragen.Single(pv => pv.Naam.SafeEqual(speler.Naam)).PasVragenVerdiend;
+                    
                     for (int i = 0; i < juisteAntwoorden.Count; i++)
                     {
                         var a = speler.Antwoorden[i].Trim().ToLower();
@@ -71,8 +71,9 @@ namespace DeMol.ViewModels
 
                 // geef de mol het gemiddelde
                 var molscore = scores.Single(s => s.Speler.SafeEqual(antwoorden.Spelers.Single(ss => ss.IsDeMol).Naam));
-                molscore.juisteAntwoorden += totaalJuisteAntwoordenVandaag / antwoorden.Spelers.Count;
-                molscore.tijd += TimeSpan.FromTicks(totaalTijdVandaag.Ticks / antwoorden.Spelers.Count);
+                var aantalNietMollen = antwoorden.Spelers.Count - 1;
+                molscore.juisteAntwoorden += totaalJuisteAntwoordenVandaag / aantalNietMollen;
+                molscore.tijd += TimeSpan.FromTicks(totaalTijdVandaag.Ticks / aantalNietMollen);
             }
 
             var eindWinnaar = scores.OrderByDescending(s => s.juisteAntwoorden).ThenBy(s => s.tijd).First();
@@ -88,6 +89,12 @@ namespace DeMol.ViewModels
             }
 
 
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            timer.Stop();
+            base.OnDeactivate(close);
         }
 
         public void Menu()
@@ -110,13 +117,6 @@ namespace DeMol.ViewModels
         {
             get { return text; }
             set { Set(ref text, value); }
-        }
-
-        struct Score
-        {
-            public string Speler;
-            public double juisteAntwoorden;
-            public TimeSpan tijd;
         }
 
         protected override void OnActivate()

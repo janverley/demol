@@ -36,7 +36,7 @@ namespace DeMol.ViewModels
             List<Score> scores = new List<Score>();
             foreach (var speler in antwoorden.Spelers.Where(s => !s.IsDeMol))
             {
-                var juist = 0;
+                var juist = adminData.Pasvragen.Single(pv => pv.Naam.SafeEqual(speler.Naam)).PasVragenVerdiend;
 
                 for (int i = 0; i < juisteAntwoorden.Count; i++)
                 {
@@ -127,13 +127,6 @@ namespace DeMol.ViewModels
         {
             get { return text; }
             set { Set(ref text, value); }
-        }
-
-        struct Score
-        {
-            public string Speler;
-            public int juisteAntwoorden;
-            public TimeSpan tijd;
         }
 
         protected override void OnActivate()

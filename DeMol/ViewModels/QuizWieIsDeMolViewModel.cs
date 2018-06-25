@@ -68,6 +68,7 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<QuizVragenViewModel>();
             x.Naam = Naam;
             x.IsDeMol = false;
+            x.DeMolIs = Opties.Single(o => o.IsSelected).OptieText;
             conductor.ActivateItem(x);
         }
         public void Menu()

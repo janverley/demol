@@ -75,6 +75,7 @@ namespace DeMol.ViewModels
             var timerminuten = -1;
             var showResult = -1;
             var showQuiz = -1;
+            var showEndResult = false;
 
             var p = new OptionSet()
             {
@@ -82,10 +83,10 @@ namespace DeMol.ViewModels
                 { "t|timer=", "Start the timer screen with # minutes.", (int v) => timerminuten = v },
                 { "r|result=",  "Start the ResultScreen for day", (int v) => showResult = v},
                 { "q|quiz=",  "Start the Quiz for day", (int v) => showQuiz = v},
+                { "e|endresult",  "Start the EndResult", v => showEndResult = (v!=null) },
             };
 
-
-
+            
         List<string> extra;
             try
             {
@@ -114,6 +115,11 @@ namespace DeMol.ViewModels
             {
                 var x = container.GetInstance<QuizNaamViewModel>();
                 Dag = showQuiz;
+                ActivateItem(x);
+            }
+            else if (showEndResult)
+            {
+                var x = container.GetInstance<EndResultViewModel>();
                 ActivateItem(x);
             }
             else
