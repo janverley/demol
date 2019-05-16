@@ -54,11 +54,11 @@ namespace DeMol.ViewModels
 
             var dagwinnaar = scores.OrderByDescending(s => s.juisteAntwoorden).ThenBy(s => s.tijd).First();
 
-            if ((adminData.Opdrachten.op1 == Status.OK || adminData.Opdrachten.op1 == Status.NA) // geslaagd of niet gespeeld
+            if ((adminData.Opdrachten.OpdrachtStatus1 == OpdrachtStatus.OK || adminData.Opdrachten.OpdrachtStatus1 == OpdrachtStatus.NA) // geslaagd of niet gespeeld
             &&
-                (adminData.Opdrachten.op2 == Status.OK || adminData.Opdrachten.op2 == Status.NA) // geslaagd of niet gespeeld
+                (adminData.Opdrachten.OpdrachtStatus2 == OpdrachtStatus.OK || adminData.Opdrachten.OpdrachtStatus2 == OpdrachtStatus.NA) // geslaagd of niet gespeeld
                 &&
-                    (adminData.Opdrachten.op3 == Status.OK || adminData.Opdrachten.op3 == Status.NA)) // geslaagd of niet gespeeld
+                    (adminData.Opdrachten.OpdrachtStatus3 == OpdrachtStatus.OK || adminData.Opdrachten.OpdrachtStatus3 == OpdrachtStatus.NA)) // geslaagd of niet gespeeld
             {
                 // dag winnaar
 

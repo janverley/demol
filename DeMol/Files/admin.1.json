@@ -1,45 +1,42 @@
-
-    "Opdrachten": {
-        "op1": "OK",
-        "op2": "NOK",
-        "op3": "NA"
-    },
-    "Pasvragen": [
-        {
-            "Naam": "Juul",
-            "PasVragenVerdiend": 0
-        },
-        {
-            "Naam": "Staf",
-            "PasVragenVerdiend": 1
-        },
-        {
-            "Naam": "Vic",
-            "PasVragenVerdiend": 2
-        },
-        {
-            "Naam": "Mie",
-            "PasVragenVerdiend": 3
-        },
-        {
-            "Naam": "Jochen",
-            "PasVragenVerdiend": 0
-        },
-        {
-            "Naam": "Pieter",
-            "PasVragenVerdiend": 0
-        },
-        {
-            "Naam": "Hanne",
-            "PasVragenVerdiend": 0
-        },
-        {
-            "Naam": "Kris",
-            "PasVragenVerdiend": 0
-        },
-        {
-            "Naam": "Hilde",
-            "PasVragenVerdiend": 0
-        },
-    ]
-}
+"Opdrachten": {
+  "OpdrachtStatus1": "OK",
+  "OpdrachtStatus2": "NOK",
+  "OpdrachtStatus3": "NA"
+}, "Pasvragen": [
+  {
+    "Naam": "Juul",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Staf",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Vic",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Mie",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Jochen",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Pieter",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Hanne",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Kris",
+    "PasVragenVerdiend": 0
+  },
+  {
+    "Naam": "Hilde",
+    "PasVragenVerdiend": 0
+  },
+] }

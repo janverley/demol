@@ -16,9 +16,9 @@ namespace DeMol.ViewModels
             this.container = container;
         }
 
-        private Status _op1;
-        private Status _op2;
-        private Status _op3;
+        private OpdrachtStatus _op1;
+        private OpdrachtStatus _op2;
+        private OpdrachtStatus _op3;
 
         protected override void OnActivate()
         {
@@ -95,9 +95,9 @@ namespace DeMol.ViewModels
                     Pasvragen.Add(new PasVraagViewModel { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
                 }
 
-                op1 = adminData.Opdrachten.op1;
-                op2 = adminData.Opdrachten.op2;
-                op3 = adminData.Opdrachten.op3;
+                OpdrachtStatus1 = adminData.Opdrachten.OpdrachtStatus1;
+                OpdrachtStatus2 = adminData.Opdrachten.OpdrachtStatus2;
+                OpdrachtStatus3 = adminData.Opdrachten.OpdrachtStatus3;
 
                 if (!VragenGevonden)
                 {
@@ -116,19 +116,19 @@ namespace DeMol.ViewModels
         public BindableCollection<DagViewModel> Dagen { get; } = new BindableCollection<DagViewModel>();
         public BindableCollection<PasVraagViewModel> Pasvragen { get; } = new BindableCollection<PasVraagViewModel>();
 
-        public Status op1
+        public OpdrachtStatus OpdrachtStatus1
         {
             get { return _op1; }
             set { Set(ref _op1, value); }
         }
 
-        public Status op2
+        public OpdrachtStatus OpdrachtStatus2
         {
             get { return _op2; }
             set { Set(ref _op2, value); }
         }
 
-        public Status op3
+        public OpdrachtStatus OpdrachtStatus3
         {
             get { return _op3; }
             set { Set(ref _op3, value); }
@@ -162,9 +162,9 @@ namespace DeMol.ViewModels
         public void SaveAdmin()
         {
             var newAdminData = new AdminData();
-            newAdminData.Opdrachten.op1 = op1;
-            newAdminData.Opdrachten.op2 = op2;
-            newAdminData.Opdrachten.op3 = op3;
+            newAdminData.Opdrachten.OpdrachtStatus1 = OpdrachtStatus1;
+            newAdminData.Opdrachten.OpdrachtStatus2 = OpdrachtStatus2;
+            newAdminData.Opdrachten.OpdrachtStatus3 = OpdrachtStatus3;
 
 
             foreach (var item in Pasvragen)

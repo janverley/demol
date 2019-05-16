@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DeMol.Model
 {
-    public enum Status
+    public enum OpdrachtStatus
     {
         OK,
         NOK,
@@ -16,9 +16,9 @@ namespace DeMol.Model
 
     public class Opdrachten
     {
-        public Status op1 { get; set; }
-        public Status op2 { get; set; }
-        public Status op3 { get; set; }
+        public OpdrachtStatus OpdrachtStatus1 { get; set; }
+        public OpdrachtStatus OpdrachtStatus2 { get; set; }
+        public OpdrachtStatus OpdrachtStatus3 { get; set; }
     }
     public class PasvragenVerdiend
     {
@@ -30,7 +30,7 @@ namespace DeMol.Model
     {
         public AdminData()
         {
-            Opdrachten = new Opdrachten { op1 = Status.NOK, op2 = Status.NA, op3 = Status.NA };
+            Opdrachten = new Opdrachten { OpdrachtStatus1 = OpdrachtStatus.NOK, OpdrachtStatus2 = OpdrachtStatus.NA, OpdrachtStatus3 = OpdrachtStatus.NA };
             Pasvragen = new List<PasvragenVerdiend>();
         }
 
