@@ -14,7 +14,6 @@ namespace DeMol.ViewModels
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
         private readonly DispatcherTimer timer = new DispatcherTimer();
-        private string tijd;
 
         public TimerViewModel(ShellViewModel conductor, SimpleContainer container)
         {

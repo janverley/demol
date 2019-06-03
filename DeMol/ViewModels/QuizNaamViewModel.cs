@@ -1,5 +1,6 @@
 using Caliburn.Micro;
 using DeMol.Model;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
@@ -59,12 +60,11 @@ namespace DeMol.ViewModels
 
         public bool CanStart => !string.IsNullOrEmpty(Naam) && string.IsNullOrEmpty(Message) && VragenGevonden;
 
+        public Action<QuizNaamViewModel> DoStart { get; set; } = vm => { };
+
         public void Start()
         {
-            var x = container.GetInstance<QuizBenJijDeMolViewModel>();
-            x.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower());
-            conductor.ActivateItem(x);
-
+            DoStart(this);
         }
 
         public void OnKeyDown(KeyEventArgs e)

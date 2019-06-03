@@ -30,20 +30,20 @@ namespace DeMol.ViewModels
             {
                 Set(ref dag, value);
 
-                Title = $"De Mol - {DagenData.Dagen.First(d => d.Id == dag)?.Naam??""}";
+                ShellTitle = $"De Mol - {DagenData.Dagen.First(d => d.Id == dag)?.Naam??""}";
             }
         }
-        private string title;
+        private string shellTitle;
 
-        public string Title
+        public string ShellTitle
         {
             get
             {
-                return title;
+                return shellTitle;
             }
             set
             {
-                Set(ref title, value);
+                Set(ref shellTitle, value);
             }
         }
 

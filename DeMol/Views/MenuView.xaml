@@ -24,6 +24,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
+                <Button Name="StartMolAanduiden" Style="{StaticResource Btn1}">Mol aanduiden</Button>
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start</Button>
                 <Button Name="Validate" Style="{StaticResource Btn1}">Valideer</Button>
                 <Button Name="EndResult" Style="{StaticResource Btn1}">EindResultaat</Button>
@@ -46,24 +47,9 @@
                              x:Name="PasswordBox"/>
                         <Button Name="SaveAdmin" Style="{StaticResource Btn1}" Margin="5 0">Save</Button>
                     </StackPanel>
-
-
-                    <StackPanel Grid.Column="0" Grid.Row="1" >
-                        <StackPanel >
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.OK}}" Style="{StaticResource R2}">Opdracht 1 geslaagd</RadioButton>
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.NOK}}" Style="{StaticResource R2}">Opdracht 1 niet geslaagd</RadioButton>
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.NA}}" Style="{StaticResource R2}">Opdracht 1 niet gespeeld</RadioButton>
-                        </StackPanel>
-                        <StackPanel Margin="0 15 0 0">
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.OK}}" Style="{StaticResource R2}" >Opdracht 2 geslaagd</RadioButton>
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.NOK}}" Style="{StaticResource R2}" >Opdracht 2 niet geslaagd</RadioButton>
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus2, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.NA}}" Style="{StaticResource R2}" >Opdracht 2 niet gespeeld</RadioButton>
-                        </StackPanel>
-                        <StackPanel Margin="0 15 0 0">
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.OK}}" Style="{StaticResource R2}" >Opdracht 3 geslaagd</RadioButton>
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.NOK}}" Style="{StaticResource R2}" >Opdracht 3 niet geslaagd</RadioButton>
-                            <RadioButton IsChecked="{Binding Path=OpdrachtStatus3, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:OpdrachtStatus.NA}}" Style="{StaticResource R2}" >Opdracht 3 niet gespeeld</RadioButton>
-                        </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1">
+                        <TextBlock Style="{StaticResource H1}">Opdrachten gespeeld vandaag:</TextBlock>
+                        <ItemsControl Grid.IsSharedSizeScope="True" Name="OpdrachtenGespeeld"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1">
                         <TextBlock Style="{StaticResource H1}">Pas vragen verdiend vandaag:</TextBlock>

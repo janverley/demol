@@ -6,6 +6,7 @@
              >
     <Application.Resources>
         <ResourceDictionary>
+            
             <SolidColorBrush x:Key="90p" Color="#50FFFFFF"></SolidColorBrush>
             <SolidColorBrush x:Key="95p" Color="#95FFFFFF"></SolidColorBrush>
 
@@ -15,6 +16,9 @@
                 <Setter Property="Margin" Value="0 0 5 0" />
             </Style>
             <Style TargetType="{x:Type TextBlock}" x:Key="H2" BasedOn="{StaticResource H1}">
+                <Setter Property="FontSize" Value="100" />
+            </Style>
+            <Style TargetType="{x:Type CheckBox}" x:Key="C1">
                 <Setter Property="FontSize" Value="100" />
             </Style>
             <Style TargetType="{x:Type RadioButton}" x:Key="R1">
@@ -90,6 +94,9 @@
             <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
 
             <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Themes/MetroDark/MetroDark.MSControls.Core.Implicit.xaml" />
+                <ResourceDictionary Source="Themes/MetroDark/MetroDark.MSControls.Toolkit.Implicit.xaml" />
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="Bootstrapper" />
                     <SolidColorBrush x:Key="BackgroundBrush" Color="#FF225378" />

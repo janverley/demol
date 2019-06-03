@@ -34,6 +34,7 @@ namespace DeMol
                .PerRequest<InvalidateViewModel>()
                .PerRequest<QuizNaamViewModel>()
                .PerRequest<QuizBenJijDeMolViewModel>()
+               .PerRequest<JijBentDeMolViewModel>()
                .PerRequest<QuizWieIsDeMolViewModel>()
                .PerRequest<QuizOuttroViewModel>()
                .PerRequest<ValidateViewModel>()

@@ -3,6 +3,7 @@ using Caliburn.Micro;
 using System;
 using System.Linq;
 using DeMol.Properties;
+using System.Globalization;
 
 namespace DeMol.ViewModels
 {
@@ -71,6 +72,7 @@ namespace DeMol.ViewModels
             NotifyOfPropertyChange(() => CanSaveAdmin);
             NotifyOfPropertyChange(() => CanStartQuiz);
             NotifyOfPropertyChange(() => CanValidate);
+            NotifyOfPropertyChange(() => CanStartMolAanduiden);
         }
 
         public void SelectedDagChanged()
@@ -79,6 +81,7 @@ namespace DeMol.ViewModels
             {
                 container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
                 var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+                var opdrachtenVragenData = Util.SafeReadJson<OpdrachtVragenData>();
 
                 // als file niet gevonden
                 foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
@@ -95,9 +98,11 @@ namespace DeMol.ViewModels
                     Pasvragen.Add(new PasVraagViewModel { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
                 }
 
-                OpdrachtStatus1 = adminData.Opdrachten.OpdrachtStatus1;
-                OpdrachtStatus2 = adminData.Opdrachten.OpdrachtStatus2;
-                OpdrachtStatus3 = adminData.Opdrachten.OpdrachtStatus3;
+                OpdrachtenGespeeld.Clear();
+                foreach (var item in opdrachtenVragenData.OpdrachtVragen)
+                {
+                    OpdrachtenGespeeld.Add(new OpdrachtViewModel{ Naam = item.Opdracht, VandaagGespeeld = false });
+                }
 
                 if (!VragenGevonden)
                 {
@@ -115,24 +120,7 @@ namespace DeMol.ViewModels
 
         public BindableCollection<DagViewModel> Dagen { get; } = new BindableCollection<DagViewModel>();
         public BindableCollection<PasVraagViewModel> Pasvragen { get; } = new BindableCollection<PasVraagViewModel>();
-
-        public OpdrachtStatus OpdrachtStatus1
-        {
-            get { return _op1; }
-            set { Set(ref _op1, value); }
-        }
-
-        public OpdrachtStatus OpdrachtStatus2
-        {
-            get { return _op2; }
-            set { Set(ref _op2, value); }
-        }
-
-        public OpdrachtStatus OpdrachtStatus3
-        {
-            get { return _op3; }
-            set { Set(ref _op3, value); }
-        }
+        public BindableCollection<OpdrachtViewModel> OpdrachtenGespeeld { get; } = new BindableCollection<OpdrachtViewModel>();
 
         public string LockString
         {
@@ -162,17 +150,18 @@ namespace DeMol.ViewModels
         public void SaveAdmin()
         {
             var newAdminData = new AdminData();
-            newAdminData.Opdrachten.OpdrachtStatus1 = OpdrachtStatus1;
-            newAdminData.Opdrachten.OpdrachtStatus2 = OpdrachtStatus2;
-            newAdminData.Opdrachten.OpdrachtStatus3 = OpdrachtStatus3;
-
 
             foreach (var item in Pasvragen)
             {
                 newAdminData.Pasvragen.Add(new PasvragenVerdiend { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
             }
+            foreach (var item in OpdrachtenGespeeld.Where(o => o.VandaagGespeeld))
+            {
+                newAdminData.OpdrachtenGespeeld.Add(item.Naam);
+            }
 
             Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);
+
         }
 
         private string message;
@@ -190,13 +179,34 @@ namespace DeMol.ViewModels
         }
 
         public bool CanStartQuiz => SelectedDag != null && VragenGevonden;
+        public bool CanStartMolAanduiden => SelectedDag != null && VragenGevonden;
 
         private bool VragenGevonden => Util.DataFileFoundAndValid<VragenData>(container.GetInstance<ShellViewModel>().Dag);
 
+        public void StartMolAanduiden()
+        {
+            var x = container.GetInstance<QuizNaamViewModel>();
+            x.DoStart = (vm) =>
+            {
+                var x2 = container.GetInstance<JijBentDeMolViewModel>();
+                x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
+                conductor.ActivateItem(x2);
+            };
+
+            conductor.ActivateItem(x);
+        }
 
         public void StartQuiz()
         {
             var x = container.GetInstance<QuizNaamViewModel>();
+
+            x.DoStart = (vm) =>
+            {
+                var x2 = container.GetInstance<QuizBenJijDeMolViewModel>();
+                x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
+                conductor.ActivateItem(x2);
+            };
+
             conductor.ActivateItem(x);
         }
         public bool CanValidate => SelectedDag != null;

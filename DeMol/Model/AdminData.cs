@@ -13,13 +13,6 @@ namespace DeMol.Model
         NA
     };
 
-
-    public class Opdrachten
-    {
-        public OpdrachtStatus OpdrachtStatus1 { get; set; }
-        public OpdrachtStatus OpdrachtStatus2 { get; set; }
-        public OpdrachtStatus OpdrachtStatus3 { get; set; }
-    }
     public class PasvragenVerdiend
     {
         public string Naam { get; set; }
@@ -30,11 +23,10 @@ namespace DeMol.Model
     {
         public AdminData()
         {
-            Opdrachten = new Opdrachten { OpdrachtStatus1 = OpdrachtStatus.NOK, OpdrachtStatus2 = OpdrachtStatus.NA, OpdrachtStatus3 = OpdrachtStatus.NA };
             Pasvragen = new List<PasvragenVerdiend>();
+            OpdrachtenGespeeld = new List<string>();
         }
-
-        public Opdrachten Opdrachten { get; set; }
         public List<PasvragenVerdiend> Pasvragen { get; set; }
+        public List<string> OpdrachtenGespeeld { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,13 +11,21 @@ namespace DeMol.Model
 {
     public static class Util
     {
-        private static Dictionary<Type, string> Files => new Dictionary<Type, string>
+        private struct FileData
         {
-            { typeof(AdminData), @".\Files\admin.{0}.json" },
-            { typeof(DagenData), @".\Files\dagen.json"},
-            { typeof(SpelersData), @".\Files\spelers.json" },
-            { typeof(VragenData), @".\Files\vragen.{0}.json" },
-            { typeof(AntwoordenData), @".\Files\antwoorden.{0}.json" }
+            public string Filename { get; set; }
+            public bool Encrypted { get; set; }
+        }
+
+        private static Dictionary<Type, FileData> Files => new Dictionary<Type, FileData>
+        {
+            { typeof(AdminData), new FileData{ Filename =  @".\Files\admin.{0}.json", Encrypted = false } },
+            { typeof(DagenData), new FileData{ Filename =  @".\Files\dagen.json", Encrypted = false } },
+            { typeof(SpelersData), new FileData{ Filename =  @".\Files\spelers.json", Encrypted = false }  },
+            { typeof(VragenData), new FileData{ Filename =  @".\Files\vragen.{0}.json", Encrypted = false }  },
+            { typeof(AntwoordenData), new FileData{ Filename =  @".\Files\antwoorden.{0}.json", Encrypted = false }  },
+            { typeof(MollenData), new FileData{ Filename =  @".\Files\mollen.json", Encrypted = false } },
+            { typeof(OpdrachtVragenData), new FileData{ Filename =  @".\Files\OpdrachtVragen.json", Encrypted = false } }
         };
 
         public static bool SafeEqual(this string a, string b)
@@ -29,14 +38,14 @@ namespace DeMol.Model
 
         public static void SafeFileWithBackup(object data)
         {
-            SafeFileWithBackup(Files[data.GetType()], data);
+            SafeFileWithBackup(Files[data.GetType()].Filename, data, Files[data.GetType()].Encrypted);
         }
         public static void SafeFileWithBackup(object data, int dag)
         {
-            SafeFileWithBackup(string.Format(Files[data.GetType()], dag), data);
+            SafeFileWithBackup(string.Format(Files[data.GetType()].Filename, dag), data, Files[data.GetType()].Encrypted);
         }
 
-        private static void SafeFileWithBackup(string path, object data)
+        private static void SafeFileWithBackup(string path, object data, bool encrypt)
         {
             var fileInfo = new FileInfo(path);
             // first backup
@@ -62,6 +71,12 @@ namespace DeMol.Model
 
             var contents = JsonConvert.SerializeObject(data, Formatting.Indented);
 
+            if (encrypt)
+            {
+                contents = Crypt(contents);
+            }
+
+
             if (!Directory.Exists(fileInfo.DirectoryName))
             {
                 Directory.CreateDirectory(fileInfo.DirectoryName);
@@ -72,22 +87,28 @@ namespace DeMol.Model
 
         public static T SafeReadJson<T>(int dag) where T : new()
         {
-            var path = string.Format(Files[typeof(T)], dag);
-            return SafeReadJson<T>(path);
+            var path = string.Format(Files[typeof(T)].Filename, dag);
+            return SafeReadJson<T>(path, Files[typeof(T)].Encrypted);
         }
 
         public static T SafeReadJson<T>() where T : new()
         {
-            var path = Files[typeof(T)];
-            return SafeReadJson<T>(path);
+            var path = Files[typeof(T)].Filename;
+            return SafeReadJson<T>(path, Files[typeof(T)].Encrypted);
         }
-        private static T SafeReadJson<T>(string path) where T : new()
+        private static T SafeReadJson<T>(string path, bool decrypt) where T : new()
         {
             T data = new T();
 
             if (File.Exists(path))
             {
                 string contents = File.ReadAllText(path);
+
+                if (decrypt)
+                {
+                    contents = Decrypt(contents);
+                }
+
                 data = JsonConvert.DeserializeObject<T>(contents);
             }
 
@@ -97,13 +118,13 @@ namespace DeMol.Model
 
         internal static bool DataFileFoundAndValid<T>()
         {
-            return DataFileFoundAndValid<T>(Files[typeof(T)]);
+            return DataFileFoundAndValid<T>(Files[typeof(T)].Filename, Files[typeof(T)].Encrypted);
         }
         internal static bool DataFileFoundAndValid<T>(int dag)
         {
-            return DataFileFoundAndValid<T>(string.Format(Files[typeof(T)], dag));
+            return DataFileFoundAndValid<T>(string.Format(Files[typeof(T)].Filename, dag), Files[typeof(T)].Encrypted);
         }
-        private static bool DataFileFoundAndValid<T>(string path)
+        private static bool DataFileFoundAndValid<T>(string path, bool decrypt)
         {
             var result = true;
 
@@ -116,6 +137,12 @@ namespace DeMol.Model
                 string contents = File.ReadAllText(path);
                 try
                 {
+                    if (decrypt)
+                    {
+                        contents = Decrypt(contents);
+                    }
+
+
                     T data = JsonConvert.DeserializeObject<T>(contents);
                 }
                 catch
@@ -124,6 +151,27 @@ namespace DeMol.Model
                 }
             }
             return result;
+        }
+
+        private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+        public static string Crypt(this string text)
+        {
+            SymmetricAlgorithm algorithm = DES.Create();
+            ICryptoTransform transform = algorithm.CreateEncryptor(key, iv);
+            byte[] inputbuffer = Encoding.Unicode.GetBytes(text);
+            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            return Convert.ToBase64String(outputBuffer);
+        }
+
+        public static string Decrypt(this string text)
+        {
+            SymmetricAlgorithm algorithm = DES.Create();
+            ICryptoTransform transform = algorithm.CreateDecryptor(key, iv);
+            byte[] inputbuffer = Convert.FromBase64String(text);
+            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            return Encoding.Unicode.GetString(outputBuffer);
         }
     }
 }

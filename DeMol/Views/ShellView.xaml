@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Image Source="{Binding Path=BgSource}"  Stretch="UniformToFill" Grid.RowSpan="2"/>
-        <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Title" Grid.Row="0" Margin="0 5"/>
+        <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="ShellTitle" Grid.Row="0" Margin="0 5"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <ContentControl Name="ActiveItem"/>
         </ScrollViewer>
