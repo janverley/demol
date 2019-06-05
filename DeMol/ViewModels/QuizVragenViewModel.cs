@@ -28,11 +28,11 @@ namespace DeMol.ViewModels
         }
 
         private DateTime startTime;
-        private List<QuizVraagViewModel> quizVraagViewModels = new List<QuizVraagViewModel>();
+        private readonly List<QuizVraagViewModel> quizVraagViewModels = new List<QuizVraagViewModel>();
         private Speler speler;
         private QuizVraagViewModel quizVraag;
         private int index;
-        private IConductor conductor;
+        private readonly IConductor conductor;
         private readonly SimpleContainer container;
         private bool isDeMol;
 
@@ -75,9 +75,31 @@ namespace DeMol.ViewModels
 
             speler = new Speler { Naam = Naam };
 
-            var vragen = Util.SafeReadJson<VragenData>(container.GetInstance<ShellViewModel>().Dag);
+            var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            var opdrachtenVanVandaag = admin.OpdrachtenGespeeld;
 
-            foreach (var vraag in vragen.Vragen)
+            var vragenVoorVandaag = new List<Vraag>();
+
+            foreach (var gespeeldeOpdracht in opdrachtenVanVandaag)
+            {
+                if (!Util.DataFileFoundAndValid<OpdrachtVragenData>(gespeeldeOpdracht))
+                {
+                    Message = $"Er is iets mis: opdracht vragen over gespeelde opdracht [{gespeeldeOpdracht}] niet gevonden. Bel me, schrijf me :)";
+                    index = -1;
+                    return;
+                }
+
+                var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
+
+                foreach (var vraag  in opdrachtVragen.Vragen)
+                {
+                    vragenVoorVandaag.Add(vraag);
+                }
+            }
+
+            vragenVoorVandaag = vragenVoorVandaag.Shuffle(new Random()).ToList();
+
+            foreach (var vraag in vragenVoorVandaag)
             {
                 quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Text, vraag.Opties??Enumerable.Empty<string>())); 
             }

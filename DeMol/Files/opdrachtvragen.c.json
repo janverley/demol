@@ -1,0 +1,30 @@
+{
+  "Opdracht": "c",
+  "Description": "iets met c",
+  "Vragen": [
+    {
+      "Text": "vraag c 1 ?",
+      "Opties": [
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde"
+      ]
+    },
+    {
+      "Text": "vraaag c 2 ?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "vraag c 3?"
+    }
+  ]
+}

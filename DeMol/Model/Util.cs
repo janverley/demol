@@ -11,6 +11,19 @@ namespace DeMol.Model
 {
     public static class Util
     {
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
+        {
+            T[] elements = source.ToArray();
+            for (int i = elements.Length - 1; i >= 0; i--)
+            {
+                // Swap element "i" with a random earlier element it (or itself)
+                // ... except we don't really need to swap it fully, as we can
+                // return it immediately, and afterwards it's irrelevant.
+                int swapIndex = rng.Next(i + 1);
+                yield return elements[swapIndex];
+                elements[swapIndex] = elements[i];
+            }
+        }
         private struct FileData
         {
             public string Filename { get; set; }
@@ -25,7 +38,7 @@ namespace DeMol.Model
             { typeof(VragenData), new FileData{ Filename =  @".\Files\vragen.{0}.json", Encrypted = false }  },
             { typeof(AntwoordenData), new FileData{ Filename =  @".\Files\antwoorden.{0}.json", Encrypted = false }  },
             { typeof(MollenData), new FileData{ Filename =  @".\Files\mollen.json", Encrypted = false } },
-            { typeof(OpdrachtVragenData), new FileData{ Filename =  @".\Files\OpdrachtVragen.json", Encrypted = false } }
+            { typeof(OpdrachtVragenData), new FileData{ Filename =  @".\Files\OpdrachtVragen.{0}.json", Encrypted = false } }
         };
 
         public static bool SafeEqual(this string a, string b)
@@ -41,6 +54,11 @@ namespace DeMol.Model
             SafeFileWithBackup(Files[data.GetType()].Filename, data, Files[data.GetType()].Encrypted);
         }
         public static void SafeFileWithBackup(object data, int dag)
+        {
+            SafeFileWithBackup(data, dag.ToString());
+        }
+
+        public static void SafeFileWithBackup(object data, string dag)
         {
             SafeFileWithBackup(string.Format(Files[data.GetType()].Filename, dag), data, Files[data.GetType()].Encrypted);
         }
@@ -87,6 +105,11 @@ namespace DeMol.Model
 
         public static T SafeReadJson<T>(int dag) where T : new()
         {
+            return SafeReadJson<T>(dag.ToString());
+        }
+
+        public static T SafeReadJson<T>(string dag) where T : new()
+        {
             var path = string.Format(Files[typeof(T)].Filename, dag);
             return SafeReadJson<T>(path, Files[typeof(T)].Encrypted);
         }
@@ -120,9 +143,13 @@ namespace DeMol.Model
         {
             return DataFileFoundAndValid<T>(Files[typeof(T)].Filename, Files[typeof(T)].Encrypted);
         }
-        internal static bool DataFileFoundAndValid<T>(int dag)
+        internal static bool DataFileFoundAndValid<T>(string dag)
         {
             return DataFileFoundAndValid<T>(string.Format(Files[typeof(T)].Filename, dag), Files[typeof(T)].Encrypted);
+        }
+        internal static bool DataFileFoundAndValid<T>(int dag)
+        {
+            return DataFileFoundAndValid<T>(dag.ToString());
         }
         private static bool DataFileFoundAndValid<T>(string path, bool decrypt)
         {
@@ -142,7 +169,6 @@ namespace DeMol.Model
                         contents = Decrypt(contents);
                     }
 
-
                     T data = JsonConvert.DeserializeObject<T>(contents);
                 }
                 catch
@@ -153,8 +179,8 @@ namespace DeMol.Model
             return result;
         }
 
-        private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-        private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static readonly byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static readonly byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
         public static string Crypt(this string text)
         {

@@ -24,5 +24,6 @@ namespace DeMol.ViewModels
             set { Set(ref vandaagGespeeld, value); }
         }
 
+        public string Id { get; internal set; }
     }
 }

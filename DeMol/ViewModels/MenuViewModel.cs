@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using DeMol.Properties;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace DeMol.ViewModels
 {
@@ -16,10 +17,6 @@ namespace DeMol.ViewModels
             this.conductor = conductor;
             this.container = container;
         }
-
-        private OpdrachtStatus _op1;
-        private OpdrachtStatus _op2;
-        private OpdrachtStatus _op3;
 
         protected override void OnActivate()
         {
@@ -81,7 +78,7 @@ namespace DeMol.ViewModels
             {
                 container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
                 var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-                var opdrachtenVragenData = Util.SafeReadJson<OpdrachtVragenData>();
+                //var opdrachtenVragenData = Util.SafeReadJson<OpdrachtVragenData>();
 
                 // als file niet gevonden
                 foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
@@ -92,6 +89,8 @@ namespace DeMol.ViewModels
                     }
                 }
 
+                var bestaandeOpdrachtVragen = GetAllOpdrachtVragen();
+
                 Pasvragen.Clear();
                 foreach (var item in adminData.Pasvragen)
                 {
@@ -99,9 +98,9 @@ namespace DeMol.ViewModels
                 }
 
                 OpdrachtenGespeeld.Clear();
-                foreach (var item in opdrachtenVragenData.OpdrachtVragen)
+                foreach (var item in bestaandeOpdrachtVragen)
                 {
-                    OpdrachtenGespeeld.Add(new OpdrachtViewModel{ Naam = item.Opdracht, VandaagGespeeld = false });
+                    OpdrachtenGespeeld.Add(new OpdrachtViewModel{ Id = item.Opdracht, Naam = $"{item.Opdracht.ToUpper()} - {item.Description}", VandaagGespeeld = false });
                 }
 
                 if (!VragenGevonden)
@@ -115,7 +114,26 @@ namespace DeMol.ViewModels
             }
         }
 
-        private IConductor conductor;
+        private IEnumerable<OpdrachtVragenData> GetAllOpdrachtVragen()
+        {
+            var result = new List<OpdrachtVragenData>();
+
+            var allChars = "abcdefghijklmnopqrstuvwxyz";
+
+            foreach (var @char in allChars.ToCharArray())
+            {
+                var opdrachtId = @char.ToString();
+                if (Util.DataFileFoundAndValid<OpdrachtVragenData>(opdrachtId))
+                {
+                    var opdrachtVragenData = Util.SafeReadJson<OpdrachtVragenData>(opdrachtId);
+                    result.Add(opdrachtVragenData);
+                }
+            }
+
+            return result;
+        }
+
+        private readonly IConductor conductor;
         private readonly SimpleContainer container;
 
         public BindableCollection<DagViewModel> Dagen { get; } = new BindableCollection<DagViewModel>();
@@ -157,7 +175,7 @@ namespace DeMol.ViewModels
             }
             foreach (var item in OpdrachtenGespeeld.Where(o => o.VandaagGespeeld))
             {
-                newAdminData.OpdrachtenGespeeld.Add(item.Naam);
+                newAdminData.OpdrachtenGespeeld.Add(item.Id);
             }
 
             Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);

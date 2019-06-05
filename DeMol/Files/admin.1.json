@@ -1,4 +1,4 @@
-"Opdrachten": {
+{"Opdrachten": {
   "OpdrachtStatus1": "OK",
   "OpdrachtStatus2": "NOK",
   "OpdrachtStatus3": "NA"
@@ -38,5 +38,6 @@
   {
     "Naam": "Hilde",
     "PasVragenVerdiend": 0
-  },
+  }
 ] }
+}

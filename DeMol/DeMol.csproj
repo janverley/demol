@@ -284,10 +284,16 @@
     <None Include="Files\dagen.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Files\spelers.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Files\opdrachtvragen.a.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Files\opdrachtvragen.json">
+    <None Include="Files\opdrachtvragen.b.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\opdrachtvragen.c.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\spelers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Files\vragen.1.json">
