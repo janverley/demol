@@ -27,6 +27,8 @@ namespace DeMol.ViewModels
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Stop();
+
             List<Score> scores = new List<Score>();
 
             foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)

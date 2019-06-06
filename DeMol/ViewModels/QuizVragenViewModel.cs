@@ -78,6 +78,13 @@ namespace DeMol.ViewModels
             var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
             var opdrachtenVanVandaag = admin.OpdrachtenGespeeld;
 
+            if (!opdrachtenVanVandaag.Any())
+            {
+                Message = $"Er is iets mis: Er lijken geen opdrachten gespeeld vandaag. Bel me, schrijf me :)";
+                index = -1;
+                return;
+            }
+
             var vragenVoorVandaag = new List<Vraag>();
 
             foreach (var gespeeldeOpdracht in opdrachtenVanVandaag)
@@ -143,8 +150,7 @@ namespace DeMol.ViewModels
 
         public void Next()
         {
-            // noteer antwoord
-            speler.Antwoorden.Add(quizVraag.AntwoordToNote);
+            NoteerAntwoord();
 
             index++;
             QuizVraag = quizVraagViewModels[index];
@@ -152,11 +158,21 @@ namespace DeMol.ViewModels
             NotifyOfPropertyChange(() => CanStop);
         }
 
+        private void NoteerAntwoord()
+        {
+            if (QuizVraag != null)
+            {
+                // noteer antwoord
+                speler.Antwoorden.Add(QuizVraag.AntwoordToNote);
+            }
+        }
+
         public void Stop()
         {
             var diff = DateTime.UtcNow - startTime;
 
-            speler.Antwoorden.Add(quizVraag.AntwoordToNote);
+            NoteerAntwoord();
+
             speler.DeMolIs = DeMolIs;
             speler.IsDeMol = IsDeMol;
 

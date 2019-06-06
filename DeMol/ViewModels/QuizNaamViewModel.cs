@@ -34,7 +34,7 @@ namespace DeMol.ViewModels
 
         private void Validate()
         {
-            if (!container.GetInstance<ShellViewModel>().Spelerdata.Spelers.Any(s => s.Naam.SafeEqual(Naam)))
+            if (!string.IsNullOrEmpty(Naam) && !container.GetInstance<ShellViewModel>().Spelerdata.Spelers.Any(s => s.Naam.SafeEqual(Naam)))
             {
                 Message = $"'{Naam}' ken ik niet.";
             }
@@ -60,11 +60,12 @@ namespace DeMol.ViewModels
 
         public bool CanStart => !string.IsNullOrEmpty(Naam) && string.IsNullOrEmpty(Message) && VragenGevonden;
 
-        public Action<QuizNaamViewModel> DoStart { get; set; } = vm => { };
+        public Action<QuizNaamViewModel> DoNext { get; set; } = vm => { };
 
         public void Start()
         {
-            DoStart(this);
+            DoNext(this);
+
         }
 
         public void OnKeyDown(KeyEventArgs e)
@@ -81,6 +82,7 @@ namespace DeMol.ViewModels
         protected override void OnActivate()
         {
             base.OnActivate();
+            Naam = "";
 
             if (!VragenGevonden)
             {

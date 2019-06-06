@@ -13,6 +13,6 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBlock Style="{StaticResource H1}" x:Name="Naam"/>
-        <CheckBox Grid.Column="1" x:Name="VandaagGespeeld" Width="80"/>
+        <CheckBox Grid.Column="1" x:Name="VandaagGespeeld" Width="80" VerticalContentAlignment="Stretch"/>
     </Grid>
 </UserControl>

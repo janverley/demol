@@ -10,8 +10,8 @@
              cal:Message.Attach="[Event KeyDown] = [Action OnKeyDown($eventArgs)]">
     <Grid>
         <StackPanel VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Message"/>
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Margin="20">Roep de volgende speler</TextBlock>
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Name="Message" TextAlignment="Center"/>
+            <!--<TextBlock HorizontalAlignment="Center" Style="{StaticResource H1}" Margin="20">Roep de volgende speler</TextBlock>-->
             <Button Name="Next" Style="{StaticResource Btn1}" HorizontalAlignment="Center" Margin="40" MinWidth="80">OK</Button>
         </StackPanel>
     </Grid>

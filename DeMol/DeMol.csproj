@@ -113,8 +113,8 @@
     <Compile Include="Views\InvalidateView.xaml.cs">
       <DependentUpon>InvalidateView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\JijBentDeMol.xaml.cs">
-      <DependentUpon>JijBentDeMol.xaml</DependentUpon>
+    <Compile Include="Views\JijBentDeMolView.xaml.cs">
+      <DependentUpon>JijBentDeMolView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
@@ -196,7 +196,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\JijBentDeMol.xaml">
+    <Page Include="Views\JijBentDeMolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

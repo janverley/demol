@@ -1,31 +1,31 @@
 {
-    "Spelers": [
-        {
-            "Naam": "Juul"
-        },
-        {
-            "Naam": "Staf"
-        },
-        {
-            "Naam": "Vic"
-        },
-        {
-            "Naam": "Mie"
-        },
-        {
-            "Naam": "Jochen"
-        },
-        {
-            "Naam": "Pieter"
-        },
-        {
-            "Naam": "Hanne"
-        },
-        {
-            "Naam": "Kris"
-        },
-        {
-            "Naam": "Hilde"
-        }
-    ]
+  "Spelers": [
+    {
+      "Naam": "Juul"
+    },
+    {
+      "Naam": "Staf"
+    },
+    {
+      "Naam": "Vic"
+    },
+    {
+      "Naam": "Pieter"
+    },
+    {
+      "Naam": "Hanne"
+    },
+    {
+      "Naam": "Mie"
+    },
+    {
+      "Naam": "Jochen"
+    },
+    {
+      "Naam": "Kris"
+    },
+    {
+      "Naam": "Hilde"
+    }
+  ]
 }

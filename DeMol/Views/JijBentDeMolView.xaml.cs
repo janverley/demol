@@ -18,9 +18,9 @@ namespace DeMol.Views
     /// <summary>
     /// Interaction logic for JijBentDeMol.xaml
     /// </summary>
-    public partial class JijBentDeMol : UserControl
+    public partial class JijBentDeMolView : UserControl
     {
-        public JijBentDeMol()
+        public JijBentDeMolView()
         {
             InitializeComponent();
         }

@@ -203,22 +203,28 @@ namespace DeMol.ViewModels
 
         public void StartMolAanduiden()
         {
-            var x = container.GetInstance<QuizNaamViewModel>();
-            x.DoStart = (vm) =>
+            var quizNaamViewModel = container.GetInstance<QuizNaamViewModel>();
+            quizNaamViewModel.DoNext = (vm) =>
             {
-                var x2 = container.GetInstance<JijBentDeMolViewModel>();
-                x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
-                conductor.ActivateItem(x2);
+                var jijBentDeMolViewModel = container.GetInstance<JijBentDeMolViewModel>();
+                jijBentDeMolViewModel.Dag = SelectedDag;
+                jijBentDeMolViewModel.IsMorgen = false;
+                jijBentDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
+                jijBentDeMolViewModel.DoNext = (_) =>
+                {
+                    conductor.ActivateItem(quizNaamViewModel);
+                };
+
+                conductor.ActivateItem(jijBentDeMolViewModel);
             };
 
-            conductor.ActivateItem(x);
+            conductor.ActivateItem(quizNaamViewModel);
         }
 
         public void StartQuiz()
         {
             var x = container.GetInstance<QuizNaamViewModel>();
-
-            x.DoStart = (vm) =>
+            x.DoNext = (vm) =>
             {
                 var x2 = container.GetInstance<QuizBenJijDeMolViewModel>();
                 x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
