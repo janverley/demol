@@ -41,7 +41,8 @@ namespace DeMol
                .PerRequest<ResultViewModel>()
                .PerRequest<QuizVragenViewModel>()
                .PerRequest<EndResultViewModel>()
-               .PerRequest<TimerViewModel>();
+               .PerRequest<TimerViewModel>()
+               .PerRequest<SmoelenViewModel>();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

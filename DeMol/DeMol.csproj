@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BooleanConverterOfT.cs" />
     <Compile Include="Model\AntwoordenData.cs" />
     <Compile Include="Model\OpdrachtVragenData.cs" />
     <Compile Include="Model\DagenData.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="ViewModels\EndResultViewModel.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\smoelenViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\ValidateViewModel.cs" />
     <Compile Include="Views\CheckView.xaml.cs">
@@ -162,6 +164,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Views\SmoelenView.xaml.cs">
+      <DependentUpon>SmoelenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TimerView.xaml.cs">
       <DependentUpon>TimerView.xaml</DependentUpon>
     </Compile>
@@ -249,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SmoelenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -343,6 +352,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\MetroDark\HowToApplyTheme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\smoelen\hanne.png" />
+    <Resource Include="Views\smoelen\hilde.png" />
+    <Resource Include="Views\smoelen\jochen.png" />
+    <Resource Include="Views\smoelen\juul.png" />
+    <Resource Include="Views\smoelen\kris.png" />
+    <Resource Include="Views\smoelen\mie.png" />
+    <Resource Include="Views\smoelen\pieter.png" />
+    <Resource Include="Views\smoelen\staf.png" />
+    <Resource Include="Views\smoelen\vic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

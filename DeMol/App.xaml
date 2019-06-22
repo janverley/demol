@@ -6,10 +6,29 @@
              >
     <Application.Resources>
         <ResourceDictionary>
-            
+
+            <local:BooleanToVisibilityConverter x:Key="showWhenDisabled" True="Collapsed" False="Visible" />
+
             <SolidColorBrush x:Key="90p" Color="#50FFFFFF"></SolidColorBrush>
             <SolidColorBrush x:Key="95p" Color="#95FFFFFF"></SolidColorBrush>
 
+            <Style TargetType="Button" x:Key="imgButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid Margin="5">
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                                <Grid  Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}">
+                                    <Line X1="0" Y1="0" X2="{TemplateBinding ActualWidth}" Y2="{TemplateBinding ActualHeight}" Stroke="Red" StrokeThickness="20" 
+                                     />
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+            
             <Style TargetType="{x:Type TextBlock}" x:Key="H1">
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="FontSize" Value="25" />

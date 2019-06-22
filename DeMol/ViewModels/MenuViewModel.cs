@@ -245,5 +245,11 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<EndResultViewModel>();
             conductor.ActivateItem(x);
         }
+
+        public void Smoelen()
+        {
+            var x = container.GetInstance<SmoelenViewModel>();
+            conductor.ActivateItem(x);
+        }
     }
 }
