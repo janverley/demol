@@ -408,5 +408,13 @@
     <Resource Include="Views\smoelen\staf.png" />
     <Resource Include="Views\smoelen\vic.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\bg.2019.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\bg.2019.red.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

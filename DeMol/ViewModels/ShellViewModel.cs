@@ -64,7 +64,7 @@ namespace DeMol.ViewModels
         {
             base.OnInitialize();
 
-            BgSource = @"./bg.jpg";
+            BgSource = @"./bg.2019.jpg";
 
             DagenData = Util.SafeReadJson<DagenData>();
 
