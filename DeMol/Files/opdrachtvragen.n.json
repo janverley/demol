@@ -1,6 +1,6 @@
 {
-  "Opdracht": "c",
-  "Description": "Selfie-time",
+  "Opdracht": "n",
+  "Description": "Scrabble",
   "Vragen": [
     {
       "Text": "vraag c 1 ?",
@@ -14,7 +14,8 @@
         "Hanne",
         "Kris",
         "Hilde"
-      ]
+      ],
+      "MeerdereOptiesMogelijk":true
     },
     {
       "Text": "vraaag c 2 ?",

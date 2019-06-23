@@ -10,15 +10,27 @@ namespace DeMol.ViewModels
 {
     public class QuizVraagViewModel : PropertyChangedBase
     {
+        private readonly bool meerdereOptiesMogelijk;
         private string text;
         private string antwoord;
         private bool showAntwoord;
 
-        public QuizVraagViewModel(string text, IEnumerable<string> opties)
+        public QuizVraagViewModel(string text, IEnumerable<string> opties, bool meerdereOptiesMogelijk)
         {
             Text = text;
-            Opties = new BindableCollection<OptieViewModel>(opties.Select(s => new OptieViewModel(s)));
-            ShowAntwoord = !Opties.Any();
+            this.meerdereOptiesMogelijk = meerdereOptiesMogelijk;
+
+            if (meerdereOptiesMogelijk)
+            {
+                MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>(opties.Select(s => new MeerdereOptieViewModel(s)));
+                Opties = new BindableCollection<OptieViewModel>();
+            }
+            else
+            {
+                MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>();
+                Opties = new BindableCollection<OptieViewModel>(opties.Select(s => new OptieViewModel(s)));
+            }
+            ShowAntwoord = !opties.Any();
         }
 
         public string Text
@@ -48,18 +60,26 @@ namespace DeMol.ViewModels
         }
 
         public BindableCollection<OptieViewModel> Opties { get; set; }
+        public BindableCollection<MeerdereOptieViewModel> MeerdereOpties { get; set; }
 
         public string AntwoordToNote
         {
             get
             {
-                if (Opties.Any())
+                if (meerdereOptiesMogelijk)
                 {
-                    return Opties.FirstOrDefault(o => o.IsSelected)?.OptieText??$"NIKS_{DateTime.UtcNow.Ticks}";
+                    return string.Join(",", MeerdereOpties.Where(o => o.IsSelected).Select(o => o.OptieText));
                 }
                 else
                 {
-                    return Antwoord?? $"NIKS_{DateTime.UtcNow.Ticks}";
+                    if (Opties.Any())
+                    {
+                        return Opties.FirstOrDefault(o => o.IsSelected)?.OptieText ?? $"NIKS_{DateTime.UtcNow.Ticks}";
+                    }
+                    else
+                    {
+                        return Antwoord?? $"NIKS_{DateTime.UtcNow.Ticks}";
+                    }
                 }
             }
         }

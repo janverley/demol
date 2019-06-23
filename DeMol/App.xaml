@@ -18,15 +18,11 @@
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid Margin="5">
                             <ContentPresenter Content="{TemplateBinding Content}"/>
-                                <Grid  Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}">
-                                    <Line X1="0" Y1="0" X2="{TemplateBinding ActualWidth}" Y2="{TemplateBinding ActualHeight}" Stroke="Red" StrokeThickness="20" 
-                                     />
-                                </Grid>
+                                <Border Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}" Background="#45FFFFFF"/>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-
             </Style>
             
             <Style TargetType="{x:Type TextBlock}" x:Key="H1">

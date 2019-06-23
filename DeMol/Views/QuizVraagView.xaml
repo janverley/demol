@@ -11,6 +11,7 @@
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Style="{StaticResource H1}" x:Name="Text" Margin="0 30"></TextBlock>
+            <ItemsControl Grid.IsSharedSizeScope="True" Name="MeerdereOpties" HorizontalAlignment="Center"/>
             <ItemsControl Grid.IsSharedSizeScope="True" Name="Opties" HorizontalAlignment="Center"/>
             <TextBox Style="{StaticResource B1}" x:Name="Antwoord" Visibility="{Binding Path=ShowAntwoord, Converter={StaticResource booleanToVisibilityConverter}}"/>
 

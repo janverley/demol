@@ -98,8 +98,11 @@ namespace DeMol.ViewModels
 
                 var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
 
-                foreach (var vraag  in opdrachtVragen.Vragen)
+
+                for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
                 {
+                    var vraag = opdrachtVragen.Vragen[i];
+                    vraag.Text = $"{vraag.Text} ({gespeeldeOpdracht.ToUpper()}{i + 1})";
                     vragenVoorVandaag.Add(vraag);
                 }
             }
@@ -108,7 +111,7 @@ namespace DeMol.ViewModels
 
             foreach (var vraag in vragenVoorVandaag)
             {
-                quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Text, vraag.Opties??Enumerable.Empty<string>())); 
+                quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Text, vraag.Opties??Enumerable.Empty<string>(), vraag.MeerdereOptiesMogelijk)); 
             }
 
             QuizVraag = quizVraagViewModels[index];

@@ -37,4 +37,35 @@ namespace DeMol.ViewModels
 
 
     }
+
+    public class MeerdereOptieViewModel : PropertyChangedBase
+    {
+        private string optieText;
+        private bool isSelected;
+
+        public MeerdereOptieViewModel(string optieText)
+        {
+            this.optieText = optieText;
+        }
+
+        public string OptieText
+        {
+            get { return optieText; }
+            set
+            {
+                Set(ref optieText, value);
+            }
+        }
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                Set(ref isSelected, value);
+            }
+        }
+
+
+    }
 }
