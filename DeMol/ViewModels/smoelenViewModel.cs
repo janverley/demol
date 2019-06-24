@@ -22,26 +22,33 @@ namespace DeMol.ViewModels
         }
         public void SelectUser(string name)
         {
+            Naam = name;
+            DoNext(this);
         }
 
         public bool CanSelectUser(string name)
         {
-            var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
-            return result;
+            return CanSelectUserDelegate(name);
         }
 
-        public ICommand SelectUserCommand { get { return new DelegateCommand(SelectUser, CanSelectUser); } }
+        public DelegateCommand SelectUserCommand { get { return new DelegateCommand(SelectUser, CanSelectUser); } }
 
-        protected override void OnActivate()
-        {
-            antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
-            base.OnActivate();
-        }
+        public Action<SmoelenViewModel> DoNext { get; set; }// = vm => { };
+
+        public Func<string, bool> CanSelectUserDelegate { get; set; }// = vm => { };
+
+        public string Naam { get; set; }
+
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
 
+        protected override void OnActivate()
+        {
+            SelectUserCommand.RaiseCanExecuteChanged();
+            base.OnActivate();
+        }
     }
 }

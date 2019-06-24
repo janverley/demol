@@ -111,12 +111,12 @@ namespace DeMol.ViewModels
                 Dag = showResult;
                 ActivateItem(x);
             }
-            else if (showQuiz > 0)
-            {
-                var x = container.GetInstance<QuizNaamViewModel>();
-                Dag = showQuiz;
-                ActivateItem(x);
-            }
+            //else if (showQuiz > 0)
+            //{
+            //    var x = container.GetInstance<QuizNaamViewModel>();
+            //    Dag = showQuiz;
+            //    ActivateItem(x);
+            //}
             else if (showEndResult)
             {
                 var x = container.GetInstance<EndResultViewModel>();

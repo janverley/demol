@@ -14,7 +14,16 @@ namespace DeMol.ViewModels
             this.canExecuteDelegate = canExecuteDelegate;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
 
         public bool CanExecute(object parameter) => canExecuteDelegate((string)parameter);
         public void Execute(object parameter) => executeDelegate((string)parameter);

@@ -167,7 +167,7 @@ namespace DeMol.ViewModels
 
         public void SaveAdmin()
         {
-            var newAdminData = new AdminData();
+            var newAdminData = Util.SafeReadJson<AdminData>(SelectedDag.Id);
 
             foreach (var item in Pasvragen)
             {
@@ -203,27 +203,49 @@ namespace DeMol.ViewModels
 
         public void StartMolAanduiden()
         {
-            var quizNaamViewModel = container.GetInstance<QuizNaamViewModel>();
-            quizNaamViewModel.DoNext = (vm) =>
+            var x = container.GetInstance<SmoelenViewModel>();
+
+            x.CanSelectUserDelegate = (name) =>
             {
+                var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+                var result = !adminData.IsVerteldOfZeDeMolZijn.Any(s => s.Naam == name);
+                return result;
+            };
+
+            x.DoNext = (vm) =>
+            {
+                var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+                adminData.IsVerteldOfZeDeMolZijn.Add(new SpelerInfo { Naam = vm.Naam });
+                Util.SafeFileWithBackup(adminData, container.GetInstance<ShellViewModel>().Dag);
+
+
                 var jijBentDeMolViewModel = container.GetInstance<JijBentDeMolViewModel>();
                 jijBentDeMolViewModel.Dag = SelectedDag;
                 jijBentDeMolViewModel.IsMorgen = false;
                 jijBentDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
                 jijBentDeMolViewModel.DoNext = (_) =>
                 {
-                    conductor.ActivateItem(quizNaamViewModel);
+                    conductor.ActivateItem(x);
                 };
 
                 conductor.ActivateItem(jijBentDeMolViewModel);
             };
 
-            conductor.ActivateItem(quizNaamViewModel);
+            conductor.ActivateItem(x);
         }
 
         public void StartQuiz()
         {
-            var x = container.GetInstance<QuizNaamViewModel>();
+            //var x = container.GetInstance<QuizNaamViewModel>();
+            var x = container.GetInstance<SmoelenViewModel>();
+
+            x.CanSelectUserDelegate = (name) =>
+            {
+                var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+                var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
+                return result;
+            };
+
             x.DoNext = (vm) =>
             {
                 var x2 = container.GetInstance<QuizBenJijDeMolViewModel>();

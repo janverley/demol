@@ -51,14 +51,15 @@ namespace DeMol.ViewModels
 
             jijBentDeMolViewModel.DoNext = (_) =>
             {
-                var quizNaamViewModel = container.GetInstance<QuizNaamViewModel>();
-                quizNaamViewModel.DoNext = (vm) =>
+                //var quizNaamViewModel = container.GetInstance<QuizNaamViewModel>();
+                var x = container.GetInstance<SmoelenViewModel>();
+                x.DoNext = (vm) =>
                 {
                     var quizBenJijDeMolViewModel = container.GetInstance<QuizBenJijDeMolViewModel>();
                     quizBenJijDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
                     conductor.ActivateItem(quizBenJijDeMolViewModel);
                 };
-                conductor.ActivateItem(quizNaamViewModel);
+                conductor.ActivateItem(x);
             };
             conductor.ActivateItem(jijBentDeMolViewModel);
 
