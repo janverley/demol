@@ -17,8 +17,13 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid Margin="5">
-                            <ContentPresenter Content="{TemplateBinding Content}"/>
-                                <Border Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}" Background="#45FFFFFF"/>
+                                <ContentPresenter Content="{TemplateBinding Content}">
+                                    <ContentPresenter.LayoutTransform>
+                                        <ScaleTransform ScaleX="0.6" ScaleY="0.6"/>
+                                    </ContentPresenter.LayoutTransform>
+                                </ContentPresenter>
+                                <Ellipse Fill="#45FFFFFF" Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}" />
+                                <!--<Border Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}" Background="#45FFFFFF"/>-->
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>

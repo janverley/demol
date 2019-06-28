@@ -11,6 +11,7 @@ namespace DeMol.ViewModels
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
+        private readonly int timeoutMolAanduiden;
         private readonly DispatcherTimer timer = new DispatcherTimer();
 
         public JijBentDeMolViewModel(ShellViewModel conductor, SimpleContainer container)
@@ -18,8 +19,10 @@ namespace DeMol.ViewModels
             this.conductor = conductor;
             this.container = container;
 
+            timeoutMolAanduiden = container.GetInstance<ShellViewModel>().TimeoutMolAanduiden;
+
             timer.Tick += Timer_Tick;
-            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Interval = TimeSpan.FromSeconds(timeoutMolAanduiden);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -32,22 +35,15 @@ namespace DeMol.ViewModels
         {
             base.OnActivate();
 
-            var mollen = new List<int> { 7, 8, 1, 0, 4, 3, 2, 6, 5 };
-
-            var did = (Dag.Id-1)%mollen.Count;
-
-            var mol = mollen[did];
-                
-                var demol = container.GetInstance<ShellViewModel>().Spelerdata.Spelers[mol];
 
             var vandaagMorgen = IsMorgen ? "morgen" : "vandaag";
 
             var ja = $"{Naam}, {vandaagMorgen} ben jij de mol.\n\nProbeer zo veel mogelijk opdrachten te laten mislukken! \nVeel succes!";
             var nee = $"{Naam}, {vandaagMorgen} ben jij niet de mol.\n\nProbeer de mol te ontmaskeren en onthoud zo veel mogelijk van wat er gebeurd.\nVeel succes!";
 
-            var m = Util.SafeEqual(Naam, demol.Naam) ? ja : nee;
+            var m = container.GetInstance<ShellViewModel>().IsDeMol(Dag.Id, Naam) ? ja : nee;
 
-            Message = $"Opgelet, deze boodschap verdwijnt na 10 seconden.\n\n{m}\n\n Roep de volgende speler.";
+            Message = $"Opgelet, deze boodschap verdwijnt na {timeoutMolAanduiden} seconden.\n\n{m}\n\n Roep de volgende speler.";
 
             timer.Start();
         }

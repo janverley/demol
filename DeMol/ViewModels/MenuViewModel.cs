@@ -32,7 +32,6 @@ namespace DeMol.ViewModels
             if (container.GetInstance<ShellViewModel>().Dag > 0 && Dagen.Any(d => d.Id == container.GetInstance<ShellViewModel>().Dag))
             {
                 SelectedDag = Dagen.First(d => d.Id == container.GetInstance<ShellViewModel>().Dag);
-                SelectedDagChanged();
             }
         }
 
@@ -59,6 +58,8 @@ namespace DeMol.ViewModels
                     {
                         container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
                     }
+                    SelectedDagChanged();
+
                     UpdateButtonStates();
                 }
             }
@@ -169,10 +170,13 @@ namespace DeMol.ViewModels
         {
             var newAdminData = Util.SafeReadJson<AdminData>(SelectedDag.Id);
 
+            newAdminData.Pasvragen.Clear();
             foreach (var item in Pasvragen)
             {
                 newAdminData.Pasvragen.Add(new PasvragenVerdiend { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
             }
+
+            newAdminData.OpdrachtenGespeeld.Clear();
             foreach (var item in OpdrachtenGespeeld.Where(o => o.VandaagGespeeld))
             {
                 newAdminData.OpdrachtenGespeeld.Add(item.Id);

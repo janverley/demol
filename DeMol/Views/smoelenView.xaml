@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1464" d:DesignWidth="1715">
     <Grid >
-             <Grid>
+             <Grid VerticalAlignment="Center">
 
             <Grid.RowDefinitions>
 

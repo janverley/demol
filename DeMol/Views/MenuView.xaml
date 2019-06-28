@@ -24,12 +24,12 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <Button Name="StartMolAanduiden" Style="{StaticResource Btn1}">Mol aanduiden</Button>
+                <Button Name="StartMolAanduiden" Style="{StaticResource Btn1}">Mol van Vandaag</Button>
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Start vragen</Button>
                 <Button Name="Validate" Style="{StaticResource Btn1}">Valideer antwoorden</Button>
-                <Button Name="EndResult" Style="{StaticResource Btn1}">Finale</Button>
+                <!--<Button Name="EndResult" Style="{StaticResource Btn1}">Finale</Button>-->
                 <Button Name="Timer" Style="{StaticResource Btn1}">Timer</Button>
-                <Button Name="Smoelen" Style="{StaticResource Btn1}">Smoelen</Button>
+                <!--<Button Name="Smoelen" Style="{StaticResource Btn1}">Smoelen</Button>-->
             </StackPanel>
             <Border BorderBrush="White" BorderThickness="1" Margin="5"  Padding="5">
                 <Grid>

@@ -49,8 +49,22 @@ namespace DeMol.ViewModels
 
         public int AantalSpelers => Spelerdata.Spelers.Count;
         public int AantalSpelersDieDeMolMoetenGeradenHebben => Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben;
+        public int TimeoutMolAanduiden => Settings.Default.timeoutMolAanduiden;
         public DagenData DagenData { get; private set; }
         public SpelersData Spelerdata { get; private set; }
+
+        public bool IsDeMol(int dagId, string naam)
+        {
+            var mollen = new List<int> { 7, 8, 1, 0, 4, 3, 2, 6, 5 };
+
+            var did = (dagId - 1) % mollen.Count;
+
+            var mol = mollen[did];
+
+            var demol = Spelerdata.Spelers[mol];
+
+            return naam.SafeEqual(demol.Naam);
+        }
 
         private string bgSource;
 
