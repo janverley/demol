@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DeMol.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="1464" d:DesignWidth="1715">
+             d:DesignHeight="1464" d:DesignWidth="2400">
     <Grid >
              <Grid VerticalAlignment="Center">
 
