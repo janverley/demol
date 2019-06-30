@@ -3,31 +3,32 @@
   "Description": "Queen Hanne",
   "Vragen": [
     {
-      "Text": "vraag a 1",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraag a 2?",
+      "Text": "Heeft de mol een roos hoedje opgehad?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag a 3?"
+      "Text": "Deed de mol het touwenparcours mee?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     },
     {
-      "Text": "vraag a 4?"
+      "Text": "Zat de mol in de grijze bus vandaag?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zette de mol als eerste zijn helm op?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

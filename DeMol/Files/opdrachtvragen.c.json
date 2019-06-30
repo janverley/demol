@@ -3,28 +3,39 @@
   "Description": "Selfie-time",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraaag c 2 ?",
+      "Text": "Was de mol een walkie man/vrouw?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Is de mol in de eerste auto vertrokken naar Barjac?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Stond de mol mee op de selfies?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zat de mol vooraan in de auto bij de heenrit naar Barjac?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zat de mol achteraan in de auto bij de terugrit van Barjac?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

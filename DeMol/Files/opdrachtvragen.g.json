@@ -3,7 +3,7 @@
   "Description": "Pluimen",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
+      "Text": "Met wie zat de mol met de badminton in het team?",
       "Opties": [
         "Juul",
         "Staf",
@@ -14,17 +14,15 @@
         "Hanne",
         "Kris",
         "Hilde"
-      ]
+      ],
+      "MeerdereOptiesMogelijk":true
     },
     {
-      "Text": "vraaag c 2 ?",
+      "Text": "Heeft het team van de mol het aantal slagen gehaald?",
       "Opties": [
         "Ja",
         "Nee"
       ]
-    },
-    {
-      "Text": "vraag c 3?"
     }
   ]
 }

@@ -3,7 +3,7 @@
   "Description": "Construction",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
+      "Text": "Wie zat er bij mol in de groep tijdens de legoproef?",
       "Opties": [
         "Juul",
         "Staf",
@@ -14,17 +14,24 @@
         "Hanne",
         "Kris",
         "Hilde"
-      ]
+      ],
+      "MeerdereOptiesMogelijk":true
     },
     {
-      "Text": "vraaag c 2 ?",
+      "Text": "In welke groep zat de mol tijdens de lego proef?",
+      "Opties": [
+        "Groep 1",
+        "Groep 2",
+        "Groep 3"
+      ]
+    },
+
+    {
+      "Text": "Had de mol tijdens de legoproef de walkie talkie in handen?",
       "Opties": [
         "Ja",
         "Nee"
       ]
-    },
-    {
-      "Text": "vraag c 3?"
     }
   ]
 }

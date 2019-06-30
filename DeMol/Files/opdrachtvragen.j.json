@@ -3,28 +3,29 @@
   "Description": "Flambeaux",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
+      "Text": "Hoeveel ingrediënten had de mol in de eerste proefronde juist?",
       "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
+        "Niet van toepassing",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
       ]
     },
     {
-      "Text": "vraaag c 2 ?",
+      "Text": "Was de mol geblinddoekt",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Gaf de mol een drankje aan de proevers?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

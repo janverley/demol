@@ -3,28 +3,25 @@
   "Description": "Promenade",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraaag c 2 ?",
+      "Text": "Zat de mol in de wandelgroep?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Heeft de mol vandaag een stekjesraadsel trachten op te lossen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Droeg de mol sandalen tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

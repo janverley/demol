@@ -3,7 +3,7 @@
   "Description": "Estafette",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
+      "Text": "Tegen wie kwam de mol uit in de 1e estafetteronde?",
       "Opties": [
         "Juul",
         "Staf",
@@ -17,14 +17,27 @@
       ]
     },
     {
-      "Text": "vraaag c 2 ?",
+      "Text": "Zat de mol in een jutte zak vandaag?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Hoe dikwijls heeft de mol de estafette gedaan?",
+      "Opties": [
+        "1 keer",
+        "2 keer",
+        "3 keer",
+        "4 keer"
+      ]
+    },
+    {
+      "Text": "Kreeg de mol in de eerste ronde zijn bijsluiter als eerste opgevouwen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

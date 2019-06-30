@@ -3,7 +3,7 @@
   "Description": "Casino",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
+      "Text": "Bij wie moest de mol trekken bij 'zwarte mollen'?",
       "Opties": [
         "Juul",
         "Staf",
@@ -17,14 +17,25 @@
       ]
     },
     {
-      "Text": "vraaag c 2 ?",
+      "Text": "Heeft de mol met 'zwarte mollen' een negatief paar afgelegd?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Kocht de mol een 'voordeel envelop'?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Speelde de mol 'roulette'?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

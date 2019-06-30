@@ -3,28 +3,18 @@
   "Description": "Kubb",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraaag c 2 ?",
+      "Text": "Heeft de mol 3 keer zelf gegooid tijdens het kubb spel?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Heeft de mol zelf een 0 punten worp gegooid?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

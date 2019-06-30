@@ -3,29 +3,25 @@
   "Description": "Scrabble",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ],
-      "MeerdereOptiesMogelijk":true
-    },
-    {
-      "Text": "vraaag c 2 ?",
+      "Text": "Kwam de mol tijdens de Scrabble opdracht in het water?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Zat de mol in het winnende Scrabble team?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Had de mol een duikbril op tijdens de Scrabble proef?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

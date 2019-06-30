@@ -3,28 +3,32 @@
   "Description": "Aviron",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraaag c 2 ?",
+      "Text": "Heeft de mol vandaag een vis gevangen?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Zat de mol bij aankomst in de 1e kajak?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Reed de mol na de kajak met de grijze bus terug?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Droeg de mol tijdens de kajak een bikini?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

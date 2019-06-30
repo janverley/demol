@@ -3,28 +3,39 @@
   "Description": "Spookdorp",
   "Vragen": [
     {
-      "Text": "vraag b 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraaag b 2 ?",
+      "Text": "Ging de mol vandaag alleen het spookdorp in?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag b3?"
+      "Text": "Heeft de mol zijn/haar envelop gevonden?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zat de mol in de grijze bus vandaag?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Welk bedrag was de mol waard?",
+      "Opties": [
+        "100",
+        "200",
+        "300",
+        "400",
+        "500",
+        "600",
+        "700",
+        "800",
+        "900"
+      ]
     }
   ]
 }
