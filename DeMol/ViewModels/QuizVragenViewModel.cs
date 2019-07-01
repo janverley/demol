@@ -71,8 +71,6 @@ namespace DeMol.ViewModels
             }
 
 
-            quizVraagViewModels.Clear();
-
             speler = new Speler { Naam = Naam };
 
             var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
@@ -85,7 +83,7 @@ namespace DeMol.ViewModels
                 return;
             }
 
-            var vragenVoorVandaag = new List<Vraag>();
+            var vragenVoorVandaag = new Dictionary<string,Vraag>();
 
             foreach (var gespeeldeOpdracht in opdrachtenVanVandaag)
             {
@@ -102,16 +100,19 @@ namespace DeMol.ViewModels
                 for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
                 {
                     var vraag = opdrachtVragen.Vragen[i];
-                    vraag.Text = $"{vraag.Text} ({gespeeldeOpdracht.ToUpper()}{i + 1})";
-                    vragenVoorVandaag.Add(vraag);
+                    var vraagID = $"{gespeeldeOpdracht.ToUpper()}{i + 1}";
+                    vraag.Text = $"{vraag.Text} ({vraagID})";
+                    vragenVoorVandaag.Add(vraagID, vraag);
                 }
             }
 
-            vragenVoorVandaag = vragenVoorVandaag.Shuffle(new Random()).ToList();
+            vragenVoorVandaag = vragenVoorVandaag.Shuffle(new Random()).ToDictionary(kvp=>kvp.Key, kvp=>kvp.Value);
+
+            quizVraagViewModels.Clear();
 
             foreach (var vraag in vragenVoorVandaag)
             {
-                quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Text, vraag.Opties??Enumerable.Empty<string>(), vraag.MeerdereOptiesMogelijk)); 
+                quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Value.Text, vraag.Value.Opties??Enumerable.Empty<string>(), vraag.Value.MeerdereOptiesMogelijk, vraag.Key)); 
             }
 
             QuizVraag = quizVraagViewModels[index];
@@ -166,7 +167,7 @@ namespace DeMol.ViewModels
             if (QuizVraag != null)
             {
                 // noteer antwoord
-                speler.Antwoorden.Add(QuizVraag.AntwoordToNote);
+                speler.Antwoorden.Add(QuizVraag.VraagID, QuizVraag.AntwoordToNote);
             }
         }
 

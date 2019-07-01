@@ -13,7 +13,6 @@ namespace DeMol.ViewModels
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
-        private AntwoordenData antwoorden;
 
         public SmoelenViewModel(ShellViewModel conductor, SimpleContainer container)
         {

@@ -31,18 +31,19 @@ namespace DeMol
                 .Singleton<MenuViewModel>();
 
             container
-               .PerRequest<InvalidateViewModel>()
-               //.PerRequest<QuizNaamViewModel>()
-               .PerRequest<QuizBenJijDeMolViewModel>()
-               .PerRequest<JijBentDeMolViewModel>()
-               .PerRequest<QuizWieIsDeMolViewModel>()
-               .PerRequest<QuizOuttroViewModel>()
-               .PerRequest<ValidateViewModel>()
-               .PerRequest<ResultViewModel>()
-               .PerRequest<QuizVragenViewModel>()
-               .PerRequest<EndResultViewModel>()
-               .PerRequest<TimerViewModel>()
-               .PerRequest<SmoelenViewModel>();
+                .PerRequest<InvalidateViewModel>()
+//.PerRequest<QuizNaamViewModel>()
+//.PerRequest<QuizBenJijDeMolViewModel>()
+                .PerRequest<QuizIntroViewModel>()
+                .PerRequest<JijBentDeMolViewModel>()
+                .PerRequest<QuizWieIsDeMolViewModel>()
+                .PerRequest<QuizOuttroViewModel>()
+                .PerRequest<ValidateViewModel>()
+                .PerRequest<ResultViewModel>()
+                .PerRequest<QuizVragenViewModel>()
+                .PerRequest<EndResultViewModel>()
+                .PerRequest<TimerViewModel>()
+                .PerRequest<SmoelenViewModel>();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

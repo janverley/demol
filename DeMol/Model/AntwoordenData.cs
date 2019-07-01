@@ -10,12 +10,12 @@ namespace DeMol.Model
     {
         public Speler()
         {
-            Antwoorden = new List<string>();
+            Antwoorden = new Dictionary<string, string>();
         }
         public bool IsDeMol { get; set; }
         public string Naam { get; set; }
         public string DeMolIs { get; set; }
-        public List<string> Antwoorden { get; set; }
+        public Dictionary<string,string> Antwoorden { get; set; }
         public TimeSpan Tijd { get; set; }
     }
 

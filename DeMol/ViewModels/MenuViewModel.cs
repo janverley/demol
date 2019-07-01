@@ -101,17 +101,23 @@ namespace DeMol.ViewModels
                 OpdrachtenGespeeld.Clear();
                 foreach (var item in bestaandeOpdrachtVragen)
                 {
-                    OpdrachtenGespeeld.Add(new OpdrachtViewModel{ Id = item.Opdracht, Naam = $"{item.Opdracht.ToUpper()} - {item.Description}", VandaagGespeeld = false });
+                    OpdrachtenGespeeld.Add(
+                        new OpdrachtViewModel
+                        {
+                            Id = item.Opdracht,
+                            Naam = $"{item.Opdracht.ToUpper()} - {item.Description}",
+                            VandaagGespeeld = adminData.OpdrachtenGespeeld.Any(o => o.SafeEqual(item.Opdracht))
+                        });
                 }
 
-                if (!VragenGevonden)
-                {
-                    Message = "Vragen File niet gevonden!";
-                }
-                else
-                {
-                    Message = "";
-                }
+                //if (!VragenGevonden)
+                //{
+                //    Message = "Vragen File niet gevonden!";
+                //}
+                //else
+                //{
+                //    Message = "";
+                //}
             }
         }
 
@@ -200,10 +206,10 @@ namespace DeMol.ViewModels
             }
         }
 
-        public bool CanStartQuiz => SelectedDag != null && VragenGevonden;
-        public bool CanStartMolAanduiden => SelectedDag != null && VragenGevonden;
+        public bool CanStartQuiz => SelectedDag != null;// && VragenGevonden;
+        public bool CanStartMolAanduiden => SelectedDag != null;// && VragenGevonden;
 
-        private bool VragenGevonden => Util.DataFileFoundAndValid<VragenData>(container.GetInstance<ShellViewModel>().Dag);
+        //private bool VragenGevonden => Util.DataFileFoundAndValid<VragenData>(container.GetInstance<ShellViewModel>().Dag);
 
         public void StartMolAanduiden()
         {
@@ -252,7 +258,7 @@ namespace DeMol.ViewModels
 
             x.DoNext = (vm) =>
             {
-                var x2 = container.GetInstance<QuizBenJijDeMolViewModel>();
+                var x2 = container.GetInstance<QuizIntroViewModel>();
                 x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
                 conductor.ActivateItem(x2);
             };

@@ -38,12 +38,10 @@ namespace DeMol.ViewModels
             {
                 var juist = adminData.Pasvragen.Single(pv => pv.Naam.SafeEqual(speler.Naam)).PasVragenVerdiend;
 
-                for (int i = 0; i < juisteAntwoorden.Count; i++)
+                foreach (var juistAntwoord in juisteAntwoorden)
                 {
-                    var a = speler.Antwoorden[i].Trim().ToLower();
-                    var ja = juisteAntwoorden[i].Trim().ToLower();
-
-                    if (a.SafeEqual(ja))
+                    var antwoordSpeler = speler.Antwoorden[juistAntwoord.Key];
+                    if (antwoordSpeler.SafeEqual(juistAntwoord.Value))
                     {
                         juist++;
                     }

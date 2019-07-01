@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using DeMol.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -53,9 +54,17 @@ namespace DeMol.ViewModels
             {
                 //var quizNaamViewModel = container.GetInstance<QuizNaamViewModel>();
                 var x = container.GetInstance<SmoelenViewModel>();
+
+                x.CanSelectUserDelegate = (name) =>
+                {
+                    var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+                    var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
+                    return result;
+                };
+
                 x.DoNext = (vm) =>
                 {
-                    var quizBenJijDeMolViewModel = container.GetInstance<QuizBenJijDeMolViewModel>();
+                    var quizBenJijDeMolViewModel = container.GetInstance<QuizIntroViewModel>();
                     quizBenJijDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
                     conductor.ActivateItem(quizBenJijDeMolViewModel);
                 };

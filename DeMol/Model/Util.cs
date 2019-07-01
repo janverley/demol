@@ -35,7 +35,7 @@ namespace DeMol.Model
             { typeof(AdminData), new FileData{ Filename =  @".\Files\admin.{0}.json", Encrypted = false } },
             { typeof(DagenData), new FileData{ Filename =  @".\Files\dagen.json", Encrypted = false } },
             { typeof(SpelersData), new FileData{ Filename =  @".\Files\spelers.json", Encrypted = false }  },
-            { typeof(VragenData), new FileData{ Filename =  @".\Files\vragen.{0}.json", Encrypted = false }  },
+            //{ typeof(VragenData), new FileData{ Filename =  @".\Files\vragen.{0}.json", Encrypted = false }  },
             { typeof(AntwoordenData), new FileData{ Filename =  @".\Files\antwoorden.{0}.json", Encrypted = false }  },
             { typeof(MollenData), new FileData{ Filename =  @".\Files\mollen.json", Encrypted = false } },
             { typeof(OpdrachtVragenData), new FileData{ Filename =  @".\Files\OpdrachtVragen.{0}.json", Encrypted = false } }

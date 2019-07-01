@@ -51,16 +51,13 @@ namespace DeMol.ViewModels
                 foreach (var speler in antwoorden.Spelers.Where(s => !s.IsDeMol))
                 {
                     var juist = adminData.Pasvragen.Single(pv => pv.Naam.SafeEqual(speler.Naam)).PasVragenVerdiend;
-                    
-                    for (int i = 0; i < juisteAntwoorden.Count; i++)
-                    {
-                        var a = speler.Antwoorden[i].Trim().ToLower();
-                        var ja = juisteAntwoorden[i].Trim().ToLower();
 
-                        if (a.SafeEqual(ja))
+                    foreach (var juistAntwoord in juisteAntwoorden)
+                    {
+                        var antwoordSpeler = speler.Antwoorden[juistAntwoord.Key];
+                        if (antwoordSpeler.SafeEqual(juistAntwoord.Value))
                         {
                             juist++;
-                            totaalJuisteAntwoordenVandaag++;
                         }
                     }
 

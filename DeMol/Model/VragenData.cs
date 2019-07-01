@@ -16,7 +16,6 @@ namespace DeMol.Model
 
     public class VragenData
     {
-        public string Dag { get; set; }
         public List<Vraag> Vragen { get; set; } = new List<Vraag>();
     }
 }

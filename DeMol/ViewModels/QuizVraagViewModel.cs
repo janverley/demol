@@ -15,11 +15,11 @@ namespace DeMol.ViewModels
         private string antwoord;
         private bool showAntwoord;
 
-        public QuizVraagViewModel(string text, IEnumerable<string> opties, bool meerdereOptiesMogelijk)
+        public QuizVraagViewModel(string text, IEnumerable<string> opties, bool meerdereOptiesMogelijk, string vraagID)
         {
             Text = text;
             this.meerdereOptiesMogelijk = meerdereOptiesMogelijk;
-
+            VraagID = vraagID;
             if (meerdereOptiesMogelijk)
             {
                 MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>(opties.Select(s => new MeerdereOptieViewModel(s)));
@@ -41,6 +41,8 @@ namespace DeMol.ViewModels
                 Set(ref text, value);
             }
         }
+
+        public string VraagID { get; }
 
         public string Antwoord
         {
@@ -83,6 +85,5 @@ namespace DeMol.ViewModels
                 }
             }
         }
-
     }
 }
