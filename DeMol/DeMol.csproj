@@ -89,6 +89,7 @@
     <Compile Include="Model\Util.cs" />
     <Compile Include="Model\VragenData.cs" />
     <Compile Include="ViewModels\CheckViewModel.cs" />
+    <Compile Include="ViewModels\DagResultaatViewModel.cs" />
     <Compile Include="ViewModels\DagViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\InvalidateViewModel.cs" />
@@ -112,6 +113,9 @@
     <Compile Include="ViewModels\ValidateViewModel.cs" />
     <Compile Include="Views\CheckView.xaml.cs">
       <DependentUpon>CheckView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DagResultaatView.xaml.cs">
+      <DependentUpon>DagResultaatView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EnumToBooleanConverter.cs" />
     <Compile Include="Views\InvalidateView.xaml.cs">
@@ -202,6 +206,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CheckView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DagResultaatView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -352,6 +360,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Files\opdrachtvragen.o.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\opdrachtvragen.x.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Files\spelers.json">

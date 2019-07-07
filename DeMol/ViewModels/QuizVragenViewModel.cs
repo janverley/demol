@@ -70,7 +70,6 @@ namespace DeMol.ViewModels
                 Message = "";
             }
 
-
             speler = new Speler { Naam = Naam };
 
             var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
@@ -83,36 +82,13 @@ namespace DeMol.ViewModels
                 return;
             }
 
-            var vragenVoorVandaag = new Dictionary<string,Vraag>();
-
-            foreach (var gespeeldeOpdracht in opdrachtenVanVandaag)
-            {
-                if (!Util.DataFileFoundAndValid<OpdrachtVragenData>(gespeeldeOpdracht))
-                {
-                    Message = $"Er is iets mis: opdracht vragen over gespeelde opdracht [{gespeeldeOpdracht}] niet gevonden. Bel me, schrijf me :)";
-                    index = -1;
-                    return;
-                }
-
-                var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
-
-
-                for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
-                {
-                    var vraag = opdrachtVragen.Vragen[i];
-                    var vraagID = $"{gespeeldeOpdracht.ToUpper()}{i + 1}";
-                    vraag.Text = $"{vraag.Text} ({vraagID})";
-                    vragenVoorVandaag.Add(vraagID, vraag);
-                }
-            }
-
-            vragenVoorVandaag = vragenVoorVandaag.Shuffle(new Random()).ToDictionary(kvp=>kvp.Key, kvp=>kvp.Value);
+            var randomVraagCodes = admin.VragenCodes.Shuffle(new Random());
 
             quizVraagViewModels.Clear();
-
-            foreach (var vraag in vragenVoorVandaag)
+            foreach (var vraagCode in randomVraagCodes)
             {
-                quizVraagViewModels.Add(new QuizVraagViewModel(vraag.Value.Text, vraag.Value.Opties??Enumerable.Empty<string>(), vraag.Value.MeerdereOptiesMogelijk, vraag.Key)); 
+                var vraag = Util.GetVraagFromCode(vraagCode);
+                quizVraagViewModels.Add(new QuizVraagViewModel(vraag, vraagCode)); 
             }
 
             QuizVraag = quizVraagViewModels[index];

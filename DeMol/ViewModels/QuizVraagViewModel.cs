@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using DeMol.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,22 @@ namespace DeMol.ViewModels
         private string antwoord;
         private bool showAntwoord;
 
-        public QuizVraagViewModel(string text, IEnumerable<string> opties, bool meerdereOptiesMogelijk, string vraagID)
+        public QuizVraagViewModel(Vraag vraag, string vraagID)           
         {
-            Text = text;
-            this.meerdereOptiesMogelijk = meerdereOptiesMogelijk;
+            Text = $"{vraag.Text} ({vraagID})";
+            this.meerdereOptiesMogelijk = vraag.MeerdereOptiesMogelijk;
             VraagID = vraagID;
-            if (meerdereOptiesMogelijk)
+            if (vraag.MeerdereOptiesMogelijk)
             {
-                MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>(opties.Select(s => new MeerdereOptieViewModel(s)));
+                MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>(vraag.Opties.Select(s => new MeerdereOptieViewModel(s)));
                 Opties = new BindableCollection<OptieViewModel>();
             }
             else
             {
                 MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>();
-                Opties = new BindableCollection<OptieViewModel>(opties.Select(s => new OptieViewModel(s)));
+                Opties = new BindableCollection<OptieViewModel>(vraag.Opties.Select(s => new OptieViewModel(s)));
             }
-            ShowAntwoord = !opties.Any();
+            ShowAntwoord = !vraag.Opties.Any();
         }
 
         public string Text
@@ -80,7 +81,7 @@ namespace DeMol.ViewModels
                     }
                     else
                     {
-                        return Antwoord?? $"NIKS_{DateTime.UtcNow.Ticks}";
+                        return Antwoord ?? $"NIKS_{DateTime.UtcNow.Ticks}";
                     }
                 }
             }

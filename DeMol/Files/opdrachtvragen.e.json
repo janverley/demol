@@ -3,28 +3,25 @@
   "Description": "Karaoke",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraaag c 2 ?",
+      "Text": "Had de mol het aantal antwoorden juist ingeschat?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Als hoeveelste neuriede de mol?",
+      "Opties": [
+        "als eerste",
+        "als tweede",
+        "als derde",
+        "als vierde",
+        "als vijfde",
+        "als zesde",
+        "als zevende",
+        "als achtste",
+        "als laatste"
+      ]
     }
   ]
 }

@@ -49,5 +49,23 @@ namespace DeMol.Properties {
                 return ((int)(this["timeoutMolAanduiden"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int aantalVragenPerDag {
+            get {
+                return ((int)(this["aantalVragenPerDag"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int aantalVragenWeekWinnaar {
+            get {
+                return ((int)(this["aantalVragenWeekWinnaar"]));
+            }
+        }
     }
 }

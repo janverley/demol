@@ -52,62 +52,44 @@ namespace DeMol.ViewModels
 
             var dagwinnaar = scores.OrderByDescending(s => s.juisteAntwoorden).ThenBy(s => s.tijd).First();
 
-            //if ((adminData.Opdrachten.OpdrachtStatus1 == OpdrachtStatus.OK || adminData.Opdrachten.OpdrachtStatus1 == OpdrachtStatus.NA) // geslaagd of niet gespeeld
-            //&&
-            //    (adminData.Opdrachten.OpdrachtStatus2 == OpdrachtStatus.OK || adminData.Opdrachten.OpdrachtStatus2 == OpdrachtStatus.NA) // geslaagd of niet gespeeld
-            //    &&
-            //        (adminData.Opdrachten.OpdrachtStatus3 == OpdrachtStatus.OK || adminData.Opdrachten.OpdrachtStatus3 == OpdrachtStatus.NA)) // geslaagd of niet gespeeld
-            //{
-            //    // dag winnaar
+            var resultSB = new StringBuilder();
 
-            //    Winnaar = dagwinnaar.Speler;
+            resultSB.AppendLine($"- De Mol was vandaag: {deMol.Naam}!");
 
+            resultSB.AppendLine($"- {dagwinnaar.Speler} had de meest vragen juist ({dagwinnaar.juisteAntwoorden}).");
+            
+            // mol geraden? 
+            var raders = antwoorden.Spelers
+                .Where(s => !s.IsDeMol)
+                .Where(s => s.DeMolIs.SafeEqual(deMol.Naam));
 
-            //    Text = $"Alle opdrachten geslaaagd! {Environment.NewLine} De Dagwinnaar is {dagwinnaar.Speler}!  De mol was vandaag {deMol.Naam}.";
-            //    Text += $"{Environment.NewLine}{dagwinnaar.Speler} had {dagwinnaar.juisteAntwoorden} juiste antwoorden.";
+            switch (raders.Count())
+            {
+               case 0:
+                    resultSB.AppendLine($"- Niemand heeft geraden wie de mol was.");
+                    break;
+                case 1:
+                    resultSB.AppendLine($"- Alleen {raders.First().Naam} heeft geraden wie de mol was.");
+                    break;
+                default:
+                    resultSB.AppendLine($"- Deze {raders.Count()} spelers hebben geraden wie de mol was: {string.Join(",",raders.Select(r => r.Naam))}");
+                    break;
+            }
 
-            //    var exaequos = scores.Where(s => !s.Equals(dagwinnaar) && s.juisteAntwoorden == dagwinnaar.juisteAntwoorden);
-            //    if (exaequos.Any())
-            //    {
-            //        Text += $"{Environment.NewLine}Ex-aequo: Er waren {exaequos.Count()} spelers met evenveel juiste antwoorden als de winnaar ({dagwinnaar.juisteAntwoorden}), maar die waren trager dan {dagwinnaar.Speler}: {string.Join(",", exaequos.Select(s => s.Speler))}";
-            //    }
+            Text = resultSB.ToString();
 
-            //}
-            //else
-            //{
-            //    var result = "?";
-
-            //    // mol geraden? 
-            //    var raders = antwoorden.Spelers.Where(s => !s.IsDeMol).Where(s => s.DeMolIs.SafeEqual(deMol.Naam));
-            //    if (raders.Count() >= container.GetInstance<ShellViewModel>().AantalSpelersDieDeMolMoetenGeradenHebben)
-            //    {
-            //        // de mol is geraden door
-            //        Winnaar = "Niemand";
-            //        result = $"Geen winnaar!{Environment.NewLine}De mol was vandaag {deMol.Naam}, maar {raders.Count()} spelers hebben geraden wie de mol was: {string.Join(", ", raders.Select(s => s.Naam))}."
-            //            +
-            //            $"{Environment.NewLine}{dagwinnaar.Speler} had de meeste juiste antwoorden vandaag, of was het snelst.";
-            //    }
-            //    else
-            //    {
-            //        Winnaar = deMol.Naam;
-            //        if (!raders.Any())
-            //        {
-            //            result = $"De Mol is winnaar!{Environment.NewLine}De mol was vandaag {deMol.Naam}, en niemand heeft geraden wie de mol was.";
-
-            //        }
-            //        else
-            //        {
-            //            result = $"De Mol is winnaar!{Environment.NewLine}De mol was vandaag {deMol.Naam}, en dat is enkel geraden door: {string.Join(", ", raders.Select(s => s.Naam))}.";
-            //        }
-            //    }
-
-            //    Text = $"{Environment.NewLine}{result}";
-            //}
+            timer.Stop();
         }
 
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
+            conductor.ActivateItem(x);
+        }
+
+        public void Antwoorden()
+        {
+            var x = container.GetInstance<DagResultaatViewModel>();
             conductor.ActivateItem(x);
         }
 

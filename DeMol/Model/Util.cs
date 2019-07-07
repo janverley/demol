@@ -103,6 +103,27 @@ namespace DeMol.Model
             File.WriteAllText(fileInfo.FullName, contents);
         }
 
+        internal static Tuple<string, Vraag> GetVraagAndCode(OpdrachtVragenData extraVragen, int r)
+        {
+            var vraag = extraVragen.Vragen[r];
+            var vraagID = $"{extraVragen.Opdracht.ToUpper()}{r + 1}";
+
+            return new Tuple<string, Vraag>(vraagID, vraag);
+        }
+
+        internal static Vraag GetVraagFromCode(string code)
+        {
+            var opdrachtId = code.Substring(0, 1);
+            var vraagNummer = Int32.Parse(code.Substring(1)) - 1;
+
+            var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(opdrachtId);
+
+            var x = GetVraagAndCode(opdrachtVragen, vraagNummer);
+
+            return x.Item2;
+        }
+
+
         public static T SafeReadJson<T>(int dag) where T : new()
         {
             return SafeReadJson<T>(dag.ToString());

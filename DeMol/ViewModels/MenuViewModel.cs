@@ -37,10 +37,10 @@ namespace DeMol.ViewModels
 
         protected override void OnDeactivate(bool close)
         {
-            if (SelectedDag != null)
-            {
-                SaveAdmin();
-            }
+            //if (SelectedDag != null)
+            //{
+            //    SaveAdmin();
+            //}
             base.OnDeactivate(close);
         }
 
@@ -118,6 +118,7 @@ namespace DeMol.ViewModels
                 //{
                 //    Message = "";
                 //}
+                UpdateButtonStates();
             }
         }
 
@@ -188,8 +189,35 @@ namespace DeMol.ViewModels
                 newAdminData.OpdrachtenGespeeld.Add(item.Id);
             }
 
-            Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);
+            newAdminData.VragenCodes.Clear();
+            foreach (var gespeeldeOpdracht in newAdminData.OpdrachtenGespeeld)
+            {
+                var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
 
+                for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
+                {
+                    var x = Util.GetVraagAndCode(opdrachtVragen, i);
+                    newAdminData.VragenCodes.Add(x.Item1);
+                }
+            }
+            var extraVragen = Util.SafeReadJson<OpdrachtVragenData>("x");
+            for (int i = newAdminData.VragenCodes.Count; i < Properties.Settings.Default.aantalVragenPerDag; i++)
+            {
+                var r = new Random().Next(extraVragen.Vragen.Count);
+                var x = Util.GetVraagAndCode(extraVragen, r);
+
+                if (!newAdminData.VragenCodes.Contains(x.Item1))
+                {
+                    newAdminData.VragenCodes.Add(x.Item1);
+                }
+                else
+                {
+                    i--;
+                }
+            }
+
+            Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);
+            UpdateButtonStates();
         }
 
         private string message;
@@ -206,10 +234,10 @@ namespace DeMol.ViewModels
             }
         }
 
-        public bool CanStartQuiz => SelectedDag != null;// && VragenGevonden;
+        public bool CanStartQuiz => SelectedDag != null && AdminIsSaved;
         public bool CanStartMolAanduiden => SelectedDag != null;// && VragenGevonden;
 
-        //private bool VragenGevonden => Util.DataFileFoundAndValid<VragenData>(container.GetInstance<ShellViewModel>().Dag);
+        private bool AdminIsSaved => Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag);
 
         public void StartMolAanduiden()
         {
