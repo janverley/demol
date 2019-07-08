@@ -13,6 +13,9 @@
             <TextBlock Style="{StaticResource H2}" Text="{Binding Path=Winnaar}" TextAlignment="Center" Margin="20"/>
         <TextBlock Style="{StaticResource H1}" Text="{Binding Path=Text}" TextAlignment="Center" />
         </StackPanel>
-        <Button VerticalAlignment="Bottom" Name="Menu" HorizontalAlignment="Center" Style="{StaticResource Btn1}" Margin="20">Menu</Button>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Name="Menu" Style="{StaticResource Btn1}" Margin="20">Menu</Button>
+            <Button Name="Antwoorden" Style="{StaticResource Btn1}" Margin="20">Antwoorden</Button>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -25,6 +25,8 @@ namespace DeMol.ViewModels
             timer.Interval = TimeSpan.FromSeconds(5);
         }
 
+        private StringBuilder overzichtSB = new StringBuilder();
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             timer.Stop();
@@ -33,53 +35,29 @@ namespace DeMol.ViewModels
 
             foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
             {
-
-                scores.Add(new Score { Speler = speler.Naam, juisteAntwoorden = 0, tijd = TimeSpan.Zero}); 
+                scores.Add(new Score { Speler = speler.Naam, juisteAntwoorden = 0, tijd = TimeSpan.Zero });
             }
 
-            foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
+            var finaleData = Util.SafeReadJson<FinaleData>();
+            var finaleAntwoorden = Util.SafeReadJson<AntwoordenData>("finale");
+
+            foreach (var speler in finaleAntwoorden.Spelers)
             {
-                var adminData = Util.SafeReadJson<AdminData>(dag.Id);
-                var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
-
-                var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
-                var juisteAntwoorden = deMol.Antwoorden;
-
-                var totaalJuisteAntwoordenVandaag = 0;
-                var totaalTijdVandaag = TimeSpan.Zero;
-
-                foreach (var speler in antwoorden.Spelers.Where(s => !s.IsDeMol))
+                var score = scores.Single(s => s.Speler.SafeEqual(speler.Naam));
+                score.tijd = speler.Tijd;
+                foreach (var finaleVraag in finaleData.FinaleVragen)
                 {
-                    var juist = adminData.Pasvragen.Single(pv => pv.Naam.SafeEqual(speler.Naam)).PasVragenVerdiend;
-
-                    foreach (var juistAntwoord in juisteAntwoorden)
+                    if (speler.Antwoorden[finaleVraag.VraagCode].SafeEqual(finaleVraag.JuistAntwoord))
                     {
-                        var antwoordSpeler = speler.Antwoorden[juistAntwoord.Key];
-                        if (antwoordSpeler.SafeEqual(juistAntwoord.Value))
-                        {
-                            juist++;
-                        }
+                        score.juisteAntwoorden++;
                     }
-
-                    var score = scores.Single(s => s.Speler.SafeEqual(speler.Naam));
-
-                    score.juisteAntwoorden += juist;
-                    score.tijd += speler.Tijd;
-                    totaalTijdVandaag+=speler.Tijd;
                 }
-
-                // geef de mol het gemiddelde
-                var molscore = scores.Single(s => s.Speler.SafeEqual(antwoorden.Spelers.Single(ss => ss.IsDeMol).Naam));
-                var aantalNietMollen = antwoorden.Spelers.Count - 1;
-                molscore.juisteAntwoorden += totaalJuisteAntwoordenVandaag / aantalNietMollen;
-                molscore.tijd += TimeSpan.FromTicks(totaalTijdVandaag.Ticks / aantalNietMollen);
             }
-
             var eindWinnaar = scores.OrderByDescending(s => s.juisteAntwoorden).ThenBy(s => s.tijd).First();
 
             Winnaar = eindWinnaar.Speler;
 
-            Text = $"De EindWinnaar had de meeste vragen juist beantwoord in heel het spel.";
+            Text = $"De EindWinnaar had de meeste vragen juist beantwoord in het finale spel.";
 
             var exaequos = scores.Where(s => !s.Equals(eindWinnaar) && s.juisteAntwoorden == eindWinnaar.juisteAntwoorden);
             if (exaequos.Any())
@@ -87,6 +65,16 @@ namespace DeMol.ViewModels
                 Text += $"{Environment.NewLine}Ex-aequo: Er waren {exaequos.Count()} spelers met evenveel juiste antwoorden als de winnaar ({eindWinnaar.juisteAntwoorden}), maar die waren trager dan {eindWinnaar.Speler}: {string.Join(",", exaequos.Select(s => s.Speler))}";
             }
 
+            overzichtSB.AppendLine($"Spelers:");
+            foreach (var score in scores)
+            {
+                overzichtSB.AppendLine($"{score.Speler}: {score.juisteAntwoorden} ({score.tijd})");
+            }
+            overzichtSB.AppendLine($"Antwoorden:");
+            foreach (var fv in finaleData.FinaleVragen)
+            {
+                overzichtSB.AppendLine($"{fv.Dag.Naam} {fv.Description}: {fv.Vraag.Text}({fv.VraagCode}): {fv.JuistAntwoord}");
+            }
 
         }
 
@@ -99,6 +87,33 @@ namespace DeMol.ViewModels
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
+            conductor.ActivateItem(x);
+        }
+        public void Antwoorden()
+        {
+            var x = container.GetInstance<DagResultaatViewModel>();
+
+            //var resultSB = new StringBuilder();
+
+            //var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            //var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+
+            //var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
+            //var juisteAntwoorden = deMol.Antwoorden;
+
+            //foreach (var juistAntwoord in juisteAntwoorden)
+            //{
+            //    var code = juistAntwoord.Key;
+            //    var vraagText = Util.GetVraagFromCode(code).Text;
+
+            //    var antwoord = juistAntwoord.Value;
+
+            //    resultSB.AppendLine($"- {code} - {vraagText} - {antwoord}");
+            //}
+
+            x.Text = overzichtSB.ToString();
+
+
             conductor.ActivateItem(x);
         }
 
@@ -124,7 +139,6 @@ namespace DeMol.ViewModels
 
             foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
             {
-
                 var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
 
                 Checks.Add(new CheckViewModel($"Dag {dag.Id} administratie saved:", Util.DataFileFoundAndValid<AdminData>(dag.Id)));
@@ -149,6 +163,6 @@ namespace DeMol.ViewModels
         public BindableCollection<CheckViewModel> Checks { get; set; } = new BindableCollection<CheckViewModel>();
         public bool ShowChecks { get; private set; } = false;
 
-       
+
     }
 }
