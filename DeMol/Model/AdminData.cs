@@ -34,4 +34,24 @@ namespace DeMol.Model
         public List<string> VragenCodes { get; set; }
 
     }
+
+    public class FinaleData
+    {
+        public FinaleData()
+        {
+            FinaleVragen = new List<FinaleVraag>();
+        }
+        public List<FinaleVraag> FinaleVragen { get; set; }
+    }
+
+    public class FinaleVraag
+    {
+        public Dag Dag { get; set; }
+        public Vraag Vraag { get; set; }
+        public string VraagCode { get; set; }
+        public string Opdracht { get; set; }
+        public string Description { get; set; }
+        public string JuistAntwoord { get; set; }
+    }
 }
+

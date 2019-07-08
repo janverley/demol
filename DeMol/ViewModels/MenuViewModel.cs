@@ -189,7 +189,7 @@ namespace DeMol.ViewModels
                 newAdminData.OpdrachtenGespeeld.Add(item.Id);
             }
 
-            newAdminData.VragenCodes.Clear();
+            var vragenCodes = new List<string>();
             foreach (var gespeeldeOpdracht in newAdminData.OpdrachtenGespeeld)
             {
                 var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
@@ -197,24 +197,32 @@ namespace DeMol.ViewModels
                 for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
                 {
                     var x = Util.GetVraagAndCode(opdrachtVragen, i);
-                    newAdminData.VragenCodes.Add(x.Item1);
+                    vragenCodes.Add(x.Item1);
                 }
             }
             var extraVragen = Util.SafeReadJson<OpdrachtVragenData>("x");
-            for (int i = newAdminData.VragenCodes.Count; i < Properties.Settings.Default.aantalVragenPerDag; i++)
+            for (int i = vragenCodes.Count; i < Properties.Settings.Default.aantalVragenPerDag; i++)
             {
                 var r = new Random().Next(extraVragen.Vragen.Count);
                 var x = Util.GetVraagAndCode(extraVragen, r);
 
-                if (!newAdminData.VragenCodes.Contains(x.Item1))
+                if (!vragenCodes.Contains(x.Item1))
                 {
-                    newAdminData.VragenCodes.Add(x.Item1);
+                    vragenCodes.Add(x.Item1);
                 }
                 else
                 {
                     i--;
                 }
             }
+
+            vragenCodes = vragenCodes.Shuffle(new Random()).ToList();
+            newAdminData.VragenCodes.Clear();
+            foreach (var vragenCode in vragenCodes)
+            {
+                newAdminData.VragenCodes.Add(vragenCode);
+            }
+
 
             Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);
             UpdateButtonStates();
@@ -273,8 +281,7 @@ namespace DeMol.ViewModels
         }
 
         public void StartQuiz()
-        {
-            //var x = container.GetInstance<QuizNaamViewModel>();
+        {         
             var x = container.GetInstance<SmoelenViewModel>();
 
             x.CanSelectUserDelegate = (name) =>
@@ -304,6 +311,132 @@ namespace DeMol.ViewModels
         {
             var x = container.GetInstance<EndResultViewModel>();
             conductor.ActivateItem(x);
+        }
+
+        public bool CanEndQuiz
+        {
+            get
+            {
+                var result = false;
+
+                foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
+                {
+                    var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
+                    if (antwoorden.Spelers.Count(s => s.IsDeMol) != 1)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        result = true;
+                    }
+                }
+
+                return result;
+            }
+        }
+        public void EndQuiz()
+        {
+            var finaleAdminData = Util.SafeReadJson<FinaleData>();
+            if (!finaleAdminData.FinaleVragen.Any())
+            {
+                var finaleVragen = new List<FinaleVraag>();
+
+                var alleGespeeldeOpdrachten = new List<string>();
+                foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
+                {
+                    var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
+                    var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
+                    var juisteAntwoorden = deMol.Antwoorden;
+
+                    var adminData = Util.SafeReadJson<AdminData>(dag.Id);
+                    foreach (var gespeeldeOpdracht in adminData.OpdrachtenGespeeld)
+                    {
+                        if (!alleGespeeldeOpdrachten.Contains(gespeeldeOpdracht))
+                        {
+                            alleGespeeldeOpdrachten.Add(gespeeldeOpdracht);
+
+                            var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
+
+                            for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
+                            {
+                                var tup = Util.GetVraagAndCode(opdrachtVragen, i);
+
+                                var juistAntwoord = juisteAntwoorden[tup.Item1];
+
+                                var finaleVraag = new FinaleVraag
+                                {
+                                    Dag = dag,
+                                    Description = opdrachtVragen.Description,
+                                    Opdracht = opdrachtVragen.Opdracht,
+                                    Vraag = tup.Item2,
+                                    VraagCode = tup.Item1,
+                                    JuistAntwoord = juistAntwoord
+                                };
+
+                                finaleVragen.Add(finaleVraag);
+                            }
+                        }
+                    }
+                }
+
+
+                for (int i = 0; i < Math.Min(finaleVragen.Count, Settings.Default.aantalVragenWeekWinnaar); i++)
+                {
+                    var r = new Random().Next(finaleVragen.Count);
+                    var finaleVraag = finaleVragen[r];
+                    if (!finaleAdminData.FinaleVragen.Any(fv => fv.VraagCode == finaleVraag.VraagCode))
+                    {
+                        finaleAdminData.FinaleVragen.Add(finaleVraag);
+                    }
+                    else
+                    {
+                        i--;
+                    }
+                }
+                Util.SafeFileWithBackup(finaleAdminData);
+            }
+
+            var x = container.GetInstance<SmoelenViewModel>();
+
+            x.CanSelectUserDelegate = (name) =>
+            {
+                var antwoorden = Util.SafeReadJson<AntwoordenData>("finale");
+                var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
+                return result;
+            };
+
+            x.DoNext = (vm) =>
+            {
+                var finaleAdminData2 = Util.SafeReadJson<FinaleData>();
+                
+                var x2 = container.GetInstance<QuizVragenViewModel>();
+
+                x2.QuizVraagViewModelFactory = (vraagCode) =>
+                {
+                    var fv = finaleAdminData2.FinaleVragen.Single(fv2 => fv2.VraagCode == vraagCode);
+
+                    var result = new QuizVraagViewModel(fv.Vraag, fv.VraagCode);
+                    result.Text = $"{fv.Dag.Naam}: {fv.Description}\n{fv.Vraag.Text} ({fv.VraagCode})";
+
+                    return result;
+                };
+
+                x2.IsDeMol = false;
+                x2.DagId = "finale";
+                x2.VragenCodes = finaleAdminData2.FinaleVragen.Select(fv => fv.VraagCode).ToList();
+                x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
+
+                x2.DoNext = (QuizVragenViewModel quizVragenViewModel) =>
+                {
+                   conductor.ActivateItem(x);
+                };
+
+                conductor.ActivateItem(x2);
+            };
+
+            conductor.ActivateItem(x);
+
         }
 
         public void Smoelen()

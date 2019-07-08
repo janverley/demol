@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using DeMol.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,11 @@ namespace DeMol.ViewModels
             if (ditIsDeMolVandaag)
             {
                 var x = container.GetInstance<QuizVragenViewModel>();
+
+                var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+
+                x.VragenCodes = admin.VragenCodes;
+                x.DagId = container.GetInstance<ShellViewModel>().Dag.ToString();
                 x.Naam = Naam;
                 x.IsDeMol = true;
                 conductor.ActivateItem(x);

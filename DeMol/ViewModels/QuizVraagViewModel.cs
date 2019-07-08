@@ -16,7 +16,7 @@ namespace DeMol.ViewModels
         private string antwoord;
         private bool showAntwoord;
 
-        public QuizVraagViewModel(Vraag vraag, string vraagID)           
+        public QuizVraagViewModel(Vraag vraag, string vraagID)
         {
             Text = $"{vraag.Text} ({vraagID})";
             this.meerdereOptiesMogelijk = vraag.MeerdereOptiesMogelijk;

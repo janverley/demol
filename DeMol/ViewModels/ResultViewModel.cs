@@ -79,6 +79,7 @@ namespace DeMol.ViewModels
             Text = resultSB.ToString();
 
             timer.Stop();
+            CanAntwoorden = true;
         }
 
         public void Menu()
@@ -92,6 +93,15 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<DagResultaatViewModel>();
             conductor.ActivateItem(x);
         }
+
+        private bool canAntwoorden;
+
+        public bool CanAntwoorden
+        {
+            get { return canAntwoorden; }
+            set            {                Set(ref canAntwoorden, value);            }
+        }
+
 
         private string winnaar;
 
@@ -112,6 +122,8 @@ namespace DeMol.ViewModels
         protected override void OnActivate()
         {
             base.OnActivate();
+
+            CanAntwoorden = false;
 
             var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 

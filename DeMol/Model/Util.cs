@@ -38,7 +38,8 @@ namespace DeMol.Model
             //{ typeof(VragenData), new FileData{ Filename =  @".\Files\vragen.{0}.json", Encrypted = false }  },
             { typeof(AntwoordenData), new FileData{ Filename =  @".\Files\antwoorden.{0}.json", Encrypted = false }  },
             { typeof(MollenData), new FileData{ Filename =  @".\Files\mollen.json", Encrypted = false } },
-            { typeof(OpdrachtVragenData), new FileData{ Filename =  @".\Files\OpdrachtVragen.{0}.json", Encrypted = false } }
+            { typeof(OpdrachtVragenData), new FileData{ Filename =  @".\Files\OpdrachtVragen.{0}.json", Encrypted = false } },
+            { typeof(FinaleData), new FileData{ Filename =  @".\Files\finaleData.json", Encrypted = false } }
         };
 
         public static bool SafeEqual(this string a, string b)

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using DeMol.Model;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
@@ -66,6 +67,10 @@ namespace DeMol.ViewModels
         public void Start()
         {
             var x = container.GetInstance<QuizVragenViewModel>();
+            var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+
+            x.VragenCodes = admin.VragenCodes;
+            x.DagId = container.GetInstance<ShellViewModel>().Dag.ToString();
             x.Naam = Naam;
             x.IsDeMol = false;
             x.DeMolIs = Opties.Single(o => o.IsSelected).OptieText;

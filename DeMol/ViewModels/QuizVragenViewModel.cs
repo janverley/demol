@@ -10,6 +10,7 @@ namespace DeMol.ViewModels
     public class QuizVragenViewModel : Screen
     {
         private string naam;
+        private Dictionary<string, string> antwoorden = new Dictionary<string, string>();
 
         public string Naam
         {
@@ -27,9 +28,13 @@ namespace DeMol.ViewModels
             }
         }
 
+        public List<string> VragenCodes { get; set; }
+
+        public string DagId { get; set; }
+
+
         private DateTime startTime;
         private readonly List<QuizVraagViewModel> quizVraagViewModels = new List<QuizVraagViewModel>();
-        private Speler speler;
         private QuizVraagViewModel quizVraag;
         private int index;
         private readonly IConductor conductor;
@@ -40,8 +45,22 @@ namespace DeMol.ViewModels
         {
             this.conductor = conductor;
             this.container = container;
+
+            QuizVraagViewModelFactory = (vraagCode) =>
+            {
+                var vraag = Util.GetVraagFromCode(vraagCode);
+                return new QuizVraagViewModel(vraag, vraagCode);
+            };
+
+            DoNext = (QuizVragenViewModel quizVragenViewModel) =>
+            {
+                var x = container.GetInstance<QuizOuttroViewModel>();
+                x.Naam = quizVragenViewModel.Naam;
+                conductor.ActivateItem(x);
+            };
+
         }
-      
+
         private string message;
 
         public string Message
@@ -55,6 +74,8 @@ namespace DeMol.ViewModels
                 Set(ref message, value);
             }
         }
+
+        public Func<string, QuizVraagViewModel> QuizVraagViewModelFactory { get; set; }
 
         protected override void OnActivate()
         {
@@ -70,25 +91,13 @@ namespace DeMol.ViewModels
                 Message = "";
             }
 
-            speler = new Speler { Naam = Naam };
-
-            var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-            var opdrachtenVanVandaag = admin.OpdrachtenGespeeld;
-
-            if (!opdrachtenVanVandaag.Any())
-            {
-                Message = $"Er is iets mis: Er lijken geen opdrachten gespeeld vandaag. Bel me, schrijf me :)";
-                index = -1;
-                return;
-            }
-
-            var randomVraagCodes = admin.VragenCodes.Shuffle(new Random());
 
             quizVraagViewModels.Clear();
-            foreach (var vraagCode in randomVraagCodes)
+            foreach (var vraagCode in VragenCodes)
             {
-                var vraag = Util.GetVraagFromCode(vraagCode);
-                quizVraagViewModels.Add(new QuizVraagViewModel(vraag, vraagCode)); 
+                var vm = QuizVraagViewModelFactory(vraagCode);
+                quizVraagViewModels.Add(vm);
+
             }
 
             QuizVraag = quizVraagViewModels[index];
@@ -143,7 +152,7 @@ namespace DeMol.ViewModels
             if (QuizVraag != null)
             {
                 // noteer antwoord
-                speler.Antwoorden.Add(QuizVraag.VraagID, QuizVraag.AntwoordToNote);
+                antwoorden.Add(QuizVraag.VraagID, QuizVraag.AntwoordToNote);
             }
         }
 
@@ -153,21 +162,24 @@ namespace DeMol.ViewModels
 
             NoteerAntwoord();
 
-            speler.DeMolIs = DeMolIs;
-            speler.IsDeMol = IsDeMol;
+            var alleAntwoorden = Util.SafeReadJson<AntwoordenData>(DagId);
 
-            speler.Tijd = diff;
+            var speler = new Speler
+            {
+                Naam = Naam,
+                DeMolIs = DeMolIs,
+                IsDeMol = IsDeMol,
+                Tijd = diff,
+                Antwoorden = antwoorden
+            };
 
-            var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+            alleAntwoorden.Spelers.Add(speler);
 
-            antwoorden.Spelers.Add(speler);
+            Util.SafeFileWithBackup(alleAntwoorden, DagId);
 
-            Util.SafeFileWithBackup(antwoorden, container.GetInstance<ShellViewModel>().Dag);
-
-            var x = container.GetInstance<QuizOuttroViewModel>();
-            x.Naam = Naam;
-            conductor.ActivateItem(x);
-
+            DoNext(this);
         }
+
+        public Action<QuizVragenViewModel> DoNext{ get; set; }
     }
 }
