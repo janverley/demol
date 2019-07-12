@@ -36,6 +36,13 @@
         "800",
         "900"
       ]
+    },
+    {
+      "Text": "Heeft de mol de tijd doorgegeven via de walkietalkie?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

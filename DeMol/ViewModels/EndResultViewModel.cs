@@ -93,23 +93,6 @@ namespace DeMol.ViewModels
         {
             var x = container.GetInstance<DagResultaatViewModel>();
 
-            //var resultSB = new StringBuilder();
-
-            //var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-            //var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
-
-            //var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
-            //var juisteAntwoorden = deMol.Antwoorden;
-
-            //foreach (var juistAntwoord in juisteAntwoorden)
-            //{
-            //    var code = juistAntwoord.Key;
-            //    var vraagText = Util.GetVraagFromCode(code).Text;
-
-            //    var antwoord = juistAntwoord.Value;
-
-            //    resultSB.AppendLine($"- {code} - {vraagText} - {antwoord}");
-            //}
 
             x.Text = overzichtSB.ToString();
 

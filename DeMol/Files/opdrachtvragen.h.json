@@ -22,6 +22,61 @@
         "Ja",
         "Nee"
       ]
+    },
+    {
+      "Text": "Heeft de mol de opdracht van de getallen in de cirkel trachten op te lossen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Verwisselde de mol van schoen vandaag?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een opdracht doorgestuurd naar de wandelaars?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Hoeveel raadsels loste de mol op vandaag?",
+      "Opties": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14"
+      ]
+    },
+    {
+      "Text": "Schreef de mol op een rots vandaag?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol met een baksteen gesleurd vandaag?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

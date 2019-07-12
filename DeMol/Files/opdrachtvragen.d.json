@@ -3,28 +3,19 @@
   "Description": "Vandemannekes",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
+      "Text": "In welke groep zat de mol?",
       "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
+        "De Duikers",
+        "De Verstoppers",
+        "De Zoekers"
       ]
     },
     {
-      "Text": "vraaag c 2 ?",
+      "Text": "Heeft de mol vals gespeeld door een voorwerp achter te houden?",
       "Opties": [
         "Ja",
         "Nee"
       ]
-    },
-    {
-      "Text": "vraag c 3?"
     }
   ]
 }

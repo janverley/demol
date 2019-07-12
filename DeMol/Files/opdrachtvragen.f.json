@@ -3,28 +3,37 @@
   "Description": "Beaucoup Fish",
   "Vragen": [
     {
-      "Text": "vraag c 1 ?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "vraaag c 2 ?",
+      "Text": "Heeft de mol het ijzeren kruis gezien?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "vraag c 3?"
+      "Text": "Heeft de mol het blad met de visgraat vat gehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zat er alcohol in het eerste drankje dat de mol dronk in het restaurant?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+
+    },
+    {
+      "Text": "Wat at de mol? (meerdere opties mogelijk)",
+      "Opties": [
+        "voorgerecht",
+        "hoofdgerecht met vis",
+        "hoofdgerecht met vlees",
+        "dessert",
+        "koffie"
+      ],
+      "MeerdereOptiesMogelijk": true
     }
   ]
 }

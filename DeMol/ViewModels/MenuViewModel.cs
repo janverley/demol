@@ -126,7 +126,7 @@ namespace DeMol.ViewModels
         {
             var result = new List<OpdrachtVragenData>();
 
-            var allChars = "abcdefghijklmnopqrstuvwxyz";
+            var allChars = "abcdefghijklmnopqrstuvwyz";
 
             foreach (var @char in allChars.ToCharArray())
             {
@@ -321,12 +321,12 @@ namespace DeMol.ViewModels
 
                 foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
                 {
-                    var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
-                    if (antwoorden.Spelers.Count(s => s.IsDeMol) != 1)
-                    {
-                        result = false;
-                    }
-                    else
+                    //var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
+                    //if (antwoorden.Spelers.Count(s => s.IsDeMol) != 1)
+                    //{
+                    //    result = false;
+                    //}
+                    //else
                     {
                         result = true;
                     }

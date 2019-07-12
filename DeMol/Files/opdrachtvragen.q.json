@@ -1,0 +1,20 @@
+{
+  "Opdracht": "q",
+  "Description": "Light",
+  "Vragen": [
+    {
+      "Text": "Heeft de mol de afstandsbediening gebruikt?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een kaars aangezet??",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}
