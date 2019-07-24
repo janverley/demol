@@ -226,6 +226,8 @@ namespace DeMol.ViewModels
 
             Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);
             UpdateButtonStates();
+
+            System.IO.File.Delete($@".\Files\antwoorden.{SelectedDag.Id}.json");
         }
 
         private string message;

@@ -35,44 +35,60 @@ namespace DeMol.ViewModels
             }
         }
 
-        public string Message => $"{Naam}, je antwoorden zijn genoteerd.\n\nJe krijgt nu te zien of jij morgen de mol bent.";
+        public string Message => GetErIsEenMorgen() ? 
+            $"{Naam}, je antwoorden zijn genoteerd.\n\nJe krijgt nu te zien of jij morgen de mol bent." 
+            : $"{Naam}, je antwoorden zijn genoteerd.";
 
-
-        public void Next()
+        private bool GetErIsEenMorgen()
         {
             var dagIdMorgen = container.GetInstance<ShellViewModel>().Dag + 1;
             var dagenData = container.GetInstance<ShellViewModel>().DagenData;
 
-            var morgen = dagenData.Dagen.Single(d => d.Id == dagIdMorgen);
+            var erIsEenMorgen = dagenData.Dagen.Any(d => d.Id == dagIdMorgen);
 
-            var jijBentDeMolViewModel = container.GetInstance<JijBentDeMolViewModel>();
-            jijBentDeMolViewModel.Dag = new DagViewModel(morgen.Id, morgen.Naam);
-            jijBentDeMolViewModel.IsMorgen = true;
-            jijBentDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower());
+            return erIsEenMorgen;
+        }
 
-            jijBentDeMolViewModel.DoNext = (_) =>
+        public void Next()
+        {
+            var smoelenViewModel = container.GetInstance<SmoelenViewModel>();
+
+            smoelenViewModel.CanSelectUserDelegate = (name) =>
             {
-                //var quizNaamViewModel = container.GetInstance<QuizNaamViewModel>();
-                var x = container.GetInstance<SmoelenViewModel>();
-
-                x.CanSelectUserDelegate = (name) =>
-                {
-                    var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
-                    var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
-                    return result;
-                };
-
-                x.DoNext = (vm) =>
-                {
-                    var quizBenJijDeMolViewModel = container.GetInstance<QuizIntroViewModel>();
-                    quizBenJijDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
-                    conductor.ActivateItem(quizBenJijDeMolViewModel);
-                };
-                conductor.ActivateItem(x);
+                var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+                var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
+                return result;
             };
-            conductor.ActivateItem(jijBentDeMolViewModel);
 
+            smoelenViewModel.DoNext = (vm) =>
+            {
+                var quizBenJijDeMolViewModel = container.GetInstance<QuizIntroViewModel>();
+                quizBenJijDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
+                conductor.ActivateItem(quizBenJijDeMolViewModel);
+            };
+            
+            if (GetErIsEenMorgen())
+            {
+                var dagIdMorgen = container.GetInstance<ShellViewModel>().Dag + 1;
+                var dagenData = container.GetInstance<ShellViewModel>().DagenData;
 
+                var morgen = dagenData.Dagen.Single(d => d.Id == dagIdMorgen);
+
+                var jijBentDeMolViewModel = container.GetInstance<JijBentDeMolViewModel>();
+                jijBentDeMolViewModel.Dag = new DagViewModel(morgen.Id, morgen.Naam);
+                jijBentDeMolViewModel.IsMorgen = true;
+                jijBentDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower());
+
+                jijBentDeMolViewModel.DoNext = (_) =>
+                {
+                    conductor.ActivateItem(smoelenViewModel);
+                };
+                conductor.ActivateItem(jijBentDeMolViewModel);
+            }
+            else
+            {
+                conductor.ActivateItem(smoelenViewModel);
+            }
         }
 
         public void OnKeyDown(KeyEventArgs e)
