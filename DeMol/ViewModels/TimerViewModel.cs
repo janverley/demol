@@ -31,7 +31,7 @@ namespace DeMol.ViewModels
             if (left <= TimeSpan.Zero)
             {
                 left = TimeSpan.Zero;
-                container.GetInstance<ShellViewModel>().BgSource = @"./bg.2019.red.jpg";
+                container.GetInstance<ShellViewModel>().BgSource = @"./bg.2020.red.jpg";
                 Stop();
             }
 
