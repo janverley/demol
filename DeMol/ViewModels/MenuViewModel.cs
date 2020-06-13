@@ -187,18 +187,18 @@ namespace DeMol.ViewModels
             }
         }
 
-        private IEnumerable<OpdrachtVragenData> GetAllOpdrachtVragen()
+        private IEnumerable<OpdrachtData> GetAllOpdrachtVragen()
         {
-            var result = new List<OpdrachtVragenData>();
+            var result = new List<OpdrachtData>();
 
             var allChars = "abcdefghijklmnopqrstuvwyz";
 
             foreach (var @char in allChars.ToCharArray())
             {
                 var opdrachtId = @char.ToString();
-                if (Util.DataFileFoundAndValid<OpdrachtVragenData>(opdrachtId))
+                if (Util.DataFileFoundAndValid<OpdrachtData>(opdrachtId))
                 {
-                    var opdrachtVragenData = Util.SafeReadJson<OpdrachtVragenData>(opdrachtId);
+                    var opdrachtVragenData = Util.SafeReadJson<OpdrachtData>(opdrachtId);
                     result.Add(opdrachtVragenData);
                 }
             }
@@ -233,7 +233,7 @@ namespace DeMol.ViewModels
             var vragenCodes = new List<string>();
             foreach (var gespeeldeOpdracht in newAdminData.OpdrachtenGespeeld)
             {
-                var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
+                var opdrachtVragen = Util.SafeReadJson<OpdrachtData>(gespeeldeOpdracht);
 
                 for (var i = 0; i < opdrachtVragen.Vragen.Count; i++)
                 {
@@ -242,7 +242,7 @@ namespace DeMol.ViewModels
                 }
             }
 
-            var extraVragen = Util.SafeReadJson<OpdrachtVragenData>("x");
+            var extraVragen = Util.SafeReadJson<OpdrachtData>("x");
             for (var i = vragenCodes.Count; i < Settings.Default.aantalVragenPerDag; i++)
             {
                 var r = new Random().Next(extraVragen.Vragen.Count);
@@ -356,7 +356,7 @@ namespace DeMol.ViewModels
                         {
                             alleGespeeldeOpdrachten.Add(gespeeldeOpdracht);
 
-                            var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
+                            var opdrachtVragen = Util.SafeReadJson<OpdrachtData>(gespeeldeOpdracht);
 
                             for (var i = 0; i < opdrachtVragen.Vragen.Count; i++)
                             {

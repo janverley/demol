@@ -22,7 +22,7 @@ namespace DeMol.Model
             {typeof(AntwoordenData), new FileData {Filename = @".\Files\antwoorden.{0}.json", Encrypted = false}},
             {typeof(MollenData), new FileData {Filename = @".\Files\mollen.json", Encrypted = false}},
             {
-                typeof(OpdrachtVragenData),
+                typeof(OpdrachtData),
                 new FileData {Filename = @".\Files\OpdrachtVragen.{0}.json", Encrypted = false}
             },
             {typeof(FinaleData), new FileData {Filename = @".\Files\finaleData.json", Encrypted = false}}
@@ -106,10 +106,10 @@ namespace DeMol.Model
             File.WriteAllText(fileInfo.FullName, contents);
         }
 
-        internal static Tuple<string, Vraag> GetVraagAndCode(OpdrachtVragenData extraVragen, int r)
+        internal static Tuple<string, Vraag> GetVraagAndCode(OpdrachtData extra, int r)
         {
-            var vraag = extraVragen.Vragen[r];
-            var vraagID = $"{extraVragen.Opdracht.ToUpper()}{r + 1}";
+            var vraag = extra.Vragen[r];
+            var vraagID = $"{extra.Opdracht.ToUpper()}{r + 1}";
 
             return new Tuple<string, Vraag>(vraagID, vraag);
         }
@@ -119,7 +119,7 @@ namespace DeMol.Model
             var opdrachtId = code.Substring(0, 1);
             var vraagNummer = int.Parse(code.Substring(1)) - 1;
 
-            var opdrachtVragen = SafeReadJson<OpdrachtVragenData>(opdrachtId);
+            var opdrachtVragen = SafeReadJson<OpdrachtData>(opdrachtId);
 
             var x = GetVraagAndCode(opdrachtVragen, vraagNummer);
 

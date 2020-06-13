@@ -90,7 +90,7 @@
     <Compile Include="Model\FinaleVraag.cs" />
     <Compile Include="Model\Mol.cs" />
     <Compile Include="Model\OpdrachtStatus.cs" />
-    <Compile Include="Model\OpdrachtVragenData.cs" />
+    <Compile Include="Model\OpdrachtData.cs" />
     <Compile Include="Model\DagenData.cs" />
     <Compile Include="Model\MollenData.cs" />
     <Compile Include="Model\PasvragenVerdiend.cs" />

@@ -7,10 +7,8 @@ namespace DeMol.Model
         public bool MeerdereOptiesMogelijk;
         public string Text { get; set; }
         public List<string> Opties { get; set; } = new List<string>();
+        
+        
     }
 
-    //public class VragenData
-    //{
-    //    public List<Vraag> Vragen { get; set; } = new List<Vraag>();
-    //}
 }
