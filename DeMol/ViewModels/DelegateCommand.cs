@@ -5,8 +5,8 @@ namespace DeMol.ViewModels
 {
     internal class DelegateCommand : ICommand
     {
-        private Action<string> executeDelegate;
-        private Func<string, bool> canExecuteDelegate;
+        private readonly Func<string, bool> canExecuteDelegate;
+        private readonly Action<string> executeDelegate;
 
         public DelegateCommand(Action<string> executeDelegate, Func<string, bool> canExecuteDelegate)
         {
@@ -16,16 +16,23 @@ namespace DeMol.ViewModels
 
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return canExecuteDelegate((string) parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            executeDelegate((string) parameter);
         }
 
         public void RaiseCanExecuteChanged()
         {
             CommandManager.InvalidateRequerySuggested();
         }
-
-        public bool CanExecute(object parameter) => canExecuteDelegate((string)parameter);
-        public void Execute(object parameter) => executeDelegate((string)parameter);
     }
 }

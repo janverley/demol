@@ -1,11 +1,7 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Caliburn.Micro;
 
 namespace DeMol.ViewModels
 {
@@ -14,6 +10,7 @@ namespace DeMol.ViewModels
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
         private readonly DispatcherTimer timer = new DispatcherTimer();
+        private TimeSpan left = TimeSpan.Zero;
 
         public TimerViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -23,6 +20,15 @@ namespace DeMol.ViewModels
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(1);
         }
+
+        public string Tijd => left.ToString("mm\\:ss");
+
+        public int Minuten { get; set; }
+
+        public bool CanStop => timer.IsEnabled;
+        public bool CanStart => !timer.IsEnabled;
+
+        public bool MinutenIsEnabled => !timer.IsEnabled;
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -50,13 +56,6 @@ namespace DeMol.ViewModels
             timer.Stop();
             UpdateControlStates();
             base.OnDeactivate(close);
-
-        }
-        private TimeSpan left = TimeSpan.Zero;
-
-        public string Tijd
-        {
-            get { return left.ToString("mm\\:ss"); }
         }
 
         public void Start()
@@ -64,8 +63,6 @@ namespace DeMol.ViewModels
             timer.Start();
             UpdateControlStates();
         }
-
-        public int Minuten { get; set; }
 
         public void Stop()
         {
@@ -79,11 +76,6 @@ namespace DeMol.ViewModels
             NotifyOfPropertyChange(() => CanStop);
             NotifyOfPropertyChange(() => CanStart);
         }
-
-        public bool CanStop => timer.IsEnabled;
-        public bool CanStart => !timer.IsEnabled;
-
-        public bool MinutenIsEnabled => !timer.IsEnabled;
 
         public void Reset()
         {
@@ -103,10 +95,12 @@ namespace DeMol.ViewModels
             {
                 Start();
             }
+
             if (e?.Key == Key.Space && CanStop)
             {
                 Stop();
             }
+
             if (e?.Key == Key.Escape)
             {
                 Menu();

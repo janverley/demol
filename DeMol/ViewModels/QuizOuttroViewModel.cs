@@ -1,12 +1,8 @@
-﻿using Caliburn.Micro;
-using DeMol.Model;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using Caliburn.Micro;
+using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
@@ -15,17 +11,17 @@ namespace DeMol.ViewModels
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
 
+        private string naam;
+
         public QuizOuttroViewModel(ShellViewModel conductor, SimpleContainer container)
         {
             this.conductor = conductor;
             this.container = container;
         }
 
-        private string naam;
-
         public string Naam
         {
-            get { return naam; }
+            get => naam;
             set
             {
                 if (Set(ref naam, value))
@@ -35,8 +31,8 @@ namespace DeMol.ViewModels
             }
         }
 
-        public string Message => GetErIsEenMorgen() ? 
-            $"{Naam}, je antwoorden zijn genoteerd.\n\nJe krijgt nu te zien of jij morgen de mol bent." 
+        public string Message => GetErIsEenMorgen()
+            ? $"{Naam}, je antwoorden zijn genoteerd.\n\nJe krijgt nu te zien of jij morgen de mol bent."
             : $"{Naam}, je antwoorden zijn genoteerd.";
 
         private bool GetErIsEenMorgen()
@@ -53,20 +49,20 @@ namespace DeMol.ViewModels
         {
             var smoelenViewModel = container.GetInstance<SmoelenViewModel>();
 
-            smoelenViewModel.CanSelectUserDelegate = (name) =>
+            smoelenViewModel.CanSelectUserDelegate = name =>
             {
                 var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
                 var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
                 return result;
             };
 
-            smoelenViewModel.DoNext = (vm) =>
+            smoelenViewModel.DoNext = vm =>
             {
                 var quizBenJijDeMolViewModel = container.GetInstance<QuizIntroViewModel>();
                 quizBenJijDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
                 conductor.ActivateItem(quizBenJijDeMolViewModel);
             };
-            
+
             if (GetErIsEenMorgen())
             {
                 var dagIdMorgen = container.GetInstance<ShellViewModel>().Dag + 1;
@@ -79,10 +75,7 @@ namespace DeMol.ViewModels
                 jijBentDeMolViewModel.IsMorgen = true;
                 jijBentDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower());
 
-                jijBentDeMolViewModel.DoNext = (_) =>
-                {
-                    conductor.ActivateItem(smoelenViewModel);
-                };
+                jijBentDeMolViewModel.DoNext = _ => { conductor.ActivateItem(smoelenViewModel); };
                 conductor.ActivateItem(jijBentDeMolViewModel);
             }
             else

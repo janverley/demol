@@ -1,15 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using System.Windows.Input;
+using Caliburn.Micro;
 using DeMol.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace DeMol.ViewModels
 {
-    class QuizIntroViewModel : Screen
+    internal class QuizIntroViewModel : Screen
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
@@ -19,13 +14,11 @@ namespace DeMol.ViewModels
         {
             this.conductor = conductor;
             this.container = container;
-
-            
         }
 
         public string Naam
         {
-            get { return naam; }
+            get => naam;
             set
             {
                 if (Set(ref naam, value))
@@ -37,7 +30,8 @@ namespace DeMol.ViewModels
             }
         }
 
-        public string Text => ditIsDeMolVandaag ? $"{Naam}, jij was vandaag De Mol" : $"{Naam}, jij was vandaag niet De Mol";
+        public string Text =>
+            ditIsDeMolVandaag ? $"{Naam}, jij was vandaag De Mol" : $"{Naam}, jij was vandaag niet De Mol";
 
         public bool ditIsDeMolVandaag { get; private set; }
 
@@ -47,6 +41,7 @@ namespace DeMol.ViewModels
             {
                 Start();
             }
+
             if (e?.Key == Key.Escape)
             {
                 Menu();
@@ -74,6 +69,7 @@ namespace DeMol.ViewModels
                 conductor.ActivateItem(x);
             }
         }
+
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();

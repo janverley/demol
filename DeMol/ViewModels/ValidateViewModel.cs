@@ -1,10 +1,6 @@
-﻿using Caliburn.Micro;
+﻿using System.Linq;
+using Caliburn.Micro;
 using DeMol.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeMol.ViewModels
 {
@@ -23,24 +19,27 @@ namespace DeMol.ViewModels
 
         public BindableCollection<string> Notas { get; set; } = new BindableCollection<string>();
 
+        public bool CanShowResult => Checks.All(c => c.IsOk);
+
         protected override void OnActivate()
         {
             base.OnActivate();
 
             var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 
-            Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:", Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
-            Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}", antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
-            Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}", antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
-
+            Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:",
+                Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
+            Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}",
+                antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
+            Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}",
+                antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
         }
+
         public void InvalidateAnswers()
         {
             var x = container.GetInstance<InvalidateViewModel>();
             conductor.ActivateItem(x);
         }
-
-        public bool CanShowResult => Checks.All(c => c.IsOk);
 
 
         public void ShowResult()

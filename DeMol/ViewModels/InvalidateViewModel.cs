@@ -1,9 +1,5 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using Caliburn.Micro;
 
 namespace DeMol.ViewModels
 {
@@ -23,10 +19,10 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
+
         public void Invalidate()
         {
-            System.IO.File.Delete($@".\Files\antwoorden.{container.GetInstance<ShellViewModel>().Dag}.json");
+            File.Delete($@".\Files\antwoorden.{container.GetInstance<ShellViewModel>().Dag}.json");
         }
     }
-
 }

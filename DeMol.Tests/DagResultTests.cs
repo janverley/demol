@@ -1,5 +1,4 @@
-﻿using System;
-using DeMol.Model;
+﻿using DeMol.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DeMol.Tests
@@ -11,8 +10,6 @@ namespace DeMol.Tests
         public void AllemaalAllesJuist_1Winnaar()
         {
             var antwoorden = new AntwoordenData();
-
-
         }
 
         [TestMethod]

@@ -1,25 +1,55 @@
-﻿using Caliburn.Micro;
-using DeMol.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
+using Caliburn.Micro;
+using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
     public class QuizVragenViewModel : Screen
     {
+        private readonly IConductor conductor;
+        private readonly SimpleContainer container;
+        private readonly List<QuizVraagViewModel> quizVraagViewModels = new List<QuizVraagViewModel>();
+        private readonly Dictionary<string, string> antwoorden = new Dictionary<string, string>();
+        private int index;
+        private bool isDeMol;
+
+        private string message;
         private string naam;
-        private Dictionary<string, string> antwoorden = new Dictionary<string, string>();
+        private QuizVraagViewModel quizVraag;
+
+
+        private DateTime startTime;
+
+        public QuizVragenViewModel(ShellViewModel conductor, SimpleContainer container)
+        {
+            this.conductor = conductor;
+            this.container = container;
+
+            QuizVraagViewModelFactory = vraagCode =>
+            {
+                var vraag = Util.GetVraagFromCode(vraagCode);
+                return new QuizVraagViewModel(vraag, vraagCode);
+            };
+
+            DoNext = quizVragenViewModel =>
+            {
+                var x = container.GetInstance<QuizOuttroViewModel>();
+                x.Naam = quizVragenViewModel.Naam;
+                conductor.ActivateItem(x);
+            };
+        }
 
         public string Naam
         {
-            get { return naam; }
-            set { Set(ref naam, value); }
+            get => naam;
+            set => Set(ref naam, value);
         }
+
         public bool IsDeMol
         {
-            get { return isDeMol; }
+            get => isDeMol;
             set
             {
                 if (Set(ref isDeMol, value))
@@ -32,50 +62,27 @@ namespace DeMol.ViewModels
 
         public string DagId { get; set; }
 
-
-        private DateTime startTime;
-        private readonly List<QuizVraagViewModel> quizVraagViewModels = new List<QuizVraagViewModel>();
-        private QuizVraagViewModel quizVraag;
-        private int index;
-        private readonly IConductor conductor;
-        private readonly SimpleContainer container;
-        private bool isDeMol;
-
-        public QuizVragenViewModel(ShellViewModel conductor, SimpleContainer container)
-        {
-            this.conductor = conductor;
-            this.container = container;
-
-            QuizVraagViewModelFactory = (vraagCode) =>
-            {
-                var vraag = Util.GetVraagFromCode(vraagCode);
-                return new QuizVraagViewModel(vraag, vraagCode);
-            };
-
-            DoNext = (QuizVragenViewModel quizVragenViewModel) =>
-            {
-                var x = container.GetInstance<QuizOuttroViewModel>();
-                x.Naam = quizVragenViewModel.Naam;
-                conductor.ActivateItem(x);
-            };
-
-        }
-
-        private string message;
-
         public string Message
         {
-            get
-            {
-                return message;
-            }
-            set
-            {
-                Set(ref message, value);
-            }
+            get => message;
+            set => Set(ref message, value);
         }
 
         public Func<string, QuizVraagViewModel> QuizVraagViewModelFactory { get; set; }
+
+        public QuizVraagViewModel QuizVraag
+        {
+            get => quizVraag;
+            set => Set(ref quizVraag, value);
+        }
+
+
+        public bool CanNext => index < quizVraagViewModels.Count - 1;
+        public bool CanStop => index == quizVraagViewModels.Count - 1;
+
+        public string DeMolIs { get; set; }
+
+        public Action<QuizVragenViewModel> DoNext { get; set; }
 
         protected override void OnActivate()
         {
@@ -97,22 +104,12 @@ namespace DeMol.ViewModels
             {
                 var vm = QuizVraagViewModelFactory(vraagCode);
                 quizVraagViewModels.Add(vm);
-
             }
 
             QuizVraag = quizVraagViewModels[index];
 
             NotifyOfPropertyChange(() => CanNext);
             NotifyOfPropertyChange(() => CanStop);
-        }
-
-        public QuizVraagViewModel QuizVraag
-        {
-            get { return quizVraag; }
-            set
-            {
-                Set(ref quizVraag, value);
-            }
         }
 
         public void OnKeyDown(KeyEventArgs e)
@@ -128,14 +125,7 @@ namespace DeMol.ViewModels
                     Stop();
                 }
             }
-
         }
-
-
-        public bool CanNext => index < (quizVraagViewModels.Count - 1);
-        public bool CanStop => index  == quizVraagViewModels.Count - 1;
-
-        public string DeMolIs { get; set; }
 
         public void Next()
         {
@@ -179,7 +169,5 @@ namespace DeMol.ViewModels
 
             DoNext(this);
         }
-
-        public Action<QuizVragenViewModel> DoNext{ get; set; }
     }
 }

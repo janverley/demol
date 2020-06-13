@@ -1,16 +1,11 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeMol.ViewModels
 {
     public class OptieViewModel : PropertyChangedBase
     {
-        private string optieText;
         private bool isSelected;
+        private string optieText;
 
         public OptieViewModel(string optieText)
         {
@@ -19,53 +14,14 @@ namespace DeMol.ViewModels
 
         public string OptieText
         {
-            get { return optieText; }
-            set
-            {
-                Set(ref optieText, value);
-            }
+            get => optieText;
+            set => Set(ref optieText, value);
         }
 
         public bool IsSelected
         {
-            get { return isSelected; }
-            set
-            {
-                Set(ref isSelected, value);
-            }
+            get => isSelected;
+            set => Set(ref isSelected, value);
         }
-
-
-    }
-
-    public class MeerdereOptieViewModel : PropertyChangedBase
-    {
-        private string optieText;
-        private bool isSelected;
-
-        public MeerdereOptieViewModel(string optieText)
-        {
-            this.optieText = optieText;
-        }
-
-        public string OptieText
-        {
-            get { return optieText; }
-            set
-            {
-                Set(ref optieText, value);
-            }
-        }
-
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                Set(ref isSelected, value);
-            }
-        }
-
-
     }
 }

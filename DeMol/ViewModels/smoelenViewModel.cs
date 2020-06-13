@@ -1,15 +1,9 @@
-﻿using Caliburn.Micro;
-using DeMol.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System;
+using Caliburn.Micro;
 
 namespace DeMol.ViewModels
 {
-    class SmoelenViewModel : Screen
+    internal class SmoelenViewModel : Screen
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
@@ -19,6 +13,15 @@ namespace DeMol.ViewModels
             this.conductor = conductor;
             this.container = container;
         }
+
+        public DelegateCommand SelectUserCommand => new DelegateCommand(SelectUser, CanSelectUser);
+
+        public Action<SmoelenViewModel> DoNext { get; set; } // = vm => { };
+
+        public Func<string, bool> CanSelectUserDelegate { get; set; } // = vm => { };
+
+        public string Naam { get; set; }
+
         public void SelectUser(string name)
         {
             Naam = name;
@@ -29,14 +32,6 @@ namespace DeMol.ViewModels
         {
             return CanSelectUserDelegate(name);
         }
-
-        public DelegateCommand SelectUserCommand { get { return new DelegateCommand(SelectUser, CanSelectUser); } }
-
-        public Action<SmoelenViewModel> DoNext { get; set; }// = vm => { };
-
-        public Func<string, bool> CanSelectUserDelegate { get; set; }// = vm => { };
-
-        public string Naam { get; set; }
 
         public void Menu()
         {

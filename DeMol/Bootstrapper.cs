@@ -1,10 +1,9 @@
-﻿using Caliburn.Micro;
-using DeMol.ViewModels;
-using NDesk.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
+using Caliburn.Micro;
+using DeMol.ViewModels;
 
 namespace DeMol
 {
@@ -70,8 +69,8 @@ namespace DeMol
         protected override void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            MessageBox.Show($"{e.Exception.Message}\n{e.Exception.InnerException?.Message ?? ""}", "An error as occurred", MessageBoxButton.OK);
+            MessageBox.Show($"{e.Exception.Message}\n{e.Exception.InnerException?.Message ?? ""}",
+                "An error as occurred", MessageBoxButton.OK);
         }
-
     }
 }

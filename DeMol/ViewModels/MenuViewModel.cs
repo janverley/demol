@@ -1,21 +1,106 @@
-﻿using DeMol.Model;
-using Caliburn.Micro;
-using System;
-using System.Linq;
-using DeMol.Properties;
-using System.Globalization;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using Caliburn.Micro;
+using DeMol.Model;
+using DeMol.Properties;
 
 namespace DeMol.ViewModels
 {
-
     public class MenuViewModel : Screen
     {
+        private readonly IConductor conductor;
+        private readonly SimpleContainer container;
+
+        private string lockString = "";
+
+        private string message;
+
+
+        private DagViewModel selectedDag;
 
         public MenuViewModel(ShellViewModel conductor, SimpleContainer container)
         {
             this.conductor = conductor;
             this.container = container;
+        }
+
+        public DagViewModel SelectedDag
+        {
+            get => selectedDag;
+            set
+            {
+                if (Set(ref selectedDag, value))
+                {
+                    if (value != null)
+                    {
+                        container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
+                    }
+
+                    SelectedDagChanged();
+
+                    UpdateButtonStates();
+                }
+            }
+        }
+
+        public BindableCollection<DagViewModel> Dagen { get; } = new BindableCollection<DagViewModel>();
+        public BindableCollection<PasVraagViewModel> Pasvragen { get; } = new BindableCollection<PasVraagViewModel>();
+
+        public BindableCollection<OpdrachtViewModel> OpdrachtenGespeeld { get; } =
+            new BindableCollection<OpdrachtViewModel>();
+
+        public string LockString
+        {
+            get => lockString;
+            set
+            {
+                if (Set(ref lockString, value))
+                {
+                    UpdateButtonStates();
+                }
+            }
+        }
+
+        private bool UnLocked => LockString.Equals(Settings.Default.pwd, StringComparison.InvariantCultureIgnoreCase);
+
+        public bool CanSaveAdmin => SelectedDag != null && UnLocked;
+
+        public string Message
+        {
+            get => message;
+            set => Set(ref message, value);
+        }
+
+        public bool CanStartQuiz => SelectedDag != null && AdminIsSaved;
+        public bool CanStartMolAanduiden => SelectedDag != null; // && VragenGevonden;
+
+        private bool AdminIsSaved => Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+        public bool CanValidate => SelectedDag != null;
+
+        public bool CanEndQuiz
+        {
+            get
+            {
+                var result = false;
+
+                foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
+                {
+                    //var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
+                    //if (antwoorden.Spelers.Count(s => s.IsDeMol) != 1)
+                    //{
+                    //    result = false;
+                    //}
+                    //else
+                    {
+                        result = true;
+                    }
+                }
+
+                return result;
+            }
         }
 
         protected override void OnActivate()
@@ -29,7 +114,8 @@ namespace DeMol.ViewModels
             }
 
             // if set, preselect SelectedDag
-            if (container.GetInstance<ShellViewModel>().Dag > 0 && Dagen.Any(d => d.Id == container.GetInstance<ShellViewModel>().Dag))
+            if (container.GetInstance<ShellViewModel>().Dag > 0 &&
+                Dagen.Any(d => d.Id == container.GetInstance<ShellViewModel>().Dag))
             {
                 SelectedDag = Dagen.First(d => d.Id == container.GetInstance<ShellViewModel>().Dag);
             }
@@ -42,27 +128,6 @@ namespace DeMol.ViewModels
             //    SaveAdmin();
             //}
             base.OnDeactivate(close);
-        }
-
-
-        private DagViewModel selectedDag;
-
-        public DagViewModel SelectedDag
-        {
-            get { return selectedDag; }
-            set
-            {
-                if (Set(ref selectedDag, value))
-                {
-                    if (value != null)
-                    {
-                        container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
-                    }
-                    SelectedDagChanged();
-
-                    UpdateButtonStates();
-                }
-            }
         }
 
         private void UpdateButtonStates()
@@ -86,7 +151,7 @@ namespace DeMol.ViewModels
                 {
                     if (!adminData.Pasvragen.Any(pv => pv.Naam.SafeEqual(speler.Naam)))
                     {
-                        adminData.Pasvragen.Add(new PasvragenVerdiend { Naam = speler.Naam, PasVragenVerdiend = 0 });
+                        adminData.Pasvragen.Add(new PasvragenVerdiend {Naam = speler.Naam, PasVragenVerdiend = 0});
                     }
                 }
 
@@ -95,7 +160,7 @@ namespace DeMol.ViewModels
                 Pasvragen.Clear();
                 foreach (var item in adminData.Pasvragen)
                 {
-                    Pasvragen.Add(new PasVraagViewModel { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
+                    Pasvragen.Add(new PasVraagViewModel {Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend});
                 }
 
                 OpdrachtenGespeeld.Clear();
@@ -141,31 +206,6 @@ namespace DeMol.ViewModels
             return result;
         }
 
-        private readonly IConductor conductor;
-        private readonly SimpleContainer container;
-
-        public BindableCollection<DagViewModel> Dagen { get; } = new BindableCollection<DagViewModel>();
-        public BindableCollection<PasVraagViewModel> Pasvragen { get; } = new BindableCollection<PasVraagViewModel>();
-        public BindableCollection<OpdrachtViewModel> OpdrachtenGespeeld { get; } = new BindableCollection<OpdrachtViewModel>();
-
-        public string LockString
-        {
-            get { return lockString; }
-            set
-            {
-                if (Set(ref lockString, value))
-                {
-                    UpdateButtonStates();
-                }
-            }
-        }
-
-        private string lockString = "";
-
-        private bool UnLocked => LockString.Equals(Settings.Default.pwd, StringComparison.InvariantCultureIgnoreCase);
-
-        public bool CanSaveAdmin => SelectedDag != null && UnLocked;
-
         public void Timer()
         {
             var x = container.GetInstance<TimerViewModel>();
@@ -180,7 +220,8 @@ namespace DeMol.ViewModels
             newAdminData.Pasvragen.Clear();
             foreach (var item in Pasvragen)
             {
-                newAdminData.Pasvragen.Add(new PasvragenVerdiend { Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend });
+                newAdminData.Pasvragen.Add(new PasvragenVerdiend
+                    {Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend});
             }
 
             newAdminData.OpdrachtenGespeeld.Clear();
@@ -194,14 +235,15 @@ namespace DeMol.ViewModels
             {
                 var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
 
-                for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
+                for (var i = 0; i < opdrachtVragen.Vragen.Count; i++)
                 {
                     var x = Util.GetVraagAndCode(opdrachtVragen, i);
                     vragenCodes.Add(x.Item1);
                 }
             }
+
             var extraVragen = Util.SafeReadJson<OpdrachtVragenData>("x");
-            for (int i = vragenCodes.Count; i < Properties.Settings.Default.aantalVragenPerDag; i++)
+            for (var i = vragenCodes.Count; i < Settings.Default.aantalVragenPerDag; i++)
             {
                 var r = new Random().Next(extraVragen.Vragen.Count);
                 var x = Util.GetVraagAndCode(extraVragen, r);
@@ -227,43 +269,24 @@ namespace DeMol.ViewModels
             Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);
             UpdateButtonStates();
 
-            System.IO.File.Delete($@".\Files\antwoorden.{SelectedDag.Id}.json");
+            File.Delete($@".\Files\antwoorden.{SelectedDag.Id}.json");
         }
-
-        private string message;
-
-        public string Message
-        {
-            get
-            {
-                return message;
-            }
-            set
-            {
-                Set(ref message, value);
-            }
-        }
-
-        public bool CanStartQuiz => SelectedDag != null && AdminIsSaved;
-        public bool CanStartMolAanduiden => SelectedDag != null;// && VragenGevonden;
-
-        private bool AdminIsSaved => Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag);
 
         public void StartMolAanduiden()
         {
             var x = container.GetInstance<SmoelenViewModel>();
 
-            x.CanSelectUserDelegate = (name) =>
+            x.CanSelectUserDelegate = name =>
             {
                 var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
                 var result = !adminData.IsVerteldOfZeDeMolZijn.Any(s => s.Naam == name);
                 return result;
             };
 
-            x.DoNext = (vm) =>
+            x.DoNext = vm =>
             {
                 var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-                adminData.IsVerteldOfZeDeMolZijn.Add(new SpelerInfo { Naam = vm.Naam });
+                adminData.IsVerteldOfZeDeMolZijn.Add(new SpelerInfo {Naam = vm.Naam});
                 Util.SafeFileWithBackup(adminData, container.GetInstance<ShellViewModel>().Dag);
 
 
@@ -271,10 +294,7 @@ namespace DeMol.ViewModels
                 jijBentDeMolViewModel.Dag = SelectedDag;
                 jijBentDeMolViewModel.IsMorgen = false;
                 jijBentDeMolViewModel.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
-                jijBentDeMolViewModel.DoNext = (_) =>
-                {
-                    conductor.ActivateItem(x);
-                };
+                jijBentDeMolViewModel.DoNext = _ => { conductor.ActivateItem(x); };
 
                 conductor.ActivateItem(jijBentDeMolViewModel);
             };
@@ -283,17 +303,17 @@ namespace DeMol.ViewModels
         }
 
         public void StartQuiz()
-        {         
+        {
             var x = container.GetInstance<SmoelenViewModel>();
 
-            x.CanSelectUserDelegate = (name) =>
+            x.CanSelectUserDelegate = name =>
             {
                 var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
                 var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
                 return result;
             };
 
-            x.DoNext = (vm) =>
+            x.DoNext = vm =>
             {
                 var x2 = container.GetInstance<QuizIntroViewModel>();
                 x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
@@ -302,41 +322,19 @@ namespace DeMol.ViewModels
 
             conductor.ActivateItem(x);
         }
-        public bool CanValidate => SelectedDag != null;
 
         public void Validate()
         {
             var x = container.GetInstance<ValidateViewModel>();
             conductor.ActivateItem(x);
         }
+
         public void EndResult()
         {
             var x = container.GetInstance<EndResultViewModel>();
             conductor.ActivateItem(x);
         }
 
-        public bool CanEndQuiz
-        {
-            get
-            {
-                var result = false;
-
-                foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
-                {
-                    //var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
-                    //if (antwoorden.Spelers.Count(s => s.IsDeMol) != 1)
-                    //{
-                    //    result = false;
-                    //}
-                    //else
-                    {
-                        result = true;
-                    }
-                }
-
-                return result;
-            }
-        }
         public void EndQuiz()
         {
             var finaleAdminData = Util.SafeReadJson<FinaleData>();
@@ -360,7 +358,7 @@ namespace DeMol.ViewModels
 
                             var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(gespeeldeOpdracht);
 
-                            for (int i = 0; i < opdrachtVragen.Vragen.Count; i++)
+                            for (var i = 0; i < opdrachtVragen.Vragen.Count; i++)
                             {
                                 var tup = Util.GetVraagAndCode(opdrachtVragen, i);
 
@@ -383,7 +381,7 @@ namespace DeMol.ViewModels
                 }
 
 
-                for (int i = 0; i < Math.Min(finaleVragen.Count, Settings.Default.aantalVragenWeekWinnaar); i++)
+                for (var i = 0; i < Math.Min(finaleVragen.Count, Settings.Default.aantalVragenWeekWinnaar); i++)
                 {
                     var r = new Random().Next(finaleVragen.Count);
                     var finaleVraag = finaleVragen[r];
@@ -396,25 +394,26 @@ namespace DeMol.ViewModels
                         i--;
                     }
                 }
+
                 Util.SafeFileWithBackup(finaleAdminData);
             }
 
             var x = container.GetInstance<SmoelenViewModel>();
 
-            x.CanSelectUserDelegate = (name) =>
+            x.CanSelectUserDelegate = name =>
             {
                 var antwoorden = Util.SafeReadJson<AntwoordenData>("finale");
                 var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
                 return result;
             };
 
-            x.DoNext = (vm) =>
+            x.DoNext = vm =>
             {
                 var finaleAdminData2 = Util.SafeReadJson<FinaleData>();
-                
+
                 var x2 = container.GetInstance<QuizVragenViewModel>();
 
-                x2.QuizVraagViewModelFactory = (vraagCode) =>
+                x2.QuizVraagViewModelFactory = vraagCode =>
                 {
                     var fv = finaleAdminData2.FinaleVragen.Single(fv2 => fv2.VraagCode == vraagCode);
 
@@ -429,16 +428,12 @@ namespace DeMol.ViewModels
                 x2.VragenCodes = finaleAdminData2.FinaleVragen.Select(fv => fv.VraagCode).ToList();
                 x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
 
-                x2.DoNext = (QuizVragenViewModel quizVragenViewModel) =>
-                {
-                   conductor.ActivateItem(x);
-                };
+                x2.DoNext = quizVragenViewModel => { conductor.ActivateItem(x); };
 
                 conductor.ActivateItem(x2);
             };
 
             conductor.ActivateItem(x);
-
         }
 
         public void Smoelen()

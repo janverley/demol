@@ -82,15 +82,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BooleanConverterOfT.cs" />
+    <Compile Include="BooleanConverter.cs" />
+    <Compile Include="BooleanToVisibilityConverter.cs" />
     <Compile Include="Model\AntwoordenData.cs" />
+    <Compile Include="Model\Dag.cs" />
+    <Compile Include="Model\FinaleData.cs" />
+    <Compile Include="Model\FinaleVraag.cs" />
+    <Compile Include="Model\Mol.cs" />
+    <Compile Include="Model\OpdrachtStatus.cs" />
     <Compile Include="Model\OpdrachtVragenData.cs" />
     <Compile Include="Model\DagenData.cs" />
     <Compile Include="Model\MollenData.cs" />
+    <Compile Include="Model\PasvragenVerdiend.cs" />
     <Compile Include="Model\Score.cs" />
-    <Compile Include="Model\SpelerData.cs" />
+    <Compile Include="Model\Speler.cs" />
+    <Compile Include="Model\SpelerInfo.cs" />
+    <Compile Include="Model\SpelersData.cs" />
     <Compile Include="Model\Util.cs" />
-    <Compile Include="Model\VragenData.cs" />
+    <Compile Include="Model\Vraag.cs" />
     <Compile Include="ViewModels\CheckViewModel.cs" />
     <Compile Include="ViewModels\DagResultaatViewModel.cs" />
     <Compile Include="ViewModels\DagViewModel.cs" />
@@ -98,6 +107,7 @@
     <Compile Include="ViewModels\EindResultaatViewModel.cs" />
     <Compile Include="ViewModels\InvalidateViewModel.cs" />
     <Compile Include="ViewModels\JijBentDeMolViewModel.cs" />
+    <Compile Include="ViewModels\MeerdereOptieViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OpdrachtViewModel.cs" />
     <Compile Include="ViewModels\OptieViewModel.cs" />

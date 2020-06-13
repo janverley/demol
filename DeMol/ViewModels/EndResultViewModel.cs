@@ -1,11 +1,10 @@
-﻿using Caliburn.Micro;
-using DeMol.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
+using Caliburn.Micro;
+using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
@@ -16,6 +15,12 @@ namespace DeMol.ViewModels
 
         private readonly DispatcherTimer timer = new DispatcherTimer();
 
+        private readonly StringBuilder overzichtSB = new StringBuilder();
+
+        private string text;
+
+        private string winnaar;
+
         public EndResultViewModel(ShellViewModel conductor, SimpleContainer container)
         {
             this.conductor = conductor;
@@ -25,17 +30,30 @@ namespace DeMol.ViewModels
             timer.Interval = TimeSpan.FromSeconds(5);
         }
 
-        private StringBuilder overzichtSB = new StringBuilder();
+        public string Winnaar
+        {
+            get => winnaar;
+            set => Set(ref winnaar, value);
+        }
+
+        public string Text
+        {
+            get => text;
+            set => Set(ref text, value);
+        }
+
+        public BindableCollection<CheckViewModel> Checks { get; set; } = new BindableCollection<CheckViewModel>();
+        public bool ShowChecks { get; private set; }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
             timer.Stop();
 
-            List<Score> scores = new List<Score>();
+            var scores = new List<Score>();
 
             foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
             {
-                scores.Add(new Score { Speler = speler.Naam, juisteAntwoorden = 0, tijd = TimeSpan.Zero });
+                scores.Add(new Score {Speler = speler.Naam, juisteAntwoorden = 0, tijd = TimeSpan.Zero});
             }
 
             var finaleData = Util.SafeReadJson<FinaleData>();
@@ -53,29 +71,33 @@ namespace DeMol.ViewModels
                     }
                 }
             }
+
             var eindWinnaar = scores.OrderByDescending(s => s.juisteAntwoorden).ThenBy(s => s.tijd).First();
 
             Winnaar = eindWinnaar.Speler;
 
-            Text = $"De EindWinnaar had de meeste vragen juist beantwoord in het finale spel.";
+            Text = "De EindWinnaar had de meeste vragen juist beantwoord in het finale spel.";
 
-            var exaequos = scores.Where(s => !s.Equals(eindWinnaar) && s.juisteAntwoorden == eindWinnaar.juisteAntwoorden);
+            var exaequos = scores.Where(s =>
+                !s.Equals(eindWinnaar) && s.juisteAntwoorden == eindWinnaar.juisteAntwoorden);
             if (exaequos.Any())
             {
-                Text += $"{Environment.NewLine}Ex-aequo: Er waren {exaequos.Count()} spelers met evenveel juiste antwoorden als de winnaar ({eindWinnaar.juisteAntwoorden}), maar die waren trager dan {eindWinnaar.Speler}: {string.Join(",", exaequos.Select(s => s.Speler))}";
+                Text +=
+                    $"{Environment.NewLine}Ex-aequo: Er waren {exaequos.Count()} spelers met evenveel juiste antwoorden als de winnaar ({eindWinnaar.juisteAntwoorden}), maar die waren trager dan {eindWinnaar.Speler}: {string.Join(",", exaequos.Select(s => s.Speler))}";
             }
 
-            overzichtSB.AppendLine($"Spelers:");
+            overzichtSB.AppendLine("Spelers:");
             foreach (var score in scores)
             {
                 overzichtSB.AppendLine($"{score.Speler}: {score.juisteAntwoorden} ({score.tijd})");
             }
-            overzichtSB.AppendLine($"Antwoorden:");
+
+            overzichtSB.AppendLine("Antwoorden:");
             foreach (var fv in finaleData.FinaleVragen)
             {
-                overzichtSB.AppendLine($"{fv.Dag.Naam} {fv.Description}: {fv.Vraag.Text}({fv.VraagCode}): {fv.JuistAntwoord}");
+                overzichtSB.AppendLine(
+                    $"{fv.Dag.Naam} {fv.Description}: {fv.Vraag.Text}({fv.VraagCode}): {fv.JuistAntwoord}");
             }
-
         }
 
         protected override void OnDeactivate(bool close)
@@ -89,6 +111,7 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
+
         public void Antwoorden()
         {
             var x = container.GetInstance<DagResultaatViewModel>();
@@ -100,22 +123,6 @@ namespace DeMol.ViewModels
             conductor.ActivateItem(x);
         }
 
-        private string winnaar;
-
-        public string Winnaar
-        {
-            get { return winnaar; }
-            set { Set(ref winnaar, value); }
-        }
-
-        private string text;
-
-        public string Text
-        {
-            get { return text; }
-            set { Set(ref text, value); }
-        }
-
         protected override void OnActivate()
         {
             base.OnActivate();
@@ -124,9 +131,12 @@ namespace DeMol.ViewModels
             {
                 var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
 
-                Checks.Add(new CheckViewModel($"Dag {dag.Id} administratie saved:", Util.DataFileFoundAndValid<AdminData>(dag.Id)));
-                Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}", antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
-                Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}", antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
+                Checks.Add(new CheckViewModel($"Dag {dag.Id} administratie saved:",
+                    Util.DataFileFoundAndValid<AdminData>(dag.Id)));
+                Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}",
+                    antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
+                Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}",
+                    antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
             }
 
 
@@ -137,15 +147,10 @@ namespace DeMol.ViewModels
             }
             else
             {
-
                 Text = "De einduitslag van De Mol...";
 
                 timer.Start();
             }
         }
-        public BindableCollection<CheckViewModel> Checks { get; set; } = new BindableCollection<CheckViewModel>();
-        public bool ShowChecks { get; private set; } = false;
-
-
     }
 }

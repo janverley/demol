@@ -1,29 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace DeMol.Views
 {
     /// <summary>
-    /// Interaction logic for QuizVraagView.xaml
+    ///     Interaction logic for QuizVraagView.xaml
     /// </summary>
     public partial class QuizVraagView : UserControl
     {
         public QuizVraagView()
         {
             InitializeComponent();
-            Dispatcher.BeginInvoke(new System.Action(() => Keyboard.Focus(Antwoord)), System.Windows.Threading.DispatcherPriority.Loaded);
+            Dispatcher.BeginInvoke(new Action(() => Keyboard.Focus(Antwoord)), DispatcherPriority.Loaded);
         }
     }
 }
