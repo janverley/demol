@@ -2,31 +2,39 @@
   "Dagen": [
     {
       "Id": 1,
-      "Naam": "zaterdag 13 juli"
+      "Naam": "woensdag 1 juli"
     },
     {
       "Id": 2,
-      "Naam": "zondag 14 juli"
+      "Naam": "donderdag 2 juli"
     },
     {
       "Id": 3,
-      "Naam": "maandag 15 juli"
+      "Naam": "vrijdag 3 juli"
     },
     {
       "Id": 4,
-      "Naam": "dinsdag 16 juli"
+      "Naam": "zaterdag 4 juli"
     },
     {
       "Id": 5,
-      "Naam": "woensdag 17 juli"
+      "Naam": "zondag 5 juli"
     },
     {
       "Id": 6,
-      "Naam": "donderdag 18 juli"
+      "Naam": "maandag 6 juli"
     },
     {
       "Id": 7,
-      "Naam": "vrijdag 19 juli"
+      "Naam": "dinsdag 7 juli"
+    },
+    {
+      "Id": 8,
+      "Naam": "woensdag 8 juli"
+    },
+    {
+      "Id": 9,
+      "Naam": "donderdag 9 juli"
     }
   ]
 }
