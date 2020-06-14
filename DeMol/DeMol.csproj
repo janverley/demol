@@ -450,5 +450,16 @@
   <ItemGroup>
     <Resource Include="bg.icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\smoelen\2019\hanne.png" />
+    <Content Include="Views\smoelen\2019\hilde.png" />
+    <Content Include="Views\smoelen\2019\jochen.png" />
+    <Content Include="Views\smoelen\2019\juul.png" />
+    <Content Include="Views\smoelen\2019\kris.png" />
+    <Content Include="Views\smoelen\2019\mie.png" />
+    <Content Include="Views\smoelen\2019\pieter.png" />
+    <Content Include="Views\smoelen\2019\staf.png" />
+    <Content Include="Views\smoelen\2019\vic.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
