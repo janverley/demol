@@ -6,6 +6,8 @@ namespace DeMol.ViewModels
     {
         private string naam;
         private bool vandaagGespeeld;
+        private int effectiefVerdiend;
+        private int maxTeVerdienen;
 
         public string Naam
         {
@@ -17,6 +19,18 @@ namespace DeMol.ViewModels
         {
             get => vandaagGespeeld;
             set => Set(ref vandaagGespeeld, value);
+        }
+
+        public int MaxTeVerdienen
+        {
+            get => maxTeVerdienen;
+            set => Set(ref maxTeVerdienen, value);
+        }
+
+        public int EffectiefVerdiend
+        {
+            get => effectiefVerdiend;
+            set => Set(ref effectiefVerdiend, value);
         }
 
         public string Id { get; internal set; }

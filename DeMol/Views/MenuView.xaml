@@ -24,12 +24,12 @@
 
             <StackPanel Orientation="Horizontal">
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Dag Quiz</Button>
-                <Button Name="Validate" Style="{StaticResource Btn1}">Dag Resultaat</Button>
+                <!-- <Button Name="Validate" Style="{StaticResource Btn1}">Dag Resultaat</Button> -->
                 <Button Name="EndQuiz" Style="{StaticResource Btn1}">Finale Quiz</Button>
                 <Button Name="EndResult" Style="{StaticResource Btn1}">Finale Resultaat</Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Name="StartMolAanduiden" Style="{StaticResource Btn1}">Mol van Vandaag</Button>
+                <!-- <Button Name="StartMolAanduiden" Style="{StaticResource Btn1}">Mol van Vandaag</Button> -->
                 <Button Name="Timer" Style="{StaticResource Btn1}" Margin="10 0 5 5">Timer</Button>
             </StackPanel>
             <Border BorderBrush="White" BorderThickness="1" Margin="5" Padding="5">
@@ -51,7 +51,7 @@
                         <Button Name="SaveAdmin" Style="{StaticResource Btn1}" Margin="5 0">Save</Button>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1">
-                        <TextBlock Style="{StaticResource H1}">Opdrachten gespeeld vandaag:</TextBlock>
+                        <TextBlock Style="{StaticResource H1}">Opdrachten gespeeld vandaag: Max - Effectief</TextBlock>
                         <ItemsControl Grid.IsSharedSizeScope="True" Name="OpdrachtenGespeeld" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1">
