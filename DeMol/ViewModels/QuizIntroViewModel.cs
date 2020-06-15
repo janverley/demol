@@ -24,16 +24,16 @@ namespace DeMol.ViewModels
                 if (Set(ref naam, value))
                 {
                     var dag = container.GetInstance<ShellViewModel>().Dag;
-                    ditIsDeMolVandaag = container.GetInstance<ShellViewModel>().IsDeMol(dag, Naam);
+                    //ditIsDeMolVandaag = container.GetInstance<ShellViewModel>().IsDeMol(dag, Naam);
                     NotifyOfPropertyChange(nameof(Text));
                 }
             }
         }
 
-        public string Text =>
-            ditIsDeMolVandaag ? $"{Naam}, jij was vandaag De Mol" : $"{Naam}, jij was vandaag niet De Mol";
+        public string Text => "begin quiz";
+           // ditIsDeMolVandaag ? $"{Naam}, jij was vandaag De Mol" : $"{Naam}, jij was vandaag niet De Mol";
 
-        public bool ditIsDeMolVandaag { get; private set; }
+        //public bool ditIsDeMolVandaag { get; private set; }
 
         public void OnKeyDown(KeyEventArgs e)
         {
@@ -50,19 +50,19 @@ namespace DeMol.ViewModels
 
         public void Start()
         {
-            if (ditIsDeMolVandaag)
-            {
-                var x = container.GetInstance<QuizVragenViewModel>();
-
-                var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-
-                x.VragenCodes = admin.VragenCodes;
-                x.DagId = container.GetInstance<ShellViewModel>().Dag.ToString();
-                x.Naam = Naam;
-                x.IsDeMol = true;
-                conductor.ActivateItem(x);
-            }
-            else
+            // if (ditIsDeMolVandaag)
+            // {
+            //     var x = container.GetInstance<QuizVragenViewModel>();
+            //
+            //     var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            //
+            //     x.VragenCodes = admin.VragenCodes;
+            //     x.DagId = container.GetInstance<ShellViewModel>().Dag.ToString();
+            //     x.Naam = Naam;
+            //     x.IsDeMol = true;
+            //     conductor.ActivateItem(x);
+            // }
+            // else
             {
                 var x = container.GetInstance<QuizWieIsDeMolViewModel>();
                 x.Naam = Naam;

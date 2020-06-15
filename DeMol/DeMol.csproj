@@ -114,6 +114,7 @@
     <Compile Include="ViewModels\PasVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizBenJijDeMolViewModel.cs" />
     <Compile Include="ViewModels\QuizIntroViewModel.cs" />
+    <Compile Include="ViewModels\QuizViewModel.cs" />
     <Compile Include="ViewModels\QuizWieIsDeMolViewModel.cs" />
     <Compile Include="ViewModels\QuizNaamViewModel.cs" />
     <Compile Include="ViewModels\QuizOuttroViewModel.cs" />
@@ -163,11 +164,17 @@
     <Compile Include="Views\QuizIntroView.xaml.cs">
       <DependentUpon>QuizIntroView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\QuizLoopView.xaml.cs">
+      <DependentUpon>QuizLoopView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\QuizNaamView.xaml.cs">
       <DependentUpon>QuizNaamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuizOuttroView.xaml.cs">
       <DependentUpon>QuizOuttroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuizView.xaml.cs">
+      <DependentUpon>QuizView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuizVraagView.xaml.cs">
       <DependentUpon>QuizVraagView.xaml</DependentUpon>
@@ -270,6 +277,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\QuizLoopView.xaml" />
     <Page Include="Views\QuizNaamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -278,6 +286,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\QuizView.xaml" />
     <Page Include="Views\QuizVraagView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -32,13 +32,13 @@ namespace DeMol.ViewModels
                 var vraag = Util.GetVraagFromCode(vraagCode);
                 return new QuizVraagViewModel(vraag, vraagCode);
             };
-
-            DoNext = quizVragenViewModel =>
-            {
-                var x = container.GetInstance<QuizOuttroViewModel>();
-                x.Naam = quizVragenViewModel.Naam;
-                conductor.ActivateItem(x);
-            };
+            //
+            // DoNext = quizVragenViewModel =>
+            // {
+            //     var x = container.GetInstance<QuizOuttroViewModel>();
+            //     x.Naam = quizVragenViewModel.Naam;
+            //     conductor.ActivateItem(x);
+            // };
         }
 
         public string Naam

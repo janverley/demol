@@ -54,18 +54,18 @@ namespace DeMol.ViewModels
             set => Set(ref bgSource, value);
         }
 
-        public bool IsDeMol(int dagId, string naam)
-        {
-            var mollen = new List<int> {7, 8, 1, 0, 4, 3, 2, 6, 5};
-
-            var did = (dagId - 1) % mollen.Count;
-
-            var mol = mollen[did];
-
-            var demol = Spelerdata.Spelers[mol];
-
-            return naam.SafeEqual(demol.Naam);
-        }
+        // public bool IsDeMol(int dagId, string naam)
+        // {
+        //     var mollen = new List<int> {7, 8, 1, 0, 4, 3, 2, 6, 5};
+        //
+        //     var did = (dagId - 1) % mollen.Count;
+        //
+        //     var mol = mollen[did];
+        //
+        //     var demol = Spelerdata.Spelers[mol];
+        //
+        //     return naam.SafeEqual(demol.Naam);
+        // }
 
         protected override void OnInitialize()
         {

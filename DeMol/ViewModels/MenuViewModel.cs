@@ -316,22 +316,24 @@ namespace DeMol.ViewModels
 
         public void StartQuiz()
         {
-            var x = container.GetInstance<SmoelenViewModel>();
+            var x = container.GetInstance<QuizViewModel>();
 
-            x.CanSelectUserDelegate = name =>
-            {
-                var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
-                var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
-                return result;
-            };
+            // x.CanSelectUserDelegate = name =>
+            // {
+            //     var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+            //     var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
+            //     return result;
+            // };
+            //
+            // x.DoNext = vm =>
+            // {
+            //     var x2 = container.GetInstance<QuizViewModel>();
+            //     x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
+            //     conductor.ActivateItem(x2);
+            // };
 
-            x.DoNext = vm =>
-            {
-                var x2 = container.GetInstance<QuizIntroViewModel>();
-                x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
-                conductor.ActivateItem(x2);
-            };
-
+            x.SelectedDag = SelectedDag;
+            
             conductor.ActivateItem(x);
         }
 

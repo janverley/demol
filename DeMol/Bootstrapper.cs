@@ -34,16 +34,18 @@ namespace DeMol
 //.PerRequest<QuizNaamViewModel>()
 //.PerRequest<QuizBenJijDeMolViewModel>()
                 .PerRequest<QuizIntroViewModel>()
-                .PerRequest<JijBentDeMolViewModel>()
+                //.PerRequest<JijBentDeMolViewModel>()
                 .PerRequest<QuizWieIsDeMolViewModel>()
-                .PerRequest<QuizOuttroViewModel>()
+                //.PerRequest<QuizOuttroViewModel>()
                 .PerRequest<ValidateViewModel>()
                 .PerRequest<ResultViewModel>()
                 .PerRequest<QuizVragenViewModel>()
                 .PerRequest<EndResultViewModel>()
                 .PerRequest<TimerViewModel>()
                 .PerRequest<SmoelenViewModel>()
-                .PerRequest<DagResultaatViewModel>();
+                .PerRequest<DagResultaatViewModel>()
+                .PerRequest<QuizViewModel>()
+                ;
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
