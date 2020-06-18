@@ -43,7 +43,9 @@ namespace DeMol.ViewModels
         }
 
         public string Text =>
-            $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat vandaag De Mol was?";
+            $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat De Mol was bij opdracht {Opdracht}?";
+
+        public string Opdracht { get; set; }
 
         public bool CanStart => Opties.Any(o => o.IsSelected);
 
@@ -74,7 +76,7 @@ namespace DeMol.ViewModels
             var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
 
             x.VragenCodes = admin.VragenCodes;
-            x.DagId = container.GetInstance<ShellViewModel>().Dag.ToString();
+            x.OpdrachtId = container.GetInstance<ShellViewModel>().Dag.ToString();
             x.Naam = Naam;
             x.IsDeMol = false;
             x.DeMolIs = Opties.Single(o => o.IsSelected).OptieText;

@@ -155,7 +155,7 @@ namespace DeMol.ViewModels
                     }
                 }
 
-                var opdrachtDatas = AlleOpdrachtData();
+                var opdrachtDatas = Util.AlleOpdrachtData();
 
                 Pasvragen.Clear();
                 foreach (var item in adminData.Pasvragen)
@@ -166,18 +166,19 @@ namespace DeMol.ViewModels
                 OpdrachtenGespeeld.Clear();
                 foreach (var opdrachtData in opdrachtDatas)
                 {
-                    var algesavedOpdrachtdata =
-                        adminData.OpdrachtenGespeeld.FirstOrDefault(o => o.OpdrachtId.SafeEqual(opdrachtData.Opdracht));
-                    
+                    // var algesavedOpdrachtdata =
+                    //     adminData.OpdrachtenGespeeld.FirstOrDefault(o => o.Opdracht.SafeEqual(opdrachtData.Opdracht));
+
                     OpdrachtenGespeeld.Add(
-                        new OpdrachtViewModel
-                        {
-                            Id = opdrachtData.Opdracht,
-                            Naam = $"{opdrachtData.Opdracht.ToUpper()} - {opdrachtData.Description}",
-                            VandaagGespeeld = (algesavedOpdrachtdata != null),
-                            MaxTeVerdienen = algesavedOpdrachtdata?.MaxTeVerdienen??0,
-                            EffectiefVerdiend = algesavedOpdrachtdata?.EffectiefVerdiend??0
-                            });
+                        new OpdrachtViewModel(opdrachtData, SelectedDag.Id));
+                    // {
+                    //     Id = opdrachtData.Opdracht,
+                    //     OpdrachtData = opdrachtData,
+                    //     Naam = Util.OpdrachtUINaam(opdrachtData),
+                    //     VandaagGespeeld = (algesavedOpdrachtdata != null),
+                    //     MaxTeVerdienen = algesavedOpdrachtdata?.MaxTeVerdienenBedrag??0,
+                    //     EffectiefVerdiend = algesavedOpdrachtdata?.VerdiendBedrag??0
+                    //     });
                 }
 
                 //if (!VragenGevonden)
@@ -190,25 +191,6 @@ namespace DeMol.ViewModels
                 //}
                 UpdateButtonStates();
             }
-        }
-
-        private IEnumerable<OpdrachtData> AlleOpdrachtData()
-        {
-            var result = new List<OpdrachtData>();
-
-            var allChars = "abcdefghijklmnopqrstuvwyz";
-
-            foreach (var @char in allChars.ToCharArray())
-            {
-                var opdrachtId = @char.ToString();
-                if (Util.DataFileFoundAndValid<OpdrachtData>(opdrachtId))
-                {
-                    var opdrachtVragenData = Util.SafeReadJson<OpdrachtData>(opdrachtId);
-                    result.Add(opdrachtVragenData);
-                }
-            }
-
-            return result;
         }
 
         public void Timer()
@@ -229,53 +211,56 @@ namespace DeMol.ViewModels
                     {Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend});
             }
 
-            newAdminData.OpdrachtenGespeeld.Clear();
-            foreach (var item in OpdrachtenGespeeld.Where(o => o.VandaagGespeeld))
+            //newAdminData.OpdrachtenGespeeld.Clear();
+            foreach (var item in OpdrachtenGespeeld)
             {
-                var gespeelde = new GespeeldeOpdrachtData()
-                {
-                    OpdrachtId = item.Id,
-                    EffectiefVerdiend = item.EffectiefVerdiend,
-                    MaxTeVerdienen = item.MaxTeVerdienen
-                };
-                    
-                newAdminData.OpdrachtenGespeeld.Add(gespeelde);
+                
+                Util.SafeFileWithBackup(item.OpdrachtData, item.OpdrachtData.Opdracht);
+                
+                // var gespeelde = new GespeeldeOpdrachtData()
+                // {
+                //     OpdrachtId = item.Id,
+                //     EffectiefVerdiend = item.EffectiefVerdiend,
+                //     MaxTeVerdienen = item.MaxTeVerdienen
+                // };
+                //     
+                // newAdminData.OpdrachtenGespeeld.Add(gespeelde);
             }
 
-            var vragenCodes = new List<string>();
-            foreach (var gespeeldeOpdracht in newAdminData.OpdrachtenGespeeld)
-            {
-                var opdrachtVragen = Util.SafeReadJson<OpdrachtData>(gespeeldeOpdracht.OpdrachtId);
-
-                for (var i = 0; i < opdrachtVragen.Vragen.Count; i++)
-                {
-                    var x = Util.GetVraagAndCode(opdrachtVragen, i);
-                    vragenCodes.Add(x.Item1);
-                }
-            }
-
-            var extraVragen = Util.SafeReadJson<OpdrachtData>("x");
-            for (var i = vragenCodes.Count; i < Settings.Default.aantalVragenPerDag; i++)
-            {
-                var r = new Random().Next(extraVragen.Vragen.Count);
-                var x = Util.GetVraagAndCode(extraVragen, r);
-
-                if (!vragenCodes.Contains(x.Item1))
-                {
-                    vragenCodes.Add(x.Item1);
-                }
-                else
-                {
-                    i--;
-                }
-            }
-
-            vragenCodes = vragenCodes.Shuffle(new Random()).ToList();
-            newAdminData.VragenCodes.Clear();
-            foreach (var vragenCode in vragenCodes)
-            {
-                newAdminData.VragenCodes.Add(vragenCode);
-            }
+            // var vragenCodes = new List<string>();
+            // foreach (var gespeeldeOpdracht in newAdminData.OpdrachtenGespeeld)
+            // {
+            //     var opdrachtVragen = Util.SafeReadJson<OpdrachtData>(gespeeldeOpdracht.Opdracht);
+            //
+            //     for (var i = 0; i < opdrachtVragen.Vragen.Count; i++)
+            //     {
+            //         var x = Util.GetVraagAndCode(opdrachtVragen, i);
+            //         vragenCodes.Add(x.Item1);
+            //     }
+            // }
+            //
+            // var extraVragen = Util.SafeReadJson<OpdrachtData>("x");
+            // for (var i = vragenCodes.Count; i < Settings.Default.aantalVragenPerDag; i++)
+            // {
+            //     var r = new Random().Next(extraVragen.Vragen.Count);
+            //     var x = Util.GetVraagAndCode(extraVragen, r);
+            //
+            //     if (!vragenCodes.Contains(x.Item1))
+            //     {
+            //         vragenCodes.Add(x.Item1);
+            //     }
+            //     else
+            //     {
+            //         i--;
+            //     }
+            // }
+            //
+            // vragenCodes = vragenCodes.Shuffle(new Random()).ToList();
+            // newAdminData.VragenCodes.Clear();
+            // foreach (var vragenCode in vragenCodes)
+            // {
+            //     newAdminData.VragenCodes.Add(vragenCode);
+            // }
 
 
             Util.SafeFileWithBackup(newAdminData, SelectedDag.Id);
@@ -351,6 +336,8 @@ namespace DeMol.ViewModels
 
         public void EndQuiz()
         {
+            var opdrachtDatas = Util.AlleOpdrachtData().Where(od => od.GespeeldOpDag != -1);
+            
             var finaleAdminData = Util.SafeReadJson<FinaleData>();
             if (!finaleAdminData.FinaleVragen.Any())
             {
@@ -364,13 +351,13 @@ namespace DeMol.ViewModels
                     var juisteAntwoorden = deMol.Antwoorden;
 
                     var adminData = Util.SafeReadJson<AdminData>(dag.Id);
-                    foreach (var gespeeldeOpdracht in adminData.OpdrachtenGespeeld)
+                    foreach (var gespeeldeOpdracht in opdrachtDatas)
                     {
-                        if (!alleGespeeldeOpdrachten.Contains(gespeeldeOpdracht.OpdrachtId))
+                        if (!alleGespeeldeOpdrachten.Contains(gespeeldeOpdracht.Opdracht))
                         {
-                            alleGespeeldeOpdrachten.Add(gespeeldeOpdracht.OpdrachtId);
+                            alleGespeeldeOpdrachten.Add(gespeeldeOpdracht.Opdracht);
 
-                            var opdrachtVragen = Util.SafeReadJson<OpdrachtData>(gespeeldeOpdracht.OpdrachtId);
+                            var opdrachtVragen = Util.SafeReadJson<OpdrachtData>(gespeeldeOpdracht.Opdracht);
 
                             for (var i = 0; i < opdrachtVragen.Vragen.Count; i++)
                             {
@@ -438,7 +425,7 @@ namespace DeMol.ViewModels
                 };
 
                 x2.IsDeMol = false;
-                x2.DagId = "finale";
+                x2.OpdrachtId = "finale";
                 x2.VragenCodes = finaleAdminData2.FinaleVragen.Select(fv => fv.VraagCode).ToList();
                 x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
 

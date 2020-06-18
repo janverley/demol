@@ -60,7 +60,7 @@ namespace DeMol.ViewModels
 
         public List<string> VragenCodes { get; set; }
 
-        public string DagId { get; set; }
+        public string OpdrachtId { get; set; }
 
         public string Message
         {
@@ -152,7 +152,7 @@ namespace DeMol.ViewModels
 
             NoteerAntwoord();
 
-            var alleAntwoorden = Util.SafeReadJson<AntwoordenData>(DagId);
+            var alleAntwoorden = Util.SafeReadJson<AntwoordenData>(OpdrachtId);
 
             var speler = new Speler
             {
@@ -165,7 +165,7 @@ namespace DeMol.ViewModels
 
             alleAntwoorden.Spelers.Add(speler);
 
-            Util.SafeFileWithBackup(alleAntwoorden, DagId);
+            Util.SafeFileWithBackup(alleAntwoorden, OpdrachtId);
 
             DoNext(this);
         }

@@ -32,7 +32,7 @@ namespace DeMol
             container
                 .PerRequest<InvalidateViewModel>()
 //.PerRequest<QuizNaamViewModel>()
-//.PerRequest<QuizBenJijDeMolViewModel>()
+                .PerRequest<QuizBenJijDeMolViewModel>()
                 .PerRequest<QuizIntroViewModel>()
                 //.PerRequest<JijBentDeMolViewModel>()
                 .PerRequest<QuizWieIsDeMolViewModel>()

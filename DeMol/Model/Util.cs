@@ -62,7 +62,7 @@ namespace DeMol.Model
 
         public static void SafeFileWithBackup(object data, string dag)
         {
-            SafeFileWithBackup(string.Format(Files[data.GetType()].Filename, dag), data,
+            SafeFileWithBackup(String.Format(Files[data.GetType()].Filename, dag), data,
                 Files[data.GetType()].Encrypted);
         }
 
@@ -117,7 +117,7 @@ namespace DeMol.Model
         internal static Vraag GetVraagFromCode(string code)
         {
             var opdrachtId = code.Substring(0, 1);
-            var vraagNummer = int.Parse(code.Substring(1)) - 1;
+            var vraagNummer = Int32.Parse(code.Substring(1)) - 1;
 
             var opdrachtVragen = SafeReadJson<OpdrachtData>(opdrachtId);
 
@@ -134,7 +134,7 @@ namespace DeMol.Model
 
         public static T SafeReadJson<T>(string dag) where T : new()
         {
-            var path = string.Format(Files[typeof(T)].Filename, dag);
+            var path = String.Format(Files[typeof(T)].Filename, dag);
             return SafeReadJson<T>(path, Files[typeof(T)].Encrypted);
         }
 
@@ -171,7 +171,7 @@ namespace DeMol.Model
 
         internal static bool DataFileFoundAndValid<T>(string dag)
         {
-            return DataFileFoundAndValid<T>(string.Format(Files[typeof(T)].Filename, dag), Files[typeof(T)].Encrypted);
+            return DataFileFoundAndValid<T>(String.Format(Files[typeof(T)].Filename, dag), Files[typeof(T)].Encrypted);
         }
 
         internal static bool DataFileFoundAndValid<T>(int dag)
@@ -230,6 +230,30 @@ namespace DeMol.Model
         {
             public string Filename { get; set; }
             public bool Encrypted { get; set; }
+        }
+
+        public static IEnumerable<OpdrachtData> AlleOpdrachtData()
+        {
+            var result = new List<OpdrachtData>();
+
+            var allChars = "abcdefghijklmnopqrstuvwyz";
+
+            foreach (var @char in allChars.ToCharArray())
+            {
+                var opdrachtId = @char.ToString();
+                if (Util.DataFileFoundAndValid<OpdrachtData>(opdrachtId))
+                {
+                    var opdrachtVragenData = Util.SafeReadJson<OpdrachtData>(opdrachtId);
+                    result.Add(opdrachtVragenData);
+                }
+            }
+
+            return result;
+        }
+
+        public static string OpdrachtUINaam(OpdrachtData opdrachtData)
+        {
+            return $"{opdrachtData.Opdracht.ToUpper()} - {opdrachtData.Description}";
         }
     }
 }
