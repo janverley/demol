@@ -92,7 +92,7 @@ namespace DeMol.ViewModels
             if (IsDeMol)
             {
                 Message = "Jij bent De Mol, dus je moet op alle vragen goed antwoorden!";
-            }
+            }    
             else
             {
                 Message = "";

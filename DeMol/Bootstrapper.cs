@@ -39,6 +39,7 @@ namespace DeMol
                 //.PerRequest<QuizOuttroViewModel>()
                 .PerRequest<ValidateViewModel>()
                 .PerRequest<ResultViewModel>()
+                .PerRequest<VragenLijstViewModel>()
                 .PerRequest<QuizVragenViewModel>()
                 .PerRequest<EndResultViewModel>()
                 .PerRequest<TimerViewModel>()

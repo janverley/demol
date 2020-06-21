@@ -20,6 +20,7 @@
             <ContentControl Name="QuizVraag" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="Previous" Style="{StaticResource Btn1}">Vorige Vraag</Button>
             <Button x:Name="Next" Style="{StaticResource Btn1}">Volgende Vraag</Button>
             <Button x:Name="Stop" Style="{StaticResource Btn1}">Stop</Button>
         </StackPanel>

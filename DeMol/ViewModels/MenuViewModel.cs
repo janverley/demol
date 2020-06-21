@@ -27,6 +27,8 @@ namespace DeMol.ViewModels
             this.container = container;
         }
 
+        
+        
         public DagViewModel SelectedDag
         {
             get => selectedDag;
@@ -408,31 +410,31 @@ namespace DeMol.ViewModels
                 return result;
             };
 
-            x.DoNext = vm =>
-            {
-                var finaleAdminData2 = Util.SafeReadJson<FinaleData>();
-
-                var x2 = container.GetInstance<QuizVragenViewModel>();
-
-                x2.QuizVraagViewModelFactory = vraagCode =>
-                {
-                    var fv = finaleAdminData2.FinaleVragen.Single(fv2 => fv2.VraagCode == vraagCode);
-
-                    var result = new QuizVraagViewModel(fv.Vraag, fv.VraagCode);
-                    result.Text = $"{fv.Dag.Naam}: {fv.Description}\n{fv.Vraag.Text} ({fv.VraagCode})";
-
-                    return result;
-                };
-
-                x2.IsDeMol = false;
-                x2.OpdrachtId = "finale";
-                x2.VragenCodes = finaleAdminData2.FinaleVragen.Select(fv => fv.VraagCode).ToList();
-                x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
-
-                x2.DoNext = quizVragenViewModel => { conductor.ActivateItem(x); };
-
-                conductor.ActivateItem(x2);
-            };
+            // x.DoNext = vm =>
+            // {
+            //     var finaleAdminData2 = Util.SafeReadJson<FinaleData>();
+            //
+            //     var x2 = container.GetInstance<QuizVragenViewModel>();
+            //
+            //     x2.QuizVraagViewModelFactory = vraagCode =>
+            //     {
+            //         var fv = finaleAdminData2.FinaleVragen.Single(fv2 => fv2.VraagCode == vraagCode);
+            //
+            //         var result = new QuizVraagViewModel(fv.Vraag, fv.VraagCode);
+            //         result.Text = $"{fv.Dag.Naam}: {fv.Description}\n{fv.Vraag.Text} ({fv.VraagCode})";
+            //
+            //         return result;
+            //     };
+            //
+            //     x2.IsDeMol = false;
+            //     x2.OpdrachtId = "finale";
+            //     x2.VragenCodes = finaleAdminData2.FinaleVragen.Select(fv => fv.VraagCode).ToList();
+            //     x2.Naam = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(vm.Naam.ToLower());
+            //
+            //     x2.DoNext = quizVragenViewModel => { conductor.ActivateItem(x); };
+            //
+            //     conductor.ActivateItem(x2);
+            // };
 
             conductor.ActivateItem(x);
         }

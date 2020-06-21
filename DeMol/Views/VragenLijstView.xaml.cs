@@ -2,9 +2,9 @@ using System.Windows.Controls;
 
 namespace DeMol.Views
 {
-    public partial class QuizLoopView : UserControl
+    public partial class VragenLijstView : UserControl
     {
-        public QuizLoopView()
+        public VragenLijstView()
         {
             InitializeComponent();
         }

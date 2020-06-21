@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
@@ -67,11 +68,14 @@ namespace DeMol.ViewModels
         public bool CanStart => Opties.Any(o => o.IsSelected);
         public OpdrachtData OpdrachtData { get; set; }
 
+        public Action<QuizBenJijDeMolViewModel> DoNext { get; set; }
+        
         public void Start()
         {
-            var x = this.Parent as QuizLoopViewModel;
-            x.OnQuizBenJijDeMolViewModelClose(Naam, OpdrachtData, IsDeMol);
-            TryClose();
+            DoNext(this);
+            //var x = this.Parent as VragenLijstViewModel;
+            //TryClose();
+            //x.OnQuizBenJijDeMolViewModelClose(Naam, OpdrachtData, IsDeMol);
 
             //conductor.DeactivateItem(this, true);
 

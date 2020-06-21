@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
@@ -45,7 +46,8 @@ namespace DeMol.ViewModels
         public string Text =>
             $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat De Mol was bij opdracht {Opdracht}?";
 
-        public string Opdracht { get; set; }
+        public string Opdracht => Util.OpdrachtUINaam(OpdrachtData);
+        public OpdrachtData OpdrachtData { get; set; }
 
         public bool CanStart => Opties.Any(o => o.IsSelected);
 
@@ -69,20 +71,23 @@ namespace DeMol.ViewModels
                 Menu();
             }
         }
-
+        public Action<QuizWieIsDeMolViewModel> DoNext { get; set; }
         public void Start()
         {
-            var x = container.GetInstance<QuizVragenViewModel>();
-            var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-
-            x.VragenCodes = admin.VragenCodes;
-            x.OpdrachtId = container.GetInstance<ShellViewModel>().Dag.ToString();
-            x.Naam = Naam;
-            x.IsDeMol = false;
-            x.DeMolIs = Opties.Single(o => o.IsSelected).OptieText;
-            conductor.ActivateItem(x);
+            DoNext(this);
+            // var x = container.GetInstance<QuizVragenViewModel>();
+            // var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            //
+            // x.VragenCodes = admin.VragenCodes;
+            // x.OpdrachtId = container.GetInstance<ShellViewModel>().Dag.ToString();
+            // x.Naam = Naam;
+            // x.IsDeMol = false;
+            // x.DeMolIs = Opties.Single(o => o.IsSelected).OptieText;
+            // conductor.ActivateItem(x);
         }
 
+        public string DeMolIs => Opties.Single(o => o.IsSelected).OptieText;
+        
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
