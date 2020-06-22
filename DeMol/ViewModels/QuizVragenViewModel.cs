@@ -8,10 +8,10 @@ namespace DeMol.ViewModels
 {
     public class QuizVragenViewModel : Screen
     {
+        private readonly Dictionary<string, string> antwoorden = new Dictionary<string, string>();
         private readonly IConductor conductor;
         private readonly SimpleContainer container;
         private readonly List<QuizVraagViewModel> quizVraagViewModels = new List<QuizVraagViewModel>();
-        private readonly Dictionary<string, string> antwoorden = new Dictionary<string, string>();
         private int index;
         private bool isDeMol;
 
@@ -77,6 +77,7 @@ namespace DeMol.ViewModels
         }
 
 
+        public bool CanPrevious => index > 0;
         public bool CanNext => index < quizVraagViewModels.Count - 1;
         public bool CanStop => index == quizVraagViewModels.Count - 1;
 
@@ -92,7 +93,7 @@ namespace DeMol.ViewModels
             if (IsDeMol)
             {
                 Message = "Jij bent De Mol, dus je moet op alle vragen goed antwoorden!";
-            }    
+            }
             else
             {
                 Message = "";
@@ -109,6 +110,7 @@ namespace DeMol.ViewModels
             QuizVraag = quizVraagViewModels[index];
 
             NotifyOfPropertyChange(() => CanNext);
+            NotifyOfPropertyChange(() => CanPrevious);
             NotifyOfPropertyChange(() => CanStop);
         }
 
@@ -134,6 +136,18 @@ namespace DeMol.ViewModels
             index++;
             QuizVraag = quizVraagViewModels[index];
             NotifyOfPropertyChange(() => CanNext);
+            NotifyOfPropertyChange(() => CanPrevious);
+            NotifyOfPropertyChange(() => CanStop);
+        }
+
+        public void Previous()
+        {
+            // NoteerAntwoord();
+
+            index--;
+            QuizVraag = quizVraagViewModels[index];
+            NotifyOfPropertyChange(() => CanNext);
+            NotifyOfPropertyChange(() => CanPrevious);
             NotifyOfPropertyChange(() => CanStop);
         }
 
@@ -142,6 +156,11 @@ namespace DeMol.ViewModels
             if (QuizVraag != null)
             {
                 // noteer antwoord
+                if (antwoorden.ContainsKey(QuizVraag.VraagID))
+                {
+                    antwoorden.Remove(QuizVraag.VraagID);
+                }
+
                 antwoorden.Add(QuizVraag.VraagID, QuizVraag.AntwoordToNote);
             }
         }
@@ -156,10 +175,10 @@ namespace DeMol.ViewModels
 
             var speler = new Speler
             {
-                Naam = Naam,
-                DeMolIs = DeMolIs,
-                IsDeMol = IsDeMol,
-                Tijd = diff,
+                Naam       = Naam,
+                DeMolIs    = DeMolIs,
+                IsDeMol    = IsDeMol,
+                Tijd       = diff,
                 Antwoorden = antwoorden
             };
 

@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using Caliburn.Micro;
-using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
@@ -31,7 +30,7 @@ namespace DeMol.ViewModels
         }
 
         public string Text => "begin quiz";
-           // ditIsDeMolVandaag ? $"{Naam}, jij was vandaag De Mol" : $"{Naam}, jij was vandaag niet De Mol";
+        // ditIsDeMolVandaag ? $"{Naam}, jij was vandaag De Mol" : $"{Naam}, jij was vandaag niet De Mol";
 
         //public bool ditIsDeMolVandaag { get; private set; }
 
@@ -54,7 +53,7 @@ namespace DeMol.ViewModels
             // {
             //     var x = container.GetInstance<QuizVragenViewModel>();
             //
-            //     var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            //     var admin = Util.GetAdminData(container);
             //
             //     x.VragenCodes = admin.VragenCodes;
             //     x.DagId = container.GetInstance<ShellViewModel>().Dag.ToString();

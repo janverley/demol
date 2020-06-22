@@ -7,10 +7,10 @@ namespace DeMol.Model
         public AdminData()
         {
             Pasvragen = new List<PasvragenVerdiend>();
-          //  OpdrachtenGespeeld = new List<OpdrachtData>();
+            //  OpdrachtenGespeeld = new List<OpdrachtData>();
             IsVerteldOfZeDeMolZijn = new List<SpelerInfo>();
-            VragenCodes = new List<string>();
-            HeeftQuizGestart = new List<SpelerInfo>();
+            VragenCodes            = new List<string>();
+            HeeftQuizGespeeld      = new List<SpelerInfo>();
         }
 
         public List<PasvragenVerdiend> Pasvragen { get; set; }
@@ -19,7 +19,7 @@ namespace DeMol.Model
         //public List<OpdrachtData> OpdrachtenGespeeld { get; set; }
 
         public List<SpelerInfo> IsVerteldOfZeDeMolZijn { get; set; }
-        public List<SpelerInfo> HeeftQuizGestart { get; set; }
+        public List<SpelerInfo> HeeftQuizGespeeld { get; set; }
         public List<string> VragenCodes { get; set; }
     }
 

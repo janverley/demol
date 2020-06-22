@@ -16,12 +16,12 @@ namespace DeMol.ViewModels
             smoelenViewModel = container.GetInstance<SmoelenViewModel>();
             smoelenViewModel.CanSelectUserDelegate = name =>
             {
-                var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+                var adminData = Util.GetAdminData(container);
 
-                var result = !adminData.HeeftQuizGestart.Any(s => s.Naam.SafeEqual(name));
+                var result = !adminData.HeeftQuizGespeeld.Any(s => s.Naam.SafeEqual(name));
                 return result;
             };
-            
+
             smoelenViewModel.DoNext = vm => StartQuiz(vm.Naam);
         }
 
@@ -40,11 +40,6 @@ namespace DeMol.ViewModels
 
         public void StartQuiz(string naam)
         {
-            var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-            adminData.HeeftQuizGestart.Add(new SpelerInfo{Naam = naam});
-            Util.SafeFileWithBackup(adminData, container.GetInstance<ShellViewModel>().Dag);
-            
-            
             var vragenlijstViewModel = container.GetInstance<VragenLijstViewModel>();
             vragenlijstViewModel.Naam = naam;
             ActivateItem(vragenlijstViewModel);

@@ -27,8 +27,8 @@ namespace DeMol.ViewModels
             this.conductor = conductor;
             this.container = container;
 
-            timer.Tick += Timer_Tick;
-            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Tick     += Timer_Tick;
+            timer.Interval =  TimeSpan.FromSeconds(5);
         }
 
         public bool CanAntwoorden
@@ -54,10 +54,10 @@ namespace DeMol.ViewModels
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            var adminData  = Util.GetAdminData(container);
             var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 
-            var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
+            var deMol            = antwoorden.Spelers.Single(s => s.IsDeMol);
             var juisteAntwoorden = deMol.Antwoorden;
 
             var scores = new List<Score>();
@@ -100,7 +100,7 @@ namespace DeMol.ViewModels
                     break;
                 default:
                     resultSB.AppendLine(
-                        $"- Deze {raders.Count()} spelers hebben geraden wie de mol was: {string.Join(",", raders.Select(r => r.Naam))}");
+                        $"- Deze {raders.Count()} spelers hebben geraden wie de mol was: {String.Join(",", raders.Select(r => r.Naam))}");
                     break;
             }
 
@@ -122,15 +122,15 @@ namespace DeMol.ViewModels
 
             var resultSB = new StringBuilder();
 
-            var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            var adminData  = Util.GetAdminData(container);
             var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 
-            var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
+            var deMol            = antwoorden.Spelers.Single(s => s.IsDeMol);
             var juisteAntwoorden = deMol.Antwoorden;
 
             foreach (var juistAntwoord in juisteAntwoorden)
             {
-                var code = juistAntwoord.Key;
+                var code      = juistAntwoord.Key;
                 var vraagText = Util.GetVraagFromCode(code).Text;
 
                 var antwoord = juistAntwoord.Value;

@@ -50,6 +50,9 @@ namespace DeMol.ViewModels
         public OpdrachtData OpdrachtData { get; set; }
 
         public bool CanStart => Opties.Any(o => o.IsSelected);
+        public Action<QuizWieIsDeMolViewModel> DoNext { get; set; }
+
+        public string DeMolIs => Opties.Single(o => o.IsSelected).OptieText;
 
         private void Optie_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -71,12 +74,12 @@ namespace DeMol.ViewModels
                 Menu();
             }
         }
-        public Action<QuizWieIsDeMolViewModel> DoNext { get; set; }
+
         public void Start()
         {
             DoNext(this);
             // var x = container.GetInstance<QuizVragenViewModel>();
-            // var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+            // var admin = Util.GetAdminData(container);
             //
             // x.VragenCodes = admin.VragenCodes;
             // x.OpdrachtId = container.GetInstance<ShellViewModel>().Dag.ToString();
@@ -86,8 +89,6 @@ namespace DeMol.ViewModels
             // conductor.ActivateItem(x);
         }
 
-        public string DeMolIs => Opties.Single(o => o.IsSelected).OptieText;
-        
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();

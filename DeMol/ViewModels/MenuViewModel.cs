@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using Caliburn.Micro;
@@ -27,8 +26,7 @@ namespace DeMol.ViewModels
             this.container = container;
         }
 
-        
-        
+
         public DagViewModel SelectedDag
         {
             get => selectedDag;
@@ -145,7 +143,7 @@ namespace DeMol.ViewModels
             if (SelectedDag != null)
             {
                 container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
-                var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+                var adminData = Util.GetAdminData(container);
                 //var opdrachtenVragenData = Util.SafeReadJson<OpdrachtVragenData>();
 
                 // als file niet gevonden
@@ -216,9 +214,8 @@ namespace DeMol.ViewModels
             //newAdminData.OpdrachtenGespeeld.Clear();
             foreach (var item in OpdrachtenGespeeld)
             {
-                
                 Util.SafeFileWithBackup(item.OpdrachtData, item.OpdrachtData.Opdracht);
-                
+
                 // var gespeelde = new GespeeldeOpdrachtData()
                 // {
                 //     OpdrachtId = item.Id,
@@ -277,14 +274,14 @@ namespace DeMol.ViewModels
         //
         //     x.CanSelectUserDelegate = name =>
         //     {
-        //         var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+        //         var adminData = Util.GetAdminData(container);
         //         var result = !adminData.IsVerteldOfZeDeMolZijn.Any(s => s.Naam == name);
         //         return result;
         //     };
         //
         //     x.DoNext = vm =>
         //     {
-        //         var adminData = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+        //         var adminData = Util.GetAdminData(container);
         //         adminData.IsVerteldOfZeDeMolZijn.Add(new SpelerInfo {Naam = vm.Naam});
         //         Util.SafeFileWithBackup(adminData, container.GetInstance<ShellViewModel>().Dag);
         //
@@ -320,7 +317,7 @@ namespace DeMol.ViewModels
             // };
 
             x.SelectedDag = SelectedDag;
-            
+
             conductor.ActivateItem(x);
         }
 
@@ -339,7 +336,7 @@ namespace DeMol.ViewModels
         public void EndQuiz()
         {
             var opdrachtDatas = Util.AlleOpdrachtData().Where(od => od.GespeeldOpDag != -1);
-            
+
             var finaleAdminData = Util.SafeReadJson<FinaleData>();
             if (!finaleAdminData.FinaleVragen.Any())
             {
@@ -348,8 +345,8 @@ namespace DeMol.ViewModels
                 var alleGespeeldeOpdrachten = new List<string>();
                 foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
                 {
-                    var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
-                    var deMol = antwoorden.Spelers.Single(s => s.IsDeMol);
+                    var antwoorden       = Util.SafeReadJson<AntwoordenData>(dag.Id);
+                    var deMol            = antwoorden.Spelers.Single(s => s.IsDeMol);
                     var juisteAntwoorden = deMol.Antwoorden;
 
                     var adminData = Util.SafeReadJson<AdminData>(dag.Id);
@@ -369,11 +366,11 @@ namespace DeMol.ViewModels
 
                                 var finaleVraag = new FinaleVraag
                                 {
-                                    Dag = dag,
-                                    Description = opdrachtVragen.Description,
-                                    Opdracht = opdrachtVragen.Opdracht,
-                                    Vraag = tup.Item2,
-                                    VraagCode = tup.Item1,
+                                    Dag           = dag,
+                                    Description   = opdrachtVragen.Description,
+                                    Opdracht      = opdrachtVragen.Opdracht,
+                                    Vraag         = tup.Item2,
+                                    VraagCode     = tup.Item1,
                                     JuistAntwoord = juistAntwoord
                                 };
 
@@ -386,7 +383,7 @@ namespace DeMol.ViewModels
 
                 for (var i = 0; i < Math.Min(finaleVragen.Count, Settings.Default.aantalVragenWeekWinnaar); i++)
                 {
-                    var r = new Random().Next(finaleVragen.Count);
+                    var r           = new Random().Next(finaleVragen.Count);
                     var finaleVraag = finaleVragen[r];
                     if (!finaleAdminData.FinaleVragen.Any(fv => fv.VraagCode == finaleVraag.VraagCode))
                     {
@@ -406,7 +403,7 @@ namespace DeMol.ViewModels
             x.CanSelectUserDelegate = name =>
             {
                 var antwoorden = Util.SafeReadJson<AntwoordenData>("finale");
-                var result = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
+                var result     = !antwoorden.Spelers.Any(s => s.Naam.SafeEqual(name));
                 return result;
             };
 
