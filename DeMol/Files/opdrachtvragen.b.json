@@ -1,44 +1,37 @@
 {
   "Opdracht": "b",
-  "Description": "Spookdorp",
+  "Description": "Shoppen",
   "Vragen": [
     {
-      "Text": "Ging de mol vandaag alleen het spookdorp in?",
+      "Text": "Ging de mol een winkel binnen?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol zijn/haar envelop gevonden?",
+      "Text": "Nam de mol foto’s tijdens de opdracht?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Zat de mol in de grijze bus vandaag?",
+      "Text": "Heeft de mol geld vast gehad tijdens de opdracht?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Welk bedrag was de mol waard?",
+      "Text": "Had de mol een 'kantoor'?",
       "Opties": [
-        "100",
-        "200",
-        "300",
-        "400",
-        "500",
-        "600",
-        "700",
-        "800",
-        "900"
+        "Ja",
+        "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol de tijd doorgegeven via de walkietalkie?",
+      "Text": "Droeg de mol sandalen tijdens de proef?",
       "Opties": [
         "Ja",
         "Nee"

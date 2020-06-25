@@ -1,17 +1,44 @@
 {
   "Opdracht": "d",
-  "Description": "Vandemannekes",
+  "Description": "Laat het niet hangen",
   "Vragen": [
     {
-      "Text": "In welke groep zat de mol?",
+      "Text": "Had de mol een balletje?",
       "Opties": [
-        "De Duikers",
-        "De Verstoppers",
-        "De Zoekers"
+        "Ja",
+        "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol vals gespeeld door een voorwerp achter te houden?",
+      "Text": "Was de kleur van het voorwerp van de mol rood?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Wie stond er links van de mol tijdens de opdracht",
+      "Opties": [
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde"
+      ]
+    },
+    {
+      "Text": "Heeft de mol gevloekt tijdens de proef?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Is de mol linkshandig?",
       "Opties": [
         "Ja",
         "Nee"

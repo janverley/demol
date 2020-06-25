@@ -1,34 +1,29 @@
 {
   "Opdracht": "l",
-  "Description": "Kubb",
+  "Description": "Codenaam",
   "Vragen": [
     {
-      "Text": "Heeft de mol 3 keer zelf gegooid tijdens het Kubb spel?",
+      "Text": "Heeft de mol een woord met een positief bedrag gekozen?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol zelf een 0 punten worp gegooid?",
+      "Text": "Hoeveel woorden heeft de mol gekozen?"
+    },
+    {
+      "Text": "Hoeveel keer heeft de mol een term geroepen?"
+    },
+    {
+      "Text": "Heet de mol Spysschaert?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Gooide de mol linkshandig?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Gooide de mol op blote voeten?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
+      "Text": "Hoe oud is de mol?"
     }
   ]
 }

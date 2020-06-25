@@ -1,33 +1,28 @@
 {
   "Opdracht": "k",
-  "Description": "Construction",
+  "Description": "Soundtrack",
   "Vragen": [
     {
-      "Text": "Wie zat er bij mol in de groep tijdens de legoproef?",
+      "Text": "Hoeveelst heeft de mol zijn lied geneuried?",
       "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ],
-      "MeerdereOptiesMogelijk":true
-    },
-    {
-      "Text": "In welke groep zat de mol tijdens de lego proef?",
-      "Opties": [
-        "Groep 1",
-        "Groep 2",
-        "Groep 3"
+        "Eerste", "2e","3e"," 4e"," 5e"," 6e"," 7e"," 8e","Laatste"
       ]
     },
-
     {
-      "Text": "Had de mol tijdens de legoproef de walkie talkie in handen?",
+      "Text": "Hoeveel keer sloeg de mol raak op de pinata?"
+    },
+    {
+      "Text": "Droeg de mol een bikini tijdens dit spel?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Hoeveel keer heeft de mol een juist antwoord gegeven?"
+    },
+    {
+      "Text": "Ging de mol naar binnen tijdens deze opdracht?",
       "Opties": [
         "Ja",
         "Nee"

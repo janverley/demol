@@ -1,27 +1,39 @@
 {
   "Opdracht": "g",
-  "Description": "Pluimen",
+  "Description": "Be Cool",
   "Vragen": [
     {
-      "Text": "Met wie zat de mol met de badminton in het team?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ],
-      "MeerdereOptiesMogelijk":true
-    },
-    {
-      "Text": "Heeft het team van de mol het aantal slagen gehaald?",
+      "Text": "Had de mol pasvragen?",
       "Opties": [
         "Ja",
         "Nee"
+      ]
+    },
+    {
+      "Text": "Had de mol geld?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Is de mol tijdens het onderhandelen rechtgestaan?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol het over de resterende tijd gehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Als hoeveelste trok de mol zijn envelop",
+      "Opties": [
+        "Eerste", "2e","3e"," 4e"," 5e"," 6e"," 7e"," 8e","Laatste"
       ]
     }
   ]

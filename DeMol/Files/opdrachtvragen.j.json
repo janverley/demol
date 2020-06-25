@@ -1,27 +1,37 @@
 {
   "Opdracht": "j",
-  "Description": "Cocktailbar",
+  "Description": "Back in time",
   "Vragen": [
     {
-      "Text": "Hoeveel ingrediënten had de mol in de eerste proefronde juist?",
-      "Opties": [
-        "Niet van toepassing",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ]
-    },
-    {
-      "Text": "Was de mol geblinddoekt",
+      "Text": "Heeft de mol wijn gedronken?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Gaf de mol een drankje aan de proevers?",
+      "Text": "Heeft de mol de polaroid vast gehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Stond de mol naast water op de foto?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol gelopen tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol getuft vandaag?",
       "Opties": [
         "Ja",
         "Nee"

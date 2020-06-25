@@ -1,37 +1,36 @@
 {
   "Opdracht": "m",
-  "Description": "Casino",
+  "Description": "Construction",
   "Vragen": [
     {
-      "Text": "Bij wie moest de mol trekken bij 'zwarte mollen'?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "Heeft de mol met 'zwarte mollen' een negatief paar afgelegd?",
+      "Text": "Werd het voorwerp van de mol juist geraden?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Kocht de mol een 'voordeel envelop'?",
+      "Text": "Heeft de mol rode blokken gebruikt in zijn bouwsel?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Speelde de mol 'roulette'?",
+      "Text": "Op de hoeveelste rij werd het bouwsel van de mol op het antwoordblad ingevuld?",
+      "Opties": [
+        "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "Laatste"
+      ]
+    },
+    {
+      "Text": "Was het voorwerp van de mol een dier?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol iets op het antwoordblad geschreven?",
       "Opties": [
         "Ja",
         "Nee"

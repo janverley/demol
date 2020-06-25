@@ -1,39 +1,37 @@
 {
   "Opdracht": "o",
-  "Description": "Estafette",
+  "Description": "Promenade",
   "Vragen": [
     {
-      "Text": "Tegen wie kwam de mol uit in de 1e estafetteronde?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ]
-    },
-    {
-      "Text": "Zat de mol in een jutte zak vandaag?",
+      "Text": "Zat de mol in de wandelgroep?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Hoe dikwijls heeft de mol de estafette gedaan?",
+      "Text": "Heeft de mol met een dobbelsteen gegooid?",
       "Opties": [
-        "1 keer",
-        "2 keer",
-        "3 keer",
-        "4 keer"
+        "Ja",
+        "Nee"
       ]
     },
     {
-      "Text": "Kreeg de mol in de eerste ronde zijn bijsluiter als eerste opgevouwen?",
+      "Text": "Trok de mol een foto tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Werd de mol nat tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een zwart mollenboekje?",
       "Opties": [
         "Ja",
         "Nee"

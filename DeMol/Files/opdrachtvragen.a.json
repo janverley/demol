@@ -1,30 +1,37 @@
 {
   "Opdracht": "a",
-  "Description": "Queen Hanne",
+  "Description": "RummiKub",
   "Vragen": [
     {
-      "Text": "Heeft de mol een roos hoedje opgehad?",
+      "Text": "Ging de mol blokjes opduiken?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Deed de mol het touwenparcours mee?",
+      "Text": "Heeft de mol een nieuwe serie gelegd",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Zat de mol in de grijze bus vandaag?",
+      "Text": "Heeft de mol een joker vast gehad",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Zette de mol als eerste zijn helm op?",
+      "Text": "Heeft de mol een roos mollenboekje",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heet de mol Harts?",
       "Opties": [
         "Ja",
         "Nee"

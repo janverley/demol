@@ -1,39 +1,41 @@
 {
   "Opdracht": "f",
-  "Description": "Beaucoup Fish",
+  "Description": "Kunst of Kitch?",
   "Vragen": [
     {
-      "Text": "Heeft de mol het ijzeren kruis gezien?",
+      "Text": "Heeft de mol een penseeel vast gehad?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol het blad met de visgraat vat gehad?",
+      "Text": "Heeft de mol de foto van een kunstwerk vast gehad?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Zat er alcohol in het eerste drankje dat de mol dronk in het restaurant?",
+      "Text": "Heeft de mol bewust gesaboteerd met een foute kleur?",
       "Opties": [
         "Ja",
         "Nee"
       ]
-
     },
     {
-      "Text": "Wat at de mol? (meerdere opties mogelijk)",
+      "Text": "Had de mol verf aan zijn handen na de opdracht?",
       "Opties": [
-        "voorgerecht",
-        "hoofdgerecht met vis",
-        "hoofdgerecht met vlees",
-        "dessert",
-        "koffie"
-      ],
-      "MeerdereOptiesMogelijk": true
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Droeg de mol een zwembroek tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
     }
   ]
 }

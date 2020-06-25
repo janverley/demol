@@ -1,37 +1,36 @@
 {
   "Opdracht": "c",
-  "Description": "Selfie-time",
+  "Description": "Van de boekskes",
   "Vragen": [
     {
-      "Text": "Was de mol een walkie man/vrouw?",
+      "Text": "Was de vraag over het boekje van de mol juist?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Is de mol in de eerste auto vertrokken naar Barjac?",
+      "Text": "Heeft de mol een juist antwoord gegeven?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Stond de mol mee op de selfies?",
+      "Text": "De hoeveelste vraag ging over het boekje van de mol",
+      "Opties": [
+        "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "Laatste"
+      ]
+    },
+    {
+      "Text": "Heeft de mol tijdens de kwis een alcoholisch drankje gedronken?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Zat de mol vooraan in de auto bij de heenrit naar Barjac?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Zat de mol achteraan in de auto bij de terugrit van Barjac?",
+      "Text": "Had de mol nog zwemgerief aan tijdens de kwis?",
       "Opties": [
         "Ja",
         "Nee"
