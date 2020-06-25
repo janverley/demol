@@ -323,11 +323,11 @@ namespace DeMol.ViewModels
             conductor.ActivateItem(x);
         }
 
-        // public void Validate()
-        // {
-        //     var x = container.GetInstance<ValidateViewModel>();
-        //     conductor.ActivateItem(x);
-        // }
+        public void Validate()
+        {
+            var x = container.GetInstance<ValidateViewModel>();
+            conductor.ActivateItem(x);
+        }
 
         public void EndResult()
         {

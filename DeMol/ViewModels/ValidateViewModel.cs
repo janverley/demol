@@ -25,14 +25,23 @@ namespace DeMol.ViewModels
         {
             base.OnActivate();
 
-            var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
-
-            Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:",
+             Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:",
                 Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
-            Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}",
-                antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
-            Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}",
-                antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
+
+
+            var admin = Util.GetAdminDataOfSelectedDag(container);
+
+            foreach (var gespeeldeOpdrachtData in admin.OpdrachtenGespeeld)
+            {
+
+                var antwoordendata = Util.SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
+
+                Checks.Add(new CheckViewModel($"Aantal Antwoorden in opdracht {gespeeldeOpdrachtData.OpdrachtId}: {antwoordendata.Spelers.Count}",
+                    antwoordendata.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
+
+                Checks.Add(new CheckViewModel($"Aantal Mollen in opdracht {gespeeldeOpdrachtData.OpdrachtId}: {antwoordendata.Spelers.Count(s => s.IsDeMol)}",
+                    antwoordendata.Spelers.Count(s => s.IsDeMol) == 1));
+            }
         }
 
         public void InvalidateAnswers()

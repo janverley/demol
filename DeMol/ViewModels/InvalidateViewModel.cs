@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Caliburn.Micro;
+using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
@@ -22,7 +23,12 @@ namespace DeMol.ViewModels
 
         public void Invalidate()
         {
-            File.Delete($@".\Files\antwoorden.{container.GetInstance<ShellViewModel>().Dag}.json");
+            var admin = Util.GetAdminDataOfSelectedDag(container);
+            foreach (var gespeeldeOpdrachtData in admin.OpdrachtenGespeeld)
+            {
+                File.Delete($@".\Files\antwoorden.{gespeeldeOpdrachtData.OpdrachtId}.json");
+            }
+           
         }
     }
 }

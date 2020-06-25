@@ -24,7 +24,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <Button Name="StartQuiz" Style="{StaticResource Btn1}">Dag Quiz</Button>
-                <!-- <Button Name="Validate" Style="{StaticResource Btn1}">Dag Resultaat</Button> -->
+                <Button Name="Validate" Style="{StaticResource Btn1}">Dag Validatie</Button>
                 <Button Name="EndQuiz" Style="{StaticResource Btn1}">Finale Quiz</Button>
                 <Button Name="EndResult" Style="{StaticResource Btn1}">Finale Resultaat</Button>
             </StackPanel>

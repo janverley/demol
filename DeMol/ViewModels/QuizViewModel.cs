@@ -43,6 +43,8 @@ namespace DeMol.ViewModels
          
             var x = container.GetInstance<ScoreViewModel>();
             x.Naam = naam;
+
+            x.Text = Util.ScoreInfoVanVorigeDag(container, naam);
             
             ActivateItem(x);
         }

@@ -267,5 +267,30 @@ namespace DeMol.Model
             public string Filename { get; set; }
             public bool Encrypted { get; set; }
         }
+
+        public static string ScoreInfoVanVorigeDag(SimpleContainer container, string naam)
+        {
+            var sb = new StringBuilder();
+            
+            // vorige dag
+            var vandaag = container.GetInstance<ShellViewModel>().Dag;
+            if (vandaag == 1)
+            {
+                return "Gisteren was er geen Quiz, nog geen scores te zien hier.";
+            }
+
+            var gisteren = vandaag - 1;
+            var admindateGisteren = SafeReadJson<AdminData>(gisteren);
+
+            foreach (var gespeeldeOpdrachtData in admindateGisteren.OpdrachtenGespeeld)
+            {
+                //berkeen score voor die opdracth voor naam
+                
+                sb.AppendLine($"Opdracht {gespeeldeOpdrachtData.OpdrachtId}: ?");
+            }
+
+
+            return sb.ToString();
+        }
     }
 }

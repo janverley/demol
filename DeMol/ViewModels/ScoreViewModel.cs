@@ -19,11 +19,5 @@ namespace DeMol.ViewModels
             var q = Parent as QuizViewModel;
             q.StartQuiz(Naam);
         }
-
-        protected override void OnActivate()
-        {
-            Text = $"Hallo {Naam}";
-            base.OnActivate();
-        }
     }
 }
