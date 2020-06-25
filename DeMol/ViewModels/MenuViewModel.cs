@@ -39,7 +39,7 @@ namespace DeMol.ViewModels
                         container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
                     }
 
-                    SelectedDagChanged();
+                    //SelectedDagChanged();
 
                     UpdateButtonStates();
                 }
@@ -143,7 +143,7 @@ namespace DeMol.ViewModels
             if (SelectedDag != null)
             {
                 container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
-                var adminData = Util.GetAdminData(container);
+                var adminData = Util.GetAdminDataOfSelectedDag(container);
                 //var opdrachtenVragenData = Util.SafeReadJson<OpdrachtVragenData>();
 
                 // als file niet gevonden
@@ -166,11 +166,13 @@ namespace DeMol.ViewModels
                 OpdrachtenGespeeld.Clear();
                 foreach (var opdrachtData in opdrachtDatas)
                 {
-                    // var algesavedOpdrachtdata =
-                    //     adminData.OpdrachtenGespeeld.FirstOrDefault(o => o.Opdracht.SafeEqual(opdrachtData.Opdracht));
+                    var algesavedOpdrachtdata =
+                        adminData.OpdrachtenGespeeld.FirstOrDefault(o => o.OpdrachtId.SafeEqual(opdrachtData.Opdracht));
+
+                    //var opdrachtData = opdrachtDatas.First(od => od.Opdracht == adminData.OpdrachtenGespeeld gespeeldeOpdrachtData.OpdrachtId);
 
                     OpdrachtenGespeeld.Add(
-                        new OpdrachtViewModel(opdrachtData, SelectedDag.Id));
+                        new OpdrachtViewModel(opdrachtData, algesavedOpdrachtdata));
                     // {
                     //     Id = opdrachtData.Opdracht,
                     //     OpdrachtData = opdrachtData,
@@ -211,19 +213,19 @@ namespace DeMol.ViewModels
                     {Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend});
             }
 
-            //newAdminData.OpdrachtenGespeeld.Clear();
-            foreach (var item in OpdrachtenGespeeld)
+            newAdminData.OpdrachtenGespeeld.Clear();
+            foreach (var item in OpdrachtenGespeeld.Where(op => op.VandaagGespeeld))
             {
-                Util.SafeFileWithBackup(item.OpdrachtData, item.OpdrachtData.Opdracht);
+                //Util.SafeFileWithBackup(item.OpdrachtData, item.OpdrachtData.Opdracht);
 
-                // var gespeelde = new GespeeldeOpdrachtData()
-                // {
-                //     OpdrachtId = item.Id,
-                //     EffectiefVerdiend = item.EffectiefVerdiend,
-                //     MaxTeVerdienen = item.MaxTeVerdienen
-                // };
-                //     
-                // newAdminData.OpdrachtenGespeeld.Add(gespeelde);
+                var gespeeldeOpdracht = new GespeeldeOpdrachtData()
+                {
+                    OpdrachtId = item.Id,
+                    EffectiefVerdiend = item.EffectiefVerdiend,
+                    MaxTeVerdienen = item.MaxTeVerdienen
+                };
+                    
+                newAdminData.OpdrachtenGespeeld.Add(gespeeldeOpdracht);
             }
 
             // var vragenCodes = new List<string>();
@@ -335,7 +337,22 @@ namespace DeMol.ViewModels
 
         public void EndQuiz()
         {
-            var opdrachtDatas = Util.AlleOpdrachtData().Where(od => od.GespeeldOpDag != -1);
+// alle admindatas ophalen
+// alle gespeekde opdracthen in lijst samensteken
+            
+            var gespeeldeOpdrachtenIds = new List<string>();
+
+            foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
+            {
+                var adminadata = Util.SafeReadJson<AdminData>(dag.Id);
+
+                foreach (var gespeeldeOpdrachtData in adminadata.OpdrachtenGespeeld)
+                {
+                    gespeeldeOpdrachtenIds.Add(gespeeldeOpdrachtData.OpdrachtId);
+                }
+            }
+            
+            var opdrachtDatas = Util.AlleOpdrachtData().Where(od =>  gespeeldeOpdrachtenIds.Any(i => i== od.Opdracht));
 
             var finaleAdminData = Util.SafeReadJson<FinaleData>();
             if (!finaleAdminData.FinaleVragen.Any())

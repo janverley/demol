@@ -54,7 +54,7 @@ namespace DeMol.ViewModels
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            var adminData  = Util.GetAdminData(container);
+            var adminData  = Util.GetAdminDataOfSelectedDag(container);
             var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 
             var deMol            = antwoorden.Spelers.Single(s => s.IsDeMol);
@@ -122,7 +122,7 @@ namespace DeMol.ViewModels
 
             var resultSB = new StringBuilder();
 
-            var adminData  = Util.GetAdminData(container);
+            var adminData  = Util.GetAdminDataOfSelectedDag(container);
             var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
 
             var deMol            = antwoorden.Spelers.Single(s => s.IsDeMol);

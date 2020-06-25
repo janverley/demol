@@ -16,7 +16,7 @@ namespace DeMol.ViewModels
             smoelenViewModel = container.GetInstance<SmoelenViewModel>();
             smoelenViewModel.CanSelectUserDelegate = name =>
             {
-                var adminData = Util.GetAdminData(container);
+                var adminData = Util.GetAdminDataOfSelectedDag(container);
 
                 var result = !adminData.HeeftQuizGespeeld.Any(s => s.Naam.SafeEqual(name));
                 return result;

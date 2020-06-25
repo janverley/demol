@@ -252,7 +252,7 @@ namespace DeMol.Model
             return $"{opdrachtData.Opdracht.ToUpper()} - {opdrachtData.Description}";
         }
 
-        public static AdminData GetAdminData(SimpleContainer container)
+        public static AdminData GetAdminDataOfSelectedDag(SimpleContainer container)
         {
             return SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
         }

@@ -5,21 +5,21 @@ namespace DeMol.ViewModels
 {
     public class OpdrachtViewModel : PropertyChangedBase
     {
-        private readonly int selectedDagId;
+        //private readonly int selectedDagId;
         private int effectiefVerdiend;
         private int maxTeVerdienen;
 
         private string naam;
         private bool vandaagGespeeld;
 
-        public OpdrachtViewModel(OpdrachtData opdrachtData, int selectedDagId)
+        public OpdrachtViewModel(OpdrachtData opdrachtData, GespeeldeOpdrachtData gespeeldeOpdrachtData)
         {
-            this.selectedDagId = selectedDagId;
+            //this.selectedDagId = selectedDagId;
             OpdrachtData = opdrachtData;
             Naam = Util.OpdrachtUINaam(opdrachtData);
-            VandaagGespeeld = opdrachtData.GespeeldOpDag == selectedDagId;
-            MaxTeVerdienen = opdrachtData.MaxTeVerdienenBedrag;
-            EffectiefVerdiend = opdrachtData.VerdiendBedrag;
+            VandaagGespeeld = gespeeldeOpdrachtData != null;
+            MaxTeVerdienen = gespeeldeOpdrachtData?.MaxTeVerdienen??0;
+            EffectiefVerdiend = gespeeldeOpdrachtData?.EffectiefVerdiend??0;
         }
 
         public string Naam
@@ -34,14 +34,14 @@ namespace DeMol.ViewModels
             set
             {
                 Set(ref vandaagGespeeld, value);
-                if (vandaagGespeeld)
-                {
-                    OpdrachtData.GespeeldOpDag = selectedDagId;
-                }
-                else
-                {
-                    OpdrachtData.GespeeldOpDag = -1;
-                }
+                // if (vandaagGespeeld)
+                // {
+                //     OpdrachtData.GespeeldOpDag = selectedDagId;
+                // }
+                // else
+                // {
+                //     OpdrachtData.GespeeldOpDag = -1;
+                // }
             }
         }
 

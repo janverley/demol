@@ -21,12 +21,15 @@ namespace DeMol.ViewModels
             this.container = container;
 
 
-            var adminData = Util.GetAdminData(container);
+            var adminData = Util.GetAdminDataOfSelectedDag(container);
 
             selectedDagId  = container.GetInstance<ShellViewModel>().Dag;
             opdrachtenData = Util.AlleOpdrachtData();
 
-            gespeeldeOpdrachten = opdrachtenData.Where(od => od.GespeeldOpDag == selectedDagId).ToList();
+            gespeeldeOpdrachten = opdrachtenData
+                .Where(od => adminData.OpdrachtenGespeeld
+                    .Any(og =>og.OpdrachtId == od.Opdracht))
+                .ToList();
         }
 
 
@@ -97,7 +100,7 @@ namespace DeMol.ViewModels
 
                     if (isLast)
                     {
-                        var adminData = Util.GetAdminData(container);
+                        var adminData = Util.GetAdminDataOfSelectedDag(container);
                         adminData.HeeftQuizGespeeld.Add(new SpelerInfo {Naam = Naam});
                         Util.SafeAdminData(container, adminData);
 

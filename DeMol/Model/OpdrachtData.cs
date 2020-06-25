@@ -8,7 +8,7 @@ namespace DeMol.Model
         public string Description { get; set; }
         public List<Vraag> Vragen { get; set; } = new List<Vraag>();
 
-        public int GespeeldOpDag { get; set; }
+        //public int GespeeldOpDag { get; set; }
 
         public bool DeMolIsOntmaskerd { get; set; }
         
