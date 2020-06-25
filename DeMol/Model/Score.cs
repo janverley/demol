@@ -7,5 +7,6 @@ namespace DeMol.Model
         public double juisteAntwoorden;
         public string Speler;
         public TimeSpan tijd;
+        public bool WasDeMol;
     }
 }

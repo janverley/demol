@@ -16,7 +16,7 @@ namespace DeMol.ViewModels
         {
             //this.selectedDagId = selectedDagId;
             OpdrachtData = opdrachtData;
-            Naam = Util.OpdrachtUINaam(opdrachtData);
+            Naam = Util.OpdrachtUiNaam(opdrachtData);
             VandaagGespeeld = gespeeldeOpdrachtData != null;
             MaxTeVerdienen = gespeeldeOpdrachtData?.MaxTeVerdienen??0;
             EffectiefVerdiend = gespeeldeOpdrachtData?.EffectiefVerdiend??0;

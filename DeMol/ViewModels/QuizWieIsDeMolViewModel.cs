@@ -46,7 +46,7 @@ namespace DeMol.ViewModels
         public string Text =>
             $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat De Mol was bij opdracht {Opdracht}?";
 
-        public string Opdracht => Util.OpdrachtUINaam(OpdrachtData);
+        public string Opdracht => Util.OpdrachtUiNaam(OpdrachtData);
         public OpdrachtData OpdrachtData { get; set; }
 
         public bool CanStart => Opties.Any(o => o.IsSelected);

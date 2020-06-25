@@ -247,7 +247,7 @@ namespace DeMol.Model
             return result;
         }
 
-        public static string OpdrachtUINaam(OpdrachtData opdrachtData)
+        public static string OpdrachtUiNaam(OpdrachtData opdrachtData)
         {
             return $"{opdrachtData.Opdracht.ToUpper()} - {opdrachtData.Description}";
         }
@@ -268,9 +268,18 @@ namespace DeMol.Model
             public bool Encrypted { get; set; }
         }
 
+        public static string OpdrachtUiNaam(string opdrachtId)
+        {
+            var alles = AlleOpdrachtData();
+            var opdr = alles.First(data => data.Opdracht == opdrachtId);
+            return OpdrachtUiNaam(opdr);
+        }
+
         public static string ScoreInfoVanVorigeDag(SimpleContainer container, string naam)
         {
             var sb = new StringBuilder();
+
+            sb.AppendLine($"{naam}, dit zijn je scores van gisteren:");
             
             // vorige dag
             var vandaag = container.GetInstance<ShellViewModel>().Dag;
@@ -285,8 +294,34 @@ namespace DeMol.Model
             foreach (var gespeeldeOpdrachtData in admindateGisteren.OpdrachtenGespeeld)
             {
                 //berkeen score voor die opdracth voor naam
+
+                var antwoorden = SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
+
+                if (antwoorden.Spelers.Single(s => s.Naam == naam).IsDeMol)
+                {
+                    sb.AppendLine($"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: jij was de mol");
+                }
+                else
+                {
+               
+                    var juisteAntwoorden = antwoorden.Spelers.Single(s => s.IsDeMol).Antwoorden;
                 
-                sb.AppendLine($"Opdracht {gespeeldeOpdrachtData.OpdrachtId}: ?");
+                    var mijnAntwoorden  = antwoorden.Spelers.Single(s => s.Naam == naam).Antwoorden;
+
+                    var score = 0;
+                
+                    foreach (var juistantwoord in juisteAntwoorden)
+                    {
+                        var mijnantwoord = mijnAntwoorden[juistantwoord.Key];
+                        if (mijnantwoord.SafeEqual(juistantwoord.Value))
+                        {
+                            score++;
+                        }
+                    }
+                
+                    sb.AppendLine($"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {score} / {juisteAntwoorden.Count}");
+                    
+                }
             }
 
 

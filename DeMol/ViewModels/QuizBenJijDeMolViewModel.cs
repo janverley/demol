@@ -50,7 +50,7 @@ namespace DeMol.ViewModels
         }
 
         public string BenJijDeMol => $"{Naam}, was jij De Mol bij opdracht {Opdracht}?";
-        public string Opdracht => Util.OpdrachtUINaam(OpdrachtData);
+        public string Opdracht => Util.OpdrachtUiNaam(OpdrachtData);
 
         public void OnKeyDown(KeyEventArgs e)
         {

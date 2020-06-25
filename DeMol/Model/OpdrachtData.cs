@@ -2,6 +2,11 @@
 
 namespace DeMol.Model
 {
+    // public class ScoreData
+    // {
+    //     public string OpdracthId { get; set; }
+    // }
+
     public class OpdrachtData
     {
         public string Opdracht { get; set; }
