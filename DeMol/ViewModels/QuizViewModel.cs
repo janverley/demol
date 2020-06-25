@@ -22,7 +22,7 @@ namespace DeMol.ViewModels
                 return result;
             };
 
-            smoelenViewModel.DoNext = vm => StartQuiz(vm.Naam);
+            smoelenViewModel.DoNext = vm => StartScore(vm.Naam);
         }
 
         public DagViewModel SelectedDag { get; set; }
@@ -38,6 +38,16 @@ namespace DeMol.ViewModels
             ActivateItem(smoelenViewModel);
         }
 
+        public void StartScore(string naam)
+        {
+         
+            var x = container.GetInstance<ScoreViewModel>();
+            x.Naam = naam;
+            
+            ActivateItem(x);
+        }
+
+        
         public void StartQuiz(string naam)
         {
             var vragenlijstViewModel = container.GetInstance<VragenLijstViewModel>();

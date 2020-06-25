@@ -114,6 +114,7 @@
     <Compile Include="ViewModels\PasVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizBenJijDeMolViewModel.cs" />
     <Compile Include="ViewModels\QuizIntroViewModel.cs" />
+    <Compile Include="ViewModels\ScoreViewModel.cs" />
     <Compile Include="ViewModels\VragenLijstViewModel.cs" />
     <Compile Include="ViewModels\QuizViewModel.cs" />
     <Compile Include="ViewModels\QuizWieIsDeMolViewModel.cs" />
@@ -164,6 +165,9 @@
     </Compile>
     <Compile Include="Views\QuizIntroView.xaml.cs">
       <DependentUpon>QuizIntroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScoreView.xaml.cs">
+      <DependentUpon>ScoreView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VragenLijstView.xaml.cs">
       <DependentUpon>VragenLijstView.xaml</DependentUpon>
@@ -278,6 +282,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ScoreView.xaml" />
     <Page Include="Views\VragenLijstView.xaml" />
     <Page Include="Views\QuizNaamView.xaml">
       <SubType>Designer</SubType>
