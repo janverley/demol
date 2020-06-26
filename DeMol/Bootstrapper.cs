@@ -47,6 +47,11 @@ namespace DeMol
                 .PerRequest<SmoelenViewModel>()
                 .PerRequest<DagResultaatViewModel>()
                 .PerRequest<QuizViewModel>()
+
+                .PerRequest<FinaleQuizViewModel>()
+                .PerRequest<FinaleVragenLijstViewModel>()
+                .PerRequest<FinaleQuizVragenViewModel>();
+
                 ;
         }
 

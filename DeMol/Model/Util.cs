@@ -27,7 +27,11 @@ namespace DeMol.Model
                 typeof(OpdrachtData),
                 new FileData {Filename = @".\Files\OpdrachtVragen.{0}.json", Encrypted = false}
             },
-            {typeof(FinaleData), new FileData {Filename = @".\Files\finaleData.json", Encrypted = false}}
+            {typeof(FinaleData), new FileData {Filename = @".\Files\finaleData.json", Encrypted = false}},
+            {typeof(FinaleAntwoordenData), new FileData {Filename   = @".\Files\finaleAntwoorden.json", Encrypted = false}},
+
+            
+            
         };
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)

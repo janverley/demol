@@ -25,7 +25,7 @@ namespace DeMol.ViewModels
             smoelenViewModel.DoNext = vm => StartScore(vm.Naam);
         }
 
-        public DagViewModel SelectedDag { get; set; }
+        //public DagViewModel SelectedDag { get; set; }
 
         protected override void OnActivate()
         {
