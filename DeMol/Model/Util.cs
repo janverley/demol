@@ -50,6 +50,11 @@ namespace DeMol.Model
 
         public static bool SafeEqual(this string a, string b)
         {
+            if (a == null || b == null)
+            {
+                return false;
+            }
+            
             var sa = a.Trim().ToLower();
             var sb = b.Trim().ToLower();
 

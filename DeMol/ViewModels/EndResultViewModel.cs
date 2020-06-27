@@ -15,11 +15,11 @@ namespace DeMol.ViewModels
 
         private readonly DispatcherTimer timer = new DispatcherTimer();
 
-        private readonly StringBuilder overzichtSB = new StringBuilder();
-
         private string text;
 
         private string winnaar;
+        private bool canUitslag;
+        private List<OpdrachtData> gespeeldeOpdrachten;
 
         public EndResultViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -28,6 +28,28 @@ namespace DeMol.ViewModels
 
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(5);
+            
+            var gespeeldeOpdrachtenIds = new List<string>();
+
+            foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
+            {
+                var adminadata = Util.SafeReadJson<AdminData>(dag.Id);
+
+                foreach (var gespeeldeOpdrachtData in adminadata.OpdrachtenGespeeld)
+                {
+                    gespeeldeOpdrachtenIds.Add(gespeeldeOpdrachtData.OpdrachtId);
+                }
+            }
+            
+             gespeeldeOpdrachten = Util.AlleOpdrachtData().Where(od => gespeeldeOpdrachtenIds.Any(i => i == od.Opdracht)).ToList();
+
+
+        }
+
+        public bool CanUitslag
+        {
+            get => canUitslag;
+            set => Set(ref canUitslag, value);
         }
 
         public string Winnaar
@@ -43,7 +65,6 @@ namespace DeMol.ViewModels
         }
 
         public BindableCollection<CheckViewModel> Checks { get; set; } = new BindableCollection<CheckViewModel>();
-        public bool ShowChecks { get; private set; }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -86,6 +107,9 @@ namespace DeMol.ViewModels
                     $"{Environment.NewLine}Ex-aequo: Er waren {exaequos.Count()} spelers met evenveel juiste antwoorden als de winnaar ({eindWinnaar.juisteAntwoorden}), maar die waren trager dan {eindWinnaar.Speler}: {string.Join(",", exaequos.Select(s => s.Speler))}";
             }
 
+        var overzichtSB = new StringBuilder();
+
+
             overzichtSB.AppendLine("Spelers:");
             foreach (var score in scores)
             {
@@ -114,42 +138,73 @@ namespace DeMol.ViewModels
 
         public void Antwoorden()
         {
-            var x = container.GetInstance<DagResultaatViewModel>();
+            var sb = new StringBuilder();
 
 
-            x.Text = overzichtSB.ToString();
+            sb.AppendLine("Mollen:");
 
+            foreach (var opdrachtData in gespeeldeOpdrachten)
+            {
+                    var antwoorden = Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
+                    var mol = antwoorden.Spelers.First(s => s.IsDeMol)?.Naam??"?";
+                    var raders = antwoorden.Spelers
+                        .Where(s => !s.IsDeMol)
+                        .Where(s => s.DeMolIs.SafeEqual(mol)).Select(s => s.Naam);
+                    sb.AppendLine(
+                        $"Opdracht: {Util.OpdrachtUiNaam(opdrachtData)}: De mol was {mol}, geraden door: {string.Join(",", raders)}");
+            }
 
-            conductor.ActivateItem(x);
+            Text = sb.ToString();
+        }
+
+        public void Uitslag()
+        {
+            Text = "De einduitslag van De Mol...";
+
+            timer.Start();
+
+            
+            // var x = container.GetInstance<DagResultaatViewModel>();
+            //
+            //
+            // x.Text = overzichtSB.ToString();
+            //
+            //
+            // conductor.ActivateItem(x);
         }
 
         protected override void OnActivate()
         {
             base.OnActivate();
 
+            CanUitslag = false;
+
             foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
             {
-                var antwoorden = Util.SafeReadJson<AntwoordenData>(dag.Id);
-
                 Checks.Add(new CheckViewModel($"Dag {dag.Id} administratie saved:",
                     Util.DataFileFoundAndValid<AdminData>(dag.Id)));
-                Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}",
+            }
+            
+            foreach (var opdrachtData in gespeeldeOpdrachten)
+            {
+                var antwoorden = Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
+                
+                Checks.Add(new CheckViewModel($"Opdracht {Util.OpdrachtUiNaam(opdrachtData)}: Aantal Antwoorden: {antwoorden.Spelers.Count}",
                     antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
-                Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}",
+                Checks.Add(new CheckViewModel($"Opdracht {Util.OpdrachtUiNaam(opdrachtData)}: Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}",
                     antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
             }
+
+            var finaleantwoordenData = Util.SafeReadJson<FinaleAntwoordenData>();
+
+            Checks.Add(new CheckViewModel($"Finale: Aantal Antwoorden: {finaleantwoordenData.Spelers.Count}",
+                finaleantwoordenData.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
+
 
 
             if (!Checks.All(c => c.IsOk))
             {
-                ShowChecks = true;
-                NotifyOfPropertyChange(() => ShowChecks);
-            }
-            else
-            {
-                Text = "De einduitslag van De Mol...";
-
-                timer.Start();
+                CanUitslag = true;
             }
         }
     }

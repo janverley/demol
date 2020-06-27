@@ -8,8 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ItemsControl Grid.IsSharedSizeScope="True" Name="Checks"
-                          Visibility="{Binding Path=ShowChecks, Converter={StaticResource booleanToVisibilityConverter}}" />
+            <ItemsControl Grid.IsSharedSizeScope="True" Name="Checks"/>
 
             <TextBlock Style="{StaticResource H2}" Text="{Binding Path=Winnaar}" TextAlignment="Center" Margin="20" />
             <TextBlock Style="{StaticResource H1}" Text="{Binding Path=Text}" TextAlignment="Center" />
@@ -17,6 +16,7 @@
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Name="Menu" Style="{StaticResource Btn1}" Margin="20">Menu</Button>
             <Button Name="Antwoorden" Style="{StaticResource Btn1}" Margin="20">Antwoorden</Button>
+            <Button Name="Uitslag" Style="{StaticResource Btn1}" Margin="20">Uitslag</Button>
         </StackPanel>
     </Grid>
 </UserControl>
