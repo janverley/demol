@@ -8,6 +8,7 @@ namespace DeMol.ViewModels
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
+        private string text;
 
         public InvalidateViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -21,6 +22,12 @@ namespace DeMol.ViewModels
             conductor.ActivateItem(x);
         }
 
+        public string Text
+        {
+            get => text;
+            set => Set(ref text, value);
+        }
+        
         public void Invalidate()
         {
             var admin = Util.GetAdminDataOfSelectedDag(container);
@@ -29,6 +36,11 @@ namespace DeMol.ViewModels
                 File.Delete($@".\Files\antwoorden.{gespeeldeOpdrachtData.OpdrachtId}.json");
             }
            
+            admin.HeeftQuizGespeeld.Clear();
+            Util.SafeAdminData(container, admin);
+
+
+            Text = "Done!";
         }
     }
 }

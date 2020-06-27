@@ -7,6 +7,18 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsOk}"
+                                 Value="True">
+                        <Setter Property="Height"
+                                Value="0" />
+                    </DataTrigger>
+                </Style.Triggers>
+                
+            </Style>
+        </Grid.Style>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" SharedSizeGroup="t" />
             <ColumnDefinition Width="auto" SharedSizeGroup="t" />

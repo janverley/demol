@@ -337,5 +337,18 @@ namespace DeMol.Model
 
             return sb.ToString();
         }
+
+        public static bool CheckForDoubles(IEnumerable<Speler> spelers)
+        {
+            foreach (var speler in spelers)
+            {
+                if (spelers.Count(s => s.Naam.SafeEqual(speler.Naam)) != 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

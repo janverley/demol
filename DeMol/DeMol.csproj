@@ -367,7 +367,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Files\admin.1.json" />
-    <None Include="Files\antwoorden.1.json" />
     <None Include="Files\dagen.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

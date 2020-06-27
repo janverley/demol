@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,29 +12,26 @@ namespace DeMol.ViewModels
 {
     public class EndResultViewModel : Screen
     {
+        private readonly Dictionary<string, int> aantalPasvragenPerNaam;
+        private readonly Dictionary<string, int> aantalRadersPerOpdrachtId;
+        private readonly Dictionary<string, AntwoordenData> alleAntwoordenPerOpdrachtId;
+        private readonly Dictionary<string, string> alleJuisteAntwoorden;
+        private readonly List<Scores> alleScores;
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
+        private readonly FinaleAntwoordenData finaleantwoordenData;
+        private readonly List<OpdrachtData> gespeeldeOpdrachten;
+        private readonly int groepspot;
+        private readonly Dictionary<string, string> molPerOpdrachtId;
+        private readonly Dictionary<string, string> radersPerOpdrachtId;
 
         private readonly DispatcherTimer timer = new DispatcherTimer();
+        private bool canAntwoorden;
         private bool canUitslag;
-        private readonly List<OpdrachtData> gespeeldeOpdrachten;
 
         private string text;
 
         private string winnaar;
-        private Dictionary<string, int> aantalPasvragenPerNaam;
-        private Dictionary<string, string> alleJuisteAntwoorden;
-        private Dictionary<string, string> molPerOpdrachtId;
-        private Dictionary<string, string> radersPerOpdrachtId;
-        private Dictionary<string, int> aantalRadersPerOpdrachtId;
-        private List<Scores> alleScores;
-        private FinaleAntwoordenData finaleantwoordenData;
-        private int groepspot;
-        private bool canAntwoorden;
-        private Dictionary<string, AntwoordenData> alleAntwoordenPerOpdrachtId;
-
-
-        public bool ShowChecks { get; private set; }
 
         public EndResultViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -50,13 +46,13 @@ namespace DeMol.ViewModels
             var gespeeldeOpdrachtenIds = new List<string>();
 
             aantalPasvragenPerNaam = new Dictionary<string, int>();
-            
+
             foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
             {
                 Checks.Add(new CheckViewModel($"Administratie saved {dag.Naam} :",
                     Util.DataFileFoundAndValid<AdminData>(dag.Id)));
-                
-                
+
+
                 var adminadata = Util.SafeReadJson<AdminData>(dag.Id);
 
                 foreach (var gespeeldeOpdrachtData in adminadata.OpdrachtenGespeeld)
@@ -69,7 +65,7 @@ namespace DeMol.ViewModels
                     var naam = pasvragenVerdiend.Naam;
                     if (aantalPasvragenPerNaam.ContainsKey(naam))
                     {
-                        aantalPasvragenPerNaam[naam]+=pasvragenVerdiend.PasVragenVerdiend;
+                        aantalPasvragenPerNaam[naam] += pasvragenVerdiend.PasVragenVerdiend;
                     }
                     else
                     {
@@ -80,7 +76,7 @@ namespace DeMol.ViewModels
 
             gespeeldeOpdrachten = Util.AlleOpdrachtData().Where(od => gespeeldeOpdrachtenIds.Any(i => i == od.Opdracht))
                 .ToList();
-            
+
             alleAntwoordenPerOpdrachtId = new Dictionary<string, AntwoordenData>();
             alleJuisteAntwoorden = new Dictionary<string, string>();
             molPerOpdrachtId = new Dictionary<string, string>();
@@ -88,89 +84,106 @@ namespace DeMol.ViewModels
             aantalRadersPerOpdrachtId = new Dictionary<string, int>();
 
             groepspot = 0;
-            
+
             foreach (var opdrachtData in gespeeldeOpdrachten)
             {
-                var antwoorden = Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
-                alleAntwoordenPerOpdrachtId.Add(opdrachtData.Opdracht, antwoorden);
-                
-                Checks.Add(new CheckViewModel(
-                    $"Opdracht {Util.OpdrachtUiNaam(opdrachtData)}: Aantal Antwoorden: {antwoorden.Spelers.Count}",
-                    antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
-                Checks.Add(new CheckViewModel(
-                    $"Opdracht {Util.OpdrachtUiNaam(opdrachtData)}: Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}",
-                    antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
-                
-                groepspot += antwoorden.EffectiefVerdiend;
+                var antwoordengevonden = Util.DataFileFoundAndValid<AntwoordenData>(opdrachtData.Opdracht);
 
-                var molNaam = antwoorden.Spelers.First(s => s.IsDeMol)?.Naam ?? "?";
+                Checks.Add(new CheckViewModel($"Antwoorden saved {Util.OpdrachtUiNaam(opdrachtData)} :",
+                    antwoordengevonden));
 
-                molPerOpdrachtId.Add(opdrachtData.Opdracht, molNaam);
-                
-                foreach (var juistAntwoord in antwoorden.Spelers.First(s => s.IsDeMol).Antwoorden)
+                if (antwoordengevonden)
                 {
-                    alleJuisteAntwoorden.Add(juistAntwoord.Key, juistAntwoord.Value);
+                    var antwoorden = Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
+                    alleAntwoordenPerOpdrachtId.Add(opdrachtData.Opdracht, antwoorden);
+
+                    Checks.Add(new CheckViewModel(
+                        $"Opdracht {Util.OpdrachtUiNaam(opdrachtData)}: Aantal Antwoorden: {antwoorden.Spelers.Count}",
+                        antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
+                    Checks.Add(new CheckViewModel(
+                        $"Opdracht {Util.OpdrachtUiNaam(opdrachtData)}: Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}",
+                        antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
+                    Checks.Add(new CheckViewModel($"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(opdrachtData)}:",
+                        Util.CheckForDoubles(antwoorden.Spelers)));
+
+                    groepspot += antwoorden.EffectiefVerdiend;
+
+                    var molNaam = antwoorden.Spelers.First(s => s.IsDeMol)?.Naam ?? "?";
+
+                    molPerOpdrachtId.Add(opdrachtData.Opdracht, molNaam);
+
+                    foreach (var juistAntwoord in antwoorden.Spelers.First(s => s.IsDeMol).Antwoorden)
+                    {
+                        alleJuisteAntwoorden.Add(juistAntwoord.Key, juistAntwoord.Value);
+                    }
+
+                    var aantalRaders = antwoorden
+                        .Spelers
+                        .Where(s => !s.IsDeMol)
+                        .Count(s => s.DeMolIs.SafeEqual(molNaam));
+                    aantalRadersPerOpdrachtId.Add(opdrachtData.Opdracht, aantalRaders);
+
+                    var radersLijst = string.Join(", ", antwoorden.Spelers
+                        .Where(s => !s.IsDeMol)
+                        .Where(s => s.DeMolIs.SafeEqual(molNaam)).Select(s => s.Naam));
+                    radersPerOpdrachtId.Add(opdrachtData.Opdracht, radersLijst);
                 }
-
-                var aantalRaders = antwoorden
-                    .Spelers
-                    .Where(s => !s.IsDeMol)
-                    .Count(s => s.DeMolIs.SafeEqual(molNaam));
-                aantalRadersPerOpdrachtId.Add(opdrachtData.Opdracht, aantalRaders);
-
-                var radersLijst = string.Join(", ", antwoorden.Spelers
-                    .Where(s => !s.IsDeMol)
-                    .Where(s => s.DeMolIs.SafeEqual(molNaam)).Select(s => s.Naam));
-                radersPerOpdrachtId.Add(opdrachtData.Opdracht, radersLijst);
-
             }
 
             finaleantwoordenData = Util.SafeReadJson<FinaleAntwoordenData>();
-            
+
             Checks.Add(new CheckViewModel($"Finale: Aantal Antwoorden: {finaleantwoordenData.Spelers.Count}",
                 finaleantwoordenData.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
 
-            
             foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
             {
                 var scores = new Scores();
                 scores.Naam = speler.Naam;
                 scores.totaleTijd = TimeSpan.Zero;
-                
+
                 // pasvragen tellen
                 var pasvragenVerdiend = aantalPasvragenPerNaam.Any(kvp => kvp.Key.SafeEqual(speler.Naam))
                     ? aantalPasvragenPerNaam.Single(kvp => kvp.Key.SafeEqual(speler.Naam)).Value
                     : 0;
 
                 scores.aantalPasVragenVerdiend = pasvragenVerdiend;
-                
+
                 foreach (var opdrachtData in gespeeldeOpdrachten)
                 {
-                    var antwoorden = alleAntwoordenPerOpdrachtId[opdrachtData.Opdracht];// Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
-                    
-                    var a = antwoorden.Spelers.First(s => s.Naam.SafeEqual(speler.Naam));
-
-                    scores.totaleTijd += a.Tijd;
-                    
-                    if (a.IsDeMol)
+                    if (alleAntwoordenPerOpdrachtId.ContainsKey(opdrachtData.Opdracht))
                     {
-                        if (aantalRadersPerOpdrachtId[opdrachtData.Opdracht] < Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben)
-                        {
-                            scores.verdiendAlsMol += antwoorden.MaxTeVerdienen - antwoorden.EffectiefVerdiend;
-                        }
-                        
-                        scores.aantalKeerMolGeweest++;
-                        continue;
-                    }
+                        var antwoorden = alleAntwoordenPerOpdrachtId[opdrachtData.Opdracht];
 
-                    foreach (var antwoord in a.Antwoorden)
-                    {
-                        scores.aantalVragenBeantwoord++;
-                        var juistAntwoord = alleJuisteAntwoorden[antwoord.Key];
+                        var a = antwoorden.Spelers.FirstOrDefault(s => s.Naam.SafeEqual(speler.Naam));
 
-                        if (antwoord.Value.SafeEqual(juistAntwoord))
+                        if (a != null)
                         {
-                            scores.aantalVragenJuistBeantwoord++;
+
+
+                            scores.totaleTijd += a.Tijd;
+
+                            if (a.IsDeMol)
+                            {
+                                if (aantalRadersPerOpdrachtId[opdrachtData.Opdracht] <
+                                    Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben)
+                                {
+                                    scores.verdiendAlsMol += antwoorden.MaxTeVerdienen - antwoorden.EffectiefVerdiend;
+                                }
+
+                                scores.aantalKeerMolGeweest++;
+                                continue;
+                            }
+
+                            foreach (var antwoord in a.Antwoorden)
+                            {
+                                scores.aantalVragenBeantwoord++;
+                                var juistAntwoord = alleJuisteAntwoorden[antwoord.Key];
+
+                                if (antwoord.Value.SafeEqual(juistAntwoord))
+                                {
+                                    scores.aantalVragenJuistBeantwoord++;
+                                }
+                            }
                         }
                     }
                 }
@@ -179,11 +192,11 @@ namespace DeMol.ViewModels
                 var finaleAntwoorden = finaleantwoordenData.Spelers.Single(s => s.Naam.SafeEqual(speler.Naam));
 
                 scores.totaleTijd += finaleAntwoorden.Tijd;
-                
+
                 foreach (var demolIsPerOpdrachtId in finaleAntwoorden.DeMolIsPerOpdrachtId)
                 {
                     scores.finaleAantalVragenBeantwoord++;
-                    
+
                     if (molPerOpdrachtId[demolIsPerOpdrachtId.Key].SafeEqual(demolIsPerOpdrachtId.Value))
                     {
                         scores.finaleAantalVragenJuistBeantwoord++;
@@ -199,23 +212,28 @@ namespace DeMol.ViewModels
                         scores.finaleAantalVragenJuistBeantwoord++;
                     }
                 }
-                
-                
+
+
                 // percetnage berekene
 
-                var x = Math.Min(scores.aantalVragenJuistBeantwoord + scores.aantalPasVragenVerdiend, scores.aantalVragenBeantwoord);
+                var x = Math.Min(scores.aantalVragenJuistBeantwoord + scores.aantalPasVragenVerdiend,
+                    scores.aantalVragenBeantwoord);
                 scores.percentage = x / scores.aantalVragenBeantwoord;
-                scores.finalePercentage = scores.finaleAantalVragenJuistBeantwoord / scores.finaleAantalVragenBeantwoord;
+                scores.finalePercentage =
+                    scores.finaleAantalVragenJuistBeantwoord / scores.finaleAantalVragenBeantwoord;
 
                 scores.totaalPercentage = (scores.percentage + scores.finalePercentage) / 2;
-                
+
                 alleScores.Add(scores);
             }
-            
-            
-            Util.SafeFileWithBackup(new ScoresData{Scores = alleScores. OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd).ToList()});
 
+
+            Util.SafeFileWithBackup(new ScoresData
+                {Scores = alleScores.OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd).ToList()});
         }
+
+
+        public bool ShowChecks { get; private set; }
 
         public bool CanUitslag
         {
@@ -229,7 +247,7 @@ namespace DeMol.ViewModels
             set => Set(ref canAntwoorden, value);
         }
 
-        
+
         public string Winnaar
         {
             get => winnaar;
@@ -274,24 +292,28 @@ namespace DeMol.ViewModels
             var scores = alleScores.OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd).First();
 
             Winnaar = scores.Naam;
-            
+
             var sb = new StringBuilder();
 
             sb.AppendLine($"- behaalde in totaal {scores.totaalPercentage:P},");
-            sb.AppendLine($"- beantwoorde in de week {scores.aantalVragenJuistBeantwoord}/{scores.aantalVragenBeantwoord} vragen juist");
+            sb.AppendLine(
+                $"- beantwoorde in de week {scores.aantalVragenJuistBeantwoord}/{scores.aantalVragenBeantwoord} vragen juist");
             sb.AppendLine($"- won {scores.aantalPasVragenVerdiend} pasvragen");
-            sb.AppendLine($"- beantwoorde in de finale {scores.finaleAantalVragenJuistBeantwoord}/{scores.finaleAantalVragenBeantwoord} vragen juist");
-            sb.AppendLine($"- op een totale tijd van {scores.totaleTijd.Hours} uur, {scores.totaleTijd.Minutes} minuten en {scores.totaleTijd.Seconds} seconden");
+            sb.AppendLine(
+                $"- beantwoorde in de finale {scores.finaleAantalVragenJuistBeantwoord}/{scores.finaleAantalVragenBeantwoord} vragen juist");
+            sb.AppendLine(
+                $"- op een totale tijd van {scores.totaleTijd.Hours} uur, {scores.totaleTijd.Minutes} minuten en {scores.totaleTijd.Seconds} seconden");
             sb.AppendLine();
-            sb.AppendLine($"- was bij {scores.aantalKeerMolGeweest} opdrachten de mol en verdiende daarmee {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
+            sb.AppendLine(
+                $"- was bij {scores.aantalKeerMolGeweest} opdrachten de mol en verdiende daarmee {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
             sb.AppendLine();
             sb.AppendLine();
             sb.AppendLine($"De Groepspot bevat {groepspot.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
 
             sb.AppendLine();
-            sb.AppendLine($"Proficiat!");
+            sb.AppendLine("Proficiat!");
 
-            
+
             Text = sb.ToString();
             //Antwoorden();
 
@@ -354,7 +376,7 @@ namespace DeMol.ViewModels
             sb.AppendLine();
             sb.AppendLine("Punten:");
 
-            foreach (var scores in alleScores. OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd))
+            foreach (var scores in alleScores.OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd))
             {
                 sb.AppendLine(scores.Naam);
 
@@ -371,7 +393,6 @@ namespace DeMol.ViewModels
                     $"\t{scores.aantalKeerMolGeweest} keer mol geweest");
                 sb.AppendLine(
                     $"\tVerdiend als Mol: {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
-                
             }
 
             Text = sb.ToString();
@@ -408,6 +429,5 @@ namespace DeMol.ViewModels
                 ShowChecks = true;
             }
         }
-
     }
 }

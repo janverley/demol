@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Micro;
 using DeMol.Model;
 
@@ -28,7 +30,6 @@ namespace DeMol.ViewModels
              Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:",
                 Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
 
-
             var admin = Util.GetAdminDataOfSelectedDag(container);
 
             foreach (var gespeeldeOpdrachtData in admin.OpdrachtenGespeeld)
@@ -36,11 +37,15 @@ namespace DeMol.ViewModels
 
                 var antwoordendata = Util.SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
 
-                Checks.Add(new CheckViewModel($"Aantal Antwoorden in opdracht {gespeeldeOpdrachtData.OpdrachtId}: {antwoordendata.Spelers.Count}",
+                Checks.Add(new CheckViewModel($"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}",
                     antwoordendata.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
 
-                Checks.Add(new CheckViewModel($"Aantal Mollen in opdracht {gespeeldeOpdrachtData.OpdrachtId}: {antwoordendata.Spelers.Count(s => s.IsDeMol)}",
+                Checks.Add(new CheckViewModel($"Aantal Mollen in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count(s => s.IsDeMol)}",
                     antwoordendata.Spelers.Count(s => s.IsDeMol) == 1));
+                
+                Checks.Add(new CheckViewModel($"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}:",
+                    Util.CheckForDoubles(antwoordendata.Spelers)));
+
             }
         }
 

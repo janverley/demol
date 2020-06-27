@@ -12,7 +12,7 @@
 
             <StackPanel VerticalAlignment="Bottom" Margin="20">
                 <Button Name="InvalidateAnswers" Style="{StaticResource Btn1}">Invalideer Antwoorden</Button>
-                <Button Name="ShowResult" Style="{StaticResource Btn1}">Dag resultaat</Button>
+                <!-- <Button Name="ShowResult" Style="{StaticResource Btn1}">Dag resultaat</Button> -->
             </StackPanel>
         </StackPanel>
         <Button VerticalAlignment="Bottom" Margin="20" Name="Menu" HorizontalAlignment="Center"
