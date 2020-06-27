@@ -15,13 +15,13 @@ namespace DeMol.Model
 
         //public int GespeeldOpDag { get; set; }
 
-        public bool DeMolIsOntmaskerd { get; set; }
+        //public bool DeMolIsOntmaskerd { get; set; }
         
-        public int MaxTeVerdienenBedrag { get; set; }
+        //public int MaxTeVerdienenBedrag { get; set; }
         
-        public int VerdiendBedrag { get; set; }
+        //public int VerdiendBedrag { get; set; }
 
-        public SpelerInfo WasMolInDezeOpdracht { get; set; }
+        //public SpelerInfo WasMolInDezeOpdracht { get; set; }
         
         
     }

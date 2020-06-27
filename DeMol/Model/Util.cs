@@ -17,6 +17,7 @@ namespace DeMol.Model
 
         private static Dictionary<Type, FileData> Files => new Dictionary<Type, FileData>
         {
+            {typeof(ScoresData), new FileData {Filename   = @".\Files\scores.json", Encrypted = false}},
             {typeof(AdminData), new FileData {Filename   = @".\Files\admin.{0}.json", Encrypted = false}},
             {typeof(DagenData), new FileData {Filename   = @".\Files\dagen.json", Encrypted     = false}},
             {typeof(SpelersData), new FileData {Filename = @".\Files\spelers.json", Encrypted   = false}},

@@ -166,13 +166,16 @@ namespace DeMol.ViewModels
                 OpdrachtenGespeeld.Clear();
                 foreach (var opdrachtData in opdrachtDatas)
                 {
-                    var algesavedOpdrachtdata =
-                        adminData.OpdrachtenGespeeld.FirstOrDefault(o => o.OpdrachtId.SafeEqual(opdrachtData.Opdracht));
-
+                    var antwoorden = Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
+                    
                     //var opdrachtData = opdrachtDatas.First(od => od.Opdracht == adminData.OpdrachtenGespeeld gespeeldeOpdrachtData.OpdrachtId);
 
                     OpdrachtenGespeeld.Add(
-                        new OpdrachtViewModel(opdrachtData, algesavedOpdrachtdata));
+                        new OpdrachtViewModel(opdrachtData, 
+                            adminData.OpdrachtenGespeeld.Any(o => o.OpdrachtId.SafeEqual(opdrachtData.Opdracht)),
+                            antwoorden.MaxTeVerdienen,
+                            antwoorden.EffectiefVerdiend        
+                            ));
                     // {
                     //     Id = opdrachtData.Opdracht,
                     //     OpdrachtData = opdrachtData,
@@ -226,8 +229,26 @@ namespace DeMol.ViewModels
                 };
                     
                 newAdminData.OpdrachtenGespeeld.Add(gespeeldeOpdracht);
+                
+            }
+            
+            foreach (var item in OpdrachtenGespeeld)
+            {
+                // stockeer values in antwoordenData
+                var antwoorden = Util.SafeReadJson<AntwoordenData>(item.Id);
+
+                if (item.VandaagGespeeld)
+                {
+                    antwoorden.Dag = SelectedDag.Id.ToString();
+                }
+                
+                antwoorden.EffectiefVerdiend = item.EffectiefVerdiend;
+                antwoorden.MaxTeVerdienen = item.MaxTeVerdienen;
+                Util.SafeFileWithBackup(antwoorden,item.Id);
             }
 
+            
+            
             // var vragenCodes = new List<string>();
             // foreach (var gespeeldeOpdracht in newAdminData.OpdrachtenGespeeld)
             // {

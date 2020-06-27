@@ -11,15 +11,22 @@ namespace DeMol.ViewModels
 
         private string naam;
         private bool vandaagGespeeld;
+        private string error;
 
-        public OpdrachtViewModel(OpdrachtData opdrachtData, GespeeldeOpdrachtData gespeeldeOpdrachtData)
+        public OpdrachtViewModel(OpdrachtData opdrachtData, bool vandaagGespeeld, int maxTeVerdienen, int effectiefVerdiend)
         {
             //this.selectedDagId = selectedDagId;
             OpdrachtData = opdrachtData;
             Naam = Util.OpdrachtUiNaam(opdrachtData);
-            VandaagGespeeld = gespeeldeOpdrachtData != null;
-            MaxTeVerdienen = gespeeldeOpdrachtData?.MaxTeVerdienen??0;
-            EffectiefVerdiend = gespeeldeOpdrachtData?.EffectiefVerdiend??0;
+            VandaagGespeeld = vandaagGespeeld;
+            MaxTeVerdienen = maxTeVerdienen;
+            EffectiefVerdiend = effectiefVerdiend;
+        }
+
+        public string Error    
+        {
+            get => error;
+            set => Set(ref error, value);
         }
 
         public string Naam
@@ -52,8 +59,20 @@ namespace DeMol.ViewModels
             {
                 if (Set(ref maxTeVerdienen, value))
                 {
-                    OpdrachtData.MaxTeVerdienenBedrag = value;
+                    Check();
                 }
+            }
+        }
+
+        private void Check()
+        {
+            if (EffectiefVerdiend > MaxTeVerdienen)
+            {
+                Error = "Da kan ni";
+            }
+            else
+            {
+                Error = "";
             }
         }
 
@@ -62,10 +81,8 @@ namespace DeMol.ViewModels
             get => effectiefVerdiend;
             set
             {
-                if (Set(ref effectiefVerdiend, value))
-                {
-                    OpdrachtData.VerdiendBedrag = value;
-                }
+                if(Set(ref effectiefVerdiend, value))
+                    Check();
             }
         }
 

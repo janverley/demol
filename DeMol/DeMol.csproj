@@ -97,6 +97,7 @@
     <Compile Include="Model\MollenData.cs" />
     <Compile Include="Model\PasvragenVerdiend.cs" />
     <Compile Include="Model\Score.cs" />
+    <Compile Include="Model\ScoresData.cs" />
     <Compile Include="Model\Speler.cs" />
     <Compile Include="Model\SpelerInfo.cs" />
     <Compile Include="Model\SpelersData.cs" />
