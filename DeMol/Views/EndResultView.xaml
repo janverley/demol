@@ -11,7 +11,7 @@
             <ItemsControl Grid.IsSharedSizeScope="True" Name="Checks"/>
 
             <TextBlock Style="{StaticResource H2}" Text="{Binding Path=Winnaar}" TextAlignment="Center" Margin="20" />
-            <TextBlock Style="{StaticResource H1}" Text="{Binding Path=Text}" TextAlignment="Center" />
+            <TextBlock Style="{StaticResource H1}" Text="{Binding Path=Text}" TextAlignment="Left" />
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Name="Menu" Style="{StaticResource Btn1}" Margin="20">Menu</Button>

@@ -182,6 +182,7 @@ namespace DeMol.ViewModels
                 Antwoorden = antwoorden
             };
 
+            alleAntwoorden.OpdrachtId = OpdrachtId;
             alleAntwoorden.Spelers.Add(speler);
 
             Util.SafeFileWithBackup(alleAntwoorden, OpdrachtId);
