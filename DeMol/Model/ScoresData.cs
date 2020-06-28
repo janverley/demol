@@ -6,6 +6,8 @@ namespace DeMol.Model
     internal class ScoresData
     {
         public List<Scores> Scores { get; set; } = new List<Scores>();
+        public int GroepsPot { get; set; }
+        public int MaxTeVerdienen { get; set; }
     }
     
     public struct Scores

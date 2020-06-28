@@ -10,6 +10,7 @@ namespace DeMol.ViewModels
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
+        private string text;
 
         public ValidateViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -45,10 +46,22 @@ namespace DeMol.ViewModels
                 
                 Checks.Add(new CheckViewModel($"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}:",
                     Util.CheckForDoubles(antwoordendata.Spelers)));
-
             }
+
+            if (Checks.All(c => c.IsOk))
+            {
+                Text = "Alles Ok!";
+            }
+            
         }
 
+        public string Text
+        {
+            get => text;
+            set => Set(ref text, value);
+        }
+
+        
         public void InvalidateAnswers()
         {
             var x = container.GetInstance<InvalidateViewModel>();
