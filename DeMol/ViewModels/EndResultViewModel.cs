@@ -28,11 +28,11 @@ namespace DeMol.ViewModels
         private readonly DispatcherTimer timer = new DispatcherTimer();
         private bool canAntwoorden;
         private bool canUitslag;
+        private readonly int maxTeVerdienen;
 
         private string text;
 
         private string winnaar;
-        private int maxTeVerdienen;
 
         public EndResultViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -109,7 +109,7 @@ namespace DeMol.ViewModels
 
                     groepspot += antwoorden.EffectiefVerdiend;
                     maxTeVerdienen += antwoorden.MaxTeVerdienen;
-                    
+
                     var molNaam = antwoorden.Spelers.First(s => s.IsDeMol)?.Naam ?? "?";
 
                     molPerOpdrachtId.Add(opdrachtData.Opdracht, molNaam);
@@ -134,7 +134,8 @@ namespace DeMol.ViewModels
 
             finaleantwoordenData = Util.SafeReadJson<FinaleAntwoordenData>();
 
-            var finaleDoorIedereenGespeeld = finaleantwoordenData.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers;
+            var finaleDoorIedereenGespeeld = finaleantwoordenData.Spelers.Count ==
+                                             container.GetInstance<ShellViewModel>().AantalSpelers;
             Checks.Add(new CheckViewModel($"Finale: Aantal Antwoorden: {finaleantwoordenData.Spelers.Count}",
                 finaleDoorIedereenGespeeld));
 
@@ -146,7 +147,6 @@ namespace DeMol.ViewModels
                     scores.Naam = speler.Naam;
                     scores.totaleTijd = TimeSpan.Zero;
 
-                    // pasvragen tellen
                     var pasvragenVerdiend = aantalPasvragenPerNaam.Any(kvp => kvp.Key.SafeEqual(speler.Naam))
                         ? aantalPasvragenPerNaam.Single(kvp => kvp.Key.SafeEqual(speler.Naam)).Value
                         : 0;
@@ -163,8 +163,6 @@ namespace DeMol.ViewModels
 
                             if (a != null)
                             {
-
-
                                 scores.totaleTijd += a.Tijd;
 
                                 if (a.IsDeMol)
@@ -218,9 +216,6 @@ namespace DeMol.ViewModels
                             scores.finaleAantalVragenJuistBeantwoord++;
                         }
                     }
-
-
-                    // percetnage berekene
 
                     var x = Math.Min(scores.aantalVragenJuistBeantwoord + scores.aantalPasVragenVerdiend,
                         scores.aantalVragenBeantwoord);
@@ -277,28 +272,6 @@ namespace DeMol.ViewModels
         {
             timer.Stop();
 
-            // var scores = new List<Score>();
-            //
-            // foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
-            // {
-            //     scores.Add(new Score {Speler = speler.Naam, juisteAntwoorden = 0, tijd = TimeSpan.Zero});
-            // }
-            //
-            // var finaleData = Util.SafeReadJson<FinaleData>();
-            // var finaleAntwoorden = Util.SafeReadJson<AntwoordenData>("finale");
-            //
-            // foreach (var speler in finaleAntwoorden.Spelers)
-            // {
-            //     var score = scores.Single(s => s.Speler.SafeEqual(speler.Naam));
-            //     score.tijd = speler.Tijd;
-            //     foreach (var finaleVraag in finaleData.FinaleVragen)
-            //     {
-            //         if (speler.Antwoorden[finaleVraag.VraagCode].SafeEqual(finaleVraag.JuistAntwoord))
-            //         {
-            //             score.juisteAntwoorden++;
-            //         }
-            //     }
-            // }
 
             var scores = alleScores.OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd).First();
 
@@ -326,33 +299,6 @@ namespace DeMol.ViewModels
 
 
             Text = sb.ToString();
-            //Antwoorden();
-
-            // Text = "De EindWinnaar had de meeste vragen juist beantwoord in het finale spel.";
-            //
-            // var exaequos = scores.Where(s =>
-            //     !s.Equals(eindWinnaar) && s.juisteAntwoorden == eindWinnaar.juisteAntwoorden);
-            // if (exaequos.Any())
-            // {
-            //     Text +=
-            //         $"{Environment.NewLine}Ex-aequo: Er waren {exaequos.Count()} spelers met evenveel juiste antwoorden als de winnaar ({eindWinnaar.juisteAntwoorden}), maar die waren trager dan {eindWinnaar.Speler}: {string.Join(",", exaequos.Select(s => s.Speler))}";
-            // }
-            //
-            // var overzichtSB = new StringBuilder();
-            //
-            //
-            // overzichtSB.AppendLine("Spelers:");
-            // foreach (var score in scores)
-            // {
-            //     overzichtSB.AppendLine($"{score.Speler}: {score.juisteAntwoorden} ({score.tijd})");
-            // }
-            //
-            // overzichtSB.AppendLine("Antwoorden:");
-            // foreach (var fv in finaleData.FinaleVragen)
-            // {
-            //     overzichtSB.AppendLine(
-            //         $"{fv.Dag.Naam} {fv.Description}: {fv.Vraag.Text}({fv.VraagCode}): {fv.JuistAntwoord}");
-            // }
         }
 
         protected override void OnDeactivate(bool close)
@@ -384,14 +330,14 @@ namespace DeMol.ViewModels
 
                 var molNaam = molPerOpdrachtId[opdrachtData.Opdracht];
                 var raders = radersPerOpdrachtId[opdrachtData.Opdracht];
-                var molIsNIETGeraden = (aantalRadersPerOpdrachtId[opdrachtData.Opdracht] <
-                                    Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben);
-                var voordeMol = (!molIsNIETGeraden
+                var molIsNIETGeraden = aantalRadersPerOpdrachtId[opdrachtData.Opdracht] <
+                                       Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben;
+                var voordeMol = !molIsNIETGeraden
                     ? "Niks"
                     : (alleAntwoordenPerOpdrachtId[opdrachtData.Opdracht].MaxTeVerdienen -
                        alleAntwoordenPerOpdrachtId[opdrachtData.Opdracht].EffectiefVerdiend)
-                    .ToString("C0", CultureInfo.GetCultureInfo("nl-be")));
-                
+                    .ToString("C0", CultureInfo.GetCultureInfo("nl-be"));
+
                 sb.AppendLine(
                     $"\t\tDe mol was {molNaam}, geraden door: {raders} => {(molIsNIETGeraden ? "Goed gedaan mol!" : "Meup!")}");
                 sb.AppendLine(
@@ -428,15 +374,6 @@ namespace DeMol.ViewModels
             Text = "De einduitslag van De Mol...";
 
             timer.Start();
-
-
-            // var x = container.GetInstance<DagResultaatViewModel>();
-            //
-            //
-            // x.Text = overzichtSB.ToString();
-            //
-            //
-            // conductor.ActivateItem(x);
         }
 
         protected override void OnActivate()

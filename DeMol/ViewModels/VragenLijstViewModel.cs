@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Caliburn.Micro;
 using DeMol.Model;
@@ -12,10 +11,6 @@ namespace DeMol.ViewModels
 
         private readonly List<OpdrachtData> gespeeldeOpdrachten;
 
-        //private readonly List<OpdrachtData> gespeeldeOpdrachten;
-        private readonly IEnumerable<OpdrachtData> opdrachtenData;
-        private readonly int selectedDagId;
-
         public VragenLijstViewModel(SimpleContainer container)
         {
             this.container = container;
@@ -23,12 +18,11 @@ namespace DeMol.ViewModels
 
             var adminData = Util.GetAdminDataOfSelectedDag(container);
 
-            selectedDagId  = container.GetInstance<ShellViewModel>().Dag;
-            opdrachtenData = Util.AlleOpdrachtData();
+            var opdrachtenData = Util.AlleOpdrachtData();
 
             gespeeldeOpdrachten = opdrachtenData
                 .Where(od => adminData.OpdrachtenGespeeld
-                    .Any(og =>og.OpdrachtId == od.Opdracht))
+                    .Any(og => og.OpdrachtId == od.Opdracht))
                 .ToList();
         }
 
@@ -47,7 +41,7 @@ namespace DeMol.ViewModels
                 var opdrachtData = gespeeldeOpdrachten[i];
 
                 var jijmol = container.GetInstance<QuizBenJijDeMolViewModel>();
-                jijmol.Naam         = Naam;
+                jijmol.Naam = Naam;
                 jijmol.OpdrachtData = opdrachtData;
                 jijmol.DoNext = model =>
                 {
@@ -72,7 +66,7 @@ namespace DeMol.ViewModels
                 Items.Add(jijmol);
 
                 var wieisdemol = container.GetInstance<QuizWieIsDeMolViewModel>();
-                wieisdemol.Naam         = Naam;
+                wieisdemol.Naam = Naam;
                 wieisdemol.OpdrachtData = opdrachtData;
                 wieisdemol.DoNext = model =>
                 {
@@ -92,8 +86,8 @@ namespace DeMol.ViewModels
                 var vragenCodes = VragenCodesFromGespeeldeOpdracht(opdrachtData);
 
                 vragen.VragenCodes = vragenCodes;
-                vragen.OpdrachtId  = opdrachtData.Opdracht;
-                vragen.Naam        = Naam;
+                vragen.OpdrachtId = opdrachtData.Opdracht;
+                vragen.Naam = Naam;
                 vragen.DoNext = model2 =>
                 {
                     var isLast = !Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1).Any();
@@ -116,30 +110,18 @@ namespace DeMol.ViewModels
                 Items.Add(vragen);
             }
 
+            if (!Items.Any())
+            {
+                var boodschap = container.GetInstance<BoodschapViewModel>();
+                boodschap.Text = "Er zijn geen opdrachten gespeeld vandaag.";
+                
+                Items.Add(boodschap);
+            }
+            
             ActivateItem(Items.First());
             base.OnActivate();
         }
 
-        public void Previous()
-        {
-        }
-
-        public void Next()
-        {
-        }
-
-        private void StartLoop(string naam, OpdrachtData gespeeldeOpdracht)
-        {
-            var opdrachtId = gespeeldeOpdracht.Opdracht;
-
-            var op = opdrachtenData.FirstOrDefault(o => o.Opdracht.SafeEqual(opdrachtId));
-
-            var x2 = container.GetInstance<QuizBenJijDeMolViewModel>();
-            x2.Naam         = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(naam.ToLower());
-            x2.OpdrachtData = op;
-
-            ActivateItem(x2);
-        }
 
         private static List<string> VragenCodesFromGespeeldeOpdracht(OpdrachtData gespeeldeOpdracht)
         {
@@ -171,58 +153,5 @@ namespace DeMol.ViewModels
 
             return vragenCodes;
         }
-
-        // private void BeginVragenVoorMol(string naam,
-        //                                 OpdrachtData gespeeldeOpdracht)
-        // {
-        //     var vragenCodes = VragenCodesFromGespeeldeOpdracht(gespeeldeOpdracht);
-        //
-        //     var x3 = container.GetInstance<QuizVragenViewModel>();
-        //             
-        //     x3.VragenCodes = vragenCodes;
-        //     x3.OpdrachtId = gespeeldeOpdracht.Opdracht;
-        //     x3.Naam = naam;
-        //     x3.IsDeMol = true;
-        //     x3.DeMolIs = naam;
-        //             
-        //     ActiveItem = x3;
-        //     x3.Activate();
-        // }
-        //
-        // private void BeginVragenVoorNietMol(object sender, DeactivationEventArgs e, string naam,
-        //                                     OpdrachtData gespeeldeOpdracht)
-        // {
-        //     var vragenCodes = VragenCodesFromGespeeldeOpdracht(gespeeldeOpdracht);
-        //
-        //
-        //     var ss = (QuizWieIsDeMolViewModel) sender;
-        //     
-        //
-        //     var x3 = container.GetInstance<QuizVragenViewModel>();
-        //             
-        //     x3.VragenCodes = vragenCodes;
-        //     x3.OpdrachtId = gespeeldeOpdracht.Opdracht;
-        //     x3.Naam = naam;
-        //     x3.IsDeMol = false;
-        //     x3.DeMolIs = ss.Opties.Single(o => o.IsSelected).OptieText;
-        //             
-        //     ActivateItem(x3);
-        //
-        // }
-
-        // public void OnQuizBenJijDeMolViewModelClose(string naam, OpdrachtData opdrachData, bool isDeMol)
-        // {
-        //     if (!isDeMol)
-        //     {
-        //         var x4 = container.GetInstance<QuizWieIsDeMolViewModel>();
-        //         x4.OpdrachtData = opdrachData;
-        //         x4.Naam = naam;
-        //         ActivateItem(x4);
-        //
-        //         //x4.Deactivated += (sender, e) => BeginVragenVoorNietMol(sender, e, naam, opdrachData);
-        //     }
-        //         
-        //     //BeginVragenVoorMol(naam, opdrachData);           
-        // }
     }
 }

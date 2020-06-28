@@ -78,15 +78,6 @@ namespace DeMol.ViewModels
         public void Start()
         {
             DoNext(this);
-            // var x = container.GetInstance<QuizVragenViewModel>();
-            // var admin = Util.GetAdminData(container);
-            //
-            // x.VragenCodes = admin.VragenCodes;
-            // x.OpdrachtId = container.GetInstance<ShellViewModel>().Dag.ToString();
-            // x.Naam = Naam;
-            // x.IsDeMol = false;
-            // x.DeMolIs = Opties.Single(o => o.IsSelected).OptieText;
-            // conductor.ActivateItem(x);
         }
 
         public void Menu()

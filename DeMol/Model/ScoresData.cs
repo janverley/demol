@@ -9,7 +9,7 @@ namespace DeMol.Model
         public int GroepsPot { get; set; }
         public int MaxTeVerdienen { get; set; }
     }
-    
+
     public struct Scores
     {
         public string Naam;
@@ -19,15 +19,14 @@ namespace DeMol.Model
         public decimal aantalVragenBeantwoord;
         public int aantalVragenJuistBeantwoord;
         public decimal percentage;
-            
+
         public decimal finaleAantalVragenBeantwoord;
         public int finaleAantalVragenJuistBeantwoord;
         public decimal finalePercentage;
 
         public int aantalKeerMolGeweest;
         public int verdiendAlsMol;
-           
+
         public TimeSpan totaleTijd;
     }
-
 }

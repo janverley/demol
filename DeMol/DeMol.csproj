@@ -87,14 +87,10 @@
     <Compile Include="Model\AntwoordenData.cs" />
     <Compile Include="Model\Dag.cs" />
     <Compile Include="Model\FinaleAntwoordenData.cs" />
-    <Compile Include="Model\FinaleData.cs" />
     <Compile Include="Model\FinaleSpeler.cs" />
-    <Compile Include="Model\FinaleVraag.cs" />
-    <Compile Include="Model\Mol.cs" />
     <Compile Include="Model\OpdrachtStatus.cs" />
     <Compile Include="Model\OpdrachtData.cs" />
     <Compile Include="Model\DagenData.cs" />
-    <Compile Include="Model\MollenData.cs" />
     <Compile Include="Model\PasvragenVerdiend.cs" />
     <Compile Include="Model\Score.cs" />
     <Compile Include="Model\ScoresData.cs" />
@@ -103,16 +99,15 @@
     <Compile Include="Model\SpelersData.cs" />
     <Compile Include="Model\Util.cs" />
     <Compile Include="Model\Vraag.cs" />
+    <Compile Include="ViewModels\BoodschapViewModel.cs" />
     <Compile Include="ViewModels\CheckViewModel.cs" />
     <Compile Include="ViewModels\DagResultaatViewModel.cs" />
     <Compile Include="ViewModels\DagViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
-    <Compile Include="ViewModels\EindResultaatViewModel.cs" />
     <Compile Include="ViewModels\FinaleQuizViewModel.cs" />
     <Compile Include="ViewModels\FinaleQuizVragenViewModel.cs" />
     <Compile Include="ViewModels\FinaleVragenLijstViewModel.cs" />
     <Compile Include="ViewModels\InvalidateViewModel.cs" />
-    <Compile Include="ViewModels\JijBentDeMolViewModel.cs" />
     <Compile Include="ViewModels\MeerdereOptieViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OpdrachtViewModel.cs" />
@@ -124,8 +119,6 @@
     <Compile Include="ViewModels\VragenLijstViewModel.cs" />
     <Compile Include="ViewModels\QuizViewModel.cs" />
     <Compile Include="ViewModels\QuizWieIsDeMolViewModel.cs" />
-    <Compile Include="ViewModels\QuizNaamViewModel.cs" />
-    <Compile Include="ViewModels\QuizOuttroViewModel.cs" />
     <Compile Include="ViewModels\QuizVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizVragenViewModel.cs" />
     <Compile Include="ViewModels\EndResultViewModel.cs" />
@@ -134,6 +127,9 @@
     <Compile Include="ViewModels\smoelenViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\ValidateViewModel.cs" />
+    <Compile Include="Views\BoodschapView.xaml.cs">
+      <DependentUpon>BoodschapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CheckView.xaml.cs">
       <DependentUpon>CheckView.xaml</DependentUpon>
     </Compile>
@@ -249,6 +245,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\BoodschapView.xaml" />
     <Page Include="Views\CheckView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

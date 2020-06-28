@@ -9,12 +9,11 @@ namespace DeMol.Model
             Pasvragen = new List<PasvragenVerdiend>();
             OpdrachtenGespeeld = new List<GespeeldeOpdrachtData>();
             IsVerteldOfZeDeMolZijn = new List<SpelerInfo>();
-            VragenCodes            = new List<string>();
-            HeeftQuizGespeeld      = new List<SpelerInfo>();
+            VragenCodes = new List<string>();
+            HeeftQuizGespeeld = new List<SpelerInfo>();
         }
 
         public List<PasvragenVerdiend> Pasvragen { get; set; }
-        //public List<string> OpdrachtenGespeeld { get; set; }
 
         public List<GespeeldeOpdrachtData> OpdrachtenGespeeld { get; set; }
 

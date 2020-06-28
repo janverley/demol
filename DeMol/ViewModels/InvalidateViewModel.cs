@@ -16,18 +16,18 @@ namespace DeMol.ViewModels
             this.container = container;
         }
 
+        public string Text
+        {
+            get => text;
+            set => Set(ref text, value);
+        }
+
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
 
-        public string Text
-        {
-            get => text;
-            set => Set(ref text, value);
-        }
-        
         public void Invalidate()
         {
             var admin = Util.GetAdminDataOfSelectedDag(container);
@@ -35,7 +35,7 @@ namespace DeMol.ViewModels
             {
                 File.Delete($@".\Files\antwoorden.{gespeeldeOpdrachtData.OpdrachtId}.json");
             }
-           
+
             admin.HeeftQuizGespeeld.Clear();
             Util.SafeAdminData(container, admin);
 

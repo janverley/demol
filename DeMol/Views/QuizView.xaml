@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DeMol.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid >
-        <ContentControl Name="ActiveItem"  Padding="5" Margin="5"/>
+    <Grid>
+        <ContentControl Name="ActiveItem" Padding="5" Margin="5" />
     </Grid>
 </UserControl>

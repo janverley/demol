@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Input;
 using Caliburn.Micro;
 using DeMol.Model;
-using DeMol.Views;
 
 namespace DeMol.ViewModels
 {
@@ -26,7 +25,6 @@ namespace DeMol.ViewModels
 
         public FinaleQuizVragenViewModel(ShellViewModel conductor, SimpleContainer container)
         {
-            
             this.conductor = conductor;
             this.container = container;
 
@@ -35,13 +33,6 @@ namespace DeMol.ViewModels
                 var vraag = Util.GetVraagFromCode(vraagCode);
                 return new QuizVraagViewModel(vraag, vraagCode);
             };
-            //
-            // DoNext = quizVragenViewModel =>
-            // {
-            //     var x = container.GetInstance<QuizOuttroViewModel>();
-            //     x.Naam = quizVragenViewModel.Naam;
-            //     conductor.ActivateItem(x);
-            // };
         }
 
         public string Naam
@@ -168,21 +159,21 @@ namespace DeMol.ViewModels
                 {
                     bestaandeSpeler.AntwoordenPerVraagId.Add(antwoord.Key, antwoord.Value);
                 }
-                bestaandeSpeler.DeMolIsPerOpdrachtId.Add(OpdrachtId,DeMolIs);
+
+                bestaandeSpeler.DeMolIsPerOpdrachtId.Add(OpdrachtId, DeMolIs);
             }
             else
             {
-                var speler = new FinaleSpeler()
+                var speler = new FinaleSpeler
                 {
-                    Naam       = Naam,
-                    Tijd       = diff,
+                    Naam = Naam,
+                    Tijd = diff,
                     AntwoordenPerVraagId = antwoorden
                 };
-            
-                speler.DeMolIsPerOpdrachtId.Add(OpdrachtId,DeMolIs);
-            
+
+                speler.DeMolIsPerOpdrachtId.Add(OpdrachtId, DeMolIs);
+
                 alleAntwoorden.Spelers.Add(speler);
-               
             }
 
             Util.SafeFileWithBackup(alleAntwoorden, OpdrachtId);

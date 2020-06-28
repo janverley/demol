@@ -17,22 +17,21 @@ namespace DeMol.Model
 
         private static Dictionary<Type, FileData> Files => new Dictionary<Type, FileData>
         {
-            {typeof(ScoresData), new FileData {Filename   = @".\Files\scores.json", Encrypted = false}},
-            {typeof(AdminData), new FileData {Filename   = @".\Files\admin.{0}.json", Encrypted = false}},
-            {typeof(DagenData), new FileData {Filename   = @".\Files\dagen.json", Encrypted     = false}},
-            {typeof(SpelersData), new FileData {Filename = @".\Files\spelers.json", Encrypted   = false}},
-            //{ typeof(VragenData), new FileData{ Filename =  @".\Files\vragen.{0}.json", Encrypted = false }  },
+            {typeof(ScoresData), new FileData {Filename = @".\Files\scores.json", Encrypted = false}},
+            {typeof(AdminData), new FileData {Filename = @".\Files\admin.{0}.json", Encrypted = false}},
+            {typeof(DagenData), new FileData {Filename = @".\Files\dagen.json", Encrypted = false}},
+            {typeof(SpelersData), new FileData {Filename = @".\Files\spelers.json", Encrypted = false}},
+
             {typeof(AntwoordenData), new FileData {Filename = @".\Files\antwoorden.{0}.json", Encrypted = false}},
-            {typeof(MollenData), new FileData {Filename     = @".\Files\mollen.json", Encrypted         = false}},
+
             {
                 typeof(OpdrachtData),
                 new FileData {Filename = @".\Files\OpdrachtVragen.{0}.json", Encrypted = false}
             },
-            {typeof(FinaleData), new FileData {Filename = @".\Files\finaleData.json", Encrypted = false}},
-            {typeof(FinaleAntwoordenData), new FileData {Filename   = @".\Files\finaleAntwoorden.json", Encrypted = false}},
-
-            
-            
+            {
+                typeof(FinaleAntwoordenData),
+                new FileData {Filename = @".\Files\finaleAntwoorden.json", Encrypted = false}
+            }
         };
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
@@ -55,7 +54,7 @@ namespace DeMol.Model
             {
                 return false;
             }
-            
+
             var sa = a.Trim().ToLower();
             var sb = b.Trim().ToLower();
 
@@ -74,7 +73,7 @@ namespace DeMol.Model
 
         public static void SafeFileWithBackup(object data, string dag)
         {
-            SafeFileWithBackup(String.Format(Files[data.GetType()].Filename, dag), data,
+            SafeFileWithBackup(string.Format(Files[data.GetType()].Filename, dag), data,
                 Files[data.GetType()].Encrypted);
         }
 
@@ -84,7 +83,7 @@ namespace DeMol.Model
             // first backup
             if (fileInfo.Exists)
             {
-                var      index = 0;
+                var index = 0;
                 FileInfo backupFile;
 
                 do
@@ -120,7 +119,7 @@ namespace DeMol.Model
 
         internal static Tuple<string, Vraag> GetVraagAndCode(OpdrachtData extra, int r)
         {
-            var vraag   = extra.Vragen[r];
+            var vraag = extra.Vragen[r];
             var vraagID = $"{extra.Opdracht.ToUpper()}{r + 1}";
 
             return new Tuple<string, Vraag>(vraagID, vraag);
@@ -128,8 +127,8 @@ namespace DeMol.Model
 
         internal static Vraag GetVraagFromCode(string code)
         {
-            var opdrachtId  = code.Substring(0, 1);
-            var vraagNummer = Int32.Parse(code.Substring(1)) - 1;
+            var opdrachtId = code.Substring(0, 1);
+            var vraagNummer = int.Parse(code.Substring(1)) - 1;
 
             var opdrachtVragen = SafeReadJson<OpdrachtData>(opdrachtId);
 
@@ -146,7 +145,7 @@ namespace DeMol.Model
 
         public static T SafeReadJson<T>(string dag) where T : new()
         {
-            var path = String.Format(Files[typeof(T)].Filename, dag);
+            var path = string.Format(Files[typeof(T)].Filename, dag);
             return SafeReadJson<T>(path, Files[typeof(T)].Encrypted);
         }
 
@@ -183,7 +182,7 @@ namespace DeMol.Model
 
         internal static bool DataFileFoundAndValid<T>(string dag)
         {
-            return DataFileFoundAndValid<T>(String.Format(Files[typeof(T)].Filename, dag), Files[typeof(T)].Encrypted);
+            return DataFileFoundAndValid<T>(string.Format(Files[typeof(T)].Filename, dag), Files[typeof(T)].Encrypted);
         }
 
         internal static bool DataFileFoundAndValid<T>(int dag)
@@ -222,19 +221,19 @@ namespace DeMol.Model
 
         public static string Crypt(this string text)
         {
-            SymmetricAlgorithm algorithm    = DES.Create();
-            var                transform    = algorithm.CreateEncryptor(key, iv);
-            var                inputbuffer  = Encoding.Unicode.GetBytes(text);
-            var                outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            SymmetricAlgorithm algorithm = DES.Create();
+            var transform = algorithm.CreateEncryptor(key, iv);
+            var inputbuffer = Encoding.Unicode.GetBytes(text);
+            var outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Convert.ToBase64String(outputBuffer);
         }
 
         public static string Decrypt(this string text)
         {
-            SymmetricAlgorithm algorithm    = DES.Create();
-            var                transform    = algorithm.CreateDecryptor(key, iv);
-            var                inputbuffer  = Convert.FromBase64String(text);
-            var                outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            SymmetricAlgorithm algorithm = DES.Create();
+            var transform = algorithm.CreateDecryptor(key, iv);
+            var inputbuffer = Convert.FromBase64String(text);
+            var outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Encoding.Unicode.GetString(outputBuffer);
         }
 
@@ -272,12 +271,6 @@ namespace DeMol.Model
             SafeFileWithBackup(adminData, container.GetInstance<ShellViewModel>().Dag);
         }
 
-        private struct FileData
-        {
-            public string Filename { get; set; }
-            public bool Encrypted { get; set; }
-        }
-
         public static string OpdrachtUiNaam(string opdrachtId)
         {
             var alles = AlleOpdrachtData();
@@ -290,7 +283,7 @@ namespace DeMol.Model
             var sb = new StringBuilder();
 
             sb.AppendLine($"{naam}, dit zijn je scores van gisteren:");
-            
+
             // vorige dag
             var vandaag = container.GetInstance<ShellViewModel>().Dag;
             if (vandaag == 1)
@@ -313,13 +306,12 @@ namespace DeMol.Model
                 }
                 else
                 {
-               
                     var juisteAntwoorden = antwoorden.Spelers.Single(s => s.IsDeMol).Antwoorden;
-                
-                    var mijnAntwoorden  = antwoorden.Spelers.Single(s => s.Naam == naam).Antwoorden;
+
+                    var mijnAntwoorden = antwoorden.Spelers.Single(s => s.Naam == naam).Antwoorden;
 
                     var score = 0;
-                
+
                     foreach (var juistantwoord in juisteAntwoorden)
                     {
                         var mijnantwoord = mijnAntwoorden[juistantwoord.Key];
@@ -328,9 +320,9 @@ namespace DeMol.Model
                             score++;
                         }
                     }
-                
-                    sb.AppendLine($"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {score} / {juisteAntwoorden.Count}");
-                    
+
+                    sb.AppendLine(
+                        $"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {score} / {juisteAntwoorden.Count}");
                 }
             }
 
@@ -349,6 +341,12 @@ namespace DeMol.Model
             }
 
             return true;
+        }
+
+        private struct FileData
+        {
+            public string Filename { get; set; }
+            public bool Encrypted { get; set; }
         }
     }
 }

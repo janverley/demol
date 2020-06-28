@@ -25,8 +25,6 @@ namespace DeMol.ViewModels
             smoelenViewModel.DoNext = vm => StartScore(vm.Naam);
         }
 
-        //public DagViewModel SelectedDag { get; set; }
-
         protected override void OnActivate()
         {
             base.OnActivate();
@@ -40,16 +38,15 @@ namespace DeMol.ViewModels
 
         public void StartScore(string naam)
         {
-         
             var x = container.GetInstance<ScoreViewModel>();
             x.Naam = naam;
 
             x.Text = Util.ScoreInfoVanVorigeDag(container, naam);
-            
+
             ActivateItem(x);
         }
 
-        
+
         public void StartQuiz(string naam)
         {
             var vragenlijstViewModel = container.GetInstance<VragenLijstViewModel>();

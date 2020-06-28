@@ -7,11 +7,6 @@ namespace DeMol.ViewModels
 {
     public class FinaleQuizViewModel : Conductor<object>.Collection.OneActive
     {
-        public override object GetView(object context = null)
-        {
-            return new QuizView();
-        }
-
         private readonly SimpleContainer container;
         private readonly SmoelenViewModel smoelenViewModel;
 
@@ -29,6 +24,11 @@ namespace DeMol.ViewModels
             };
 
             smoelenViewModel.DoNext = vm => StartFinaleVragen(vm.Naam);
+        }
+
+        public override object GetView(object context = null)
+        {
+            return new QuizView();
         }
 
         protected override void OnActivate()

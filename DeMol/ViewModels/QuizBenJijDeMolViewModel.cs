@@ -1,20 +1,20 @@
 ﻿using System;
-using Caliburn.Micro;
-using System.Globalization;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Caliburn.Micro;
 using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
-    class QuizBenJijDeMolViewModel : Screen
+    internal class QuizBenJijDeMolViewModel : Screen
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
         private string naam;
 
-        OptieViewModel optieJa = new OptieViewModel("Ja");
-        OptieViewModel optieNee = new OptieViewModel("Nee");
+        private readonly OptieViewModel optieJa = new OptieViewModel("Ja");
+        private readonly OptieViewModel optieNee = new OptieViewModel("Nee");
 
 
         public QuizBenJijDeMolViewModel(ShellViewModel conductor, SimpleContainer container)
@@ -25,22 +25,14 @@ namespace DeMol.ViewModels
             optieJa.PropertyChanged += Optie_PropertyChanged;
             optieNee.PropertyChanged += Optie_PropertyChanged;
 
-            Opties = new BindableCollection<OptieViewModel> { optieJa,optieNee };
-        }
-
-        private void Optie_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(OptieViewModel.IsSelected))
-            {
-                NotifyOfPropertyChange(() => CanStart);
-            }
+            Opties = new BindableCollection<OptieViewModel> {optieJa, optieNee};
         }
 
         public BindableCollection<OptieViewModel> Opties { get; set; }
 
         public string Naam
         {
-            get { return naam; }
+            get => naam;
             set
             {
                 if (Set(ref naam, value))
@@ -52,54 +44,42 @@ namespace DeMol.ViewModels
         public string BenJijDeMol => $"{Naam}, was jij De Mol bij opdracht {Opdracht}?";
         public string Opdracht => Util.OpdrachtUiNaam(OpdrachtData);
 
+        public bool IsDeMol => optieJa.IsSelected;
+        public bool CanStart => Opties.Any(o => o.IsSelected);
+        public OpdrachtData OpdrachtData { get; set; }
+
+        public Action<QuizBenJijDeMolViewModel> DoNext { get; set; }
+
+        private void Optie_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(OptieViewModel.IsSelected))
+            {
+                NotifyOfPropertyChange(() => CanStart);
+            }
+        }
+
         public void OnKeyDown(KeyEventArgs e)
         {
             if (e?.Key == Key.Enter && CanStart)
             {
                 Start();
             }
+
             if (e?.Key == Key.Escape)
             {
                 Menu();
             }
         }
 
-        public bool IsDeMol => optieJa.IsSelected;
-        public bool CanStart => Opties.Any(o => o.IsSelected);
-        public OpdrachtData OpdrachtData { get; set; }
-
-        public Action<QuizBenJijDeMolViewModel> DoNext { get; set; }
-        
         public void Start()
         {
             DoNext(this);
-            //var x = this.Parent as VragenLijstViewModel;
-            //TryClose();
-            //x.OnQuizBenJijDeMolViewModelClose(Naam, OpdrachtData, IsDeMol);
-
-            //conductor.DeactivateItem(this, true);
-
-            //OnDeactivate(true);
-            // if (optieJa.IsSelected)
-            // {
-            //     var x = container.GetInstance<QuizVragenViewModel>();
-            //     x.Naam = Naam;
-            //     x.IsDeMol = true;
-            //     conductor.ActivateItem(x);
-            // }
-            // else
-            // {
-            //     var x = container.GetInstance<QuizWieIsDeMolViewModel>();
-            //     x.Naam = Naam;
-            //     conductor.ActivateItem(x);
-            // }
         }
+
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
-
     }
 }
-

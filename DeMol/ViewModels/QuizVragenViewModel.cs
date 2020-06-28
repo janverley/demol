@@ -32,13 +32,6 @@ namespace DeMol.ViewModels
                 var vraag = Util.GetVraagFromCode(vraagCode);
                 return new QuizVraagViewModel(vraag, vraagCode);
             };
-            //
-            // DoNext = quizVragenViewModel =>
-            // {
-            //     var x = container.GetInstance<QuizOuttroViewModel>();
-            //     x.Naam = quizVragenViewModel.Naam;
-            //     conductor.ActivateItem(x);
-            // };
         }
 
         public string Naam
@@ -92,7 +85,8 @@ namespace DeMol.ViewModels
 
             if (IsDeMol)
             {
-                Message = "Jij bent De Mol, dus je moet op alle vragen goed antwoorden!";
+                Message =
+                    $"Jij bent De Mol, dus je moet op alle vragen goed antwoorden!\n{Util.OpdrachtUiNaam(OpdrachtId)}:";
             }
             else
             {
@@ -142,8 +136,6 @@ namespace DeMol.ViewModels
 
         public void Previous()
         {
-            // NoteerAntwoord();
-
             index--;
             QuizVraag = quizVraagViewModels[index];
             NotifyOfPropertyChange(() => CanNext);
@@ -155,7 +147,6 @@ namespace DeMol.ViewModels
         {
             if (QuizVraag != null)
             {
-                // noteer antwoord
                 if (antwoorden.ContainsKey(QuizVraag.VraagID))
                 {
                     antwoorden.Remove(QuizVraag.VraagID);
@@ -175,10 +166,10 @@ namespace DeMol.ViewModels
 
             var speler = new Speler
             {
-                Naam       = Naam,
-                DeMolIs    = DeMolIs,
-                IsDeMol    = IsDeMol,
-                Tijd       = diff,
+                Naam = Naam,
+                DeMolIs = DeMolIs,
+                IsDeMol = IsDeMol,
+                Tijd = diff,
                 Antwoorden = antwoorden
             };
 

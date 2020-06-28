@@ -2,7 +2,7 @@ using Caliburn.Micro;
 
 namespace DeMol.ViewModels
 {
-    class ScoreViewModel : Screen
+    internal class ScoreViewModel : Screen
     {
         private string text;
 

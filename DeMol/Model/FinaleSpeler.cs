@@ -10,6 +10,7 @@ namespace DeMol.Model
             DeMolIsPerOpdrachtId = new Dictionary<string, string>();
             AntwoordenPerVraagId = new Dictionary<string, string>();
         }
+
         public string Naam { get; set; }
 
         public Dictionary<string, string> DeMolIsPerOpdrachtId { get; set; }

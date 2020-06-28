@@ -16,7 +16,7 @@
                                 Value="0" />
                     </DataTrigger>
                 </Style.Triggers>
-                
+
             </Style>
         </Grid.Style>
         <Grid.ColumnDefinitions>

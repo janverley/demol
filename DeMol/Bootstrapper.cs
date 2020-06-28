@@ -31,14 +31,9 @@ namespace DeMol
 
             container
                 .PerRequest<InvalidateViewModel>()
-//.PerRequest<QuizNaamViewModel>()
                 .PerRequest<QuizBenJijDeMolViewModel>()
-                .PerRequest<QuizIntroViewModel>()
-                //.PerRequest<JijBentDeMolViewModel>()
                 .PerRequest<QuizWieIsDeMolViewModel>()
-                //.PerRequest<QuizOuttroViewModel>()
                 .PerRequest<ValidateViewModel>()
-                .PerRequest<ResultViewModel>()
                 .PerRequest<VragenLijstViewModel>()
                 .PerRequest<QuizVragenViewModel>()
                 .PerRequest<EndResultViewModel>()
@@ -47,12 +42,11 @@ namespace DeMol
                 .PerRequest<SmoelenViewModel>()
                 .PerRequest<DagResultaatViewModel>()
                 .PerRequest<QuizViewModel>()
-
                 .PerRequest<FinaleQuizViewModel>()
                 .PerRequest<FinaleVragenLijstViewModel>()
-                .PerRequest<FinaleQuizVragenViewModel>();
-
-                ;
+                .PerRequest<FinaleQuizVragenViewModel>()
+                .PerRequest<BoodschapViewModel>();
+            ;
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

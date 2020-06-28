@@ -16,8 +16,8 @@
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Name="Menu" Style="{StaticResource Btn1}" Margin="20">Menu</Button>
+            <Button Name="Uitslag" Style="{StaticResource Btn1}" Margin="15">Uitslag</Button>
             <Button Name="Antwoorden" Style="{StaticResource Btn1}" Margin="20">Antwoorden</Button>
-            <Button Name="Uitslag" Style="{StaticResource Btn1}" Margin="20">Uitslag</Button>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Caliburn.Micro;
 using DeMol.Model;
 
@@ -24,27 +22,35 @@ namespace DeMol.ViewModels
 
         public bool CanShowResult => Checks.All(c => c.IsOk);
 
+        public string Text
+        {
+            get => text;
+            set => Set(ref text, value);
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();
 
-             Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:",
+            Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:",
                 Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
 
             var admin = Util.GetAdminDataOfSelectedDag(container);
 
             foreach (var gespeeldeOpdrachtData in admin.OpdrachtenGespeeld)
             {
-
                 var antwoordendata = Util.SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
 
-                Checks.Add(new CheckViewModel($"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}",
+                Checks.Add(new CheckViewModel(
+                    $"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}",
                     antwoordendata.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
 
-                Checks.Add(new CheckViewModel($"Aantal Mollen in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count(s => s.IsDeMol)}",
+                Checks.Add(new CheckViewModel(
+                    $"Aantal Mollen in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count(s => s.IsDeMol)}",
                     antwoordendata.Spelers.Count(s => s.IsDeMol) == 1));
-                
-                Checks.Add(new CheckViewModel($"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}:",
+
+                Checks.Add(new CheckViewModel(
+                    $"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}:",
                     Util.CheckForDoubles(antwoordendata.Spelers)));
             }
 
@@ -52,26 +58,12 @@ namespace DeMol.ViewModels
             {
                 Text = "Alles Ok!";
             }
-            
         }
 
-        public string Text
-        {
-            get => text;
-            set => Set(ref text, value);
-        }
 
-        
         public void InvalidateAnswers()
         {
             var x = container.GetInstance<InvalidateViewModel>();
-            conductor.ActivateItem(x);
-        }
-
-
-        public void ShowResult()
-        {
-            var x = container.GetInstance<ResultViewModel>();
             conductor.ActivateItem(x);
         }
 

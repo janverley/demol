@@ -18,9 +18,9 @@
         </Grid.ColumnDefinitions>
         <TextBlock Style="{StaticResource H1}" x:Name="Naam" />
         <CheckBox Grid.Column="1" x:Name="VandaagGespeeld" Width="80" VerticalContentAlignment="Stretch" />
-        <TextBox Grid.Column="2" x:Name="MaxTeVerdienen" Style="{StaticResource B1}" Width="80"/>
-        <TextBlock  Grid.Column="3" Style="{StaticResource H1}"> - </TextBlock>
-        <TextBox Grid.Column="4" x:Name="EffectiefVerdiend" Style="{StaticResource B1}" Width="80"/>
-        <TextBlock  Grid.Column="5" Style="{StaticResource H1}" Foreground="Red" FontWeight="Bold" x:Name="Error"/>
+        <TextBox Grid.Column="2" x:Name="MaxTeVerdienen" Style="{StaticResource B1}" Width="80" />
+        <TextBlock Grid.Column="3" Style="{StaticResource H1}"> - </TextBlock>
+        <TextBox Grid.Column="4" x:Name="EffectiefVerdiend" Style="{StaticResource B1}" Width="80" />
+        <TextBlock Grid.Column="5" Style="{StaticResource H1}" Foreground="Red" FontWeight="Bold" x:Name="Error" />
     </Grid>
 </UserControl>

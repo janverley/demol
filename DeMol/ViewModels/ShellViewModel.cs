@@ -80,7 +80,7 @@ namespace DeMol.ViewModels
 
             var menuDay = -1;
             var timerminuten = -1;
-            var showResult = -1;
+
             var showQuiz = -1;
             var showEndResult = false;
 
@@ -88,7 +88,7 @@ namespace DeMol.ViewModels
             {
                 {"m|menu=", "Start the Menu screen for day.", (int v) => menuDay = v},
                 {"t|timer=", "Start the timer screen with # minutes.", (int v) => timerminuten = v},
-                {"r|result=", "Start the ResultScreen for day", (int v) => showResult = v},
+
                 {"q|quiz=", "Start the Quiz for day", (int v) => showQuiz = v},
                 {"e|endresult", "Start the EndResult", v => showEndResult = v != null}
             };
@@ -112,18 +112,8 @@ namespace DeMol.ViewModels
                 x.Minuten = timerminuten;
                 ActivateItem(x);
             }
-            else if (showResult > 0)
-            {
-                var x = container.GetInstance<ResultViewModel>();
-                Dag = showResult;
-                ActivateItem(x);
-            }
-            //else if (showQuiz > 0)
-            //{
-            //    var x = container.GetInstance<QuizNaamViewModel>();
-            //    Dag = showQuiz;
-            //    ActivateItem(x);
-            //}
+
+
             else if (showEndResult)
             {
                 var x = container.GetInstance<EndResultViewModel>();
