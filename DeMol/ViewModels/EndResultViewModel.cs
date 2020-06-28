@@ -107,6 +107,11 @@ namespace DeMol.ViewModels
                     Checks.Add(new CheckViewModel($"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(opdrachtData)}:",
                         Util.CheckForDoubles(antwoorden.Spelers)));
 
+                    if (Checks.Any(c => !c.IsOk))
+                    {
+                        continue;
+                    }
+                    
                     groepspot += antwoorden.EffectiefVerdiend;
                     maxTeVerdienen += antwoorden.MaxTeVerdienen;
 
@@ -167,7 +172,8 @@ namespace DeMol.ViewModels
 
                                 if (a.IsDeMol)
                                 {
-                                    if (aantalRadersPerOpdrachtId[opdrachtData.Opdracht] <
+                                    if (aantalRadersPerOpdrachtId.ContainsKey(opdrachtData.Opdracht) && 
+                                        aantalRadersPerOpdrachtId[opdrachtData.Opdracht] <
                                         Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben)
                                     {
                                         scores.verdiendAlsMol +=
@@ -181,7 +187,8 @@ namespace DeMol.ViewModels
                                 foreach (var antwoord in a.Antwoorden)
                                 {
                                     scores.aantalVragenBeantwoord++;
-                                    var juistAntwoord = alleJuisteAntwoorden[antwoord.Key];
+                                    var juistAntwoord = 
+                                        alleJuisteAntwoorden.ContainsKey(antwoord.Key) ? alleJuisteAntwoorden[antwoord.Key] : "?";
 
                                     if (antwoord.Value.SafeEqual(juistAntwoord))
                                     {
@@ -201,7 +208,8 @@ namespace DeMol.ViewModels
                     {
                         scores.finaleAantalVragenBeantwoord++;
 
-                        if (molPerOpdrachtId[demolIsPerOpdrachtId.Key].SafeEqual(demolIsPerOpdrachtId.Value))
+                        if (molPerOpdrachtId.ContainsKey(demolIsPerOpdrachtId.Key)
+                            && molPerOpdrachtId[demolIsPerOpdrachtId.Key].SafeEqual(demolIsPerOpdrachtId.Value))
                         {
                             scores.finaleAantalVragenJuistBeantwoord++;
                         }
@@ -211,7 +219,8 @@ namespace DeMol.ViewModels
                     {
                         scores.finaleAantalVragenBeantwoord++;
 
-                        if (alleJuisteAntwoorden[antwoordenPerVraagId.Key].SafeEqual(antwoordenPerVraagId.Value))
+                        if (alleJuisteAntwoorden.ContainsKey(antwoordenPerVraagId.Key)
+                            && alleJuisteAntwoorden[antwoordenPerVraagId.Key].SafeEqual(antwoordenPerVraagId.Value))
                         {
                             scores.finaleAantalVragenJuistBeantwoord++;
                         }
@@ -219,9 +228,8 @@ namespace DeMol.ViewModels
 
                     var x = Math.Min(scores.aantalVragenJuistBeantwoord + scores.aantalPasVragenVerdiend,
                         scores.aantalVragenBeantwoord);
-                    scores.percentage = x / scores.aantalVragenBeantwoord;
-                    scores.finalePercentage =
-                        scores.finaleAantalVragenJuistBeantwoord / scores.finaleAantalVragenBeantwoord;
+                    scores.percentage = (scores.aantalVragenBeantwoord > 0) ? x / scores.aantalVragenBeantwoord : 0m;
+                    scores.finalePercentage = (scores.finaleAantalVragenBeantwoord > 0) ? scores.finaleAantalVragenJuistBeantwoord / scores.finaleAantalVragenBeantwoord : 0m;
 
                     scores.totaalPercentage = (scores.percentage + scores.finalePercentage) / 2;
 

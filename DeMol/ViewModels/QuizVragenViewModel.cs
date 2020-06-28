@@ -90,7 +90,7 @@ namespace DeMol.ViewModels
             }
             else
             {
-                Message = "";
+                Message = $"{Util.OpdrachtUiNaam(OpdrachtId)}:";
             }
 
 
