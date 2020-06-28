@@ -86,9 +86,9 @@ namespace DeMol.ViewModels
 
                     if (isLast)
                     {
-                        var adminData = Util.SafeReadJson<AdminData>("finale");
-                        adminData.HeeftQuizGespeeld.Add(new SpelerInfo {Naam = Naam});
-                        Util.SafeAdminData(container, adminData);
+                        //var adminData = Util.SafeReadJson<AdminData>("finale");
+                        //adminData.HeeftQuizGespeeld.Add(new SpelerInfo {Naam = Naam});
+                        //Util.SafeAdminData(container, adminData);
 
                         var q = Parent as FinaleQuizViewModel;
                         q.StartSmoel();
