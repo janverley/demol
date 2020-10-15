@@ -1,0 +1,29 @@
+{
+  "Opdracht": "l",
+  "Description": "Codenaam",
+  "Vragen": [
+    {
+      "Text": "Heeft de mol een woord met een positief bedrag gekozen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Hoeveel woorden heeft de mol gekozen?"
+    },
+    {
+      "Text": "Hoeveel keer heeft de mol een term geroepen?"
+    },
+    {
+      "Text": "Heet de mol Spysschaert?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Hoe oud is de mol?"
+    }
+  ]
+}

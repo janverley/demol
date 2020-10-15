@@ -1,0 +1,41 @@
+{
+  "Opdracht": "f",
+  "Description": "Kunst of Kitch?",
+  "Vragen": [
+    {
+      "Text": "Heeft de mol een penseeel vast gehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol de foto van een kunstwerk vast gehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol bewust gesaboteerd met een foute kleur?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Had de mol verf aan zijn handen na de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Droeg de mol een zwembroek tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

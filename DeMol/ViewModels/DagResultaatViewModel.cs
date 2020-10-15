@@ -1,14 +1,8 @@
 ﻿using Caliburn.Micro;
-using DeMol.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeMol.ViewModels
 {
-    class DagResultaatViewModel : Screen
+    internal class DagResultaatViewModel : Screen
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
@@ -22,9 +16,10 @@ namespace DeMol.ViewModels
 
         public string Text
         {
-            get { return text; }
-            set { Set(ref text, value); }
+            get => text;
+            set => Set(ref text, value);
         }
+
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
@@ -33,8 +28,6 @@ namespace DeMol.ViewModels
 
         protected override void OnActivate()
         {
-        
-
             base.OnActivate();
         }
     }

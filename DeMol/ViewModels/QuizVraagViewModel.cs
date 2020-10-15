@@ -1,29 +1,27 @@
-﻿using Caliburn.Micro;
-using DeMol.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using Caliburn.Micro;
+using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
     public class QuizVraagViewModel : PropertyChangedBase
     {
         private readonly bool meerdereOptiesMogelijk;
-        private string text;
         private string antwoord;
         private bool showAntwoord;
+        private string text;
 
         public QuizVraagViewModel(Vraag vraag, string vraagID)
         {
             Text = $"{vraag.Text} ({vraagID})";
-            this.meerdereOptiesMogelijk = vraag.MeerdereOptiesMogelijk;
+            meerdereOptiesMogelijk = vraag.MeerdereOptiesMogelijk;
             VraagID = vraagID;
             if (vraag.MeerdereOptiesMogelijk)
             {
-                MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>(vraag.Opties.Select(s => new MeerdereOptieViewModel(s)));
+                MeerdereOpties =
+                    new BindableCollection<MeerdereOptieViewModel>(vraag.Opties.Select(s =>
+                        new MeerdereOptieViewModel(s)));
                 Opties = new BindableCollection<OptieViewModel>();
             }
             else
@@ -31,35 +29,28 @@ namespace DeMol.ViewModels
                 MeerdereOpties = new BindableCollection<MeerdereOptieViewModel>();
                 Opties = new BindableCollection<OptieViewModel>(vraag.Opties.Select(s => new OptieViewModel(s)));
             }
+
             ShowAntwoord = !vraag.Opties.Any();
         }
 
         public string Text
         {
-            get { return text; }
-            set
-            {
-                Set(ref text, value);
-            }
+            get => text;
+            set => Set(ref text, value);
         }
 
         public string VraagID { get; }
 
         public string Antwoord
         {
-            get { return antwoord; }
-            set
-            {
-                Set(ref antwoord, value);
-            }
+            get => antwoord;
+            set => Set(ref antwoord, value);
         }
+
         public bool ShowAntwoord
         {
-            get { return showAntwoord; }
-            set
-            {
-                Set(ref showAntwoord, value);
-            }
+            get => showAntwoord;
+            set => Set(ref showAntwoord, value);
         }
 
         public BindableCollection<OptieViewModel> Opties { get; set; }
@@ -73,17 +64,13 @@ namespace DeMol.ViewModels
                 {
                     return string.Join(",", MeerdereOpties.Where(o => o.IsSelected).Select(o => o.OptieText));
                 }
-                else
+
+                if (Opties.Any())
                 {
-                    if (Opties.Any())
-                    {
-                        return Opties.FirstOrDefault(o => o.IsSelected)?.OptieText ?? $"NIKS_{DateTime.UtcNow.Ticks}";
-                    }
-                    else
-                    {
-                        return Antwoord ?? $"NIKS_{DateTime.UtcNow.Ticks}";
-                    }
+                    return Opties.FirstOrDefault(o => o.IsSelected)?.OptieText ?? $"NIKS_{DateTime.UtcNow.Ticks}";
                 }
+
+                return Antwoord ?? $"NIKS_{DateTime.UtcNow.Ticks}";
             }
         }
     }

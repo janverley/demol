@@ -1,49 +1,60 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using Caliburn.Micro;
+using DeMol.ViewModels;
+using Newtonsoft.Json;
 
 namespace DeMol.Model
 {
     public static class Util
     {
+        private static readonly byte[] key = new byte[8] {1, 2, 3, 4, 5, 6, 7, 8};
+        private static readonly byte[] iv = new byte[8] {1, 2, 3, 4, 5, 6, 7, 8};
+
+        private static Dictionary<Type, FileData> Files => new Dictionary<Type, FileData>
+        {
+            {typeof(ScoresData), new FileData {Filename = @".\Files\scores.json", Encrypted = false}},
+            {typeof(AdminData), new FileData {Filename = @".\Files\admin.{0}.json", Encrypted = false}},
+            {typeof(DagenData), new FileData {Filename = @".\Settings\dagen.json", Encrypted = false}},
+            {typeof(SpelersData), new FileData {Filename = @".\Settings\spelers.json", Encrypted = false}},
+
+            {typeof(AntwoordenData), new FileData {Filename = @".\Files\antwoorden.{0}.json", Encrypted = false}},
+
+            {
+                typeof(OpdrachtData),
+                new FileData {Filename = @".\Settings\OpdrachtVragen.{0}.json", Encrypted = false}
+            },
+            {
+                typeof(FinaleAntwoordenData),
+                new FileData {Filename = @".\Files\finaleAntwoorden.json", Encrypted = false}
+            }
+        };
+
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
         {
-            T[] elements = source.ToArray();
-            for (int i = elements.Length - 1; i >= 0; i--)
+            var elements = source.ToArray();
+            for (var i = elements.Length - 1; i >= 0; i--)
             {
                 // Swap element "i" with a random earlier element it (or itself)
                 // ... except we don't really need to swap it fully, as we can
                 // return it immediately, and afterwards it's irrelevant.
-                int swapIndex = rng.Next(i + 1);
+                var swapIndex = rng.Next(i + 1);
                 yield return elements[swapIndex];
                 elements[swapIndex] = elements[i];
             }
         }
-        private struct FileData
-        {
-            public string Filename { get; set; }
-            public bool Encrypted { get; set; }
-        }
-
-        private static Dictionary<Type, FileData> Files => new Dictionary<Type, FileData>
-        {
-            { typeof(AdminData), new FileData{ Filename =  @".\Files\admin.{0}.json", Encrypted = false } },
-            { typeof(DagenData), new FileData{ Filename =  @".\Files\dagen.json", Encrypted = false } },
-            { typeof(SpelersData), new FileData{ Filename =  @".\Files\spelers.json", Encrypted = false }  },
-            //{ typeof(VragenData), new FileData{ Filename =  @".\Files\vragen.{0}.json", Encrypted = false }  },
-            { typeof(AntwoordenData), new FileData{ Filename =  @".\Files\antwoorden.{0}.json", Encrypted = false }  },
-            { typeof(MollenData), new FileData{ Filename =  @".\Files\mollen.json", Encrypted = false } },
-            { typeof(OpdrachtVragenData), new FileData{ Filename =  @".\Files\OpdrachtVragen.{0}.json", Encrypted = false } },
-            { typeof(FinaleData), new FileData{ Filename =  @".\Files\finaleData.json", Encrypted = false } }
-        };
 
         public static bool SafeEqual(this string a, string b)
         {
+            if (a == null || b == null)
+            {
+                return false;
+            }
+
             var sa = a.Trim().ToLower();
             var sb = b.Trim().ToLower();
 
@@ -54,6 +65,7 @@ namespace DeMol.Model
         {
             SafeFileWithBackup(Files[data.GetType()].Filename, data, Files[data.GetType()].Encrypted);
         }
+
         public static void SafeFileWithBackup(object data, int dag)
         {
             SafeFileWithBackup(data, dag.ToString());
@@ -61,7 +73,8 @@ namespace DeMol.Model
 
         public static void SafeFileWithBackup(object data, string dag)
         {
-            SafeFileWithBackup(string.Format(Files[data.GetType()].Filename, dag), data, Files[data.GetType()].Encrypted);
+            SafeFileWithBackup(string.Format(Files[data.GetType()].Filename, dag), data,
+                Files[data.GetType()].Encrypted);
         }
 
         private static void SafeFileWithBackup(string path, object data, bool encrypt)
@@ -75,10 +88,10 @@ namespace DeMol.Model
 
                 do
                 {
-                    backupFile = new FileInfo(Path.Combine(fileInfo.DirectoryName, "Backups", $"{index}.{fileInfo.Name}"));
+                    backupFile =
+                        new FileInfo(Path.Combine(fileInfo.DirectoryName, "Backups", $"{index}.{fileInfo.Name}"));
                     index++;
-                }
-                while (backupFile.Exists);
+                } while (backupFile.Exists);
 
                 if (!Directory.Exists(backupFile.DirectoryName))
                 {
@@ -104,10 +117,10 @@ namespace DeMol.Model
             File.WriteAllText(fileInfo.FullName, contents);
         }
 
-        internal static Tuple<string, Vraag> GetVraagAndCode(OpdrachtVragenData extraVragen, int r)
+        internal static Tuple<string, Vraag> GetVraagAndCode(OpdrachtData extra, int r)
         {
-            var vraag = extraVragen.Vragen[r];
-            var vraagID = $"{extraVragen.Opdracht.ToUpper()}{r + 1}";
+            var vraag = extra.Vragen[r];
+            var vraagID = $"{extra.Opdracht.ToUpper()}{r + 1}";
 
             return new Tuple<string, Vraag>(vraagID, vraag);
         }
@@ -115,9 +128,9 @@ namespace DeMol.Model
         internal static Vraag GetVraagFromCode(string code)
         {
             var opdrachtId = code.Substring(0, 1);
-            var vraagNummer = Int32.Parse(code.Substring(1)) - 1;
+            var vraagNummer = int.Parse(code.Substring(1)) - 1;
 
-            var opdrachtVragen = Util.SafeReadJson<OpdrachtVragenData>(opdrachtId);
+            var opdrachtVragen = SafeReadJson<OpdrachtData>(opdrachtId);
 
             var x = GetVraagAndCode(opdrachtVragen, vraagNummer);
 
@@ -141,13 +154,14 @@ namespace DeMol.Model
             var path = Files[typeof(T)].Filename;
             return SafeReadJson<T>(path, Files[typeof(T)].Encrypted);
         }
+
         private static T SafeReadJson<T>(string path, bool decrypt) where T : new()
         {
-            T data = new T();
+            var data = new T();
 
             if (File.Exists(path))
             {
-                string contents = File.ReadAllText(path);
+                var contents = File.ReadAllText(path);
 
                 if (decrypt)
                 {
@@ -165,14 +179,17 @@ namespace DeMol.Model
         {
             return DataFileFoundAndValid<T>(Files[typeof(T)].Filename, Files[typeof(T)].Encrypted);
         }
+
         internal static bool DataFileFoundAndValid<T>(string dag)
         {
             return DataFileFoundAndValid<T>(string.Format(Files[typeof(T)].Filename, dag), Files[typeof(T)].Encrypted);
         }
+
         internal static bool DataFileFoundAndValid<T>(int dag)
         {
             return DataFileFoundAndValid<T>(dag.ToString());
         }
+
         private static bool DataFileFoundAndValid<T>(string path, bool decrypt)
         {
             var result = true;
@@ -183,7 +200,7 @@ namespace DeMol.Model
             }
             else
             {
-                string contents = File.ReadAllText(path);
+                var contents = File.ReadAllText(path);
                 try
                 {
                     if (decrypt)
@@ -191,35 +208,145 @@ namespace DeMol.Model
                         contents = Decrypt(contents);
                     }
 
-                    T data = JsonConvert.DeserializeObject<T>(contents);
+                    var data = JsonConvert.DeserializeObject<T>(contents);
                 }
                 catch
                 {
                     result = false;
                 }
             }
+
             return result;
         }
-
-        private static readonly byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-        private static readonly byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
         public static string Crypt(this string text)
         {
             SymmetricAlgorithm algorithm = DES.Create();
-            ICryptoTransform transform = algorithm.CreateEncryptor(key, iv);
-            byte[] inputbuffer = Encoding.Unicode.GetBytes(text);
-            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            var transform = algorithm.CreateEncryptor(key, iv);
+            var inputbuffer = Encoding.Unicode.GetBytes(text);
+            var outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Convert.ToBase64String(outputBuffer);
         }
 
         public static string Decrypt(this string text)
         {
             SymmetricAlgorithm algorithm = DES.Create();
-            ICryptoTransform transform = algorithm.CreateDecryptor(key, iv);
-            byte[] inputbuffer = Convert.FromBase64String(text);
-            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            var transform = algorithm.CreateDecryptor(key, iv);
+            var inputbuffer = Convert.FromBase64String(text);
+            var outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Encoding.Unicode.GetString(outputBuffer);
+        }
+
+        public static IEnumerable<OpdrachtData> AlleOpdrachtData()
+        {
+            var result = new List<OpdrachtData>();
+
+            var allChars = "abcdefghijklmnopqrstuvwyz";
+
+            foreach (var @char in allChars.ToCharArray())
+            {
+                var opdrachtId = @char.ToString();
+                if (DataFileFoundAndValid<OpdrachtData>(opdrachtId))
+                {
+                    var opdrachtVragenData = SafeReadJson<OpdrachtData>(opdrachtId);
+                    result.Add(opdrachtVragenData);
+                }
+            }
+
+            return result;
+        }
+
+        public static string OpdrachtUiNaam(OpdrachtData opdrachtData)
+        {
+            return $"{opdrachtData.Opdracht.ToUpper()} - {opdrachtData.Description}";
+        }
+
+        public static AdminData GetAdminDataOfSelectedDag(SimpleContainer container)
+        {
+            return SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
+        }
+
+        public static void SafeAdminData(SimpleContainer container, AdminData adminData)
+        {
+            SafeFileWithBackup(adminData, container.GetInstance<ShellViewModel>().Dag);
+        }
+
+        public static string OpdrachtUiNaam(string opdrachtId)
+        {
+            var alles = AlleOpdrachtData();
+            var opdr = alles.First(data => data.Opdracht == opdrachtId);
+            return OpdrachtUiNaam(opdr);
+        }
+
+        public static string ScoreInfoVanVorigeDag(SimpleContainer container, string naam)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"{naam}, dit zijn je scores van gisteren:");
+
+            // vorige dag
+            var vandaag = container.GetInstance<ShellViewModel>().Dag;
+            if (vandaag == 1)
+            {
+                return "Gisteren was er geen Quiz, nog geen scores te zien hier.";
+            }
+
+            var gisteren = vandaag - 1;
+            var admindateGisteren = SafeReadJson<AdminData>(gisteren);
+
+            foreach (var gespeeldeOpdrachtData in admindateGisteren.OpdrachtenGespeeld)
+            {
+                //berkeen score voor die opdracth voor naam
+
+                var antwoorden = SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
+
+                if (antwoorden.Spelers.Single(s => s.Naam == naam).IsDeMol)
+                {
+                    sb.AppendLine($"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: jij was de mol");
+                }
+                else
+                {
+                    var juisteAntwoorden = antwoorden.Spelers.Single(s => s.IsDeMol).Antwoorden;
+
+                    var mijnAntwoorden = antwoorden.Spelers.Single(s => s.Naam == naam).Antwoorden;
+
+                    var score = 0;
+
+                    foreach (var juistantwoord in juisteAntwoorden)
+                    {
+                        var mijnantwoord = mijnAntwoorden[juistantwoord.Key];
+                        if (mijnantwoord.SafeEqual(juistantwoord.Value))
+                        {
+                            score++;
+                        }
+                    }
+
+                    sb.AppendLine(
+                        $"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {score} / {juisteAntwoorden.Count}");
+                }
+            }
+
+
+            return sb.ToString();
+        }
+
+        public static bool CheckForDoubles(IEnumerable<Speler> spelers)
+        {
+            foreach (var speler in spelers)
+            {
+                if (spelers.Count(s => s.Naam.SafeEqual(speler.Naam)) != 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private struct FileData
+        {
+            public string Filename { get; set; }
+            public bool Encrypted { get; set; }
         }
     }
 }

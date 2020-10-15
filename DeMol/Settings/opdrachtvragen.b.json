@@ -1,0 +1,41 @@
+{
+  "Opdracht": "b",
+  "Description": "Shoppen",
+  "Vragen": [
+    {
+      "Text": "Ging de mol een winkel binnen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Nam de mol foto’s tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol geld vast gehad tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Had de mol een 'kantoor'?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Droeg de mol sandalen tijdens de proef?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

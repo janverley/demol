@@ -1,0 +1,40 @@
+{
+  "Opdracht": "g",
+  "Description": "Be Cool",
+  "Vragen": [
+    {
+      "Text": "Had de mol pasvragen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Had de mol geld?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Is de mol tijdens het onderhandelen rechtgestaan?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol het over de resterende tijd gehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Als hoeveelste trok de mol zijn envelop",
+      "Opties": [
+        "Eerste", "2e","3e"," 4e"," 5e"," 6e"," 7e"," 8e","Laatste"
+      ]
+    }
+  ]
+}

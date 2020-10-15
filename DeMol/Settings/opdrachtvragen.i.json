@@ -1,0 +1,41 @@
+{
+  "Opdracht": "i",
+  "Description": "Puzzel Time",
+  "Vragen": [
+    {
+      "Text": "Zat de mol in het team van kris?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een walkie vastgehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol antwoorden op het puzzelblad geschreven?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Ging de mol het bos in?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Vond de mol een foto?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

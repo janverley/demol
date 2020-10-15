@@ -1,0 +1,41 @@
+{
+  "Opdracht": "j",
+  "Description": "Back in time",
+  "Vragen": [
+    {
+      "Text": "Heeft de mol wijn gedronken?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol de polaroid vast gehad?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Stond de mol naast water op de foto?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol gelopen tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol getuft vandaag?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

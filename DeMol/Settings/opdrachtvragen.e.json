@@ -1,0 +1,41 @@
+{
+  "Opdracht": "e",
+  "Description": "Spring je rijk",
+  "Vragen": [
+    {
+      "Text": "Droeg de mol iets aan zijn voeten tijdens het springen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Nam de mol een foto tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Kwam de mol met de Audi aan bij de gorge?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Droeg de mol een bikini?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Had de mol een bedrag boven de 800 euro?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

@@ -82,31 +82,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BooleanConverterOfT.cs" />
+    <Compile Include="BooleanConverter.cs" />
+    <Compile Include="BooleanToVisibilityConverter.cs" />
     <Compile Include="Model\AntwoordenData.cs" />
-    <Compile Include="Model\OpdrachtVragenData.cs" />
+    <Compile Include="Model\Dag.cs" />
+    <Compile Include="Model\FinaleAntwoordenData.cs" />
+    <Compile Include="Model\FinaleSpeler.cs" />
+    <Compile Include="Model\OpdrachtStatus.cs" />
+    <Compile Include="Model\OpdrachtData.cs" />
     <Compile Include="Model\DagenData.cs" />
-    <Compile Include="Model\MollenData.cs" />
+    <Compile Include="Model\PasvragenVerdiend.cs" />
     <Compile Include="Model\Score.cs" />
-    <Compile Include="Model\SpelerData.cs" />
+    <Compile Include="Model\ScoresData.cs" />
+    <Compile Include="Model\Speler.cs" />
+    <Compile Include="Model\SpelerInfo.cs" />
+    <Compile Include="Model\SpelersData.cs" />
     <Compile Include="Model\Util.cs" />
-    <Compile Include="Model\VragenData.cs" />
+    <Compile Include="Model\Vraag.cs" />
+    <Compile Include="ViewModels\BoodschapViewModel.cs" />
     <Compile Include="ViewModels\CheckViewModel.cs" />
     <Compile Include="ViewModels\DagResultaatViewModel.cs" />
     <Compile Include="ViewModels\DagViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
-    <Compile Include="ViewModels\EindResultaatViewModel.cs" />
+    <Compile Include="ViewModels\FinaleQuizViewModel.cs" />
+    <Compile Include="ViewModels\FinaleQuizVragenViewModel.cs" />
+    <Compile Include="ViewModels\FinaleVragenLijstViewModel.cs" />
     <Compile Include="ViewModels\InvalidateViewModel.cs" />
-    <Compile Include="ViewModels\JijBentDeMolViewModel.cs" />
+    <Compile Include="ViewModels\MeerdereOptieViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OpdrachtViewModel.cs" />
     <Compile Include="ViewModels\OptieViewModel.cs" />
     <Compile Include="ViewModels\PasVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizBenJijDeMolViewModel.cs" />
     <Compile Include="ViewModels\QuizIntroViewModel.cs" />
+    <Compile Include="ViewModels\ScoreViewModel.cs" />
+    <Compile Include="ViewModels\VragenLijstViewModel.cs" />
+    <Compile Include="ViewModels\QuizViewModel.cs" />
     <Compile Include="ViewModels\QuizWieIsDeMolViewModel.cs" />
-    <Compile Include="ViewModels\QuizNaamViewModel.cs" />
-    <Compile Include="ViewModels\QuizOuttroViewModel.cs" />
     <Compile Include="ViewModels\QuizVraagViewModel.cs" />
     <Compile Include="ViewModels\QuizVragenViewModel.cs" />
     <Compile Include="ViewModels\EndResultViewModel.cs" />
@@ -115,6 +127,9 @@
     <Compile Include="ViewModels\smoelenViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\ValidateViewModel.cs" />
+    <Compile Include="Views\BoodschapView.xaml.cs">
+      <DependentUpon>BoodschapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CheckView.xaml.cs">
       <DependentUpon>CheckView.xaml</DependentUpon>
     </Compile>
@@ -125,6 +140,15 @@
       <DependentUpon>EindResultaatView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EnumToBooleanConverter.cs" />
+    <Compile Include="Views\FinaleQuizView.xaml.cs">
+      <DependentUpon>FinaleQuizView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FinaleQuizVragenView.xaml.cs">
+      <DependentUpon>FinaleQuizVragenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FinaleVragenLijstView.xaml.cs">
+      <DependentUpon>FinaleVragenLijstView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InvalidateView.xaml.cs">
       <DependentUpon>InvalidateView.xaml</DependentUpon>
     </Compile>
@@ -153,11 +177,20 @@
     <Compile Include="Views\QuizIntroView.xaml.cs">
       <DependentUpon>QuizIntroView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ScoreView.xaml.cs">
+      <DependentUpon>ScoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VragenLijstView.xaml.cs">
+      <DependentUpon>VragenLijstView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\QuizNaamView.xaml.cs">
       <DependentUpon>QuizNaamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuizOuttroView.xaml.cs">
       <DependentUpon>QuizOuttroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuizView.xaml.cs">
+      <DependentUpon>QuizView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuizVraagView.xaml.cs">
       <DependentUpon>QuizVraagView.xaml</DependentUpon>
@@ -212,6 +245,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\BoodschapView.xaml" />
     <Page Include="Views\CheckView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +258,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FinaleQuizView.xaml" />
+    <Page Include="Views\FinaleQuizVragenView.xaml" />
+    <Page Include="Views\FinaleVragenLijstView.xaml" />
     <Page Include="Views\InvalidateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -260,6 +297,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ScoreView.xaml" />
+    <Page Include="Views\VragenLijstView.xaml" />
     <Page Include="Views\QuizNaamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,6 +307,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\QuizView.xaml" />
     <Page Include="Views\QuizVraagView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -324,77 +364,76 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Files\admin.1.json" />
-    <None Include="Files\antwoorden.1.json" />
-    <None Include="Files\dagen.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.a.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.b.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.c.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.d.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.e.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.f.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.g.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.h.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.i.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.j.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.k.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.l.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.m.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.n.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.o.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.p.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.q.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\opdrachtvragen.x.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Files\spelers.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Settings\dagen.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.a.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.b.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.c.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.d.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.e.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.f.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.g.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.h.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.i.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.j.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.k.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.l.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.m.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.n.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.o.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\opdrachtvragen.x.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\spelers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Views\bg.2020.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\bg.2020.red.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\bg.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -433,6 +472,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bg.icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\smoelen\2019\hanne.png" />
+    <Content Include="Views\smoelen\2019\hilde.png" />
+    <Content Include="Views\smoelen\2019\jochen.png" />
+    <Content Include="Views\smoelen\2019\juul.png" />
+    <Content Include="Views\smoelen\2019\kris.png" />
+    <Content Include="Views\smoelen\2019\mie.png" />
+    <Content Include="Views\smoelen\2019\pieter.png" />
+    <Content Include="Views\smoelen\2019\staf.png" />
+    <Content Include="Views\smoelen\2019\vic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

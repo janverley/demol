@@ -1,0 +1,41 @@
+{
+  "Opdracht": "n",
+  "Description": "Pluimen",
+  "Vragen": [
+    {
+      "Text": "Heeft de mol met zijn team het aantal slagen gehaald?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol namen ingevuld op de papieren van de groepsindeling?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol tijdens het uur van de opdracht gezwommen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zat de mol met 3 in een team?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Droeg de mol een zonnebril tijdens het badmintonnen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

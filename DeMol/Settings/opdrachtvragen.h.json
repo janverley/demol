@@ -1,0 +1,55 @@
+{
+  "Opdracht": "h",
+  "Description": "Ballonnetje Prik",
+  "Vragen": [
+    {
+      "Text": "Wie zat er bij de mol in het duo?",
+      "Opties": [
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde"
+      ],
+      "MeerdereOptiesMogelijk":true
+    },
+    {
+      "Text": "Heeft de mol een roze ballon geprikt?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol op blote voeten gesprongen?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Als hoeveelste sprong de mol?",
+      "Opties": [
+        "Eerste", "2e","3e"," 4e"," 5e"," 6e"," 7e"," 8e","Laatste"
+      ]
+    },
+    {
+      "Text": "Wie nam de helm over van de mol?",
+      "Opties": [
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde"
+      ]
+    }
+  ]
+}

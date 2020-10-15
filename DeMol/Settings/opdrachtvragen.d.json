@@ -1,0 +1,48 @@
+{
+  "Opdracht": "d",
+  "Description": "Laat het niet hangen",
+  "Vragen": [
+    {
+      "Text": "Had de mol een balletje?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Was de kleur van het voorwerp van de mol rood?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Wie stond er links van de mol tijdens de opdracht",
+      "Opties": [
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde"
+      ]
+    },
+    {
+      "Text": "Heeft de mol gevloekt tijdens de proef?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Is de mol linkshandig?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

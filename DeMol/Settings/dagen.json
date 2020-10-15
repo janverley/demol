@@ -1,0 +1,40 @@
+﻿{
+  "Dagen": [
+    {
+      "Id": 1,
+      "Naam": "woensdag 1 juli"
+    },
+    {
+      "Id": 2,
+      "Naam": "donderdag 2 juli"
+    },
+    {
+      "Id": 3,
+      "Naam": "vrijdag 3 juli"
+    },
+    {
+      "Id": 4,
+      "Naam": "zaterdag 4 juli"
+    },
+    {
+      "Id": 5,
+      "Naam": "zondag 5 juli"
+    },
+    {
+      "Id": 6,
+      "Naam": "maandag 6 juli"
+    },
+    {
+      "Id": 7,
+      "Naam": "dinsdag 7 juli"
+    },
+    {
+      "Id": 8,
+      "Naam": "woensdag 8 juli"
+    },
+    {
+      "Id": 9,
+      "Naam": "donderdag 9 juli"
+    }
+  ]
+}

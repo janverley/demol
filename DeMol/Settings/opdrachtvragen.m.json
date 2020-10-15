@@ -1,0 +1,40 @@
+{
+  "Opdracht": "m",
+  "Description": "Construction",
+  "Vragen": [
+    {
+      "Text": "Werd het voorwerp van de mol juist geraden?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol rode blokken gebruikt in zijn bouwsel?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Op de hoeveelste rij werd het bouwsel van de mol op het antwoordblad ingevuld?",
+      "Opties": [
+        "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "Laatste"
+      ]
+    },
+    {
+      "Text": "Was het voorwerp van de mol een dier?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol iets op het antwoordblad geschreven?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

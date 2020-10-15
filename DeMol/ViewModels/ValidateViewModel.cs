@@ -1,10 +1,6 @@
-﻿using Caliburn.Micro;
+﻿using System.Linq;
+using Caliburn.Micro;
 using DeMol.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeMol.ViewModels
 {
@@ -12,6 +8,7 @@ namespace DeMol.ViewModels
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
+        private string text;
 
         public ValidateViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -23,29 +20,50 @@ namespace DeMol.ViewModels
 
         public BindableCollection<string> Notas { get; set; } = new BindableCollection<string>();
 
+        public bool CanShowResult => Checks.All(c => c.IsOk);
+
+        public string Text
+        {
+            get => text;
+            set => Set(ref text, value);
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();
 
-            var antwoorden = Util.SafeReadJson<AntwoordenData>(container.GetInstance<ShellViewModel>().Dag);
+            Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:",
+                Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
 
-            Checks.Add(new CheckViewModel($"Dag {container.GetInstance<ShellViewModel>().Dag} administratie saved:", Util.DataFileFoundAndValid<AdminData>(container.GetInstance<ShellViewModel>().Dag)));
-            Checks.Add(new CheckViewModel($"Aantal Antwoorden: {antwoorden.Spelers.Count}", antwoorden.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
-            Checks.Add(new CheckViewModel($"Aantal Mollen: {antwoorden.Spelers.Count(s => s.IsDeMol)}", antwoorden.Spelers.Count(s => s.IsDeMol) == 1));
+            var admin = Util.GetAdminDataOfSelectedDag(container);
 
+            foreach (var gespeeldeOpdrachtData in admin.OpdrachtenGespeeld)
+            {
+                var antwoordendata = Util.SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
+
+                Checks.Add(new CheckViewModel(
+                    $"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}",
+                    antwoordendata.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
+
+                Checks.Add(new CheckViewModel(
+                    $"Aantal Mollen in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count(s => s.IsDeMol)}",
+                    antwoordendata.Spelers.Count(s => s.IsDeMol) == 1));
+
+                Checks.Add(new CheckViewModel(
+                    $"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}:",
+                    Util.CheckForDoubles(antwoordendata.Spelers)));
+            }
+
+            if (Checks.All(c => c.IsOk))
+            {
+                Text = "Alles Ok!";
+            }
         }
+
+
         public void InvalidateAnswers()
         {
             var x = container.GetInstance<InvalidateViewModel>();
-            conductor.ActivateItem(x);
-        }
-
-        public bool CanShowResult => Checks.All(c => c.IsOk);
-
-
-        public void ShowResult()
-        {
-            var x = container.GetInstance<ResultViewModel>();
             conductor.ActivateItem(x);
         }
 

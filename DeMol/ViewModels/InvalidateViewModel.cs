@@ -1,9 +1,6 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using Caliburn.Micro;
+using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
@@ -11,6 +8,7 @@ namespace DeMol.ViewModels
     {
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
+        private string text;
 
         public InvalidateViewModel(ShellViewModel conductor, SimpleContainer container)
         {
@@ -18,15 +16,31 @@ namespace DeMol.ViewModels
             this.container = container;
         }
 
+        public string Text
+        {
+            get => text;
+            set => Set(ref text, value);
+        }
+
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
+
         public void Invalidate()
         {
-            System.IO.File.Delete($@".\Files\antwoorden.{container.GetInstance<ShellViewModel>().Dag}.json");
+            var admin = Util.GetAdminDataOfSelectedDag(container);
+            foreach (var gespeeldeOpdrachtData in admin.OpdrachtenGespeeld)
+            {
+                File.Delete($@".\Files\antwoorden.{gespeeldeOpdrachtData.OpdrachtId}.json");
+            }
+
+            admin.HeeftQuizGespeeld.Clear();
+            Util.SafeAdminData(container, admin);
+
+
+            Text = "Done!";
         }
     }
-
 }

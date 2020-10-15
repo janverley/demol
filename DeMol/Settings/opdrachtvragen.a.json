@@ -1,0 +1,41 @@
+{
+  "Opdracht": "a",
+  "Description": "RummiKub",
+  "Vragen": [
+    {
+      "Text": "Ging de mol blokjes opduiken?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een nieuwe serie gelegd",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een joker vast gehad",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een roos mollenboekje",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heet de mol Harts?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

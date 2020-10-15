@@ -1,8 +1,10 @@
-﻿using Caliburn.Micro;
-using DeMol.Model;
+﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
+using Caliburn.Micro;
+using DeMol.Model;
 
 namespace DeMol.ViewModels
 {
@@ -28,7 +30,31 @@ namespace DeMol.ViewModels
             }
         }
 
-        private void Optie_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public BindableCollection<OptieViewModel> Opties { get; set; } = new BindableCollection<OptieViewModel>();
+
+        public string Naam
+        {
+            get => naam;
+            set
+            {
+                if (Set(ref naam, value))
+                {
+                }
+            }
+        }
+
+        public string Text =>
+            $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat De Mol was bij opdracht {Opdracht}?";
+
+        public string Opdracht => Util.OpdrachtUiNaam(OpdrachtData);
+        public OpdrachtData OpdrachtData { get; set; }
+
+        public bool CanStart => Opties.Any(o => o.IsSelected);
+        public Action<QuizWieIsDeMolViewModel> DoNext { get; set; }
+
+        public string DeMolIs => Opties.Single(o => o.IsSelected).OptieText;
+
+        private void Optie_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(OptieViewModel.IsSelected))
             {
@@ -36,46 +62,24 @@ namespace DeMol.ViewModels
             }
         }
 
-        public BindableCollection<OptieViewModel> Opties { get; set; } = new BindableCollection<OptieViewModel>();
-        public string Naam
-        {
-            get { return naam; }
-            set
-            {
-                if (Set(ref naam, value))
-                {
-                   
-                }
-            }
-        }
-
-        public string Text => $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat vandaag De Mol was?";
-
         public void OnKeyDown(KeyEventArgs e)
         {
             if (e?.Key == Key.Enter && CanStart)
             {
                 Start();
             }
+
             if (e?.Key == Key.Escape)
             {
                 Menu();
             }
         }
 
-        public bool CanStart => Opties.Any(o => o.IsSelected);
         public void Start()
         {
-            var x = container.GetInstance<QuizVragenViewModel>();
-            var admin = Util.SafeReadJson<AdminData>(container.GetInstance<ShellViewModel>().Dag);
-
-            x.VragenCodes = admin.VragenCodes;
-            x.DagId = container.GetInstance<ShellViewModel>().Dag.ToString();
-            x.Naam = Naam;
-            x.IsDeMol = false;
-            x.DeMolIs = Opties.Single(o => o.IsSelected).OptieText;
-            conductor.ActivateItem(x);
+            DoNext(this);
         }
+
         public void Menu()
         {
             var x = container.GetInstance<MenuViewModel>();

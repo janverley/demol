@@ -1,0 +1,32 @@
+{
+  "Opdracht": "k",
+  "Description": "Soundtrack",
+  "Vragen": [
+    {
+      "Text": "Hoeveelst heeft de mol zijn lied geneuried?",
+      "Opties": [
+        "Eerste", "2e","3e"," 4e"," 5e"," 6e"," 7e"," 8e","Laatste"
+      ]
+    },
+    {
+      "Text": "Hoeveel keer sloeg de mol raak op de pinata?"
+    },
+    {
+      "Text": "Droeg de mol een bikini tijdens dit spel?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Hoeveel keer heeft de mol een juist antwoord gegeven?"
+    },
+    {
+      "Text": "Ging de mol naar binnen tijdens deze opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}

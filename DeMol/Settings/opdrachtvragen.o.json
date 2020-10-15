@@ -1,0 +1,41 @@
+{
+  "Opdracht": "o",
+  "Description": "Promenade",
+  "Vragen": [
+    {
+      "Text": "Zat de mol in de wandelgroep?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol met een dobbelsteen gegooid?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Trok de mol een foto tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Werd de mol nat tijdens de opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een zwart mollenboekje?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    }
+  ]
+}
