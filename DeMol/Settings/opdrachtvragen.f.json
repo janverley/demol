@@ -1,40 +1,33 @@
 {
   "Opdracht": "f",
-  "Description": "Kunst of Kitch?",
+  "Description": "Weet wat je eet",
   "Vragen": [
     {
-      "Text": "Heeft de mol een penseeel vast gehad?",
+      "Text": "Wie zat in proef team met de mol?",
+      "Opties": [
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde",
+        "Loes"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een drankje klaar gezet?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol de foto van een kunstwerk vast gehad?",
+      "Text": "Als hoeveelste is de mol gaan proeven?",
       "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Heeft de mol bewust gesaboteerd met een foute kleur?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Had de mol verf aan zijn handen na de opdracht?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Droeg de mol een zwembroek tijdens de opdracht?",
-      "Opties": [
-        "Ja",
-        "Nee"
+        "Eerste", "2e","3e", "4e", "5e"
       ]
     }
   ]

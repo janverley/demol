@@ -286,10 +286,10 @@ namespace DeMol.Model
 
             // vorige dag
             var vandaag = container.GetInstance<ShellViewModel>().Dag;
-            if (vandaag == 1)
-            {
-                return "Gisteren was er geen Quiz, nog geen scores te zien hier.";
-            }
+            // if (vandaag == 1)
+            // {
+            //     return "Gisteren was er geen Quiz, nog geen scores te zien hier.";
+            // }
 
             var gisteren = vandaag - 1;
             var admindateGisteren = SafeReadJson<AdminData>(gisteren);

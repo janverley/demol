@@ -1,54 +1,27 @@
 {
   "Opdracht": "h",
-  "Description": "Ballonnetje Prik",
+  "Description": "Als de kat van huis is - papa's",
   "Vragen": [
     {
-      "Text": "Wie zat er bij de mol in het duo?",
+      "Text": "Is de mol in de badkamer gaan zoeken?",
       "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
-      ],
-      "MeerdereOptiesMogelijk":true
+        "Ja",
+        "Nee",
+        "De mol was geen papa"
+      ]
     },
     {
-      "Text": "Heeft de mol een roze ballon geprikt?",
+      "Text": "Is de mol gaan eten?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol op blote voeten gesprongen?",
+      "Text": "Trok de mol de voor- en na- fotos?",
       "Opties": [
         "Ja",
         "Nee"
-      ]
-    },
-    {
-      "Text": "Als hoeveelste sprong de mol?",
-      "Opties": [
-        "Eerste", "2e","3e"," 4e"," 5e"," 6e"," 7e"," 8e","Laatste"
-      ]
-    },
-    {
-      "Text": "Wie nam de helm over van de mol?",
-      "Opties": [
-        "Juul",
-        "Staf",
-        "Vic",
-        "Mie",
-        "Jochen",
-        "Pieter",
-        "Hanne",
-        "Kris",
-        "Hilde"
       ]
     }
   ]

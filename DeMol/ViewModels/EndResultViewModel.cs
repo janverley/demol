@@ -19,7 +19,7 @@ namespace DeMol.ViewModels
         private readonly List<Scores> alleScores;
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
-        private readonly FinaleAntwoordenData finaleantwoordenData;
+        //private readonly FinaleAntwoordenData finaleantwoordenData;
         private readonly List<OpdrachtData> gespeeldeOpdrachten;
         private readonly int groepspot;
         private readonly Dictionary<string, string> molPerOpdrachtId;
@@ -137,14 +137,14 @@ namespace DeMol.ViewModels
                 }
             }
 
-            finaleantwoordenData = Util.SafeReadJson<FinaleAntwoordenData>();
+            //finaleantwoordenData = Util.SafeReadJson<FinaleAntwoordenData>();
 
-            var finaleDoorIedereenGespeeld = finaleantwoordenData.Spelers.Count ==
-                                             container.GetInstance<ShellViewModel>().AantalSpelers;
-            Checks.Add(new CheckViewModel($"Finale: Aantal Antwoorden: {finaleantwoordenData.Spelers.Count}",
-                finaleDoorIedereenGespeeld));
+            // var finaleDoorIedereenGespeeld = finaleantwoordenData.Spelers.Count ==
+            //                                  container.GetInstance<ShellViewModel>().AantalSpelers;
+            // Checks.Add(new CheckViewModel($"Finale: Aantal Antwoorden: {finaleantwoordenData.Spelers.Count}",
+            //     finaleDoorIedereenGespeeld));
 
-            if (finaleDoorIedereenGespeeld)
+            //if (finaleDoorIedereenGespeeld)
             {
                 foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
                 {
@@ -200,38 +200,38 @@ namespace DeMol.ViewModels
                     }
 
 
-                    var finaleAntwoorden = finaleantwoordenData.Spelers.Single(s => s.Naam.SafeEqual(speler.Naam));
+                    //var finaleAntwoorden = finaleantwoordenData.Spelers.Single(s => s.Naam.SafeEqual(speler.Naam));
 
-                    scores.totaleTijd += finaleAntwoorden.Tijd;
+                    //scores.totaleTijd += finaleAntwoorden.Tijd;
 
-                    foreach (var demolIsPerOpdrachtId in finaleAntwoorden.DeMolIsPerOpdrachtId)
-                    {
-                        scores.finaleAantalVragenBeantwoord++;
+                    // foreach (var demolIsPerOpdrachtId in finaleAntwoorden.DeMolIsPerOpdrachtId)
+                    // {
+                    //     scores.finaleAantalVragenBeantwoord++;
+                    //
+                    //     if (molPerOpdrachtId.ContainsKey(demolIsPerOpdrachtId.Key)
+                    //         && molPerOpdrachtId[demolIsPerOpdrachtId.Key].SafeEqual(demolIsPerOpdrachtId.Value))
+                    //     {
+                    //         scores.finaleAantalVragenJuistBeantwoord++;
+                    //     }
+                    // }
 
-                        if (molPerOpdrachtId.ContainsKey(demolIsPerOpdrachtId.Key)
-                            && molPerOpdrachtId[demolIsPerOpdrachtId.Key].SafeEqual(demolIsPerOpdrachtId.Value))
-                        {
-                            scores.finaleAantalVragenJuistBeantwoord++;
-                        }
-                    }
-
-                    foreach (var antwoordenPerVraagId in finaleAntwoorden.AntwoordenPerVraagId)
-                    {
-                        scores.finaleAantalVragenBeantwoord++;
-
-                        if (alleJuisteAntwoorden.ContainsKey(antwoordenPerVraagId.Key)
-                            && alleJuisteAntwoorden[antwoordenPerVraagId.Key].SafeEqual(antwoordenPerVraagId.Value))
-                        {
-                            scores.finaleAantalVragenJuistBeantwoord++;
-                        }
-                    }
+                    // foreach (var antwoordenPerVraagId in finaleAntwoorden.AntwoordenPerVraagId)
+                    // {
+                    //     scores.finaleAantalVragenBeantwoord++;
+                    //
+                    //     if (alleJuisteAntwoorden.ContainsKey(antwoordenPerVraagId.Key)
+                    //         && alleJuisteAntwoorden[antwoordenPerVraagId.Key].SafeEqual(antwoordenPerVraagId.Value))
+                    //     {
+                    //         scores.finaleAantalVragenJuistBeantwoord++;
+                    //     }
+                    // }
 
                     var x = Math.Min(scores.aantalVragenJuistBeantwoord + scores.aantalPasVragenVerdiend,
                         scores.aantalVragenBeantwoord);
                     scores.percentage = (scores.aantalVragenBeantwoord > 0) ? x / scores.aantalVragenBeantwoord : 0m;
-                    scores.finalePercentage = (scores.finaleAantalVragenBeantwoord > 0) ? scores.finaleAantalVragenJuistBeantwoord / scores.finaleAantalVragenBeantwoord : 0m;
+                    //scores.finalePercentage = (scores.finaleAantalVragenBeantwoord > 0) ? scores.finaleAantalVragenJuistBeantwoord / scores.finaleAantalVragenBeantwoord : 0m;
 
-                    scores.totaalPercentage = (scores.percentage + scores.finalePercentage) / 2;
+                    scores.totaalPercentage = scores.percentage;
 
                     alleScores.Add(scores);
                 }
@@ -289,10 +289,10 @@ namespace DeMol.ViewModels
 
             sb.AppendLine($"- behaalde in totaal {scores.totaalPercentage:P},");
             sb.AppendLine(
-                $"- beantwoorde in de week {scores.aantalVragenJuistBeantwoord}/{scores.aantalVragenBeantwoord} vragen juist");
+                $"- beantwoorde {scores.aantalVragenJuistBeantwoord}/{scores.aantalVragenBeantwoord} vragen juist");
             sb.AppendLine($"- won {scores.aantalPasVragenVerdiend} pasvragen");
-            sb.AppendLine(
-                $"- beantwoorde in de finale {scores.finaleAantalVragenJuistBeantwoord}/{scores.finaleAantalVragenBeantwoord} vragen juist");
+            // sb.AppendLine(
+            //     $"- beantwoorde in de finale {scores.finaleAantalVragenJuistBeantwoord}/{scores.finaleAantalVragenBeantwoord} vragen juist");
             sb.AppendLine(
                 $"- op een totale tijd van {scores.totaleTijd.Hours} uur, {scores.totaleTijd.Minutes} minuten en {scores.totaleTijd.Seconds} seconden");
             sb.AppendLine();
@@ -360,13 +360,13 @@ namespace DeMol.ViewModels
                 sb.AppendLine(scores.Naam);
 
                 sb.AppendLine(
-                    $"\tIn de week: ({scores.aantalVragenJuistBeantwoord} + {scores.aantalPasVragenVerdiend} pasvragen) / {scores.aantalVragenBeantwoord} -> {scores.percentage:P}");
+                    $"\tJuiste antwoorden: ({scores.aantalVragenJuistBeantwoord} + {scores.aantalPasVragenVerdiend} pasvragen) / {scores.aantalVragenBeantwoord} -> {scores.percentage:P}");
+                // sb.AppendLine(
+                //     $"\tFinale: {scores.finaleAantalVragenJuistBeantwoord} / {scores.finaleAantalVragenBeantwoord} -> {scores.finalePercentage:P}");
+                //
                 sb.AppendLine(
-                    $"\tFinale: {scores.finaleAantalVragenJuistBeantwoord} / {scores.finaleAantalVragenBeantwoord} -> {scores.finalePercentage:P}");
-
-                sb.AppendLine(
-                    $"\tTotaal: ({scores.percentage:P} + {scores.finalePercentage:P})/2 = {scores.totaalPercentage:P}");
-                sb.AppendLine(
+                     $"\tTotaal: {scores.totaalPercentage:P}");
+                 sb.AppendLine(
                     $"\tTotale Tijd: {scores.totaleTijd:g}");
                 sb.AppendLine(
                     $"\t{scores.aantalKeerMolGeweest} keer mol geweest");

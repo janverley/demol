@@ -46,14 +46,14 @@ namespace DeMol.ViewModels
             {
                 var opdrachtData = gespeeldeOpdrachten[i];
 
-                var antwoordendata = Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
-
-                var deMol = antwoordendata.Spelers.First(s => s.IsDeMol);
-                if (Naam.SafeEqual(deMol.Naam))
-                {
-                    // niks over vragen
-                    continue;
-                }
+                // var antwoordendata = Util.SafeReadJson<AntwoordenData>(opdrachtData.Opdracht);
+                //
+                // var deMol = antwoordendata.Spelers.First(s => s.IsDeMol);
+                // if (Naam.SafeEqual(deMol.Naam))
+                // {
+                //     // niks over vragen
+                //     continue;
+                // }
 
                 var wieisdemol = container.GetInstance<QuizWieIsDeMolViewModel>();
                 wieisdemol.Naam = Naam;

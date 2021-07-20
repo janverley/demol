@@ -1,38 +1,24 @@
 {
   "Opdracht": "c",
-  "Description": "Van de boekskes",
+  "Description": "Coin Pusher",
   "Vragen": [
     {
-      "Text": "Was de vraag over het boekje van de mol juist?",
+      "Text": "Op welke plek in de rij stond de mol?",
+      "Opties": [
+        "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "9e" ,"Laatste"
+      ]
+    },
+    {
+      "Text": "Heeft de mol een pasvraag verdiend?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol een juist antwoord gegeven?",
+      "Text": "Droeg de mol een korte broek tijdens het spel?",
       "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "De hoeveelste vraag ging over het boekje van de mol",
-      "Opties": [
-        "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "Laatste"
-      ]
-    },
-    {
-      "Text": "Heeft de mol tijdens de kwis een alcoholisch drankje gedronken?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Had de mol nog zwemgerief aan tijdens de kwis?",
-      "Opties": [
-        "Ja",
+        "Ja", 
         "Nee"
       ]
     }

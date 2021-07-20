@@ -20,9 +20,9 @@ namespace DeMol.Model
         public int aantalVragenJuistBeantwoord;
         public decimal percentage;
 
-        public decimal finaleAantalVragenBeantwoord;
-        public int finaleAantalVragenJuistBeantwoord;
-        public decimal finalePercentage;
+        // public decimal finaleAantalVragenBeantwoord;
+        // public int finaleAantalVragenJuistBeantwoord;
+        // public decimal finalePercentage;
 
         public int aantalKeerMolGeweest;
         public int verdiendAlsMol;

@@ -1,23 +1,9 @@
 {
   "Opdracht": "d",
-  "Description": "Laat het niet hangen",
+  "Description": "Street Art",
   "Vragen": [
     {
-      "Text": "Had de mol een balletje?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Was de kleur van het voorwerp van de mol rood?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Wie stond er links van de mol tijdens de opdracht",
+      "Text": "wie zat er in het team van de mol?",
       "Opties": [
         "Juul",
         "Staf",
@@ -27,18 +13,18 @@
         "Pieter",
         "Hanne",
         "Kris",
-        "Hilde"
+        "Hilde",
+        "Loes"
       ]
     },
     {
-      "Text": "Heeft de mol gevloekt tijdens de proef?",
+      "Text": "Als hoeveelste kwam het team van de mol aan op de afgesproken plek?",
       "Opties": [
-        "Ja",
-        "Nee"
+        "Eerste", "2e","3e", "4e", "5e"
       ]
     },
     {
-      "Text": "Is de mol linkshandig?",
+      "Text": "Moest de mol de haven oversteken?",
       "Opties": [
         "Ja",
         "Nee"

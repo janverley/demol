@@ -37,7 +37,7 @@ namespace DeMol.ViewModels
                     {
                         container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
                     }
-
+            
                     UpdateButtonStates();
                 }
             }
@@ -92,12 +92,14 @@ namespace DeMol.ViewModels
                 Dagen.Add(new DagViewModel(dag.Id, dag.Naam));
             }
 
-            // if set, preselect SelectedDag
-            if (container.GetInstance<ShellViewModel>().Dag > 0 &&
-                Dagen.Any(d => d.Id == container.GetInstance<ShellViewModel>().Dag))
-            {
-                SelectedDag = Dagen.First(d => d.Id == container.GetInstance<ShellViewModel>().Dag);
-            }
+            SelectedDag = Dagen.First();
+            SelectedDagChanged();
+            // // if set, preselect SelectedDag
+            // if (container.GetInstance<ShellViewModel>().Dag > 0 &&
+            //     Dagen.Any(d => d.Id == container.GetInstance<ShellViewModel>().Dag))
+            // {
+            //     SelectedDag = Dagen.First(d => d.Id == container.GetInstance<ShellViewModel>().Dag);
+            // }
         }
 
 

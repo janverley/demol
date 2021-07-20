@@ -1,40 +1,35 @@
 {
   "Opdracht": "j",
-  "Description": "Back in time",
+  "Description": "Zoek de verschillen",
   "Vragen": [
     {
-      "Text": "Heeft de mol wijn gedronken?",
+      "Text": "Had de mol een bewerkte foto vast?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol de polaroid vast gehad?",
+      "Text": "heeft de mol zijn doel gevonden?",
       "Opties": [
         "Ja",
-        "Nee"
+        "Nee",
+        "De mol moest zich verstoppen"
       ]
     },
     {
-      "Text": "Stond de mol naast water op de foto?",
+      "Text": "Wie zat in het team van de mol?",
       "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Heeft de mol gelopen tijdens de opdracht?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Heeft de mol getuft vandaag?",
-      "Opties": [
-        "Ja",
-        "Nee"
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde",
+        "Loes"
       ]
     }
   ]

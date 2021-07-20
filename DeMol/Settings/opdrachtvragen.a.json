@@ -1,40 +1,26 @@
 {
   "Opdracht": "a",
-  "Description": "RummiKub",
+  "Description": "On The Road",
   "Vragen": [
     {
-      "Text": "Ging de mol blokjes opduiken?",
+      "Text": "Heeft de mol onderweg een item betaald?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol een nieuwe serie gelegd",
+      "Text": "heeft de mol een foto genomen?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol een joker vast gehad",
+      "Text": "Zat de mol in de auto van de famillie Spysschaert of famille Harts?",
       "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Heeft de mol een roos mollenboekje",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Heet de mol Harts?",
-      "Opties": [
-        "Ja",
-        "Nee"
+        "Spysschaert",
+        "Harts"
       ]
     }
   ]

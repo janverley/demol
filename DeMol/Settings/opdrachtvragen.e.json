@@ -1,40 +1,37 @@
 {
   "Opdracht": "e",
-  "Description": "Spring je rijk",
+  "Description": "UPS",
   "Vragen": [
     {
-      "Text": "Droeg de mol iets aan zijn voeten tijdens het springen?",
+      "Text": "Welk vervoermiddel moest de mol nemen?",
       "Opties": [
-        "Ja",
-        "Nee"
+        "Go-Cart",
+        "Fiets", "Step", "Springbal", "Skateboard"
       ]
     },
     {
-      "Text": "Nam de mol een foto tijdens de opdracht?",
+      "Text": "Wie zat in het team van de mol?",
       "Opties": [
-        "Ja",
-        "Nee"
-      ]
+        "Juul",
+        "Staf",
+        "Vic",
+        "Mie",
+        "Jochen",
+        "Pieter",
+        "Hanne",
+        "Kris",
+        "Hilde",
+        "Loes",
+        "Niemand"
+      ],
+      "MeerdereOptiesMogelijk" :"true"
     },
     {
-      "Text": "Kwam de mol met de Audi aan bij de gorge?",
+      "Text": "Heeft het team van de mol het pakket gevonden en kwamen ze tijdig aan?",
       "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Droeg de mol een bikini?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Had de mol een bedrag boven de 800 euro?",
-      "Opties": [
-        "Ja",
-        "Nee"
+        "Niet gevonden",
+        "Gevonden maar te laat",
+        "Gevonden en binnen de tijd"
       ]
     }
   ]

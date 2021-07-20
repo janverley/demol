@@ -1,37 +1,24 @@
 {
   "Opdracht": "i",
-  "Description": "Puzzel Time",
+  "Description": "Als de kat van huis is - mama's",
   "Vragen": [
     {
-      "Text": "Zat de mol in het team van kris?",
+      "Text": "Is de mol in de badkamer gaan zoeken?",
+      "Opties": [
+        "Ja",
+        "Nee",
+        "De mol was geen papa"
+      ]
+    },
+    {
+      "Text": "Is de mol gaan eten?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Heeft de mol een walkie vastgehad?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Heeft de mol antwoorden op het puzzelblad geschreven?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Ging de mol het bos in?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Vond de mol een foto?",
+      "Text": "Trok de mol de voor- en na- fotos?",
       "Opties": [
         "Ja",
         "Nee"

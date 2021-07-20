@@ -1,37 +1,27 @@
 {
   "Opdracht": "b",
-  "Description": "Shoppen",
+  "Description": "Wankel Evenwicht",
   "Vragen": [
     {
-      "Text": "Ging de mol een winkel binnen?",
+      "Text": "Op welke plek in de rij stond de mol?",
       "Opties": [
-        "Ja",
-        "Nee"
+        "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "9e" ,
+        "Jochen was de Mol"
       ]
     },
     {
-      "Text": "Nam de mol foto’s tijdens de opdracht?",
+      "Text": "Hoeveel glazen van de mol waren er nog vol?",
       "Opties": [
-        "Ja",
-        "Nee"
+        "5",
+        "4",
+        "3",
+        "2",
+        "1",
+        "0"
       ]
     },
     {
-      "Text": "Heeft de mol geld vast gehad tijdens de opdracht?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Had de mol een 'kantoor'?",
-      "Opties": [
-        "Ja",
-        "Nee"
-      ]
-    },
-    {
-      "Text": "Droeg de mol sandalen tijdens de proef?",
+      "Text": "Heeft De Mol zijdelings moeten stappen?",
       "Opties": [
         "Ja",
         "Nee"

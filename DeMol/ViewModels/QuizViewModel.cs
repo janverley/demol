@@ -22,7 +22,7 @@ namespace DeMol.ViewModels
                 return result;
             };
 
-            smoelenViewModel.DoNext = vm => StartScore(vm.Naam);
+            smoelenViewModel.DoNext = vm => StartQuiz(vm.Naam);
         }
 
         protected override void OnActivate()
@@ -36,15 +36,15 @@ namespace DeMol.ViewModels
             ActivateItem(smoelenViewModel);
         }
 
-        public void StartScore(string naam)
-        {
-            var x = container.GetInstance<ScoreViewModel>();
-            x.Naam = naam;
-
-            x.Text = Util.ScoreInfoVanVorigeDag(container, naam);
-
-            ActivateItem(x);
-        }
+        // public void StartScore(string naam)
+        // {
+        //     var x = container.GetInstance<ScoreViewModel>();
+        //     x.Naam = naam;
+        //
+        //     x.Text = Util.ScoreInfoVanVorigeDag(container, naam);
+        //
+        //     ActivateItem(x);
+        // }
 
 
         public void StartQuiz(string naam)
