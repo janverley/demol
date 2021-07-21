@@ -3,20 +3,20 @@
   "Description": "Coin Pusher",
   "Vragen": [
     {
-      "Text": "Op welke plek in de rij stond de mol?",
+      "Text": "Op welke plek in de rij stond De Mol?",
       "Opties": [
         "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "9e" ,"Laatste"
       ]
     },
     {
-      "Text": "Heeft de mol een pasvraag verdiend?",
+      "Text": "Heeft De Mol een pasvraag verdiend?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Droeg de mol een korte broek tijdens het spel?",
+      "Text": "Droeg De Mol een korte broek tijdens het spel?",
       "Opties": [
         "Ja", 
         "Nee"

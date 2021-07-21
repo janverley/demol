@@ -3,14 +3,14 @@
   "Description": "UPS",
   "Vragen": [
     {
-      "Text": "Welk vervoermiddel moest de mol nemen?",
+      "Text": "Welk vervoermiddel moest De Mol nemen?",
       "Opties": [
         "Go-Cart",
         "Fiets", "Step", "Springbal", "Skateboard"
       ]
     },
     {
-      "Text": "Wie zat in het team van de mol?",
+      "Text": "Wie zat in het team van De Mol?",
       "Opties": [
         "Juul",
         "Staf",
@@ -27,7 +27,7 @@
       "MeerdereOptiesMogelijk" :"true"
     },
     {
-      "Text": "Heeft het team van de mol het pakket gevonden en kwamen ze tijdig aan?",
+      "Text": "Heeft het team van De Mol het pakket gevonden en kwamen ze tijdig aan?",
       "Opties": [
         "Niet gevonden",
         "Gevonden maar te laat",

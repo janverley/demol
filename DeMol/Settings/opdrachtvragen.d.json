@@ -3,7 +3,7 @@
   "Description": "Street Art",
   "Vragen": [
     {
-      "Text": "wie zat er in het team van de mol?",
+      "Text": "wie zat er in het team van De Mol?",
       "Opties": [
         "Juul",
         "Staf",
@@ -18,13 +18,13 @@
       ]
     },
     {
-      "Text": "Als hoeveelste kwam het team van de mol aan op de afgesproken plek?",
+      "Text": "Als hoeveelste kwam het team van De Mol aan op de afgesproken plek?",
       "Opties": [
         "Eerste", "2e","3e", "4e", "5e"
       ]
     },
     {
-      "Text": "Moest de mol de haven oversteken?",
+      "Text": "Moest De Mol de haven oversteken?",
       "Opties": [
         "Ja",
         "Nee"

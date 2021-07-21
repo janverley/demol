@@ -3,22 +3,22 @@
   "Description": "Zoek de verschillen",
   "Vragen": [
     {
-      "Text": "Had de mol een bewerkte foto vast?",
+      "Text": "Had De Mol een bewerkte foto vast?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "heeft de mol zijn doel gevonden?",
+      "Text": "heeft De Mol zijn doel gevonden?",
       "Opties": [
         "Ja",
         "Nee",
-        "De mol moest zich verstoppen"
+        "De Mol moest zich verstoppen"
       ]
     },
     {
-      "Text": "Wie zat in het team van de mol?",
+      "Text": "Wie zat in het team van De Mol?",
       "Opties": [
         "Juul",
         "Staf",

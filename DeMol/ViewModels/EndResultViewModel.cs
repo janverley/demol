@@ -297,7 +297,7 @@ namespace DeMol.ViewModels
                 $"- op een totale tijd van {scores.totaleTijd.Hours} uur, {scores.totaleTijd.Minutes} minuten en {scores.totaleTijd.Seconds} seconden");
             sb.AppendLine();
             sb.AppendLine(
-                $"- was bij {scores.aantalKeerMolGeweest} opdrachten de mol en verdiende daarmee {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
+                $"- was bij {scores.aantalKeerMolGeweest} opdrachten De Mol en verdiende daarmee {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
             sb.AppendLine();
             sb.AppendLine();
             sb.AppendLine($"De Groepspot bevat {groepspot.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
@@ -347,9 +347,9 @@ namespace DeMol.ViewModels
                     .ToString("C0", CultureInfo.GetCultureInfo("nl-be"));
 
                 sb.AppendLine(
-                    $"\t\tDe mol was {molNaam}, geraden door: {raders} => {(molIsNIETGeraden ? "Goed gedaan mol!" : "Meup!")}");
+                    $"\t\tDe Mol was {molNaam}, geraden door: {raders} => {(molIsNIETGeraden ? "Goed gedaan Mol!" : "Meup!")}");
                 sb.AppendLine(
-                    $"\t\tDit levert de mol {molNaam} {voordeMol} op");
+                    $"\t\tDit levert De Mol {molNaam} {voordeMol} op");
             }
 
             sb.AppendLine();
@@ -369,7 +369,7 @@ namespace DeMol.ViewModels
                  sb.AppendLine(
                     $"\tTotale Tijd: {scores.totaleTijd:g}");
                 sb.AppendLine(
-                    $"\t{scores.aantalKeerMolGeweest} keer mol geweest");
+                    $"\t{scores.aantalKeerMolGeweest} keer Mol geweest");
                 sb.AppendLine(
                     $"\tVerdiend als Mol: {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
             }

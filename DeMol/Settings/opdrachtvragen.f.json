@@ -3,7 +3,7 @@
   "Description": "Weet wat je eet",
   "Vragen": [
     {
-      "Text": "Wie zat in proef team met de mol?",
+      "Text": "Wie zat in proef team met De Mol?",
       "Opties": [
         "Juul",
         "Staf",
@@ -18,14 +18,14 @@
       ]
     },
     {
-      "Text": "Heeft de mol een drankje klaar gezet?",
+      "Text": "Heeft De Mol een drankje klaar gezet?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Als hoeveelste is de mol gaan proeven?",
+      "Text": "Als hoeveelste is De Mol gaan proeven?",
       "Opties": [
         "Eerste", "2e","3e", "4e", "5e"
       ]

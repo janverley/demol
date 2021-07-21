@@ -3,20 +3,20 @@
   "Description": "Communicatie",
   "Vragen": [
     {
-      "Text": "In welke groep zat de mol?",
+      "Text": "In welke groep zat De Mol?",
       "Opties": [
         "Eerste", "2e","3e", "4e"      
       ]
     },
     {
-      "Text": "Heeft de mol de semafoor vlaggen vast gehad?",
+      "Text": "Heeft De Mol de semafoor vlaggen vast gehad?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "heeft de mol morse moeten schijnen of ontcijferen?",
+      "Text": "heeft De Mol morse moeten schijnen of ontcijferen?",
       "Opties": [
         "Schijnen",
         "Ontcijferen",

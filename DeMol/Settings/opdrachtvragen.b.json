@@ -3,14 +3,14 @@
   "Description": "Wankel Evenwicht",
   "Vragen": [
     {
-      "Text": "Op welke plek in de rij stond de mol?",
+      "Text": "Op welke plek in de rij stond De Mol?",
       "Opties": [
         "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "9e" ,
-        "Jochen was de Mol"
+        "Jochen was De Mol"
       ]
     },
     {
-      "Text": "Hoeveel glazen van de mol waren er nog vol?",
+      "Text": "Hoeveel glazen van De Mol waren er nog vol?",
       "Opties": [
         "5",
         "4",

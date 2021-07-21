@@ -3,22 +3,22 @@
   "Description": "Als de kat van huis is - mama's",
   "Vragen": [
     {
-      "Text": "Is de mol in de badkamer gaan zoeken?",
+      "Text": "Is De Mol in de badkamer gaan zoeken?",
       "Opties": [
         "Ja",
         "Nee",
-        "De mol was geen papa"
+        "De Mol was geen papa"
       ]
     },
     {
-      "Text": "Is de mol gaan eten?",
+      "Text": "Is De Mol gaan eten?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Trok de mol de voor- en na- fotos?",
+      "Text": "Trok De Mol de voor- en na- fotos?",
       "Opties": [
         "Ja",
         "Nee"

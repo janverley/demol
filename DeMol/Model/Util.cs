@@ -302,7 +302,7 @@ namespace DeMol.Model
 
                 if (antwoorden.Spelers.Single(s => s.Naam == naam).IsDeMol)
                 {
-                    sb.AppendLine($"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: jij was de mol");
+                    sb.AppendLine($"Opdracht {OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: jij was De Mol");
                 }
                 else
                 {

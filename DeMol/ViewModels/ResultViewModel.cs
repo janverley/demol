@@ -93,14 +93,14 @@
 //             switch (raders.Count())
 //             {
 //                 case 0:
-//                     resultSB.AppendLine("- Niemand heeft geraden wie de mol was.");
+//                     resultSB.AppendLine("- Niemand heeft geraden wie De Mol was.");
 //                     break;
 //                 case 1:
-//                     resultSB.AppendLine($"- Alleen {raders.First().Naam} heeft geraden wie de mol was.");
+//                     resultSB.AppendLine($"- Alleen {raders.First().Naam} heeft geraden wie De Mol was.");
 //                     break;
 //                 default:
 //                     resultSB.AppendLine(
-//                         $"- Deze {raders.Count()} spelers hebben geraden wie de mol was: {String.Join(",", raders.Select(r => r.Naam))}");
+//                         $"- Deze {raders.Count()} spelers hebben geraden wie De Mol was: {String.Join(",", raders.Select(r => r.Naam))}");
 //                     break;
 //             }
 //
