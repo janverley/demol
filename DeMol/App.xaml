@@ -18,10 +18,10 @@
                             <Grid Margin="5">
                                 <ContentPresenter Content="{TemplateBinding Content}">
                                     <ContentPresenter.LayoutTransform>
-                                        <ScaleTransform ScaleX="0.6" ScaleY="0.6" />
+                                        <ScaleTransform ScaleX="0.4" ScaleY="0.4" />
                                     </ContentPresenter.LayoutTransform>
                                 </ContentPresenter>
-                                <Ellipse Fill="#45FFFFFF"
+                                <Ellipse Fill="#75FFFFFF"
                                          Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}" />
                                 <!--<Border Visibility="{TemplateBinding IsEnabled, Converter={StaticResource ResourceKey=showWhenDisabled}}" Background="#45FFFFFF"/>-->
                             </Grid>

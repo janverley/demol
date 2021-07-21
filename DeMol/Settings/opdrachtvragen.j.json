@@ -3,14 +3,14 @@
   "Description": "Zoek de verschillen",
   "Vragen": [
     {
-      "Text": "Had De Mol een bewerkte foto vast?",
+      "Text": "Had De Mol in de eerste ronde een bewerkte foto vast?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "heeft De Mol zijn doel gevonden?",
+      "Text": "Heeft De Mol in de 2de ronde de verstopper gevonden?",
       "Opties": [
         "Ja",
         "Nee",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "Text": "Wie zat in het team van De Mol?",
+      "Text": "Wie zat in het team van De Mol in de eerste ronde?",
       "Opties": [
         "Juul",
         "Staf",
