@@ -84,6 +84,7 @@
     </ApplicationDefinition>
     <Compile Include="BooleanConverter.cs" />
     <Compile Include="BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\ClipConverter.cs" />
     <Compile Include="Model\AntwoordenData.cs" />
     <Compile Include="Model\Dag.cs" />
     <Compile Include="Model\FinaleAntwoordenData.cs" />
