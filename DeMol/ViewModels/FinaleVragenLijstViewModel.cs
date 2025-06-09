@@ -55,23 +55,23 @@ namespace DeMol.ViewModels
                 //     continue;
                 // }
 
-                var wieisdemol = container.GetInstance<QuizWieIsDeMolViewModel>();
-                wieisdemol.Naam = Naam;
-                wieisdemol.OpdrachtData = opdrachtData;
-                wieisdemol.DoNext = model =>
-                {
-                    var x =
-                        Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1)
-                                .FirstOrDefault(y => y is FinaleQuizVragenViewModel) as
-                            FinaleQuizVragenViewModel;
+                // var wieisdemol = container.GetInstance<QuizWieIsDeMolViewModel>();
+                // wieisdemol.Naam = Naam;
+                // wieisdemol.OpdrachtData = opdrachtData;
+                // wieisdemol.DoNext = model =>
+                // {
+                //     var x =
+                //         Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1)
+                //                 .FirstOrDefault(y => y is FinaleQuizVragenViewModel) as
+                //             FinaleQuizVragenViewModel;
+                //
+                //     x.Message = $"Opdracht: {Util.OpdrachtUiNaam(opdrachtData)}";
+                //
+                //     x.DeMolIs = model.DeMolIs;
+                //     ActivateItem(x);
+                // };
 
-                    x.Message = $"Opdracht: {Util.OpdrachtUiNaam(opdrachtData)}";
-
-                    x.DeMolIs = model.DeMolIs;
-                    ActivateItem(x);
-                };
-
-                Items.Add(wieisdemol);
+                // Items.Add(wieisdemol);
 
                 var vragen = container.GetInstance<FinaleQuizVragenViewModel>();
 

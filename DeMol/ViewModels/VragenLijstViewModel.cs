@@ -40,30 +40,30 @@ namespace DeMol.ViewModels
             {
                 var opdrachtData = gespeeldeOpdrachten[i];
 
-                var jijmol = container.GetInstance<QuizBenJijDeMolViewModel>();
-                jijmol.Naam = Naam;
-                jijmol.OpdrachtData = opdrachtData;
-                jijmol.DoNext = model =>
-                {
-                    if (model.IsDeMol)
-                    {
-                        var x =
-                            Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1)
-                                    .FirstOrDefault(y => y is QuizVragenViewModel) as
-                                QuizVragenViewModel;
-                        x.IsDeMol = true;
-                        ActivateItem(x);
-                    }
-                    else
-                    {
-                        var x =
-                            Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1)
-                                    .FirstOrDefault(y => y is QuizWieIsDeMolViewModel) as
-                                QuizWieIsDeMolViewModel;
-                        ActivateItem(x);
-                    }
-                };
-                Items.Add(jijmol);
+                // var jijmol = container.GetInstance<QuizBenJijDeMolViewModel>();
+                // jijmol.Naam = Naam;
+                // jijmol.OpdrachtData = opdrachtData;
+                // jijmol.DoNext = model =>
+                // {
+                //     if (model.IsDeMol)
+                //     {
+                //         var x =
+                //             Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1)
+                //                     .FirstOrDefault(y => y is QuizVragenViewModel) as
+                //                 QuizVragenViewModel;
+                //         x.IsDeMol = true;
+                //         ActivateItem(x);
+                //     }
+                //     else
+                //     {
+                //         var x =
+                //             Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1)
+                //                     .FirstOrDefault(y => y is QuizWieIsDeMolViewModel) as
+                //                 QuizWieIsDeMolViewModel;
+                //         ActivateItem(x);
+                //     }
+                // };
+                // Items.Add(jijmol);
 
                 var wieisdemol = container.GetInstance<QuizWieIsDeMolViewModel>();
                 wieisdemol.Naam = Naam;
