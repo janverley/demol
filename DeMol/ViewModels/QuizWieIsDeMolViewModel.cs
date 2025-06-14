@@ -13,21 +13,13 @@ namespace DeMol.ViewModels
         private readonly ShellViewModel conductor;
         private readonly SimpleContainer container;
         private string naam;
+        private OpdrachtData opdrachtData;
 
         public QuizWieIsDeMolViewModel(ShellViewModel conductor, SimpleContainer container)
         {
             this.conductor = conductor;
             this.container = container;
 
-
-            var spelers = container.GetInstance<ShellViewModel>().Spelerdata.Spelers;
-            foreach (var speler in spelers)
-            {
-                var optie = new OptieViewModel(speler.Naam);
-                optie.PropertyChanged += Optie_PropertyChanged;
-
-                Opties.Add(optie);
-            }
         }
 
         public BindableCollection<OptieViewModel> Opties { get; set; } = new BindableCollection<OptieViewModel>();
@@ -44,10 +36,30 @@ namespace DeMol.ViewModels
         }
 
         public string Text =>
-            $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat De Mol was bij opdracht {Opdracht}?";
+            $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Naam.ToLower())}, wie denk jij dat {Opdracht} was?";
 
         public string Opdracht => Util.OpdrachtUiNaam(OpdrachtData);
-        public OpdrachtData OpdrachtData { get; set; }
+
+        public OpdrachtData OpdrachtData
+        {
+            get => opdrachtData;
+            set
+            {
+                opdrachtData = value;
+                
+                var opdrachtIsOverMol = opdrachtData.Opdracht.SafeEqual("a"); 
+                var spelers = container.GetInstance<ShellViewModel>().Spelerdata.Spelers;
+                foreach (var speler in spelers.Where(s => s.KanMolZijn == opdrachtIsOverMol))
+                {
+                    var optie = new OptieViewModel(speler.Naam);
+                    optie.PropertyChanged += Optie_PropertyChanged;
+
+                    Opties.Add(optie);
+                }
+
+                
+            }
+        }
 
         public bool CanStart => Opties.Any(o => o.IsSelected);
         public Action<QuizWieIsDeMolViewModel> DoNext { get; set; }

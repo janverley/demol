@@ -71,7 +71,8 @@ namespace DeMol.ViewModels
                 wieisdemol.DoNext = model =>
                 {
                     var x =
-                        Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1)
+                        Items.SkipWhile(item => !Equals(item, ActiveItem))
+                                .Skip(1)
                                 .FirstOrDefault(y => y is QuizVragenViewModel) as
                             QuizVragenViewModel;
                     x.IsDeMol = false;
@@ -79,7 +80,15 @@ namespace DeMol.ViewModels
                     ActivateItem(x);
                 };
 
-                Items.Add(wieisdemol);
+                if ((opdrachtData.Opdracht.SafeEqual("a") && Naam.SafeEqual("glenn")) || 
+                    (opdrachtData.Opdracht.SafeEqual("b") && Naam.SafeEqual("saar")))
+                {
+                    // ni vragen wie de mol/molletje is
+                }
+                else
+                {
+                    Items.Add(wieisdemol);
+                }
 
                 var vragen = container.GetInstance<QuizVragenViewModel>();
 
@@ -88,6 +97,8 @@ namespace DeMol.ViewModels
                 vragen.VragenCodes = vragenCodes;
                 vragen.OpdrachtId = opdrachtData.Opdracht;
                 vragen.Naam = Naam;
+                vragen.IsDeMol = (opdrachtData.Opdracht.SafeEqual("a") && Naam.SafeEqual("glenn")) ||
+                                 (opdrachtData.Opdracht.SafeEqual("b") && Naam.SafeEqual("saar"));
                 vragen.DoNext = model2 =>
                 {
                     var isLast = !Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1).Any();

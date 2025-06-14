@@ -42,7 +42,7 @@ namespace DeMol.ViewModels
                 var antwoordendata = Util.SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
 
                 Checks.Add(new CheckViewModel(
-                    $"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}",
+                    $"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}, zou moeten zijn {container.GetInstance<ShellViewModel>().AantalSpelers}",
                     antwoordendata.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
 
                 Checks.Add(new CheckViewModel(
@@ -50,7 +50,7 @@ namespace DeMol.ViewModels
                     antwoordendata.Spelers.Count(s => s.IsDeMol) == 1));
 
                 Checks.Add(new CheckViewModel(
-                    $"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}:",
+                    $"Dubbel geantwoord in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {Util.GetDoubles(antwoordendata.Spelers)}",
                     Util.CheckForDoubles(antwoordendata.Spelers)));
             }
 

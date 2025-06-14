@@ -83,10 +83,15 @@ namespace DeMol.ViewModels
             base.OnActivate();
             startTime = DateTime.UtcNow;
 
-            if (IsDeMol)
+            if (Naam.SafeEqual("glenn") && OpdrachtId == "a")
             {
                 Message =
                     $"Jij bent De Mol, dus je moet op alle vragen goed antwoorden!\n{Util.OpdrachtUiNaam(OpdrachtId)}:";
+            }
+            else if (Naam.SafeEqual("saar") && OpdrachtId == "b")
+            {
+                Message =
+                    $"Jij bent Het Molletje, dus je moet op alle vragen goed antwoorden!\n{Util.OpdrachtUiNaam(OpdrachtId)}:";
             }
             else
             {

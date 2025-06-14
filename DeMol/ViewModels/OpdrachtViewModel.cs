@@ -17,7 +17,7 @@ namespace DeMol.ViewModels
         {
             OpdrachtData = opdrachtData;
             Naam = Util.OpdrachtUiNaam(opdrachtData);
-            VandaagGespeeld = vandaagGespeeld;
+            VandaagGespeeld = true;
             MaxTeVerdienen = maxTeVerdienen;
             EffectiefVerdiend = effectiefVerdiend;
         }

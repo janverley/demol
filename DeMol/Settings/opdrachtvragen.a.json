@@ -1,26 +1,108 @@
 {
   "Opdracht": "a",
-  "Description": "Vragen over De Mol",
+  "Description": "De Mol",
   "Vragen": [
     {
-      "Text": "Heeft De Mol onderweg een item betaald?",
+      "Text": "Waar maakte de mol zijn filmpje?",
+      "Opties": [
+        "In de tuin",
+        "In de auto",
+        "In huis"
+      ]
+    },
+    {
+      "Text": "Wat is de kleur van het boekje van de mol?",
+      "Opties": [
+        "Donker grijs",
+        "Zilver",
+        "Parelmoer",
+        "Zalm",
+        "Fuchsia",
+        "Paars",
+        "Violet",
+        "Licht blauw",
+        "Fel blauw",
+        "Donker blauw",
+        "Donker groen",
+        "Gras groen",
+        "Licht groen",
+        "Licht geel",
+        "Oker",
+        "oranje",
+        "rood",
+        "bruin",
+        "goud"
+      ]
+    },
+    {
+      "Text": "Sprak de mol de waarheid tijden de vragenronde?",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "heeft De Mol een foto genomen?",
+      "Text": "Waar zat de mol bij de pingpong race?",
+      "Opties": [
+        "Kwissers",
+        "Estafette"
+      ]
+    },
+    {
+      "Text": "Wat deed de mol tijdens de seinopdracht?",
+      "Opties": [
+        "Rebus oplossen",
+        "Verteller",
+        "Uitbeelder",
+        "Ontvanger"
+      ]
+    },
+    {
+      "Text": "Wat was de inzet van de mol bij de zwembadproef?",
+      "Opties": [
+        "50 €",
+        "100 €",
+        "200 €",
+        "300 €",
+        "Pasvraag"
+      ]
+    },
+    {
+      "Text": "Heeft de mol bij de zwembadproef zijn inzet verzilverd??",
       "Opties": [
         "Ja",
         "Nee"
       ]
     },
     {
-      "Text": "Zat De Mol in de auto van de famillie Spysschaert of famille Harts?",
+      "Text": "Wat was de functie van de mol tijdens de kunstopdracht?",
       "Opties": [
-        "Spysschaert",
-        "Harts"
+        "Kunstgenieter",
+        "Kunstenaar",
+        "Kunstkenner",
+        "Model",
+        "Fotograaf"
+      ]
+    },
+    {
+      "Text": "Heeft de mol zijn chips helemaal opgegeten?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Is de juiste combinatie van het filmpje van de mol gevonden?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zat de mol op je juiste positie tijdens de outdoor opdracht?",
+      "Opties": [
+        "Ja",
+        "Nee"
       ]
     }
   ]

@@ -1,27 +1,107 @@
 {
   "Opdracht": "b",
-  "Description": "Vragen over Het Molletje",
+  "Description": "Het Molletje",
   "Vragen": [
     {
-      "Text": "Op welke plek in de rij stond De Mol?",
+      "Text": "Wat droeg het molletje tijdens zijn/haar filmpje?",
       "Opties": [
-        "Eerste", "2e","3e", "4e", "5e"," 6e"," 7e"," 8e", "9e" ,
-        "Jochen was De Mol"
+        "Een pet",
+        "Een bril",
+        "Vuile kleren",
+        "Een maillot",
+        "Geen van deze"
       ]
     },
     {
-      "Text": "Hoeveel glazen van De Mol waren er nog vol?",
+      "Text": "Wat is de kleur van het boekje van het molletje?",
       "Opties": [
-        "5",
-        "4",
-        "3",
-        "2",
-        "1",
-        "0"
+        "Donker grijs",
+        "Zilver",
+        "Parelmoer",
+        "Zalm",
+        "Fuchsia",
+        "Paars",
+        "Violet",
+        "Licht blauw",
+        "Fel blauw",
+        "Donker blauw",
+        "Donker groen",
+        "Gras groen",
+        "Licht groen",
+        "Licht geel",
+        "Oker",
+        "oranje",
+        "rood",
+        "bruin",
+        "goud"
       ]
     },
     {
-      "Text": "Heeft De Mol zijdelings moeten stappen?",
+      "Text": "Sprak het molletje de waarheid tijden de vragenronde?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Waar zat het molletje bij de pingpong race?",
+      "Opties": [
+        "Kwissers",
+        "Estafette"
+      ]
+    },
+    {
+      "Text": "Wat deed het molletje tijdens de seinopdracht?",
+      "Opties": [
+        "Rebus oplossen",
+        "Verteller",
+        "Uitbeelder",
+        "Ontvanger"
+      ]
+    },
+    {
+      "Text": "Wat was de inzet van het molletje bij de zwembadproef?",
+      "Opties": [
+        "50",
+        "100",
+        "200",
+        "300",
+        "Pasvraag"
+      ]
+    },
+    {
+      "Text": "Heeft het molletje bij de zwembadproef zijn inzet verzilverd?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Wat was de functie van het molletje tijdens de kunstopdracht?",
+      "Opties": [
+        "Kunstgenieter",
+        "Kunstenaar",
+        "Kunstkenner",
+        "Model",
+        "Fotograaf"
+      ]
+    },
+    {
+      "Text": "Heeft het molletje zijn chips helemaal opgegeten?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Is de juiste combinatie over het filmpje van het molletje gevonden?",
+      "Opties": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    {
+      "Text": "Zat het molletje op je juiste positie tijdens de outdoor opdracht?",
       "Opties": [
         "Ja",
         "Nee"

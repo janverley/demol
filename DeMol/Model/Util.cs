@@ -258,7 +258,7 @@ namespace DeMol.Model
 
         public static string OpdrachtUiNaam(OpdrachtData opdrachtData)
         {
-            return $"{opdrachtData.Opdracht.ToUpper()} - {opdrachtData.Description}";
+            return $"{opdrachtData.Description}";
         }
 
         public static AdminData GetAdminDataOfSelectedDag(SimpleContainer container)
@@ -328,6 +328,20 @@ namespace DeMol.Model
 
 
             return sb.ToString();
+        }
+
+        public static string GetDoubles(IEnumerable<Speler> spelers)
+        {
+            var result = "";
+            foreach (var speler in spelers)
+            {
+                if (spelers.Count(s => s.Naam.SafeEqual(speler.Naam)) != 1)
+                {
+                    result += $"{speler.Naam}, ";
+                }
+            }
+
+            return result;
         }
 
         public static bool CheckForDoubles(IEnumerable<Speler> spelers)
