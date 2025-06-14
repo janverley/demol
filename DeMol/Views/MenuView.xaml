@@ -16,9 +16,9 @@
         <StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 20">
-                <TextBlock Style="{StaticResource H1}">Dag:</TextBlock>
-                <ComboBox x:Name="Dagen" SelectedItem="{Binding SelectedDag}" DisplayMemberPath="Text"
-                          cal:Message.Attach="[Event SelectionChanged]=[Action SelectedDagChanged()]" Width="200" />
+                <!-- <TextBlock Style="{StaticResource H1}">Dag:</TextBlock> -->
+                <!-- <ComboBox x:Name="Dagen" SelectedItem="{Binding SelectedDag}" DisplayMemberPath="Text" -->
+                <!--           cal:Message.Attach="[Event SelectionChanged]=[Action SelectedDagChanged()]" Width="200" /> -->
                 <TextBlock Style="{StaticResource H1}" Name="Message" Margin="10 0 0 0" />
             </StackPanel>
 
@@ -50,12 +50,12 @@
                                      x:Name="PasswordBox" />
                         <Button Name="SaveAdmin" Style="{StaticResource Btn1}" Margin="5 0">Save</Button>
                     </StackPanel>
-                    <StackPanel Grid.Column="0" Grid.Row="1">
-                        <TextBlock Style="{StaticResource H1}">Opdrachten gespeeld: Max - Effectief</TextBlock>
-                        <ItemsControl Grid.IsSharedSizeScope="True" Name="OpdrachtenGespeeld" />
-                    </StackPanel>
+                    <!-- <StackPanel Grid.Column="0" Grid.Row="1"> -->
+                    <!--     <TextBlock Style="{StaticResource H1}">Opdrachten gespeeld: Max - Effectief</TextBlock> -->
+                    <!--     <ItemsControl Grid.IsSharedSizeScope="True" Name="OpdrachtenGespeeld" /> -->
+                    <!-- </StackPanel> -->
                     <StackPanel Grid.Column="1" Grid.Row="1">
-                        <TextBlock Style="{StaticResource H1}">Aantal Pasvragen verdiend:</TextBlock>
+                        <TextBlock Style="{StaticResource H1}">Naam - Pasvragen - Mol/molletje juist per dag</TextBlock>
                         <ItemsControl Grid.IsSharedSizeScope="True" Name="Pasvragen" />
                     </StackPanel>
                 </Grid>
