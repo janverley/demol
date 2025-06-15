@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Caliburn.Micro;
 using DeMol.Model;
@@ -323,12 +322,12 @@ namespace DeMol.ViewModels
 
             if (scores.MolGeraden)
             {
-                sb.AppendLine($"- Wist wie De Mol was");
+                sb.AppendLine("- Wist wie De Mol was");
             }
 
             if (scores.MolletjeGeraden)
             {
-                sb.AppendLine($"- Wist wie Het Molletje was");
+                sb.AppendLine("- Wist wie Het Molletje was");
             }
 
             sb.AppendLine($"- won {scores.aantalPasVragenVerdiend} pasvragen");
@@ -391,12 +390,12 @@ namespace DeMol.ViewModels
                 sb.AppendLine(scores.Naam);
                 if (scores.MolGeraden)
                 {
-                    sb.AppendLine($"\tWist wie De Mol was");
+                    sb.AppendLine("\tWist wie De Mol was");
                 }
 
                 if (scores.MolletjeGeraden)
                 {
-                    sb.AppendLine($"\tWist wie Het Molletje was");
+                    sb.AppendLine("\tWist wie Het Molletje was");
                 }
 
                 sb.AppendLine(
