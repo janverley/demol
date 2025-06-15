@@ -433,6 +433,9 @@
     <Resource Include="bg.icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\bg.2025.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\smoelen\2019\hanne.png" />
     <Content Include="Views\smoelen\2019\hilde.png" />
     <Content Include="Views\smoelen\2019\jochen.png" />
@@ -484,10 +487,10 @@
     <Content Include="Views\smoelen\2025\gus.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\smoelen\2025\hanne c.jpg">
+    <Content Include="Views\smoelen\2025\hanne_c.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\smoelen\2025\hanne s.jpg">
+    <Content Include="Views\smoelen\2025\hanne_s.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\smoelen\2025\katrien.jpg">
@@ -502,7 +505,7 @@
     <Content Include="Views\smoelen\2025\liesje.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\smoelen\2025\lode d.jpg">
+    <Content Include="Views\smoelen\2025\lode_d.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\smoelen\2025\LODE.jpg">

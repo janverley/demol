@@ -24,9 +24,27 @@ namespace DeMol.Model
         // public int finaleAantalVragenJuistBeantwoord;
         // public decimal finalePercentage;
 
-        public int aantalKeerMolGeweest;
-        public int verdiendAlsMol;
+        // public int aantalKeerMolGeweest;
+        // public int verdiendAlsMol;
 
         public TimeSpan totaleTijd;
+        public int aantalKeerMolJuistGeraden;
+        public int aantalKeerMolletjeJuistGeraden;
+
+        public bool MolGeraden;
+        public bool MolletjeGeraden;
+
+        public void WistWieDeMolWas(string opdrachtDataOpdracht)
+        {
+            if (opdrachtDataOpdracht.SafeEqual("a"))
+            {
+                MolGeraden = true;
+            }
+
+            if (opdrachtDataOpdracht.SafeEqual("b"))
+            {
+                MolletjeGeraden = true;
+            }
+        }
     }
 }

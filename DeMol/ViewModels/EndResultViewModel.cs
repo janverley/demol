@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Caliburn.Micro;
 using DeMol.Model;
@@ -13,6 +14,8 @@ namespace DeMol.ViewModels
     public class EndResultViewModel : Screen
     {
         private readonly Dictionary<string, int> aantalPasvragenPerNaam;
+        private readonly Dictionary<string, int> aantalMolJuistGeradenPerNaam;
+        private readonly Dictionary<string, int> aantalMolletjeJuistGeradenPerNaam;
         private readonly Dictionary<string, int> aantalRadersPerOpdrachtId;
         private readonly Dictionary<string, AntwoordenData> alleAntwoordenPerOpdrachtId;
         private readonly Dictionary<string, string> alleJuisteAntwoorden;
@@ -47,6 +50,8 @@ namespace DeMol.ViewModels
             var gespeeldeOpdrachtenIds = new List<string>();
 
             aantalPasvragenPerNaam = new Dictionary<string, int>();
+            aantalMolJuistGeradenPerNaam = new Dictionary<string, int>();
+            aantalMolletjeJuistGeradenPerNaam = new Dictionary<string, int>();
 
             foreach (var dag in container.GetInstance<ShellViewModel>().DagenData.Dagen)
             {
@@ -71,6 +76,38 @@ namespace DeMol.ViewModels
                     else
                     {
                         aantalPasvragenPerNaam.Add(naam, pasvragenVerdiend.PasVragenVerdiend);
+                    }
+
+                    var aantalmoljuist =
+                        (pasvragenVerdiend.Dag1MolOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag2MolOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag3MolOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag4MolOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag5MolOk ? 1 : 0);
+
+                    var aantalmolletjejuist =
+                        (pasvragenVerdiend.Dag1MolletjeOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag2MolletjeOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag3MolletjeOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag4MolletjeOk ? 1 : 0)
+                        + (pasvragenVerdiend.Dag5MolletjeOk ? 1 : 0);
+
+                    if (aantalMolJuistGeradenPerNaam.ContainsKey(naam))
+                    {
+                        aantalMolJuistGeradenPerNaam[naam] += aantalmoljuist;
+                    }
+                    else
+                    {
+                        aantalMolJuistGeradenPerNaam.Add(naam, aantalmoljuist);
+                    }
+
+                    if (aantalMolletjeJuistGeradenPerNaam.ContainsKey(naam))
+                    {
+                        aantalMolletjeJuistGeradenPerNaam[naam] += aantalmolletjejuist;
+                    }
+                    else
+                    {
+                        aantalMolletjeJuistGeradenPerNaam.Add(naam, aantalmolletjejuist);
                     }
                 }
             }
@@ -135,16 +172,14 @@ namespace DeMol.ViewModels
                         .Where(s => s.DeMolIs.SafeEqual(molNaam)).Select(s => s.Naam));
                     radersPerOpdrachtId.Add(opdrachtData.Opdracht, radersLijst);
                 }
+                
             }
 
-            //finaleantwoordenData = Util.SafeReadJson<FinaleAntwoordenData>();
-
-            // var finaleDoorIedereenGespeeld = finaleantwoordenData.Spelers.Count ==
-            //                                  container.GetInstance<ShellViewModel>().AantalSpelers;
-            // Checks.Add(new CheckViewModel($"Finale: Aantal Antwoorden: {finaleantwoordenData.Spelers.Count}",
-            //     finaleDoorIedereenGespeeld));
-
-            //if (finaleDoorIedereenGespeeld)
+            if (Checks.Any(c => !c.IsOk))
+            {
+                return;
+            }
+            
             {
                 foreach (var speler in container.GetInstance<ShellViewModel>().Spelerdata.Spelers)
                 {
@@ -152,39 +187,54 @@ namespace DeMol.ViewModels
                     scores.Naam = speler.Naam;
                     scores.totaleTijd = TimeSpan.Zero;
 
+                    //scores.aantalVragenBeantwoord = 10;
+                    
                     var pasvragenVerdiend = aantalPasvragenPerNaam.Any(kvp => kvp.Key.SafeEqual(speler.Naam))
                         ? aantalPasvragenPerNaam.Single(kvp => kvp.Key.SafeEqual(speler.Naam)).Value
                         : 0;
 
                     scores.aantalPasVragenVerdiend = pasvragenVerdiend;
 
+                    
+                    var aantalMoljuist = aantalMolJuistGeradenPerNaam.Any(kvp => kvp.Key.SafeEqual(speler.Naam))
+                        ? aantalMolJuistGeradenPerNaam.Single(kvp => kvp.Key.SafeEqual(speler.Naam)).Value
+                        : 0;
+
+                    scores.aantalKeerMolJuistGeraden = aantalMoljuist; 
+                    
+                    var aantalMolletjeJuist = aantalMolletjeJuistGeradenPerNaam.Any(kvp => kvp.Key.SafeEqual(speler.Naam))
+                    ? aantalMolletjeJuistGeradenPerNaam.Single(kvp => kvp.Key.SafeEqual(speler.Naam)).Value
+                    : 0;
+
+                    scores.aantalKeerMolletjeJuistGeraden = aantalMolletjeJuist;
+                        
                     foreach (var opdrachtData in gespeeldeOpdrachten)
                     {
                         if (alleAntwoordenPerOpdrachtId.ContainsKey(opdrachtData.Opdracht))
                         {
                             var antwoorden = alleAntwoordenPerOpdrachtId[opdrachtData.Opdracht];
 
-                            var a = antwoorden.Spelers.FirstOrDefault(s => s.Naam.SafeEqual(speler.Naam));
+                            var spelerDieAntwoord = antwoorden.Spelers.FirstOrDefault(s => s.Naam.SafeEqual(speler.Naam));
 
-                            if (a != null)
+                            var molNaam = antwoorden.Spelers.First(s => s.IsDeMol)?.Naam ?? "?";
+                            
+                            //if (spelerDieAntwoord != null)
                             {
-                                scores.totaleTijd += a.Tijd;
+                                scores.totaleTijd += spelerDieAntwoord.Tijd;
 
-                                if (a.IsDeMol)
+                                if (spelerDieAntwoord.IsDeMol)
                                 {
-                                    if (aantalRadersPerOpdrachtId.ContainsKey(opdrachtData.Opdracht) && 
-                                        aantalRadersPerOpdrachtId[opdrachtData.Opdracht] <
-                                        Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben)
-                                    {
-                                        scores.verdiendAlsMol +=
-                                            antwoorden.MaxTeVerdienen - antwoorden.EffectiefVerdiend;
-                                    }
-
-                                    scores.aantalKeerMolGeweest++;
                                     continue;
                                 }
 
-                                foreach (var antwoord in a.Antwoorden)
+                                //scores.aantalVragenBeantwoord+=2;
+                                if (spelerDieAntwoord.DeMolIs.SafeEqual(molNaam))
+                                {
+                                    scores.WistWieDeMolWas(opdrachtData.Opdracht);
+                                    //scores.aantalVragenJuistBeantwoord+=2;
+                                }
+
+                                foreach (var antwoord in spelerDieAntwoord.Antwoorden)
                                 {
                                     scores.aantalVragenBeantwoord++;
                                     var juistAntwoord = 
@@ -200,37 +250,13 @@ namespace DeMol.ViewModels
                     }
 
 
-                    //var finaleAntwoorden = finaleantwoordenData.Spelers.Single(s => s.Naam.SafeEqual(speler.Naam));
-
-                    //scores.totaleTijd += finaleAntwoorden.Tijd;
-
-                    // foreach (var demolIsPerOpdrachtId in finaleAntwoorden.DeMolIsPerOpdrachtId)
-                    // {
-                    //     scores.finaleAantalVragenBeantwoord++;
-                    //
-                    //     if (molPerOpdrachtId.ContainsKey(demolIsPerOpdrachtId.Key)
-                    //         && molPerOpdrachtId[demolIsPerOpdrachtId.Key].SafeEqual(demolIsPerOpdrachtId.Value))
-                    //     {
-                    //         scores.finaleAantalVragenJuistBeantwoord++;
-                    //     }
-                    // }
-
-                    // foreach (var antwoordenPerVraagId in finaleAntwoorden.AntwoordenPerVraagId)
-                    // {
-                    //     scores.finaleAantalVragenBeantwoord++;
-                    //
-                    //     if (alleJuisteAntwoorden.ContainsKey(antwoordenPerVraagId.Key)
-                    //         && alleJuisteAntwoorden[antwoordenPerVraagId.Key].SafeEqual(antwoordenPerVraagId.Value))
-                    //     {
-                    //         scores.finaleAantalVragenJuistBeantwoord++;
-                    //     }
-                    // }
-
-                    var x = Math.Min(scores.aantalVragenJuistBeantwoord + scores.aantalPasVragenVerdiend,
+                    var x = Math.Min(
+                        scores.aantalVragenJuistBeantwoord + 
+                        scores.aantalPasVragenVerdiend +
+                        scores.aantalKeerMolJuistGeraden + 
+                        scores.aantalKeerMolletjeJuistGeraden, 
                         scores.aantalVragenBeantwoord);
                     scores.percentage = (scores.aantalVragenBeantwoord > 0) ? x / scores.aantalVragenBeantwoord : 0m;
-                    //scores.finalePercentage = (scores.finaleAantalVragenBeantwoord > 0) ? scores.finaleAantalVragenJuistBeantwoord / scores.finaleAantalVragenBeantwoord : 0m;
-
                     scores.totaalPercentage = scores.percentage;
 
                     alleScores.Add(scores);
@@ -280,7 +306,6 @@ namespace DeMol.ViewModels
         {
             timer.Stop();
 
-
             var scores = alleScores.OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd).First();
 
             Winnaar = scores.Naam;
@@ -290,17 +315,23 @@ namespace DeMol.ViewModels
             sb.AppendLine($"- behaalde in totaal {scores.totaalPercentage:P},");
             sb.AppendLine(
                 $"- beantwoorde {scores.aantalVragenJuistBeantwoord}/{scores.aantalVragenBeantwoord} vragen juist");
+
+            if (scores.MolGeraden)
+            {
+                sb.AppendLine($"- Wist wie De Mol was");
+            }
+            if (scores.MolletjeGeraden)
+            {
+                sb.AppendLine($"- Wist wie Het Molletje was");
+            }
+            
             sb.AppendLine($"- won {scores.aantalPasVragenVerdiend} pasvragen");
-            // sb.AppendLine(
-            //     $"- beantwoorde in de finale {scores.finaleAantalVragenJuistBeantwoord}/{scores.finaleAantalVragenBeantwoord} vragen juist");
+            sb.AppendLine(
+                $"- raadde {scores.aantalKeerMolJuistGeraden} keer De Mol juist");
+            sb.AppendLine(
+                $"- raadde {scores.aantalKeerMolletjeJuistGeraden} keer Het Molletje juist");
             sb.AppendLine(
                 $"- op een totale tijd van {scores.totaleTijd.Hours} uur, {scores.totaleTijd.Minutes} minuten en {scores.totaleTijd.Seconds} seconden");
-            sb.AppendLine();
-            sb.AppendLine(
-                $"- was bij {scores.aantalKeerMolGeweest} opdrachten De Mol en verdiende daarmee {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
-            sb.AppendLine();
-            sb.AppendLine();
-            sb.AppendLine($"De Groepspot bevat {groepspot.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
 
             sb.AppendLine();
             sb.AppendLine("Proficiat!");
@@ -325,10 +356,6 @@ namespace DeMol.ViewModels
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine($"GroepsPot: {groepspot.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
-            sb.AppendLine($"Max te verdienen: {maxTeVerdienen.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
-
-            sb.AppendLine();
             sb.AppendLine("Mollen:");
 
             foreach (var opdrachtData in gespeeldeOpdrachten)
@@ -347,9 +374,7 @@ namespace DeMol.ViewModels
                     .ToString("C0", CultureInfo.GetCultureInfo("nl-be"));
 
                 sb.AppendLine(
-                    $"\t\tDe Mol was {molNaam}, geraden door: {raders} => {(molIsNIETGeraden ? "Goed gedaan Mol!" : "Meup!")}");
-                sb.AppendLine(
-                    $"\t\tDit levert De Mol {molNaam} {voordeMol} op");
+                    $"\t\tDe Mol was {molNaam}, geraden door: {raders} => {(molIsNIETGeraden ? "Goed gedaan Mol!" : $":( Geraden door meer dan {Settings.Default.AantalSpelersDieDeMolMoetenGeradenHebben} spelers")}");
             }
 
             sb.AppendLine();
@@ -360,18 +385,15 @@ namespace DeMol.ViewModels
                 sb.AppendLine(scores.Naam);
 
                 sb.AppendLine(
-                    $"\tJuiste antwoorden: ({scores.aantalVragenJuistBeantwoord} + {scores.aantalPasVragenVerdiend} pasvragen) / {scores.aantalVragenBeantwoord} -> {scores.percentage:P}");
-                // sb.AppendLine(
-                //     $"\tFinale: {scores.finaleAantalVragenJuistBeantwoord} / {scores.finaleAantalVragenBeantwoord} -> {scores.finalePercentage:P}");
-                //
+                    $"\t( Dagen De Mol juist geraden: {scores.aantalKeerMolJuistGeraden} +");
                 sb.AppendLine(
-                     $"\tTotaal: {scores.totaalPercentage:P}");
+                    $"\tDagen Het Molletje juist geraden: {scores.aantalKeerMolletjeJuistGeraden} +");
+                sb.AppendLine(
+                    $"\tJuiste antwoorden: {scores.aantalVragenJuistBeantwoord} + ");
+                sb.AppendLine(
+                    $"\tPasvragen: {scores.aantalPasVragenVerdiend} ) / {scores.aantalVragenBeantwoord} -> {scores.percentage:P}");
                  sb.AppendLine(
                     $"\tTotale Tijd: {scores.totaleTijd:g}");
-                sb.AppendLine(
-                    $"\t{scores.aantalKeerMolGeweest} keer Mol geweest");
-                sb.AppendLine(
-                    $"\tVerdiend als Mol: {scores.verdiendAlsMol.ToString("C0", CultureInfo.GetCultureInfo("nl-be"))}");
             }
 
             Text = sb.ToString();
@@ -379,8 +401,9 @@ namespace DeMol.ViewModels
 
         public void Uitslag()
         {
+            Winnaar = "";
             Text = "De einduitslag van De Mol...";
-
+            
             timer.Start();
         }
 
@@ -390,7 +413,7 @@ namespace DeMol.ViewModels
 
             if (Checks.All(c => c.IsOk))
             {
-                Text = "Alles Ok!";
+                Text = "";
 
                 ShowChecks = false;
                 CanUitslag = true;

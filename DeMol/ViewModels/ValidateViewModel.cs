@@ -42,7 +42,7 @@ namespace DeMol.ViewModels
                 var antwoordendata = Util.SafeReadJson<AntwoordenData>(gespeeldeOpdrachtData.OpdrachtId);
 
                 Checks.Add(new CheckViewModel(
-                    $"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}, zou moeten zijn {container.GetInstance<ShellViewModel>().AantalSpelers}",
+                    $"Aantal Antwoorden in opdracht {Util.OpdrachtUiNaam(gespeeldeOpdrachtData.OpdrachtId)}: {antwoordendata.Spelers.Count}, zou {container.GetInstance<ShellViewModel>().AantalSpelers} moeten zijn",
                     antwoordendata.Spelers.Count == container.GetInstance<ShellViewModel>().AantalSpelers));
 
                 Checks.Add(new CheckViewModel(

@@ -134,7 +134,21 @@ namespace DeMol.ViewModels
                 Pasvragen.Clear();
                 foreach (var item in adminData.Pasvragen)
                 {
-                    Pasvragen.Add(new PasVraagViewModel {Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend});
+                    Pasvragen.Add(new PasVraagViewModel
+                    {
+                        Naam = item.Naam, 
+                        PasVragenVerdiend = item.PasVragenVerdiend,
+                        Dag1MolOk = item.Dag1MolOk,
+                        Dag2MolOk = item.Dag2MolOk,
+                        Dag3MolOk = item.Dag3MolOk,
+                        Dag4MolOk = item.Dag4MolOk,
+                        Dag5MolOk = item.Dag5MolOk,
+                        Dag1MolletjeOk = item.Dag1MolletjeOk,
+                        Dag2MolletjeOk = item.Dag2MolletjeOk,
+                        Dag3MolletjeOk = item.Dag3MolletjeOk,
+                        Dag4MolletjeOk = item.Dag4MolletjeOk,
+                        Dag5MolletjeOk = item.Dag5MolletjeOk
+                    });
                 }
 
                 OpdrachtenGespeeld.Clear();
@@ -169,7 +183,20 @@ namespace DeMol.ViewModels
             foreach (var item in Pasvragen)
             {
                 newAdminData.Pasvragen.Add(new PasvragenVerdiend
-                    {Naam = item.Naam, PasVragenVerdiend = item.PasVragenVerdiend});
+                {
+                    Naam = item.Naam, 
+                    PasVragenVerdiend = item.PasVragenVerdiend,
+                    Dag1MolOk = item.Dag1MolOk,
+                    Dag1MolletjeOk = item.Dag1MolletjeOk,
+                    Dag2MolOk = item.Dag2MolOk,
+                    Dag2MolletjeOk = item.Dag2MolletjeOk,
+                    Dag3MolOk = item.Dag3MolOk,
+                    Dag3MolletjeOk = item.Dag3MolletjeOk,
+                    Dag4MolOk = item.Dag4MolOk,
+                    Dag4MolletjeOk = item.Dag4MolletjeOk,
+                    Dag5MolOk = item.Dag5MolOk,
+                    Dag5MolletjeOk = item.Dag5MolletjeOk,
+                });
             }
 
             newAdminData.OpdrachtenGespeeld.Clear();
