@@ -383,6 +383,14 @@ namespace DeMol.ViewModels
             foreach (var scores in alleScores.OrderByDescending(s => s.totaalPercentage).ThenBy(s => s.totaleTijd))
             {
                 sb.AppendLine(scores.Naam);
+                if (scores.MolGeraden)
+                {
+                    sb.AppendLine($"\tWist wie De Mol was");
+                }
+                if (scores.MolletjeGeraden)
+                {
+                    sb.AppendLine($"\tWist wie Het Molletje was");
+                }
 
                 sb.AppendLine(
                     $"\t( Dagen De Mol juist geraden: {scores.aantalKeerMolJuistGeraden} +");
@@ -392,7 +400,7 @@ namespace DeMol.ViewModels
                     $"\tJuiste antwoorden: {scores.aantalVragenJuistBeantwoord} + ");
                 sb.AppendLine(
                     $"\tPasvragen: {scores.aantalPasVragenVerdiend} ) / {scores.aantalVragenBeantwoord} -> {scores.percentage:P}");
-                 sb.AppendLine(
+                sb.AppendLine(
                     $"\tTotale Tijd: {scores.totaleTijd:g}");
             }
 
