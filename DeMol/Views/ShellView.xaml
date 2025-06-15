@@ -3,12 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DeMol.Views"
-        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         Title="De Mol" Height="450" Width="800" Icon="./bg.icon.png" WindowState="Maximized">
     <Grid Background="DarkCyan">
-        <Image Source="bg.2025.jpg"/>
+        <Image Source="bg.2025.jpg" />
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ContentControl Name="ActiveItem" />
         </ScrollViewer>

@@ -80,7 +80,7 @@ namespace DeMol.ViewModels
                     ActivateItem(x);
                 };
 
-                if ((opdrachtData.Opdracht.SafeEqual("a") && Naam.SafeEqual("glenn")) || 
+                if ((opdrachtData.Opdracht.SafeEqual("a") && Naam.SafeEqual("glenn")) ||
                     (opdrachtData.Opdracht.SafeEqual("b") && Naam.SafeEqual("saar")))
                 {
                     // ni vragen wie de mol/molletje is
@@ -106,7 +106,7 @@ namespace DeMol.ViewModels
                     if (isLast)
                     {
                         var adminData = Util.GetAdminDataOfSelectedDag(container);
-                        adminData.HeeftQuizGespeeld.Add(new SpelerInfo {Naam = Naam});
+                        adminData.HeeftQuizGespeeld.Add(new SpelerInfo { Naam = Naam });
                         Util.SafeAdminData(container, adminData);
 
 
@@ -125,10 +125,10 @@ namespace DeMol.ViewModels
             {
                 var boodschap = container.GetInstance<BoodschapViewModel>();
                 boodschap.Text = "Er zijn geen opdrachten gespeeld vandaag.";
-                
+
                 Items.Add(boodschap);
             }
-            
+
             ActivateItem(Items.First());
             base.OnActivate();
         }

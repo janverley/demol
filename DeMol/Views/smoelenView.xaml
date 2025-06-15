@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:DeMol.Views"
              mc:Ignorable="d"
              d:DesignHeight="1464" d:DesignWidth="2400">
     <Grid>
@@ -22,84 +21,84 @@
                 </Button>
                 <Button Name="elle" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/elle.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/elle.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="glenn" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/glenn.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/glenn.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="gus" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/gus.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/gus.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="hanne_c" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/hanne_c.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/hanne_c.jpg" Style="{StaticResource Smoel}" />
                 </Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,10">
                 <Button Name="hanne_s" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/hanne_s.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/hanne_s.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="katrien" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/katrien.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/katrien.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="kris" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/kris.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/kris.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="lien" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/lien.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/lien.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="liesje" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/liesje.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/liesje.jpg" Style="{StaticResource Smoel}" />
                 </Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,10">
                 <Button Name="LODE" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/LODE.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/LODE.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="lode_d" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/lode_d.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/lode_d.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="lora" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/lora.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/lora.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="lou" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/lou.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/lou.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="marij" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/marij.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/marij.jpg" Style="{StaticResource Smoel}" />
                 </Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" Margin="0,10">
                 <Button Name="mira" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/mira.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/mira.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="phillipe" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/phillipe.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/phillipe.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="saar" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/saar.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/saar.jpg" Style="{StaticResource Smoel}" />
                 </Button>
                 <Button Name="tijs" Style="{StaticResource imgButton}" Command="{Binding SelectUserCommand}"
                         CommandParameter="{Binding Name, RelativeSource={RelativeSource Mode=Self}}">
-                    <Image Source="./smoelen/2025/tijs.jpg"  Style="{StaticResource Smoel}" />
+                    <Image Source="./smoelen/2025/tijs.jpg" Style="{StaticResource Smoel}" />
                 </Button>
             </StackPanel>
         </Grid>

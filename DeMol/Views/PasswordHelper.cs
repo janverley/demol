@@ -30,7 +30,7 @@ namespace DeMol.Views
             // avoid recursive updating by ignoring the box's changed event
             box.PasswordChanged -= HandlePasswordChanged;
 
-            var newPassword = (string) e.NewValue;
+            var newPassword = (string)e.NewValue;
 
             if (!GetUpdatingPassword(box))
             {
@@ -52,8 +52,8 @@ namespace DeMol.Views
                 return;
             }
 
-            var wasBound = (bool) e.OldValue;
-            var needToBind = (bool) e.NewValue;
+            var wasBound = (bool)e.OldValue;
+            var needToBind = (bool)e.NewValue;
 
             if (wasBound)
             {
@@ -84,12 +84,12 @@ namespace DeMol.Views
 
         public static bool GetBindPassword(DependencyObject dp)
         {
-            return (bool) dp.GetValue(BindPassword);
+            return (bool)dp.GetValue(BindPassword);
         }
 
         public static string GetBoundPassword(DependencyObject dp)
         {
-            return (string) dp.GetValue(BoundPassword);
+            return (string)dp.GetValue(BoundPassword);
         }
 
         public static void SetBoundPassword(DependencyObject dp, string value)
@@ -99,7 +99,7 @@ namespace DeMol.Views
 
         private static bool GetUpdatingPassword(DependencyObject dp)
         {
-            return (bool) dp.GetValue(UpdatingPassword);
+            return (bool)dp.GetValue(UpdatingPassword);
         }
 
         private static void SetUpdatingPassword(DependencyObject dp, bool value)

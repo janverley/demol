@@ -25,7 +25,7 @@ namespace DeMol.ViewModels
             optieJa.PropertyChanged += Optie_PropertyChanged;
             optieNee.PropertyChanged += Optie_PropertyChanged;
 
-            Opties = new BindableCollection<OptieViewModel> {optieJa, optieNee};
+            Opties = new BindableCollection<OptieViewModel> { optieJa, optieNee };
         }
 
         public BindableCollection<OptieViewModel> Opties { get; set; }

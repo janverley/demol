@@ -25,6 +25,5 @@ namespace DeMol.ViewModels
             var x = container.GetInstance<MenuViewModel>();
             conductor.ActivateItem(x);
         }
-
     }
 }

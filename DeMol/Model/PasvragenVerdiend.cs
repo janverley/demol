@@ -4,7 +4,7 @@ namespace DeMol.Model
     {
         public string Naam { get; set; }
         public int PasVragenVerdiend { get; set; }
-        
+
         public bool Dag1MolOk { get; set; }
         public bool Dag1MolletjeOk { get; set; }
         public bool Dag2MolOk { get; set; }
@@ -15,6 +15,5 @@ namespace DeMol.Model
         public bool Dag4MolletjeOk { get; set; }
         public bool Dag5MolOk { get; set; }
         public bool Dag5MolletjeOk { get; set; }
-
     }
 }

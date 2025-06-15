@@ -18,6 +18,7 @@ namespace DeMol.ViewModels
             get => pasvragenVerdiend;
             set => Set(ref pasvragenVerdiend, value);
         }
+
         public bool Dag1MolOk { get; set; }
         public bool Dag1MolletjeOk { get; set; }
         public bool Dag2MolOk { get; set; }
@@ -28,6 +29,5 @@ namespace DeMol.ViewModels
         public bool Dag4MolletjeOk { get; set; }
         public bool Dag5MolOk { get; set; }
         public bool Dag5MolletjeOk { get; set; }
-
     }
 }

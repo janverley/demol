@@ -12,25 +12,25 @@ namespace DeMol.Model
 {
     public static class Util
     {
-        private static readonly byte[] key = new byte[8] {1, 2, 3, 4, 5, 6, 7, 8};
-        private static readonly byte[] iv = new byte[8] {1, 2, 3, 4, 5, 6, 7, 8};
+        private static readonly byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static readonly byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
         private static Dictionary<Type, FileData> Files => new Dictionary<Type, FileData>
         {
-            {typeof(ScoresData), new FileData {Filename = @".\Files\scores.json", Encrypted = false}},
-            {typeof(AdminData), new FileData {Filename = @".\Files\admin.{0}.json", Encrypted = false}},
-            {typeof(DagenData), new FileData {Filename = @".\Settings\dagen.json", Encrypted = false}},
-            {typeof(SpelersData), new FileData {Filename = @".\Settings\spelers.json", Encrypted = false}},
+            { typeof(ScoresData), new FileData { Filename = @".\Files\scores.json", Encrypted = false } },
+            { typeof(AdminData), new FileData { Filename = @".\Files\admin.{0}.json", Encrypted = false } },
+            { typeof(DagenData), new FileData { Filename = @".\Settings\dagen.json", Encrypted = false } },
+            { typeof(SpelersData), new FileData { Filename = @".\Settings\spelers.json", Encrypted = false } },
 
-            {typeof(AntwoordenData), new FileData {Filename = @".\Files\antwoorden.{0}.json", Encrypted = false}},
+            { typeof(AntwoordenData), new FileData { Filename = @".\Files\antwoorden.{0}.json", Encrypted = false } },
 
             {
                 typeof(OpdrachtData),
-                new FileData {Filename = @".\Settings\OpdrachtVragen.{0}.json", Encrypted = false}
+                new FileData { Filename = @".\Settings\OpdrachtVragen.{0}.json", Encrypted = false }
             },
             {
                 typeof(FinaleAntwoordenData),
-                new FileData {Filename = @".\Files\finaleAntwoorden.json", Encrypted = false}
+                new FileData { Filename = @".\Files\finaleAntwoorden.json", Encrypted = false }
             }
         };
 

@@ -22,12 +22,12 @@ namespace DeMol.ViewModels
 
         public bool CanExecute(object parameter)
         {
-            return canExecuteDelegate((string) parameter);
+            return canExecuteDelegate((string)parameter);
         }
 
         public void Execute(object parameter)
         {
-            executeDelegate((string) parameter);
+            executeDelegate((string)parameter);
         }
 
         public void RaiseCanExecuteChanged()

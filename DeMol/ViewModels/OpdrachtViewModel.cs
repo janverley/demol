@@ -13,7 +13,7 @@ namespace DeMol.ViewModels
         private bool vandaagGespeeld;
 
         public OpdrachtViewModel(OpdrachtData opdrachtData, bool vandaagGespeeld, int maxTeVerdienen,
-                                 int effectiefVerdiend)
+            int effectiefVerdiend)
         {
             OpdrachtData = opdrachtData;
             Naam = Util.OpdrachtUiNaam(opdrachtData);

@@ -14,7 +14,7 @@
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
-            <converters:ClipConverter x:Key="ClipConverter"/>
+            <converters:ClipConverter x:Key="ClipConverter" />
 
 
             <local:BooleanToVisibilityConverter x:Key="showWhenDisabled" True="Collapsed" False="Visible" />
@@ -23,21 +23,21 @@
             <SolidColorBrush x:Key="95p" Color="#95FFFFFF" />
 
             <Style TargetType="Image" x:Key="Smoel">
-                <Setter Property="Stretch" Value="UniformToFill"/>
-                <Setter Property="Width" Value="400"/>
-                <Setter Property="Height" Value="400"/>
+                <Setter Property="Stretch" Value="UniformToFill" />
+                <Setter Property="Width" Value="400" />
+                <Setter Property="Height" Value="400" />
                 <Setter Property="Clip">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource ClipConverter}">
-                            <Binding RelativeSource="{RelativeSource Self}" Path="ActualWidth"/>
-                            <Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+                            <Binding RelativeSource="{RelativeSource Self}" Path="ActualWidth" />
+                            <Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight" />
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
             </Style>
 
             <Style TargetType="Button" x:Key="imgButton">
-                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Name}"/>
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Name}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -67,29 +67,32 @@
                 <Setter Property="FontSize" Value="100" />
                 <Setter Property="Height" Value="40" />
             </Style>
-            
+
             <Style x:Key="ClearCheckBoxStyle" TargetType="{x:Type CheckBox}">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type CheckBox}">
                             <Grid>
-                                <Ellipse x:Name="CheckBoxBorder" Stroke="DarkGray" StrokeThickness="2" Width="20" Height="20" Fill="Transparent"/>
-                                <Ellipse x:Name="CheckBoxFill" Width="14" Height="14" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <Ellipse x:Name="CheckBoxBorder" Stroke="DarkGray" StrokeThickness="2" Width="20"
+                                         Height="20" Fill="Transparent" />
+                                <Ellipse x:Name="CheckBoxFill" Width="14" Height="14" Fill="Transparent"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                  Margin="5,0,0,0" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
-                                    <Setter TargetName="CheckBoxFill" Property="Fill" Value="DarkCyan"/>
+                                    <Setter TargetName="CheckBoxFill" Property="Fill" Value="DarkCyan" />
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="CheckBoxBorder" Property="Stroke" Value="DarkCyan"/>
+                                    <Setter TargetName="CheckBoxBorder" Property="Stroke" Value="DarkCyan" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
             <Style TargetType="{x:Type RadioButton}" x:Key="R1">
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="FontSize" Value="25" />

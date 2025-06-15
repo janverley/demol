@@ -37,7 +37,7 @@ namespace DeMol.ViewModels
                     {
                         container.GetInstance<ShellViewModel>().Dag = SelectedDag.Id;
                     }
-            
+
                     UpdateButtonStates();
                 }
             }
@@ -83,7 +83,7 @@ namespace DeMol.ViewModels
         protected override void OnActivate()
         {
             LockString = "";
-            
+
             base.OnActivate();
 
             Dagen.Clear();
@@ -125,7 +125,7 @@ namespace DeMol.ViewModels
                 {
                     if (!adminData.Pasvragen.Any(pv => pv.Naam.SafeEqual(speler.Naam)))
                     {
-                        adminData.Pasvragen.Add(new PasvragenVerdiend {Naam = speler.Naam, PasVragenVerdiend = 0});
+                        adminData.Pasvragen.Add(new PasvragenVerdiend { Naam = speler.Naam, PasVragenVerdiend = 0 });
                     }
                 }
 
@@ -136,7 +136,7 @@ namespace DeMol.ViewModels
                 {
                     Pasvragen.Add(new PasVraagViewModel
                     {
-                        Naam = item.Naam, 
+                        Naam = item.Naam,
                         PasVragenVerdiend = item.PasVragenVerdiend,
                         Dag1MolOk = item.Dag1MolOk,
                         Dag2MolOk = item.Dag2MolOk,
@@ -184,7 +184,7 @@ namespace DeMol.ViewModels
             {
                 newAdminData.Pasvragen.Add(new PasvragenVerdiend
                 {
-                    Naam = item.Naam, 
+                    Naam = item.Naam,
                     PasVragenVerdiend = item.PasVragenVerdiend,
                     Dag1MolOk = item.Dag1MolOk,
                     Dag1MolletjeOk = item.Dag1MolletjeOk,
@@ -195,7 +195,7 @@ namespace DeMol.ViewModels
                     Dag4MolOk = item.Dag4MolOk,
                     Dag4MolletjeOk = item.Dag4MolletjeOk,
                     Dag5MolOk = item.Dag5MolOk,
-                    Dag5MolletjeOk = item.Dag5MolletjeOk,
+                    Dag5MolletjeOk = item.Dag5MolletjeOk
                 });
             }
 

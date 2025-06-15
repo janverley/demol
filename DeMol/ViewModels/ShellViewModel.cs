@@ -53,7 +53,7 @@ namespace DeMol.ViewModels
             get => bgSource;
             set => Set(ref bgSource, value);
         }
-        
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
@@ -71,11 +71,11 @@ namespace DeMol.ViewModels
 
             var p = new OptionSet
             {
-                {"m|menu=", "Start the Menu screen for day.", (int v) => menuDay = v},
-                {"t|timer=", "Start the timer screen with # minutes.", (int v) => timerminuten = v},
+                { "m|menu=", "Start the Menu screen for day.", (int v) => menuDay = v },
+                { "t|timer=", "Start the timer screen with # minutes.", (int v) => timerminuten = v },
 
-                {"q|quiz=", "Start the Quiz for day", (int v) => showQuiz = v},
-                {"e|endresult", "Start the EndResult", v => showEndResult = v != null}
+                { "q|quiz=", "Start the Quiz for day", (int v) => showQuiz = v },
+                { "e|endresult", "Start the EndResult", v => showEndResult = v != null }
             };
 
 

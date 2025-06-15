@@ -20,6 +20,7 @@ namespace DeMol.Converters
                 };
                 return ellipseGeometry;
             }
+
             return null;
         }
 

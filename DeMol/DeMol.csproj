@@ -1,537 +1,537 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32B10F73-6C2E-4C76-BDF5-A5FC4520700C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>DeMol</RootNamespace>
-    <AssemblyName>DeMol</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>bg.icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.Micro.Platform, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Input.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\WPFToolkit.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="BooleanConverter.cs" />
-    <Compile Include="BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\ClipConverter.cs" />
-    <Compile Include="Model\AntwoordenData.cs" />
-    <Compile Include="Model\Dag.cs" />
-    <Compile Include="Model\FinaleAntwoordenData.cs" />
-    <Compile Include="Model\FinaleSpeler.cs" />
-    <Compile Include="Model\OpdrachtStatus.cs" />
-    <Compile Include="Model\OpdrachtData.cs" />
-    <Compile Include="Model\DagenData.cs" />
-    <Compile Include="Model\PasvragenVerdiend.cs" />
-    <Compile Include="Model\Score.cs" />
-    <Compile Include="Model\ScoresData.cs" />
-    <Compile Include="Model\Speler.cs" />
-    <Compile Include="Model\SpelerInfo.cs" />
-    <Compile Include="Model\SpelersData.cs" />
-    <Compile Include="Model\Util.cs" />
-    <Compile Include="Model\Vraag.cs" />
-    <Compile Include="ViewModels\BoodschapViewModel.cs" />
-    <Compile Include="ViewModels\CheckViewModel.cs" />
-    <Compile Include="ViewModels\DagResultaatViewModel.cs" />
-    <Compile Include="ViewModels\DagViewModel.cs" />
-    <Compile Include="ViewModels\DelegateCommand.cs" />
-    <Compile Include="ViewModels\FinaleQuizViewModel.cs" />
-    <Compile Include="ViewModels\FinaleQuizVragenViewModel.cs" />
-    <Compile Include="ViewModels\FinaleVragenLijstViewModel.cs" />
-    <Compile Include="ViewModels\InvalidateViewModel.cs" />
-    <Compile Include="ViewModels\MeerdereOptieViewModel.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="ViewModels\OpdrachtViewModel.cs" />
-    <Compile Include="ViewModels\OptieViewModel.cs" />
-    <Compile Include="ViewModels\PasVraagViewModel.cs" />
-    <Compile Include="ViewModels\QuizBenJijDeMolViewModel.cs" />
-    <Compile Include="ViewModels\QuizIntroViewModel.cs" />
-    <Compile Include="ViewModels\ScoreViewModel.cs" />
-    <Compile Include="ViewModels\VragenLijstViewModel.cs" />
-    <Compile Include="ViewModels\QuizViewModel.cs" />
-    <Compile Include="ViewModels\QuizWieIsDeMolViewModel.cs" />
-    <Compile Include="ViewModels\QuizVraagViewModel.cs" />
-    <Compile Include="ViewModels\QuizVragenViewModel.cs" />
-    <Compile Include="ViewModels\EndResultViewModel.cs" />
-    <Compile Include="ViewModels\ResultViewModel.cs" />
-    <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="ViewModels\smoelenViewModel.cs" />
-    <Compile Include="ViewModels\TimerViewModel.cs" />
-    <Compile Include="ViewModels\ValidateViewModel.cs" />
-    <Compile Include="Views\BoodschapView.xaml.cs">
-      <DependentUpon>BoodschapView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CheckView.xaml.cs">
-      <DependentUpon>CheckView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DagResultaatView.xaml.cs">
-      <DependentUpon>DagResultaatView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EindResultaatView.xaml.cs">
-      <DependentUpon>EindResultaatView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EnumToBooleanConverter.cs" />
-    <Compile Include="Views\FinaleQuizView.xaml.cs">
-      <DependentUpon>FinaleQuizView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FinaleQuizVragenView.xaml.cs">
-      <DependentUpon>FinaleQuizVragenView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FinaleVragenLijstView.xaml.cs">
-      <DependentUpon>FinaleVragenLijstView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\InvalidateView.xaml.cs">
-      <DependentUpon>InvalidateView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\JijBentDeMolView.xaml.cs">
-      <DependentUpon>JijBentDeMolView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MeerdereOptieView.xaml.cs">
-      <DependentUpon>MeerdereOptieView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OpdrachtView.xaml.cs">
-      <DependentUpon>OpdrachtView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OptieView.xaml.cs">
-      <DependentUpon>OptieView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PasswordHelper.cs" />
-    <Compile Include="Views\PasVraagView.xaml.cs">
-      <DependentUpon>PasVraagView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizBenJijDeMolView.xaml.cs">
-      <DependentUpon>QuizBenJijDeMolView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizIntroView.xaml.cs">
-      <DependentUpon>QuizIntroView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ScoreView.xaml.cs">
-      <DependentUpon>ScoreView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\VragenLijstView.xaml.cs">
-      <DependentUpon>VragenLijstView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizNaamView.xaml.cs">
-      <DependentUpon>QuizNaamView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizOuttroView.xaml.cs">
-      <DependentUpon>QuizOuttroView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizView.xaml.cs">
-      <DependentUpon>QuizView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizVraagView.xaml.cs">
-      <DependentUpon>QuizVraagView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizVragenView.xaml.cs">
-      <DependentUpon>QuizVragenView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QuizWieIsDeMolView.xaml.cs">
-      <DependentUpon>QuizWieIsDeMolView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EndResultView.xaml.cs">
-      <DependentUpon>EndResultView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ResultView.xaml.cs">
-      <DependentUpon>ResultView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ShellView.xaml.cs">
-      <DependentUpon>ShellView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AdminData.cs" />
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Views\SmoelenView.xaml.cs">
-      <DependentUpon>SmoelenView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TimerView.xaml.cs">
-      <DependentUpon>TimerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ValidateView.xaml.cs">
-      <DependentUpon>ValidateView.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Themes\MetroDark\MetroDark.MSControls.Core.Implicit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\MetroDark.MSControls.Toolkit.Implicit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\Styles.Shared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\Styles.WPF.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\Theme.Colors.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\BoodschapView.xaml" />
-    <Page Include="Views\CheckView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DagResultaatView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EindResultaatView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FinaleQuizView.xaml" />
-    <Page Include="Views\FinaleQuizVragenView.xaml" />
-    <Page Include="Views\FinaleVragenLijstView.xaml" />
-    <Page Include="Views\InvalidateView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\JijBentDeMolView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MeerdereOptieView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\OpdrachtView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\OptieView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PasVraagView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QuizBenJijDeMolView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QuizIntroView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ScoreView.xaml" />
-    <Page Include="Views\VragenLijstView.xaml" />
-    <Page Include="Views\QuizNaamView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QuizOuttroView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QuizView.xaml" />
-    <Page Include="Views\QuizVraagView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QuizVragenView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QuizWieIsDeMolView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EndResultView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ResultView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ShellView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SmoelenView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TimerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ValidateView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Files\admin.1.json" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Settings\dagen.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Settings\opdrachtvragen.a.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Settings\opdrachtvragen.b.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Settings\spelers.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\bg.2020.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Views\bg.2020.red.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Views\bg.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\bg.icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\bg.red.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\MetroDark\HowToApplyTheme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\smoelen\hanne.png" />
-    <Resource Include="Views\smoelen\hilde.png" />
-    <Resource Include="Views\smoelen\jochen.png" />
-    <Resource Include="Views\smoelen\juul.png" />
-    <Resource Include="Views\smoelen\kris.png" />
-    <Resource Include="Views\smoelen\mie.png" />
-    <Resource Include="Views\smoelen\pieter.png" />
-    <Resource Include="Views\smoelen\staf.png" />
-    <Resource Include="Views\smoelen\vic.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\bg.2019.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Views\bg.2019.red.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bg.icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\bg.2025.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2019\hanne.png" />
-    <Content Include="Views\smoelen\2019\hilde.png" />
-    <Content Include="Views\smoelen\2019\jochen.png" />
-    <Content Include="Views\smoelen\2019\juul.png" />
-    <Content Include="Views\smoelen\2019\kris.png" />
-    <Content Include="Views\smoelen\2019\mie.png" />
-    <Content Include="Views\smoelen\2019\pieter.png" />
-    <Content Include="Views\smoelen\2019\staf.png" />
-    <Content Include="Views\smoelen\2019\vic.png" />
-    <Content Include="Views\smoelen\2021\hanne.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\hilde.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\jochen-z.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\juul.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\kris.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\loes z.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\mie z.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\pieter.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\staf.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2021\vic.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\arne.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\elle.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\glenn.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\gus.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\hanne_c.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\hanne_s.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\katrien.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\kris.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\lien.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\liesje.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\lode_d.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\LODE.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\lora.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\lou.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\marij.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\mira.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\phillipe.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\saar.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\smoelen\2025\tijs.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{32B10F73-6C2E-4C76-BDF5-A5FC4520700C}</ProjectGuid>
+        <OutputType>WinExe</OutputType>
+        <RootNamespace>DeMol</RootNamespace>
+        <AssemblyName>DeMol</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+        <WarningLevel>4</WarningLevel>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationIcon>bg.icon.ico</ApplicationIcon>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+            <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
+        </Reference>
+        <Reference Include="Caliburn.Micro.Platform, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+            <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
+        </Reference>
+        <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+            <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+        </Reference>
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+            <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.ComponentModel.Composition"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+            <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+            <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Xml"/>
+        <Reference Include="Microsoft.CSharp"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Xml.Linq"/>
+        <Reference Include="System.Data.DataSetExtensions"/>
+        <Reference Include="System.Net.Http"/>
+        <Reference Include="System.Xaml">
+            <RequiredTargetFramework>4.0</RequiredTargetFramework>
+        </Reference>
+        <Reference Include="WindowsBase"/>
+        <Reference Include="PresentationCore"/>
+        <Reference Include="PresentationFramework"/>
+        <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+            <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\WPFToolkit.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <ApplicationDefinition Include="App.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </ApplicationDefinition>
+        <Compile Include="BooleanConverter.cs"/>
+        <Compile Include="BooleanToVisibilityConverter.cs"/>
+        <Compile Include="Converters\ClipConverter.cs"/>
+        <Compile Include="Model\AntwoordenData.cs"/>
+        <Compile Include="Model\Dag.cs"/>
+        <Compile Include="Model\FinaleAntwoordenData.cs"/>
+        <Compile Include="Model\FinaleSpeler.cs"/>
+        <Compile Include="Model\OpdrachtStatus.cs"/>
+        <Compile Include="Model\OpdrachtData.cs"/>
+        <Compile Include="Model\DagenData.cs"/>
+        <Compile Include="Model\PasvragenVerdiend.cs"/>
+        <Compile Include="Model\Score.cs"/>
+        <Compile Include="Model\ScoresData.cs"/>
+        <Compile Include="Model\Speler.cs"/>
+        <Compile Include="Model\SpelerInfo.cs"/>
+        <Compile Include="Model\SpelersData.cs"/>
+        <Compile Include="Model\Util.cs"/>
+        <Compile Include="Model\Vraag.cs"/>
+        <Compile Include="ViewModels\BoodschapViewModel.cs"/>
+        <Compile Include="ViewModels\CheckViewModel.cs"/>
+        <Compile Include="ViewModels\DagResultaatViewModel.cs"/>
+        <Compile Include="ViewModels\DagViewModel.cs"/>
+        <Compile Include="ViewModels\DelegateCommand.cs"/>
+        <Compile Include="ViewModels\FinaleQuizViewModel.cs"/>
+        <Compile Include="ViewModels\FinaleQuizVragenViewModel.cs"/>
+        <Compile Include="ViewModels\FinaleVragenLijstViewModel.cs"/>
+        <Compile Include="ViewModels\InvalidateViewModel.cs"/>
+        <Compile Include="ViewModels\MeerdereOptieViewModel.cs"/>
+        <Compile Include="ViewModels\MenuViewModel.cs"/>
+        <Compile Include="ViewModels\OpdrachtViewModel.cs"/>
+        <Compile Include="ViewModels\OptieViewModel.cs"/>
+        <Compile Include="ViewModels\PasVraagViewModel.cs"/>
+        <Compile Include="ViewModels\QuizBenJijDeMolViewModel.cs"/>
+        <Compile Include="ViewModels\QuizIntroViewModel.cs"/>
+        <Compile Include="ViewModels\ScoreViewModel.cs"/>
+        <Compile Include="ViewModels\VragenLijstViewModel.cs"/>
+        <Compile Include="ViewModels\QuizViewModel.cs"/>
+        <Compile Include="ViewModels\QuizWieIsDeMolViewModel.cs"/>
+        <Compile Include="ViewModels\QuizVraagViewModel.cs"/>
+        <Compile Include="ViewModels\QuizVragenViewModel.cs"/>
+        <Compile Include="ViewModels\EndResultViewModel.cs"/>
+        <Compile Include="ViewModels\ResultViewModel.cs"/>
+        <Compile Include="ViewModels\ShellViewModel.cs"/>
+        <Compile Include="ViewModels\smoelenViewModel.cs"/>
+        <Compile Include="ViewModels\TimerViewModel.cs"/>
+        <Compile Include="ViewModels\ValidateViewModel.cs"/>
+        <Compile Include="Views\BoodschapView.xaml.cs">
+            <DependentUpon>BoodschapView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\CheckView.xaml.cs">
+            <DependentUpon>CheckView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\DagResultaatView.xaml.cs">
+            <DependentUpon>DagResultaatView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\EindResultaatView.xaml.cs">
+            <DependentUpon>EindResultaatView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\EnumToBooleanConverter.cs"/>
+        <Compile Include="Views\FinaleQuizView.xaml.cs">
+            <DependentUpon>FinaleQuizView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\FinaleQuizVragenView.xaml.cs">
+            <DependentUpon>FinaleQuizVragenView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\FinaleVragenLijstView.xaml.cs">
+            <DependentUpon>FinaleVragenLijstView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\InvalidateView.xaml.cs">
+            <DependentUpon>InvalidateView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\JijBentDeMolView.xaml.cs">
+            <DependentUpon>JijBentDeMolView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\MeerdereOptieView.xaml.cs">
+            <DependentUpon>MeerdereOptieView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\MenuView.xaml.cs">
+            <DependentUpon>MenuView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\OpdrachtView.xaml.cs">
+            <DependentUpon>OpdrachtView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\OptieView.xaml.cs">
+            <DependentUpon>OptieView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\PasswordHelper.cs"/>
+        <Compile Include="Views\PasVraagView.xaml.cs">
+            <DependentUpon>PasVraagView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizBenJijDeMolView.xaml.cs">
+            <DependentUpon>QuizBenJijDeMolView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizIntroView.xaml.cs">
+            <DependentUpon>QuizIntroView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\ScoreView.xaml.cs">
+            <DependentUpon>ScoreView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\VragenLijstView.xaml.cs">
+            <DependentUpon>VragenLijstView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizNaamView.xaml.cs">
+            <DependentUpon>QuizNaamView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizOuttroView.xaml.cs">
+            <DependentUpon>QuizOuttroView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizView.xaml.cs">
+            <DependentUpon>QuizView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizVraagView.xaml.cs">
+            <DependentUpon>QuizVraagView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizVragenView.xaml.cs">
+            <DependentUpon>QuizVragenView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\QuizWieIsDeMolView.xaml.cs">
+            <DependentUpon>QuizWieIsDeMolView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\EndResultView.xaml.cs">
+            <DependentUpon>EndResultView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\ResultView.xaml.cs">
+            <DependentUpon>ResultView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\ShellView.xaml.cs">
+            <DependentUpon>ShellView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Model\AdminData.cs"/>
+        <Compile Include="App.xaml.cs">
+            <DependentUpon>App.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Include="Bootstrapper.cs"/>
+        <Compile Include="Views\SmoelenView.xaml.cs">
+            <DependentUpon>SmoelenView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\TimerView.xaml.cs">
+            <DependentUpon>TimerView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Views\ValidateView.xaml.cs">
+            <DependentUpon>ValidateView.xaml</DependentUpon>
+        </Compile>
+        <Page Include="Themes\MetroDark\MetroDark.MSControls.Core.Implicit.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="Themes\MetroDark\MetroDark.MSControls.Toolkit.Implicit.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="Themes\MetroDark\Styles.Shared.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="Themes\MetroDark\Styles.WPF.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="Themes\MetroDark\Theme.Colors.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="Views\BoodschapView.xaml"/>
+        <Page Include="Views\CheckView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\DagResultaatView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\EindResultaatView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\FinaleQuizView.xaml"/>
+        <Page Include="Views\FinaleQuizVragenView.xaml"/>
+        <Page Include="Views\FinaleVragenLijstView.xaml"/>
+        <Page Include="Views\InvalidateView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\JijBentDeMolView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\MeerdereOptieView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\MenuView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\OpdrachtView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\OptieView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\PasVraagView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\QuizBenJijDeMolView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\QuizIntroView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\ScoreView.xaml"/>
+        <Page Include="Views\VragenLijstView.xaml"/>
+        <Page Include="Views\QuizNaamView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\QuizOuttroView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\QuizView.xaml"/>
+        <Page Include="Views\QuizVraagView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\QuizVragenView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\QuizWieIsDeMolView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\EndResultView.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="Views\ResultView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\ShellView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\SmoelenView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\TimerView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Views\ValidateView.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Include="Properties\Resources.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <Compile Include="Properties\Settings.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        </Compile>
+        <EmbeddedResource Include="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <None Include="Files\admin.1.json"/>
+        <None Include="packages.config"/>
+        <None Include="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+        <None Include="Settings\dagen.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="Settings\opdrachtvragen.a.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="Settings\opdrachtvragen.b.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="Settings\spelers.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="App.config"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Views\bg.2020.jpg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+        <Resource Include="Views\bg.2020.red.jpg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+        <Resource Include="Views\bg.jpg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Views\bg.icon.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Views\bg.red.jpg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Themes\MetroDark\HowToApplyTheme.txt"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Views\smoelen\hanne.png"/>
+        <Resource Include="Views\smoelen\hilde.png"/>
+        <Resource Include="Views\smoelen\jochen.png"/>
+        <Resource Include="Views\smoelen\juul.png"/>
+        <Resource Include="Views\smoelen\kris.png"/>
+        <Resource Include="Views\smoelen\mie.png"/>
+        <Resource Include="Views\smoelen\pieter.png"/>
+        <Resource Include="Views\smoelen\staf.png"/>
+        <Resource Include="Views\smoelen\vic.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Views\bg.2019.jpg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+        <Resource Include="Views\bg.2019.red.jpg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="bg.icon.ico"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Views\bg.2025.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2019\hanne.png"/>
+        <Content Include="Views\smoelen\2019\hilde.png"/>
+        <Content Include="Views\smoelen\2019\jochen.png"/>
+        <Content Include="Views\smoelen\2019\juul.png"/>
+        <Content Include="Views\smoelen\2019\kris.png"/>
+        <Content Include="Views\smoelen\2019\mie.png"/>
+        <Content Include="Views\smoelen\2019\pieter.png"/>
+        <Content Include="Views\smoelen\2019\staf.png"/>
+        <Content Include="Views\smoelen\2019\vic.png"/>
+        <Content Include="Views\smoelen\2021\hanne.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\hilde.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\jochen-z.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\juul.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\kris.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\loes z.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\mie z.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\pieter.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\staf.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2021\vic.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\arne.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\elle.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\glenn.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\gus.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\hanne_c.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\hanne_s.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\katrien.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\kris.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\lien.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\liesje.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\lode_d.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\LODE.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\lora.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\lou.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\marij.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\mira.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\phillipe.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\saar.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Views\smoelen\2025\tijs.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

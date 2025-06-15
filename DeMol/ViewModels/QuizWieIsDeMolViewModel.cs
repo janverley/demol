@@ -19,7 +19,6 @@ namespace DeMol.ViewModels
         {
             this.conductor = conductor;
             this.container = container;
-
         }
 
         public BindableCollection<OptieViewModel> Opties { get; set; } = new BindableCollection<OptieViewModel>();
@@ -46,8 +45,8 @@ namespace DeMol.ViewModels
             set
             {
                 opdrachtData = value;
-                
-                var opdrachtIsOverMol = opdrachtData.Opdracht.SafeEqual("a"); 
+
+                var opdrachtIsOverMol = opdrachtData.Opdracht.SafeEqual("a");
                 var spelers = container.GetInstance<ShellViewModel>().Spelerdata.Spelers;
                 foreach (var speler in spelers.Where(s => s.KanMolZijn == opdrachtIsOverMol))
                 {
@@ -56,8 +55,6 @@ namespace DeMol.ViewModels
 
                     Opties.Add(optie);
                 }
-
-                
             }
         }
 

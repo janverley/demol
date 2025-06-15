@@ -4,14 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DeMol.Views"
-             xmlns:model="clr-namespace:DeMol.Model"
              mc:Ignorable="d"
-             xmlns:cal="http://www.caliburnproject.org"
              d:DesignHeight="452" d:DesignWidth="1103">
 
     <Grid Margin="40">
         <Grid.Resources>
-            <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         </Grid.Resources>
         <StackPanel>
 
