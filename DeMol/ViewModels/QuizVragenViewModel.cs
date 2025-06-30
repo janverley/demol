@@ -88,7 +88,7 @@ namespace DeMol.ViewModels
                 Message =
                     $"Jij bent De Mol, dus je moet op alle vragen goed antwoorden!\n{Util.OpdrachtUiNaam(OpdrachtId)}:";
             }
-            else if (Naam.SafeEqual("saar") && OpdrachtId == "b")
+            else if (Naam.SafeEqual("arne") && OpdrachtId == "b")
             {
                 Message =
                     $"Jij bent Het Molletje, dus je moet op alle vragen goed antwoorden!\n{Util.OpdrachtUiNaam(OpdrachtId)}:";

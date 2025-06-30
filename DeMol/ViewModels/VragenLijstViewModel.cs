@@ -81,7 +81,7 @@ namespace DeMol.ViewModels
                 };
 
                 if ((opdrachtData.Opdracht.SafeEqual("a") && Naam.SafeEqual("glenn")) ||
-                    (opdrachtData.Opdracht.SafeEqual("b") && Naam.SafeEqual("saar")))
+                    (opdrachtData.Opdracht.SafeEqual("b") && Naam.SafeEqual("arne")))
                 {
                     // ni vragen wie de mol/molletje is
                 }
@@ -98,7 +98,7 @@ namespace DeMol.ViewModels
                 vragen.OpdrachtId = opdrachtData.Opdracht;
                 vragen.Naam = Naam;
                 vragen.IsDeMol = (opdrachtData.Opdracht.SafeEqual("a") && Naam.SafeEqual("glenn")) ||
-                                 (opdrachtData.Opdracht.SafeEqual("b") && Naam.SafeEqual("saar"));
+                                 (opdrachtData.Opdracht.SafeEqual("b") && Naam.SafeEqual("arne"));
                 vragen.DoNext = model2 =>
                 {
                     var isLast = !Items.SkipWhile(item => !Equals(item, ActiveItem)).Skip(1).Any();
